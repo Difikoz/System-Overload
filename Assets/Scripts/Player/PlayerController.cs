@@ -6,16 +6,16 @@ namespace WinterUniverse
 {
     public class PlayerController : PawnController
     {
-        [HideInInspector] public PlayerLocomotionModule PlayerLocomotionManager;
-        [HideInInspector] public PlayerInteractionModule PlayerInteractionManager;
+        [HideInInspector] public PlayerLocomotion PlayerLocomotionManager;
+        [HideInInspector] public PlayerInteraction PlayerInteractionManager;
 
         private bool _hasSubscription;
 
         protected override void Awake()
         {
             base.Awake();
-            PlayerLocomotionManager = GetComponent<PlayerLocomotionModule>();
-            PlayerInteractionManager = GetComponent<PlayerInteractionModule>();
+            PlayerLocomotionManager = GetComponent<PlayerLocomotion>();
+            PlayerInteractionManager = GetComponent<PlayerInteraction>();
             GameManager.StaticInstance.SetPlayer(this);
         }
 

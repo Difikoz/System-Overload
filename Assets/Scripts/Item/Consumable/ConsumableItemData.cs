@@ -18,24 +18,25 @@ namespace WinterUniverse
             _itemType = ItemType.Consumable;
         }
 
-        public override void Use(PawnController character, bool fromInventory = true)
+        public override void Use(PawnController pawn, bool fromInventory = true)
         {
             foreach (EffectCreator creator in _effects)
             {
                 if (creator.Chance > Random.value)
                 {
-                    Effect effect = creator.Effect.CreateEffect();
                     if (creator.OverrideDefaultValues)
                     {
-                        effect.Value = creator.Value;
-                        effect.Duration = creator.Duration;
+                        pawn.PawnEffects.AddEffect(creator.Effect.CreateEffect(pawn, null, creator.Value, creator.Duration));
                     }
-                    character.PawnEffects.AddEffect(effect);
+                    else
+                    {
+                        pawn.PawnEffects.AddEffect(creator.Effect.CreateEffect(pawn, null, creator.Effect.Value, creator.Effect.Duration));
+                    }
                 }
             }
             if (fromInventory)
             {
-                character.PawnInventory.RemoveItem(this);
+                pawn.PawnInventory.RemoveItem(this);
             }
         }
     }

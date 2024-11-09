@@ -10,14 +10,13 @@ namespace WinterUniverse
         public GameObject LootItemPrefab;
         public GameObject LootBagPrefab;
         public float Gravity = -20f;
-        public ExperienceConfigData LevelConfig;
-        public InstantHealthReduceEffectData HealthReduceEffect;
-        public InstantHealthRestoreEffectData HealthRestoreEffect;
-        public InstantEnergyReduceEffectData EnergyReduceEffect;
-        public InstantEnergyRestoreEffectData EnergyRestoreEffect;
-        public List<StatData> Stats = new();
+        public ExperienceConfig LevelConfig;
+        public InstantHealthReduceEffectConfig HealthReduceEffect;
+        public InstantHealthRestoreEffectConfig HealthRestoreEffect;
+        public InstantEnergyReduceEffectConfig EnergyReduceEffect;
+        public InstantEnergyRestoreEffectConfig EnergyRestoreEffect;
+        public List<StatConfig> Stats = new();
         public List<RaceData> Races = new();
-        public List<SpecializationData> Specializations = new();
         public List<FactionData> Factions = new();
         public List<WeaponItemData> Weapons = new();
         public List<ArmorItemData> Armors = new();
@@ -29,7 +28,7 @@ namespace WinterUniverse
 
         public void Initialize()
         {
-            foreach (StatData data in Stats)
+            foreach (StatConfig data in Stats)
             {
                 _stats.Add(new(data));
             }
@@ -56,9 +55,9 @@ namespace WinterUniverse
             return _stats;
         }
 
-        public StatData GetStat(string name)
+        public StatConfig GetStat(string name)
         {
-            foreach (StatData data in Stats)
+            foreach (StatConfig data in Stats)
             {
                 if (data.DisplayName == name)
                 {
@@ -71,18 +70,6 @@ namespace WinterUniverse
         public RaceData GetRace(string name)
         {
             foreach (RaceData data in Races)
-            {
-                if (data.DisplayName == name)
-                {
-                    return data;
-                }
-            }
-            return null;
-        }
-
-        public SpecializationData GetSpecialization(string name)
-        {
-            foreach (SpecializationData data in Specializations)
             {
                 if (data.DisplayName == name)
                 {

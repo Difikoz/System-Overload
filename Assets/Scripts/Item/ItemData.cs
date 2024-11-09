@@ -22,7 +22,7 @@ namespace WinterUniverse
         [SerializeField] protected List<StatRequirement> _requiredStats = new();
 
         public string DisplayName => _displayName;
-        [TextArea] public string Description => _description;
+        public string Description => _description;
         public Sprite Icon => _icon;
         public ItemType ItemType => _itemType;
         public GameObject Model => _model;

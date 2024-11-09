@@ -29,7 +29,7 @@ namespace WinterUniverse
         protected virtual void OnTriggerEnter(Collider other)
         {
             PawnController target = other.GetComponentInParent<PawnController>();
-            if (CanDamageTarget(target))
+            if (CanDamageTarget(target, out PawnController source))
             {
                 _damagedCharacters.Add(target);
                 _hitPoint = other.ClosestPointOnBounds(transform.position);
@@ -48,13 +48,14 @@ namespace WinterUniverse
                 {
                     _targetBlockPower = 0f;
                 }
-                ApplyDamageToTarget(target);
+                ApplyDamageToTarget(target, source);
                 OnHitted?.Invoke();
             }
         }
 
-        protected virtual bool CanDamageTarget(PawnController target)
+        protected virtual bool CanDamageTarget(PawnController target, out PawnController source)
         {
+            source = null;
             return target != null && !target.IsDead && !_damagedCharacters.Contains(target);
         }
 
@@ -73,24 +74,18 @@ namespace WinterUniverse
             return ExtraTools.GetSignedAngleToDirection(transform.forward, target.transform.forward);
         }
 
-        protected virtual void ApplyDamageToTarget(PawnController target)
+        protected virtual void ApplyDamageToTarget(PawnController target, PawnController source)
         {
             foreach (DamageType type in DamageTypes)
             {
-                InstantHealthReduceEffect effect = (InstantHealthReduceEffect)GameManager.StaticInstance.WorldData.HealthReduceEffect.CreateEffect();
-                effect.Owner = target;
-                effect.Value = type.Damage;
-                effect.Value -= effect.Value * _targetBlockPower;
-                effect.Element = type.Element;
-                effect.HitPoint = _hitPoint;
-                effect.HitDirection = _hitDirection;
-                effect.AngleHitFrom = _angleFromHit;
+                InstantHealthReduceEffect effect = (InstantHealthReduceEffect)GameManager.StaticInstance.WorldData.HealthReduceEffect.CreateEffect(target, source, type.Damage - (type.Damage * _targetBlockPower), 0f);
+                effect.Initialize(type.Element, _hitPoint, _hitDirection, _angleFromHit);
                 target.PawnEffects.AddEffect(effect);
             }
-            ApplyEffectsToTarget(target, TargetEffects);
+            ApplyEffectsToTarget(target, source, TargetEffects);
         }
 
-        protected virtual void ApplyEffectsToTarget(PawnController target, List<EffectCreator> effects)
+        protected virtual void ApplyEffectsToTarget(PawnController target, PawnController source, List<EffectCreator> effects)
         {
             if (target.IsDead)
             {
@@ -100,14 +95,14 @@ namespace WinterUniverse
             {
                 if (creator.Chance > UnityEngine.Random.value)
                 {
-                    Effect effect = creator.Effect.CreateEffect();
-                    effect.Owner = target;
                     if (creator.OverrideDefaultValues)
                     {
-                        effect.Value = creator.Value;
-                        effect.Duration = creator.Duration;
+                        target.PawnEffects.AddEffect(creator.Effect.CreateEffect(target, source, creator.Value, creator.Duration));
                     }
-                    target.PawnEffects.AddEffect(effect);
+                    else
+                    {
+                        target.PawnEffects.AddEffect(creator.Effect.CreateEffect(target, source, creator.Effect.Value, creator.Effect.Duration));
+                    }
                 }
             }
         }

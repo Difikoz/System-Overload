@@ -45,7 +45,7 @@ namespace WinterUniverse
         {
             for (int i = Effects.Count - 1; i >= 0; i--)
             {
-                if (Effects[i].Data.IsPositive)
+                if (Effects[i].Config.IsPositive)
                 {
                     Effects[i].OnRemove();
                     Effects.RemoveAt(i);
@@ -57,7 +57,7 @@ namespace WinterUniverse
         {
             for (int i = Effects.Count - 1; i >= 0; i--)
             {
-                if (!Effects[i].Data.IsPositive)
+                if (!Effects[i].Config.IsPositive)
                 {
                     Effects[i].OnRemove();
                     Effects.RemoveAt(i);

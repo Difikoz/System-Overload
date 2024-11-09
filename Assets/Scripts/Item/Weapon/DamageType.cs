@@ -6,9 +6,9 @@ namespace WinterUniverse
     public class DamageType
     {
         [SerializeField] private float _damage;
-        [SerializeField] private ElementData _element;
+        [SerializeField] private ElementConfig _element;
 
         public float Damage => _damage;
-        public ElementData Element => _element;
+        public ElementConfig Element => _element;
     }
 }

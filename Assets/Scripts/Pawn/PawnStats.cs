@@ -135,7 +135,7 @@ namespace WinterUniverse
             }
         }
 
-        public void ReduceCurrentHealth(float value, ElementData element, PawnController source = null)
+        public void ReduceCurrentHealth(float value, ElementConfig element, PawnController source = null)
         {
             if (_pawn.IsDead || value <= 0f)
             {

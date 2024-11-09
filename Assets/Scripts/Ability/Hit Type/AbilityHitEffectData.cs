@@ -6,17 +6,24 @@ namespace WinterUniverse
     [CreateAssetMenu(fileName = "Effect", menuName = "Winter Universe/Ability/Hit Type/New Effect")]
     public class AbilityHitEffectData : AbilityHitTypeData
     {
-        public List<EffectData> Effects = new();
+        public List<EffectCreator> Effects = new();
 
         public override void Hit(PawnController caster, PawnController target, Vector3 position, Vector3 direction)
         {
             base.Hit(caster, target, position, direction);
-            foreach (EffectData data in Effects)
+            foreach (EffectCreator creator in Effects)
             {
-                Effect effect = data.CreateEffect();
-                effect.Owner = target;
-                effect.Source = caster;
-                target.PawnEffects.AddEffect(effect);
+                if (creator.Chance >= Random.value)
+                {
+                    if (creator.OverrideDefaultValues)
+                    {
+                        target.PawnEffects.AddEffect(creator.Effect.CreateEffect(target, caster, creator.Value, creator.Duration));
+                    }
+                    else
+                    {
+                        target.PawnEffects.AddEffect(creator.Effect.CreateEffect(target, caster, creator.Effect.Value, creator.Effect.Duration));
+                    }
+                }
             }
         }
     }
