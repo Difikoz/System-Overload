@@ -5,12 +5,7 @@ namespace WinterUniverse
     {
         public string CharacterName = "Faceless";
 
-        public string Race = "Human";
-        public string Gender = "Male";
         public string Faction = "Tramps";
-
-        public int Level = 1;
-        public int Experience;
 
         public float Health;
         public float Energy;

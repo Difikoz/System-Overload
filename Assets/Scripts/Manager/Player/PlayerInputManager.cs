@@ -74,7 +74,7 @@ namespace WinterUniverse
 
         private void HandleRunInput()
         {
-            if (_moveInput != Vector2.zero && _runInput && GameManager.StaticInstance.Player.PlayerLocomotionManager.HandleRunning())
+            if (_moveInput != Vector2.zero && _runInput && GameManager.StaticInstance.Player.PlayerLocomotion.HandleRunning())
             {
                 GameManager.StaticInstance.Player.IsRunning = true;
             }
@@ -105,7 +105,7 @@ namespace WinterUniverse
             {
                 return;
             }
-            GameManager.StaticInstance.Player.PlayerLocomotionManager.TryPerformDash();
+            GameManager.StaticInstance.Player.PlayerLocomotion.TryPerformDash();
         }
 
         public void OnInteract()
@@ -114,7 +114,7 @@ namespace WinterUniverse
             {
                 return;
             }
-            GameManager.StaticInstance.Player.PlayerInteractionManager.Interact();
+            GameManager.StaticInstance.Player.PlayerInteraction.Interact();
         }
 
         public void OnJump()
@@ -123,12 +123,12 @@ namespace WinterUniverse
             {
                 return;
             }
-            GameManager.StaticInstance.Player.PlayerLocomotionManager.TryPerformJump();
+            GameManager.StaticInstance.Player.PlayerLocomotion.TryPerformJump();
         }
 
         public void OnActionPrimaryRight()
         {
-            if (GameManager.StaticInstance.Player == null || !GameManager.StaticInstance.Player.Spawned)
+            if (GameManager.StaticInstance.Player == null)
             {
                 return;
             }
@@ -137,7 +137,7 @@ namespace WinterUniverse
 
         public void OnActionPrimaryLeft()
         {
-            if (GameManager.StaticInstance.Player == null || !GameManager.StaticInstance.Player.Spawned)
+            if (GameManager.StaticInstance.Player == null)
             {
                 return;
             }
@@ -153,7 +153,7 @@ namespace WinterUniverse
 
         public void OnActionSecondaryRight()
         {
-            if (GameManager.StaticInstance.Player == null || !GameManager.StaticInstance.Player.Spawned)
+            if (GameManager.StaticInstance.Player == null)
             {
                 return;
             }
@@ -162,7 +162,7 @@ namespace WinterUniverse
 
         public void OnActionSecondaryLeft()
         {
-            if (GameManager.StaticInstance.Player == null || !GameManager.StaticInstance.Player.Spawned)
+            if (GameManager.StaticInstance.Player == null)
             {
                 return;
             }
@@ -178,7 +178,7 @@ namespace WinterUniverse
 
         public void OnCastSpell()
         {
-            if (GameManager.StaticInstance.Player == null || !GameManager.StaticInstance.Player.Spawned)
+            if (GameManager.StaticInstance.Player == null)
             {
                 return;
             }

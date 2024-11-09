@@ -177,7 +177,7 @@ namespace WinterUniverse
 
         public bool HandleRunning()
         {
-            if (!_pawn.Spawned || _pawn.IsDead || _pawn.IsPerfomingAction || _pawn.PawnStats.EnergyCurrent <= 1f || _moveInput.magnitude < 0.5f)
+            if (_pawn.IsDead || _pawn.IsPerfomingAction || _pawn.PawnStats.EnergyCurrent <= 1f || _moveInput.magnitude < 0.5f)
             {
                 return false;
             }
@@ -187,7 +187,7 @@ namespace WinterUniverse
 
         public void TryPerformJump()
         {
-            if (!_pawn.Spawned || _pawn.IsDead || _pawn.IsPerfomingAction || !_pawn.IsGrounded || _pawn.PawnStats.EnergyCurrent < 10f)// TODO get jump energy cost stat
+            if (_pawn.IsDead || _pawn.IsPerfomingAction || !_pawn.IsGrounded || _pawn.PawnStats.EnergyCurrent < 10f)// TODO get jump energy cost stat
             {
                 return;
             }
@@ -197,7 +197,7 @@ namespace WinterUniverse
 
         public void TryPerformDash()
         {
-            if (!_pawn.Spawned || _pawn.IsDead || _pawn.IsPerfomingAction || _pawn.PawnStats.EnergyCurrent < 10f)// TODO get dodge energy cost stat
+            if (_pawn.IsDead || _pawn.IsPerfomingAction || _pawn.PawnStats.EnergyCurrent < 10f)// TODO get dodge energy cost stat
             {
                 return;
             }

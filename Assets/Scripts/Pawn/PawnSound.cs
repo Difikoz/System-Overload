@@ -9,13 +9,9 @@ namespace WinterUniverse
         private PawnController _pawn;
         private AudioSource _audioSource;
 
-        [SerializeField] private List<AudioClip> _maleAttackClips = new();
-        [SerializeField] private List<AudioClip> _maleGetHitClips = new();
-        [SerializeField] private List<AudioClip> _maleDeathClips = new();
-
-        [SerializeField] private List<AudioClip> _femaleAttackClips = new();
-        [SerializeField] private List<AudioClip> _femaleGetHitClips = new();
-        [SerializeField] private List<AudioClip> _femaleDeathClips = new();
+        [SerializeField] private List<AudioClip> _attackClips = new();
+        [SerializeField] private List<AudioClip> _getHitClips = new();
+        [SerializeField] private List<AudioClip> _deathClips = new();
 
         public virtual void Initialize()
         {
@@ -25,37 +21,25 @@ namespace WinterUniverse
 
         public void PlayAttackClip()
         {
-            if (_pawn.Gender == Gender.Male && _maleAttackClips.Count > 0)
+            if (_attackClips.Count > 0)
             {
-                PlaySound(_maleAttackClips);
-            }
-            else if (_pawn.Gender == Gender.Female && _femaleAttackClips.Count > 0)
-            {
-                PlaySound(_femaleAttackClips);
+                PlaySound(_attackClips);
             }
         }
 
         public void PlayGetHitClip()
         {
-            if (_pawn.Gender == Gender.Male && _maleGetHitClips.Count > 0)
+            if (_getHitClips.Count > 0)
             {
-                PlaySound(_maleGetHitClips);
-            }
-            else if (_pawn.Gender == Gender.Female && _femaleGetHitClips.Count > 0)
-            {
-                PlaySound(_femaleGetHitClips);
+                PlaySound(_getHitClips);
             }
         }
 
         public void PlayDeathClip()
         {
-            if (_pawn.Gender == Gender.Male && _maleDeathClips.Count > 0)
+            if (_deathClips.Count > 0)
             {
-                PlaySound(_maleDeathClips);
-            }
-            else if (_pawn.Gender == Gender.Female && _femaleDeathClips.Count > 0)
-            {
-                PlaySound(_femaleDeathClips);
+                PlaySound(_deathClips);
             }
         }
 

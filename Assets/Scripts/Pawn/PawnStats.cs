@@ -8,18 +8,12 @@ namespace WinterUniverse
     {
         public Action<float, float> OnHealthChanged;
         public Action<float, float> OnEnergyChanged;
-        public Action<float, float> OnExperienceChanged;
-        public Action<int> OnLevelChanged;
         public Action<List<Stat>> OnStatChanged;
 
         private PawnController _pawn;
 
         #region Stats
         [HideInInspector] public List<Stat> Stats = new();
-
-        [HideInInspector] public int Level;
-        [HideInInspector] public int Experience;
-        [HideInInspector] public int RequiredExperience;
 
         [HideInInspector] public Stat Strength;
         [HideInInspector] public Stat Perception;
@@ -97,42 +91,11 @@ namespace WinterUniverse
         private float _energyRegenerationTimer;
         private float _energyTickTimer;
 
-        public int KillExperience => Mathf.FloorToInt(Level + Strength.CurrentValue + Perception.CurrentValue + Endurance.CurrentValue + Charisma.CurrentValue + Intelligence.CurrentValue + Agility.CurrentValue + Luck.CurrentValue + Experience / 2f);
         public float HealthPercent => HealthCurrent / HealthMax.CurrentValue;
 
         public virtual void Initialize()
         {
             _pawn = GetComponent<PawnController>();
-        }
-
-        public void AddExperience(int exp)
-        {
-            Experience += exp;
-            while (Experience >= RequiredExperience && Level < GameManager.StaticInstance.WorldData.LevelConfig.MaxLevel)
-            {
-                Experience -= RequiredExperience;
-                LevelUp();
-            }
-            OnExperienceChanged?.Invoke(Experience, RequiredExperience);
-        }
-
-        public void LevelUp(int amount = 1)
-        {
-            while (amount > 0 && Level < GameManager.StaticInstance.WorldData.LevelConfig.MaxLevel)
-            {
-                Level++;
-                amount--;
-                if (Level < GameManager.StaticInstance.WorldData.LevelConfig.MaxLevel)
-                {
-                    RequiredExperience = GameManager.StaticInstance.WorldData.LevelConfig.GetRequiredExperience(Level);
-                }
-                else
-                {
-                    RequiredExperience = 0;
-                }
-                OnLevelChanged?.Invoke(Level);
-                OnExperienceChanged?.Invoke(Experience, RequiredExperience);
-            }
         }
 
         public void ReduceCurrentHealth(float value, ElementConfig element, PawnController source = null)
@@ -378,10 +341,6 @@ namespace WinterUniverse
                     CriticalHitPower = s;
                 }
             }
-            foreach (StatModifierCreator creator in _pawn.Race.Modifiers)
-            {
-                AddStatModifier(creator);
-            }
         }
 
         public void AddStatModifier(StatModifierCreator creator)
@@ -418,16 +377,6 @@ namespace WinterUniverse
             OnHealthChanged?.Invoke(HealthCurrent, HealthMax.CurrentValue);
             EnergyCurrent = Mathf.Clamp(EnergyCurrent, 0f, EnergyMax.CurrentValue);
             OnEnergyChanged?.Invoke(EnergyCurrent, EnergyMax.CurrentValue);
-            if (Level < GameManager.StaticInstance.WorldData.LevelConfig.MaxLevel)
-            {
-                RequiredExperience = GameManager.StaticInstance.WorldData.LevelConfig.GetRequiredExperience(Level);
-            }
-            else
-            {
-                RequiredExperience = 0;
-            }
-            OnLevelChanged?.Invoke(Level);
-            OnExperienceChanged?.Invoke(Experience, RequiredExperience);
         }
 
         public void RegenerateHealth()

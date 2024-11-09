@@ -48,7 +48,7 @@ namespace WinterUniverse
             }
             else
             {
-                GameManager.StaticInstance.Player.ClearCharacter();
+                //GameManager.StaticInstance.Player.ClearCharacter();
             }
         }
 

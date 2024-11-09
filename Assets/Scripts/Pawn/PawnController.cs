@@ -32,17 +32,12 @@ namespace WinterUniverse
         public Vector3 MoveDirection => _moveDirection;
 
         //
-        public Action<RaceConfig> OnRaceChanged;
-        public Action<Gender> OnGenderChanged;
         public Action<FactionConfig> OnFactionChanged;
         public Action OnDied;
 
         [HideInInspector] public string CharacterName;
-        [HideInInspector] public RaceConfig Race;
-        [HideInInspector] public Gender Gender;
         [HideInInspector] public FactionConfig Faction;
 
-        public bool Spawned;
         public bool IsPerfomingAction;
         public bool UseRootMotion;
         public bool UseGravity = true;
@@ -63,6 +58,8 @@ namespace WinterUniverse
 
         protected virtual void Awake()
         {
+            _pawnAnimator = GetComponentInChildren<PawnAnimator>();
+            _pawnEquipment = GetComponentInChildren<PawnEquipment>();
             _pawnLocomotion = GetComponent<PawnLocomotion>();
             _pawnInteraction = GetComponent<PawnInteraction>();
             _pawnInventory = GetComponent<PawnInventory>();
@@ -76,6 +73,10 @@ namespace WinterUniverse
             _pawnEffects.Initialize();
             _pawnSound.Initialize();
             _pawnStats.Initialize();
+            _pawnAnimator.Initialize();
+            _pawnEquipment.Initialize();
+            //CharacterUI = GetComponentInChildren<CharacterUI>();
+            IgnoreMyOwnColliders();
             DontDestroyOnLoad(this);
         }
 
@@ -98,15 +99,12 @@ namespace WinterUniverse
 
         protected virtual void Update()
         {
-            if (Spawned)
+            if (!IsDead)
             {
-                if (!IsDead)
-                {
-                    PawnStats.RegenerateHealth();
-                    PawnStats.RegenerateEnergy();
-                }
-                _pawnLocomotion.HandleLocomotion();
+                PawnStats.RegenerateHealth();
+                PawnStats.RegenerateEnergy();
             }
+            _pawnLocomotion.HandleLocomotion();
         }
 
         //
@@ -122,28 +120,8 @@ namespace WinterUniverse
 
         public virtual void CreateCharacter(CharacterSaveData data)
         {
-            ClearCharacter();
-            ChangeRace(GameManager.StaticInstance.WorldData.GetRace(data.Race));
-            if (data.Gender == "Female")
-            {
-                ChangeGender(Gender.Female);
-            }
-            else
-            {
-                ChangeGender(Gender.Male);
-            }
             ChangeFaction(GameManager.StaticInstance.WorldData.GetFaction(data.Faction));
-            LeanPool.Spawn(Race.Model, transform);// spawn model and get components
-            _pawnAnimator = GetComponentInChildren<PawnAnimator>();
-            _pawnEquipment = GetComponentInChildren<PawnEquipment>();
-            //
-            _pawnAnimator.Initialize();
-            _pawnEquipment.Initialize();
-            //CharacterUI = GetComponentInChildren<CharacterUI>();
-            IgnoreMyOwnColliders();
             CharacterName = data.CharacterName;
-            // maybe delayed call?
-            PawnStats.Level = data.Level;
             PawnStats.CreateStats();
             PawnInventory.Initialize(data.InventoryStacks);
             PawnEquipment.ClearEquipment();
@@ -152,28 +130,6 @@ namespace WinterUniverse
             PawnStats.RestoreCurrentHealth(PawnStats.HealthMax.CurrentValue);
             PawnStats.RestoreCurrentEnergy(PawnStats.EnergyMax.CurrentValue);
             PawnEquipment.ForceUpdateMeshes();
-            Spawned = true;
-        }
-
-        public virtual void ClearCharacter()
-        {
-            if (Spawned)
-            {
-                LeanPool.Despawn(PawnAnimator.gameObject);
-            }
-            Spawned = false;
-        }
-
-        public void ChangeRace(RaceConfig data)
-        {
-            Race = data;
-            OnRaceChanged?.Invoke(Race);
-        }
-
-        public void ChangeGender(Gender gender)
-        {
-            Gender = gender;
-            OnGenderChanged?.Invoke(Gender);
         }
 
         public void ChangeFaction(FactionConfig data)
@@ -204,12 +160,7 @@ namespace WinterUniverse
                 }
                 if (source != null)
                 {
-                    if (source != null)
-                    {
-                        source.PawnStats.AddExperience(PawnStats.KillExperience);
-                        Debug.Log($"Add {PawnStats.KillExperience} experience to {source.gameObject.name} from {gameObject.name}");
-                    }
-                    //CharacterStatManager.Experience = Mathf.CeilToInt(CharacterStatManager.Experience / 2f);// терять опыт при смерти?
+
                 }
                 PawnSound.PlayDeathClip();
                 PawnCombat.SetTarget();

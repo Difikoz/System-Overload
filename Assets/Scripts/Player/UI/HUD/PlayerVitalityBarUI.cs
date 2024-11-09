@@ -7,7 +7,6 @@ namespace WinterUniverse
         [SerializeField] private CanvasGroup _canvasGroup;
         [SerializeField] private VitalityBarUI _healthBar;
         [SerializeField] private VitalityBarUI _energyBar;
-        [SerializeField] private VitalityBarUI _experienceBar;
 
         public void ShowBars()
         {
@@ -27,11 +26,6 @@ namespace WinterUniverse
         public void SetEnergyValues(float cur, float max)
         {
             _energyBar.SetValues(cur, max);
-        }
-
-        public void SetExperienceValues(float cur, float max)
-        {
-            _experienceBar.SetValues(cur, max);
         }
     }
 }

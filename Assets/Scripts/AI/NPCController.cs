@@ -46,10 +46,6 @@ namespace WinterUniverse
         protected override void FixedUpdate()
         {
             base.FixedUpdate();
-            if (!Spawned)
-            {
-                return;
-            }
             if (ActionRecoveryTimer > 0f && !IsPerfomingAction)
             {
                 ActionRecoveryTimer -= Time.fixedDeltaTime;

@@ -13,13 +13,11 @@ namespace WinterUniverse
         [SerializeField] private GameObject _lootItemPrefab;
         [SerializeField] private GameObject _lootBagPrefab;
         [SerializeField] private float _gravity = -20f;
-        [SerializeField] private ExperienceConfig _levelConfig;
         [SerializeField] private InstantHealthReduceEffectConfig _healthReduceEffect;
         [SerializeField] private InstantHealthRestoreEffectConfig _healthRestoreEffect;
         [SerializeField] private InstantEnergyReduceEffectConfig _energyReduceEffect;
         [SerializeField] private InstantEnergyRestoreEffectConfig _energyRestoreEffect;
         [SerializeField] private List<StatConfig> _stats = new();
-        [SerializeField] private List<RaceConfig> _races = new();
         [SerializeField] private List<FactionConfig> _factions = new();
         [SerializeField] private List<WeaponItemConfig> _weapons = new();
         [SerializeField] private List<ArmorItemConfig> _armors = new();
@@ -31,13 +29,11 @@ namespace WinterUniverse
         public GameObject LootItemPrefab => _lootItemPrefab;
         public GameObject LootBagPrefab => _lootBagPrefab;
         public float Gravity => _gravity;
-        public ExperienceConfig LevelConfig => _levelConfig;
         public InstantHealthReduceEffectConfig HealthReduceEffect => _healthReduceEffect;
         public InstantHealthRestoreEffectConfig HealthRestoreEffect => _healthRestoreEffect;
         public InstantEnergyReduceEffectConfig EnergyReduceEffect => _energyReduceEffect;
         public InstantEnergyRestoreEffectConfig EnergyRestoreEffect => _energyRestoreEffect;
         public List<StatConfig> Stats => _stats;
-        public List<RaceConfig> Races => _races;
         public List<FactionConfig> Factions => _factions;
         public List<ItemConfig> Items => _items;
         public List<WeaponItemConfig> Weapons => _weapons;
@@ -77,18 +73,6 @@ namespace WinterUniverse
         public StatConfig GetStat(string name)
         {
             foreach (StatConfig data in _stats)
-            {
-                if (data.DisplayName == name)
-                {
-                    return data;
-                }
-            }
-            return null;
-        }
-
-        public RaceConfig GetRace(string name)
-        {
-            foreach (RaceConfig data in _races)
             {
                 if (data.DisplayName == name)
                 {

@@ -7,9 +7,6 @@ namespace WinterUniverse
     public class CharacterData : ScriptableObject
     {
         public string CharacterName = "Name";
-        public int StartingLevel = 1;
-        public RaceConfig Race;
-        public Gender Gender;
         public FactionConfig Faction;
         public List<ItemStack> StartingItems = new();
 
@@ -18,9 +15,6 @@ namespace WinterUniverse
             CharacterSaveData data = new()
             {
                 CharacterName = CharacterName,
-                Level = StartingLevel,
-                Race = Race.DisplayName,
-                Gender = Gender.ToString(),
                 Faction = Faction.DisplayName
             };
             foreach (ItemStack stack in StartingItems)

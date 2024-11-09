@@ -16,8 +16,6 @@ namespace WinterUniverse
         [SerializeField] protected int _price = 100;
         [SerializeField] protected float _rating = 1f;
         [Header("Requirements for usable items")]
-        [SerializeField] protected int _requiredLevel;
-        [SerializeField] protected List<RaceConfig> _requiredRace = new();
         [SerializeField] protected List<FactionConfig> _requiredFaction = new();
         [SerializeField] protected List<StatRequirement> _requiredStats = new();
 
@@ -30,27 +28,12 @@ namespace WinterUniverse
         public int MaxCountInStack => _maxCountInStack;
         public int Price => _price;
         public float Rating => _rating;
-        public int RequiredLevel => _requiredLevel;
-        public List<RaceConfig> RequiredRace => _requiredRace;
         public List<FactionConfig> RequiredFaction => _requiredFaction;
         public List<StatRequirement> RequiredStats => _requiredStats;
 
         public virtual bool CanUse(PawnController character, out string error, bool fromInventory = true)
         {
             error = string.Empty;
-            if (character.PawnStats.Level < _requiredLevel)
-            {
-                error = "Low Level";
-                return false;
-            }
-            if (_requiredRace.Count > 0)
-            {
-                if (!_requiredRace.Contains(character.Race))
-                {
-                    error = "Wrong Race";
-                    return false;
-                }
-            }
             if (_requiredFaction.Count > 0)
             {
                 if (!_requiredFaction.Contains(character.Faction))

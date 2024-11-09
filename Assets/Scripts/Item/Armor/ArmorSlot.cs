@@ -85,15 +85,7 @@ namespace WinterUniverse
 
         private void DisableMeshes(ArmorRenderer ar)
         {
-            foreach (GameObject go in ar.NeutralParts)
-            {
-                go.SetActive(false);
-            }
-            foreach (GameObject go in ar.MaleParts)
-            {
-                go.SetActive(false);
-            }
-            foreach (GameObject go in ar.FemaleParts)
+            foreach (GameObject go in ar.Meshes)
             {
                 go.SetActive(false);
             }
@@ -101,27 +93,10 @@ namespace WinterUniverse
 
         private void EnableMeshes(ArmorRenderer ar)
         {
-            foreach (GameObject go in ar.NeutralParts)
+            foreach (GameObject go in ar.Meshes)
             {
                 go.SetActive(true);
             }
-            foreach (GameObject go in ar.MaleParts)
-            {
-                go.SetActive(_owner.Gender == Gender.Male);
-            }
-            foreach (GameObject go in ar.FemaleParts)
-            {
-                go.SetActive(_owner.Gender == Gender.Female);
-            }
         }
-    }
-
-    [System.Serializable]
-    public class ArmorRenderer
-    {
-        public ArmorItemConfig Data;
-        public List<GameObject> NeutralParts;
-        public List<GameObject> MaleParts;
-        public List<GameObject> FemaleParts;
     }
 }
