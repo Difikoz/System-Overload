@@ -97,7 +97,7 @@ namespace WinterUniverse
                 _currentRaceIndex--;
             }
             SelectRace();
-            PlayerInputManager.StaticInstance.Player.CreateCharacter(CurrentCharacterData);
+            GameManager.StaticInstance.Player.CreateCharacter(CurrentCharacterData);
         }
 
         private void OnRaceMenuButtonNextRacePressed()
@@ -111,7 +111,7 @@ namespace WinterUniverse
                 _currentRaceIndex++;
             }
             SelectRace();
-            PlayerInputManager.StaticInstance.Player.CreateCharacter(CurrentCharacterData);
+            GameManager.StaticInstance.Player.CreateCharacter(CurrentCharacterData);
         }
 
         private void OnRaceMenuButtonConfirmPressed()
@@ -144,14 +144,14 @@ namespace WinterUniverse
         {
             CurrentCharacterData.Gender = Gender.Male.ToString();
             _genderNameText.text = Gender.Male.ToString();
-            PlayerInputManager.StaticInstance.Player.CreateCharacter(CurrentCharacterData);
+            GameManager.StaticInstance.Player.CreateCharacter(CurrentCharacterData);
         }
 
         private void OnGenderMenuButtonFemalePressed()
         {
             CurrentCharacterData.Gender = Gender.Female.ToString();
             _genderNameText.text = Gender.Female.ToString();
-            PlayerInputManager.StaticInstance.Player.CreateCharacter(CurrentCharacterData);
+            GameManager.StaticInstance.Player.CreateCharacter(CurrentCharacterData);
         }
 
         private void OnGenderMenuButtonConfirmPressed()
@@ -179,7 +179,7 @@ namespace WinterUniverse
                 _currentFactionIndex--;
             }
             SelectFaction();
-            PlayerInputManager.StaticInstance.Player.CreateCharacter(CurrentCharacterData);
+            GameManager.StaticInstance.Player.CreateCharacter(CurrentCharacterData);
         }
 
         private void OnFactionMenuButtonNextFactionPressed()
@@ -193,7 +193,7 @@ namespace WinterUniverse
                 _currentFactionIndex++;
             }
             SelectFaction();
-            PlayerInputManager.StaticInstance.Player.CreateCharacter(CurrentCharacterData);
+            GameManager.StaticInstance.Player.CreateCharacter(CurrentCharacterData);
         }
 
         private void OnFactionMenuButtonConfirmPressed()
@@ -234,7 +234,7 @@ namespace WinterUniverse
                 CurrentCharacterData.InventoryStacks.Add(stack.Item.DisplayName, stack.Amount);
             }
             // TODO move to complete window
-            PlayerInputManager.StaticInstance.Player.CreateCharacter(CurrentCharacterData);// TODO ???
+            GameManager.StaticInstance.Player.CreateCharacter(CurrentCharacterData);// TODO ???
         }
     }
 }

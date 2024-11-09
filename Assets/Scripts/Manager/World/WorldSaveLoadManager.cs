@@ -4,10 +4,8 @@ using UnityEngine.SceneManagement;
 
 namespace WinterUniverse
 {
-    public class WorldSaveGameManager : MonoBehaviour
+    public class WorldSaveLoadManager : MonoBehaviour
     {
-        [HideInInspector] public PlayerController Player;
-
         public CharacterSaveData CurrentSaveData;
 
         private string _currentSaveFileName;
@@ -19,7 +17,7 @@ namespace WinterUniverse
 
         public void SaveGame(string fileName)
         {
-            Player.SaveData(ref CurrentSaveData);
+            GameManager.StaticInstance.Player.SaveData(ref CurrentSaveData);
             DataWriter.CreateSaveFile(CurrentSaveData, fileName);
         }
 
@@ -38,7 +36,7 @@ namespace WinterUniverse
         private IEnumerator LoadWorldScene()
         {
             AsyncOperation loadOperation = SceneManager.LoadSceneAsync(1);
-            Player.LoadData(CurrentSaveData);
+            GameManager.StaticInstance.Player.LoadData(CurrentSaveData);
             yield return null;
         }
     }

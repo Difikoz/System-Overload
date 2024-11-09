@@ -7,13 +7,16 @@ namespace WinterUniverse
     public class ArmorItemData : ItemData
     {
         [Header("Equipment Modifiers")]
-        public List<StatModifierCreator> Modifiers = new();
+        [SerializeField] private List<StatModifierCreator> _modifiers = new();
         [Header("Armor Information")]
-        public ArmorTypeData ArmorType;
+        [SerializeField] private ArmorTypeData _armorType;
+
+        public List<StatModifierCreator> Modifiers => _modifiers;
+        public ArmorTypeData ArmorType => _armorType;
 
         private void OnValidate()
         {
-            ItemType = ItemType.Armor;
+            _itemType = ItemType.Armor;
         }
 
         public override void Use(PawnController character, bool fromInventory = true)

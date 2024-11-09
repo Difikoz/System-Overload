@@ -7,17 +7,20 @@ namespace WinterUniverse
     public class ConsumableItemData : ItemData
     {
         [Header("Consumable Information")]
-        public ConsumableTypeData ConsumableType;
-        public List<EffectCreator> Effects = new();
+        [SerializeField] private ConsumableTypeData _consumableType;
+        [SerializeField] private List<EffectCreator> _effects = new();
+
+        public ConsumableTypeData ConsumableType => _consumableType;
+        public List<EffectCreator> Effects => _effects;
 
         private void OnValidate()
         {
-            ItemType = ItemType.Consumable;
+            _itemType = ItemType.Consumable;
         }
 
         public override void Use(PawnController character, bool fromInventory = true)
         {
-            foreach (EffectCreator creator in Effects)
+            foreach (EffectCreator creator in _effects)
             {
                 if (creator.Chance > Random.value)
                 {

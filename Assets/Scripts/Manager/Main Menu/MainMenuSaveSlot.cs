@@ -43,12 +43,12 @@ namespace WinterUniverse
             MainMenuManager.StaticInstance.SelectSaveSlot(this);
             if (DataExists)
             {
-                PlayerInputManager.StaticInstance.Player.LoadData(CurrentSaveData);
+                GameManager.StaticInstance.Player.LoadData(CurrentSaveData);
                 // show player if data exists
             }
             else
             {
-                PlayerInputManager.StaticInstance.Player.ClearCharacter();
+                GameManager.StaticInstance.Player.ClearCharacter();
             }
         }
 

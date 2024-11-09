@@ -18,8 +18,6 @@ namespace WinterUniverse
         public TransformValues Transform = new();
         public TransformValues RespawnTransform = new();
 
-        public SerializableDictionary<string, float> BossCooldown = new();
-
         public SerializableDictionary<string, int> InventoryStacks = new();
 
         public string WeaponInRightHand = "Unarmed";

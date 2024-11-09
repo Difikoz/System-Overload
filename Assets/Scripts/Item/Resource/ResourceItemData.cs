@@ -7,7 +7,7 @@ namespace WinterUniverse
     {
         private void OnValidate()
         {
-            ItemType = ItemType.Resource;
+            _itemType = ItemType.Resource;
         }
     }
 }

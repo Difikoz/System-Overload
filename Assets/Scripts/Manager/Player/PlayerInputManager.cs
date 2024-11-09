@@ -4,14 +4,14 @@ using UnityEngine.SceneManagement;
 
 namespace WinterUniverse
 {
-    public class PlayerInputManager : Singleton<PlayerInputManager>
+    public class PlayerInputManager : MonoBehaviour
     {
-        [HideInInspector] public PlayerController Player;
-
         private Vector2 _moveInput;
+        private Vector2 _lookInput;
         private bool _runInput;
 
         public Vector2 MoveInput => _moveInput;
+        public Vector2 LookInput => _lookInput;
 
         //private void OnApplicationFocus(bool focus)
         //{
@@ -28,9 +28,8 @@ namespace WinterUniverse
         //    }
         //}
 
-        protected override void Awake()
+        public void Initialize()
         {
-            base.Awake();
             SceneManager.activeSceneChanged += OnSceneChanged;
             enabled = false;
         }
@@ -49,7 +48,7 @@ namespace WinterUniverse
 
         private void Update()
         {
-            if (Player == null)
+            if (GameManager.StaticInstance.Player == null)
             {
                 return;
             }
@@ -58,19 +57,24 @@ namespace WinterUniverse
 
         private void HandleRunInput()
         {
-            if (_moveInput != Vector2.zero && _runInput && Player.PlayerLocomotionManager.HandleRunning())
+            if (_moveInput != Vector2.zero && _runInput && GameManager.StaticInstance.Player.PlayerLocomotionManager.HandleRunning())
             {
-                Player.IsRunning = true;
+                GameManager.StaticInstance.Player.IsRunning = true;
             }
             else
             {
-                Player.IsRunning = false;
+                GameManager.StaticInstance.Player.IsRunning = false;
             }
         }
 
         public void OnMove(InputValue value)
         {
             _moveInput = value.Get<Vector2>();
+        }
+
+        public void OnLook(InputValue value)
+        {
+            _lookInput = value.Get<Vector2>();
         }
 
         public void OnRun(InputValue value)
@@ -80,88 +84,88 @@ namespace WinterUniverse
 
         public void OnDash()
         {
-            if (Player == null)
+            if (GameManager.StaticInstance.Player == null)
             {
                 return;
             }
-            Player.PlayerLocomotionManager.TryPerformDash();
+            GameManager.StaticInstance.Player.PlayerLocomotionManager.TryPerformDash();
         }
 
         public void OnInteract()
         {
-            if (Player == null)
+            if (GameManager.StaticInstance.Player == null)
             {
                 return;
             }
-            Player.PlayerInteractionManager.Interact();
+            GameManager.StaticInstance.Player.PlayerInteractionManager.Interact();
         }
 
         public void OnJump()
         {
-            if (Player == null)
+            if (GameManager.StaticInstance.Player == null)
             {
                 return;
             }
-            Player.PlayerLocomotionManager.TryPerformJump();
+            GameManager.StaticInstance.Player.PlayerLocomotionManager.TryPerformJump();
         }
 
         public void OnActionPrimaryRight()
         {
-            if (Player == null || !Player.Spawned)
+            if (GameManager.StaticInstance.Player == null || !GameManager.StaticInstance.Player.Spawned)
             {
                 return;
             }
-            Player.CombatModule.UseWeaponAbility(Player.EquipmentModule.WeaponRightSlot.Data, HandSlotType.Right, Player.EquipmentModule.WeaponRightSlot.Data.PrimaryAbility);
+            GameManager.StaticInstance.Player.CombatModule.UseWeaponAbility(GameManager.StaticInstance.Player.EquipmentModule.WeaponRightSlot.Data, HandSlotType.Right, GameManager.StaticInstance.Player.EquipmentModule.WeaponRightSlot.Data.PrimaryAbility);
         }
 
         public void OnActionPrimaryLeft()
         {
-            if (Player == null || !Player.Spawned)
+            if (GameManager.StaticInstance.Player == null || !GameManager.StaticInstance.Player.Spawned)
             {
                 return;
             }
-            if (Player.EquipmentModule.WeaponRightSlot.Data.WeaponHandType == WeaponHandType.TwoHand)
+            if (GameManager.StaticInstance.Player.EquipmentModule.WeaponRightSlot.Data.WeaponHandType == WeaponHandType.TwoHand)
             {
                 OnActionPrimaryRight();
             }
             else
             {
-                Player.CombatModule.UseWeaponAbility(Player.EquipmentModule.WeaponLeftSlot.Data, HandSlotType.Left, Player.EquipmentModule.WeaponLeftSlot.Data.PrimaryAbility);
+                GameManager.StaticInstance.Player.CombatModule.UseWeaponAbility(GameManager.StaticInstance.Player.EquipmentModule.WeaponLeftSlot.Data, HandSlotType.Left, GameManager.StaticInstance.Player.EquipmentModule.WeaponLeftSlot.Data.PrimaryAbility);
             }
         }
 
         public void OnActionSecondaryRight()
         {
-            if (Player == null || !Player.Spawned)
+            if (GameManager.StaticInstance.Player == null || !GameManager.StaticInstance.Player.Spawned)
             {
                 return;
             }
-            Player.CombatModule.UseWeaponAbility(Player.EquipmentModule.WeaponRightSlot.Data, HandSlotType.Right, Player.EquipmentModule.WeaponRightSlot.Data.SecondaryAbility);
+            GameManager.StaticInstance.Player.CombatModule.UseWeaponAbility(GameManager.StaticInstance.Player.EquipmentModule.WeaponRightSlot.Data, HandSlotType.Right, GameManager.StaticInstance.Player.EquipmentModule.WeaponRightSlot.Data.SecondaryAbility);
         }
 
         public void OnActionSecondaryLeft()
         {
-            if (Player == null || !Player.Spawned)
+            if (GameManager.StaticInstance.Player == null || !GameManager.StaticInstance.Player.Spawned)
             {
                 return;
             }
-            if (Player.EquipmentModule.WeaponRightSlot.Data.WeaponHandType == WeaponHandType.TwoHand)
+            if (GameManager.StaticInstance.Player.EquipmentModule.WeaponRightSlot.Data.WeaponHandType == WeaponHandType.TwoHand)
             {
                 OnActionSecondaryRight();
             }
             else
             {
-                Player.CombatModule.UseWeaponAbility(Player.EquipmentModule.WeaponLeftSlot.Data, HandSlotType.Left, Player.EquipmentModule.WeaponLeftSlot.Data.SecondaryAbility);
+                GameManager.StaticInstance.Player.CombatModule.UseWeaponAbility(GameManager.StaticInstance.Player.EquipmentModule.WeaponLeftSlot.Data, HandSlotType.Left, GameManager.StaticInstance.Player.EquipmentModule.WeaponLeftSlot.Data.SecondaryAbility);
             }
         }
 
         public void OnCastSpell()
         {
-            if (Player == null || !Player.Spawned)
+            if (GameManager.StaticInstance.Player == null || !GameManager.StaticInstance.Player.Spawned)
             {
                 return;
             }
-            Player.CombatModule.UseSpellAbility(Player.EquipmentModule.SpellData);
+            GameManager.StaticInstance.Player.CombatModule.UseSpellAbility(GameManager.StaticInstance.Player.EquipmentModule.SpellData);
         }
 
         private void OnDestroy()

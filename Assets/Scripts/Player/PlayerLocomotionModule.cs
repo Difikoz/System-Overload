@@ -14,7 +14,7 @@ namespace WinterUniverse
 
         protected override Vector2 GetMoveInput()
         {
-            return PlayerInputManager.StaticInstance.MoveInput;
+            return GameManager.StaticInstance.PlayerInput.MoveInput;
         }
 
         protected override Vector3 GetLookDirection()

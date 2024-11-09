@@ -6,48 +6,62 @@ namespace WinterUniverse
     public class ItemData : ScriptableObject
     {
         [Header("Basic Information")]
-        public string DisplayName = "Item";
-        [TextArea] public string Description = "Description";
-        public Sprite Icon;
-        public ItemType ItemType;
-        public GameObject Model;
-        public float Weight = 1f;
-        public int MaxCountInStack = 1;
-        public int Price = 100;
-        public float Rating = 1f;
+        [SerializeField] protected string _displayName = "Name";
+        [SerializeField, TextArea] protected string _description = "Description";
+        [SerializeField] protected Sprite _icon;
+        [SerializeField] protected ItemType _itemType;
+        [SerializeField] protected GameObject _model;
+        [SerializeField] protected float _weight = 1f;
+        [SerializeField] protected int _maxCountInStack = 1;
+        [SerializeField] protected int _price = 100;
+        [SerializeField] protected float _rating = 1f;
         [Header("Requirements for usable items")]
-        public int RequiredLevel;
-        public List<RaceData> RequiredRace = new();
-        public List<FactionData> RequiredFaction = new();
-        public List<StatRequirement> RequiredStats = new();
+        [SerializeField] protected int _requiredLevel;
+        [SerializeField] protected List<RaceData> _requiredRace = new();
+        [SerializeField] protected List<FactionData> _requiredFaction = new();
+        [SerializeField] protected List<StatRequirement> _requiredStats = new();
+
+        public string DisplayName => _displayName;
+        [TextArea] public string Description => _description;
+        public Sprite Icon => _icon;
+        public ItemType ItemType => _itemType;
+        public GameObject Model => _model;
+        public float Weight => _weight;
+        public int MaxCountInStack => _maxCountInStack;
+        public int Price => _price;
+        public float Rating => _rating;
+        public int RequiredLevel => _requiredLevel;
+        public List<RaceData> RequiredRace => _requiredRace;
+        public List<FactionData> RequiredFaction => _requiredFaction;
+        public List<StatRequirement> RequiredStats => _requiredStats;
 
         public virtual bool CanUse(PawnController character, out string error, bool fromInventory = true)
         {
             error = string.Empty;
-            if (character.StatModule.Level < RequiredLevel)
+            if (character.StatModule.Level < _requiredLevel)
             {
                 error = "Low Level";
                 return false;
             }
-            if (RequiredRace.Count > 0)
+            if (_requiredRace.Count > 0)
             {
-                if (!RequiredRace.Contains(character.Race))
+                if (!_requiredRace.Contains(character.Race))
                 {
                     error = "Wrong Race";
                     return false;
                 }
             }
-            if (RequiredFaction.Count > 0)
+            if (_requiredFaction.Count > 0)
             {
-                if (!RequiredFaction.Contains(character.Faction))
+                if (!_requiredFaction.Contains(character.Faction))
                 {
                     error = "Wrong Faction";
                     return false;
                 }
             }
-            if (RequiredStats.Count > 0)
+            if (_requiredStats.Count > 0)
             {
-                foreach (StatRequirement requirement in RequiredStats)
+                foreach (StatRequirement requirement in _requiredStats)
                 {
                     if (requirement.Type == RequirementType.GreaterOrEqual)
                     {
@@ -81,32 +95,6 @@ namespace WinterUniverse
         public virtual void Use(PawnController character, bool fromInventory = true)
         {
 
-        }
-    }
-
-    [System.Serializable]
-    public class ItemStack
-    {
-        public ItemData Item;
-        public int Amount;
-
-        public bool HasFreeSpace => Amount < Item.MaxCountInStack;
-        public bool Empty => Amount <= 0;
-
-        public void AddToStack(int value = 1)
-        {
-            Amount += value;
-        }
-
-        public void RemoveFromStack(int value = 1)
-        {
-            Amount -= value;
-        }
-
-        public ItemStack(ItemData item, int amount = 1)
-        {
-            Item = item;
-            Amount = amount;
         }
     }
 }

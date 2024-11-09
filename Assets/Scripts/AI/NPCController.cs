@@ -57,7 +57,7 @@ namespace WinterUniverse
             if (ALIFEMode == ALIFEMode.Simple)
             {
                 // other stuff
-                if (PlayerInputManager.StaticInstance.Player != null && Vector3.Distance(transform.position, PlayerInputManager.StaticInstance.Player.transform.position) < 250f)
+                if (GameManager.StaticInstance.Player != null && Vector3.Distance(transform.position, GameManager.StaticInstance.Player.transform.position) < 250f)
                 {
                     ALIFEMode = ALIFEMode.Advanced;
                     // set values aka rendering/animation to advanced
@@ -66,7 +66,7 @@ namespace WinterUniverse
             else if (ALIFEMode == ALIFEMode.Advanced)
             {
                 // other stuff
-                if (PlayerInputManager.StaticInstance.Player == null || Vector3.Distance(transform.position, PlayerInputManager.StaticInstance.Player.transform.position) > 250f)
+                if (GameManager.StaticInstance.Player == null || Vector3.Distance(transform.position, GameManager.StaticInstance.Player.transform.position) > 250f)
                 {
                     ALIFEMode = ALIFEMode.Simple;
                     // set values aka rendering/animation to simple

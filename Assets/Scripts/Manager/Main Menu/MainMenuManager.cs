@@ -77,13 +77,13 @@ namespace WinterUniverse
             _titleScreenWindow.SetActive(false);
             _mainMenuWindow.SetActive(true);
             _mainMenuButtonStartGame.Select();
-            if (PlayerInputManager.StaticInstance.Player == null)
+            if (GameManager.StaticInstance.Player == null)
             {
                 LeanPool.Spawn(GameManager.StaticInstance.WorldData.PlayerPrefab);
             }
             else
             {
-                PlayerInputManager.StaticInstance.Player.transform.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
+                GameManager.StaticInstance.Player.transform.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
             }
         }
 
@@ -119,7 +119,7 @@ namespace WinterUniverse
             _characterCreationMenuWindow.SetActive(false);
             _startGameMenuWindow.SetActive(true);
             _startGameMenuButtonBack.Select();
-            PlayerInputManager.StaticInstance.Player.ClearCharacter();
+            GameManager.StaticInstance.Player.ClearCharacter();
         }
 
         private void OnCharacterCreationMenuButtonBackPressed()
@@ -127,7 +127,7 @@ namespace WinterUniverse
             _characterCreationMenuWindow.SetActive(false);
             _startGameMenuWindow.SetActive(true);
             _startGameMenuButtonBack.Select();
-            PlayerInputManager.StaticInstance.Player.ClearCharacter();
+            GameManager.StaticInstance.Player.ClearCharacter();
         }
 
         private void OnSettingsMenuButtonBackPressed()
@@ -159,7 +159,7 @@ namespace WinterUniverse
             _startGameMenuWindow.SetActive(false);
             _characterCreationMenuWindow.SetActive(true);
             _characterCreationMenuButtonBack.Select();
-            PlayerInputManager.StaticInstance.Player.CreateCharacter(MainMenuCharacterCreationManager.StaticInstance.CurrentCharacterData);// TODO ???
+            GameManager.StaticInstance.Player.CreateCharacter(MainMenuCharacterCreationManager.StaticInstance.CurrentCharacterData);// TODO ???
         }
         //
         public void OnSaveSlotPressed()
@@ -185,7 +185,7 @@ namespace WinterUniverse
 
         public void OnStartGameMenuButtonBackSelected()
         {
-            PlayerInputManager.StaticInstance.Player.ClearCharacter();
+            GameManager.StaticInstance.Player.ClearCharacter();
             CurrentSelectedSaveSlot = null;
         }
 

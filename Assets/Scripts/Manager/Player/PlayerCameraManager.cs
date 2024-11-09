@@ -56,7 +56,7 @@ namespace WinterUniverse
 
         private void GetInput()
         {
-            //_lookInput = value.Get<Vector2>();
+            _lookInput = GameManager.StaticInstance.PlayerInput.LookInput;
         }
 
         private void HandleRotation()
