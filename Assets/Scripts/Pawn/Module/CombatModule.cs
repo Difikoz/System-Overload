@@ -5,7 +5,7 @@ namespace WinterUniverse
 {
     public class CombatModule : MonoBehaviour
     {
-        private Character _owner;
+        private PawnController _owner;
 
         public float EvadeEnergyCost = 10f;// TODO
         public float BlockEnergyCost = 10f;// TODO
@@ -18,7 +18,7 @@ namespace WinterUniverse
         public Transform FootRightPoint;
         public Transform FootLeftPoint;
 
-        [HideInInspector] public Character CurrentTarget;
+        [HideInInspector] public PawnController CurrentTarget;
         [HideInInspector] public WeaponItemData CurrentWeapon;
         [HideInInspector] public HandSlotType CurrentSlotType;
 
@@ -28,7 +28,7 @@ namespace WinterUniverse
 
         private void OnEnable()
         {
-            _owner = GetComponentInParent<Character>();
+            _owner = GetComponentInParent<PawnController>();
         }
 
         private void FixedUpdate()
@@ -82,7 +82,7 @@ namespace WinterUniverse
             }
         }
 
-        public void SetTarget(Character newTarget = null)
+        public void SetTarget(PawnController newTarget = null)
         {
             if (newTarget != null && _owner.CanTargeting && newTarget.IsTargetable)
             {
@@ -106,7 +106,7 @@ namespace WinterUniverse
             return TargetInViewAngle(CurrentTarget);
         }
 
-        public bool TargetInViewAngle(Character cm)
+        public bool TargetInViewAngle(PawnController cm)
         {
             //Debug.Log(Vector3.Angle(HeadPoint.forward, (cm.CharacterCombatManager.BodyPoint.position - HeadPoint.position).normalized));
             return Vector3.Angle(HeadPoint.forward, (cm.CombatModule.BodyPoint.position - HeadPoint.position).normalized) <= ViewAngle / 2f;// TODO
@@ -117,9 +117,9 @@ namespace WinterUniverse
             return TargetBlockedByObstacle(CurrentTarget);
         }
 
-        public bool TargetBlockedByObstacle(Character cm)
+        public bool TargetBlockedByObstacle(PawnController cm)
         {
-            return Physics.Linecast(HeadPoint.position, cm.CombatModule.BodyPoint.position, WorldLayerManager.StaticInstance.ObstacleMask);
+            return Physics.Linecast(HeadPoint.position, cm.CombatModule.BodyPoint.position, GameManager.StaticInstance.WorldLayer.ObstacleMask);
         }
 
         public bool CurrentTargetIsVisible()
@@ -127,7 +127,7 @@ namespace WinterUniverse
             return TargetIsVisible(CurrentTarget);
         }
 
-        public bool TargetIsVisible(Character cm)
+        public bool TargetIsVisible(PawnController cm)
         {
             return TargetInViewAngle(cm) && !TargetBlockedByObstacle(cm);
         }

@@ -8,7 +8,7 @@ namespace WinterUniverse
 
         public override void EnableDamageCollider()
         {
-            Collider[] colliders = Physics.OverlapSphere(transform.position, Radius, WorldLayerManager.StaticInstance.CharacterMask);
+            Collider[] colliders = Physics.OverlapSphere(transform.position, Radius, GameManager.StaticInstance.WorldLayer.CharacterMask);
             foreach (Collider collider in colliders)
             {
                 OnTriggerEnter(collider);

@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 namespace WinterUniverse
 {
-    public class CameraManager : MonoBehaviour
+    public class PlayerCameraManager : MonoBehaviour
     {
         [SerializeField] private Transform _verticalRoot;
         [SerializeField] private float _followSpeed = 4f;
@@ -14,17 +14,19 @@ namespace WinterUniverse
         [SerializeField] private float _collisionRadius = 0.25f;
         [SerializeField] private float _collisionAvoidanceSpeed = 8f;
 
-        private Camera _cam;
+        private Camera _camera;
         private Vector2 _lookInput;
         private Vector3 _camLocalPosition;
         private float _lookAngle;
         private float _cameraDefaultOffset;
         private float _cameraTargetOffset;
 
+        public Camera Camera => _camera;
+
         public void Initialize()
         {
-            _cam = GetComponentInChildren<Camera>();
-            _cameraDefaultOffset = _cam.transform.position.z;
+            _camera = GetComponentInChildren<Camera>();
+            _cameraDefaultOffset = _camera.transform.position.z;
             enabled = false;
             SceneManager.activeSceneChanged += OnSceneChanged;
         }
@@ -73,8 +75,8 @@ namespace WinterUniverse
         private void HandleCollision()
         {
             _cameraTargetOffset = _cameraDefaultOffset;
-            Vector3 direction = (_cam.transform.position - _verticalRoot.position).normalized;
-            if (Physics.SphereCast(_verticalRoot.position, _collisionRadius, direction, out RaycastHit hit, Mathf.Abs(_cameraTargetOffset), GameManager.StaticInstance.Layer.ObstacleMask))
+            Vector3 direction = (_camera.transform.position - _verticalRoot.position).normalized;
+            if (Physics.SphereCast(_verticalRoot.position, _collisionRadius, direction, out RaycastHit hit, Mathf.Abs(_cameraTargetOffset), GameManager.StaticInstance.WorldLayer.ObstacleMask))
             {
                 _cameraTargetOffset = -(Vector3.Distance(_verticalRoot.position, hit.point) - _collisionRadius);
             }
@@ -82,8 +84,8 @@ namespace WinterUniverse
             {
                 _cameraTargetOffset = -_collisionRadius;
             }
-            _camLocalPosition.z = Mathf.Lerp(_cam.transform.localPosition.z, _cameraTargetOffset, _collisionAvoidanceSpeed * Time.deltaTime);
-            _cam.transform.localPosition = _camLocalPosition;
+            _camLocalPosition.z = Mathf.Lerp(_camera.transform.localPosition.z, _cameraTargetOffset, _collisionAvoidanceSpeed * Time.deltaTime);
+            _camera.transform.localPosition = _camLocalPosition;
         }
 
         private void OnDestroy()

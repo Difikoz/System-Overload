@@ -15,7 +15,7 @@ namespace WinterUniverse
             ItemType = ItemType.Consumable;
         }
 
-        public override void Use(Character character, bool fromInventory = true)
+        public override void Use(PawnController character, bool fromInventory = true)
         {
             foreach (EffectCreator creator in Effects)
             {

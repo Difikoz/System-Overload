@@ -5,12 +5,12 @@ namespace WinterUniverse
 {
     public class InteractionModule : MonoBehaviour
     {
-        private Character _owner;
+        private PawnController _owner;
         protected List<Interactable> _interactables = new();
 
         protected virtual void Awake()
         {
-            _owner = GetComponent<Character>();
+            _owner = GetComponent<PawnController>();
         }
 
         public void AddInteractable(Interactable interactable)

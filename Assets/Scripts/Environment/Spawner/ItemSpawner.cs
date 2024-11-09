@@ -21,7 +21,7 @@ namespace WinterUniverse
             {
                 LeanPool.Despawn(_spawnedItem.gameObject);
             }
-            _spawnedItem = LeanPool.Spawn(WorldDataManager.StaticInstance.LootItemPrefab, transform.position, transform.rotation).GetComponent<ItemInteractable>();
+            _spawnedItem = LeanPool.Spawn(GameManager.StaticInstance.WorldData.LootItemPrefab, transform.position, transform.rotation).GetComponent<ItemInteractable>();
             _spawnedItem.Setup(Item, Amount);
         }
     }

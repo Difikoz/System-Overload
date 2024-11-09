@@ -19,7 +19,7 @@ namespace WinterUniverse
         protected float _angleFromTarget;
         protected float _angleFromHit;
         protected float _targetBlockPower;
-        protected List<Character> _damagedCharacters = new();
+        protected List<PawnController> _damagedCharacters = new();
 
         protected virtual void Awake()
         {
@@ -28,7 +28,7 @@ namespace WinterUniverse
 
         protected virtual void OnTriggerEnter(Collider other)
         {
-            Character target = other.GetComponentInParent<Character>();
+            PawnController target = other.GetComponentInParent<PawnController>();
             if (CanDamageTarget(target))
             {
                 _damagedCharacters.Add(target);
@@ -53,31 +53,31 @@ namespace WinterUniverse
             }
         }
 
-        protected virtual bool CanDamageTarget(Character target)
+        protected virtual bool CanDamageTarget(PawnController target)
         {
             return target != null && !target.IsDead && !_damagedCharacters.Contains(target);
         }
 
-        protected virtual Vector3 GetHitDirection(Character target)
+        protected virtual Vector3 GetHitDirection(PawnController target)
         {
             return (_hitPoint - transform.position).normalized;
         }
 
-        protected virtual float GetAngleFromTarget(Character target)
+        protected virtual float GetAngleFromTarget(PawnController target)
         {
             return Vector3.Angle(target.transform.forward, (_hitPoint - target.transform.position).normalized);
         }
 
-        protected virtual float GetAngleFromHit(Character target)
+        protected virtual float GetAngleFromHit(PawnController target)
         {
             return ExtraTools.GetSignedAngleToDirection(transform.forward, target.transform.forward);
         }
 
-        protected virtual void ApplyDamageToTarget(Character target)
+        protected virtual void ApplyDamageToTarget(PawnController target)
         {
             foreach (DamageType type in DamageTypes)
             {
-                InstantHealthReduceEffect effect = (InstantHealthReduceEffect)WorldDataManager.StaticInstance.HealthReduceEffect.CreateEffect();
+                InstantHealthReduceEffect effect = (InstantHealthReduceEffect)GameManager.StaticInstance.WorldData.HealthReduceEffect.CreateEffect();
                 effect.Owner = target;
                 effect.Value = type.Damage;
                 effect.Value -= effect.Value * _targetBlockPower;
@@ -90,7 +90,7 @@ namespace WinterUniverse
             ApplyEffectsToTarget(target, TargetEffects);
         }
 
-        protected virtual void ApplyEffectsToTarget(Character target, List<EffectCreator> effects)
+        protected virtual void ApplyEffectsToTarget(PawnController target, List<EffectCreator> effects)
         {
             if (target.IsDead)
             {

@@ -25,12 +25,12 @@ namespace WinterUniverse
             return $"Pick Up {(Amount > 1 ? $"{Amount} " : "")}{Data.DisplayName}";
         }
 
-        public override bool CanInteract(Character character)
+        public override bool CanInteract(PawnController character)
         {
             return true;
         }
 
-        public override void Interact(Character character)
+        public override void Interact(PawnController character)
         {
             character.InventoryModule.AddItem(Data, Amount);
             if (character.GetComponent<PlayerController>())

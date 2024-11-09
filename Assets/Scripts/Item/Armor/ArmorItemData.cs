@@ -16,7 +16,7 @@ namespace WinterUniverse
             ItemType = ItemType.Armor;
         }
 
-        public override void Use(Character character, bool fromInventory = true)
+        public override void Use(PawnController character, bool fromInventory = true)
         {
             character.EquipmentModule.EquipArmor(this, fromInventory);
         }

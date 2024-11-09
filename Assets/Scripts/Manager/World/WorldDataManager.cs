@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace WinterUniverse
 {
-    public class WorldDataManager : Singleton<WorldDataManager>
+    public class WorldDataManager : MonoBehaviour
     {
         public GameObject PlayerPrefab;
         public GameObject NPCPrefab;
@@ -27,9 +27,8 @@ namespace WinterUniverse
         private List<Stat> _stats = new();
         private List<ItemData> _items = new();
 
-        protected override void Awake()
+        public void Initialize()
         {
-            base.Awake();
             foreach (StatData data in Stats)
             {
                 _stats.Add(new(data));

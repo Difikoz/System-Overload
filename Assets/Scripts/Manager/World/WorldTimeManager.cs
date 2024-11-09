@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 namespace WinterUniverse
 {
-    public class WorldTimeManager : Singleton<WorldTimeManager>
+    public class WorldTimeManager : MonoBehaviour
     {
         public Action<int, int> OnTimeChanged;
         public Action<int, int, int> OnDateChanged;
@@ -22,9 +22,8 @@ namespace WinterUniverse
         public int Month;
         public int Year;
 
-        protected override void Awake()
+        public void Initialize()
         {
-            base.Awake();
             SceneManager.activeSceneChanged += OnSceneChanged;
         }
 

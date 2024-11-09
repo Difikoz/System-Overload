@@ -12,7 +12,7 @@ namespace WinterUniverse
         public Action<int> OnLevelChanged;
         public Action<List<Stat>> OnStatChanged;
 
-        private Character _owner;
+        private PawnController _owner;
 
         #region Stats
         [HideInInspector] public List<Stat> Stats = new();
@@ -102,13 +102,13 @@ namespace WinterUniverse
 
         private void OnEnable()
         {
-            _owner = GetComponentInParent<Character>();
+            _owner = GetComponentInParent<PawnController>();
         }
 
         public void AddExperience(int exp)
         {
             Experience += exp;
-            while (Experience >= RequiredExperience && Level < WorldDataManager.StaticInstance.LevelConfig.MaxLevel)
+            while (Experience >= RequiredExperience && Level < GameManager.StaticInstance.WorldData.LevelConfig.MaxLevel)
             {
                 Experience -= RequiredExperience;
                 LevelUp();
@@ -118,13 +118,13 @@ namespace WinterUniverse
 
         public void LevelUp(int amount = 1)
         {
-            while (amount > 0 && Level < WorldDataManager.StaticInstance.LevelConfig.MaxLevel)
+            while (amount > 0 && Level < GameManager.StaticInstance.WorldData.LevelConfig.MaxLevel)
             {
                 Level++;
                 amount--;
-                if (Level < WorldDataManager.StaticInstance.LevelConfig.MaxLevel)
+                if (Level < GameManager.StaticInstance.WorldData.LevelConfig.MaxLevel)
                 {
-                    RequiredExperience = WorldDataManager.StaticInstance.LevelConfig.GetRequiredExperience(Level);
+                    RequiredExperience = GameManager.StaticInstance.WorldData.LevelConfig.GetRequiredExperience(Level);
                 }
                 else
                 {
@@ -135,7 +135,7 @@ namespace WinterUniverse
             }
         }
 
-        public void ReduceCurrentHealth(float value, ElementData element, Character source = null)
+        public void ReduceCurrentHealth(float value, ElementData element, PawnController source = null)
         {
             if (_owner.IsDead || value <= 0f)
             {
@@ -198,7 +198,7 @@ namespace WinterUniverse
 
         public void CreateStats()
         {
-            Stats = new(WorldDataManager.StaticInstance.GetStats());
+            Stats = new(GameManager.StaticInstance.WorldData.GetStats());
             foreach (Stat s in Stats)
             {
                 if (s.Data.DisplayName == "Strength")
@@ -418,9 +418,9 @@ namespace WinterUniverse
             OnHealthChanged?.Invoke(HealthCurrent, HealthMax.CurrentValue);
             EnergyCurrent = Mathf.Clamp(EnergyCurrent, 0f, EnergyMax.CurrentValue);
             OnEnergyChanged?.Invoke(EnergyCurrent, EnergyMax.CurrentValue);
-            if (Level < WorldDataManager.StaticInstance.LevelConfig.MaxLevel)
+            if (Level < GameManager.StaticInstance.WorldData.LevelConfig.MaxLevel)
             {
-                RequiredExperience = WorldDataManager.StaticInstance.LevelConfig.GetRequiredExperience(Level);
+                RequiredExperience = GameManager.StaticInstance.WorldData.LevelConfig.GetRequiredExperience(Level);
             }
             else
             {

@@ -44,7 +44,7 @@ namespace WinterUniverse
             {
                 if (Element.HitClips.Count > 0)
                 {
-                    Owner.SoundModule.PlaySound(WorldSoundManager.StaticInstance.ChooseRandomClip(Element.HitClips));
+                    Owner.SoundModule.PlaySound(GameManager.StaticInstance.WorldSound.ChooseRandomClip(Element.HitClips));
                 }
                 Owner.SoundModule.PlayGetHitClip();
             }

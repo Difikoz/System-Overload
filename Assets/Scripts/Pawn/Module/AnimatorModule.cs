@@ -5,7 +5,7 @@ namespace WinterUniverse
     [RequireComponent(typeof(Animator))]
     public class AnimatorModule : MonoBehaviour
     {
-        private Character _owner;
+        private PawnController _owner;
 
         [HideInInspector] public Animator Animator;
         public float Height = 2f;
@@ -20,7 +20,7 @@ namespace WinterUniverse
 
         private void OnEnable()
         {
-            _owner = GetComponentInParent<Character>();
+            _owner = GetComponentInParent<PawnController>();
         }
 
         public void UpdateAnimatorMovement(float horizontal, float vertical, float moveSpeed)
@@ -48,17 +48,17 @@ namespace WinterUniverse
 
         public void FootR()
         {
-            if (Physics.Raycast(_owner.CombatModule.FootRightPoint.position, -transform.up, out RaycastHit hit, 0.1f, WorldLayerManager.StaticInstance.ObstacleMask))
+            if (Physics.Raycast(_owner.CombatModule.FootRightPoint.position, -transform.up, out RaycastHit hit, 0.1f, GameManager.StaticInstance.WorldLayer.ObstacleMask))
             {
-                _owner.SoundModule.PlaySound(WorldSoundManager.StaticInstance.GetFootstepClip(hit.transform));
+                _owner.SoundModule.PlaySound(GameManager.StaticInstance.WorldSound.GetFootstepClip(hit.transform));
             }
         }
 
         public void FootL()
         {
-            if (Physics.Raycast(_owner.CombatModule.FootLeftPoint.position, -transform.up, out RaycastHit hit, 0.1f, WorldLayerManager.StaticInstance.ObstacleMask))
+            if (Physics.Raycast(_owner.CombatModule.FootLeftPoint.position, -transform.up, out RaycastHit hit, 0.1f, GameManager.StaticInstance.WorldLayer.ObstacleMask))
             {
-                _owner.SoundModule.PlaySound(WorldSoundManager.StaticInstance.GetFootstepClip(hit.transform));
+                _owner.SoundModule.PlaySound(GameManager.StaticInstance.WorldSound.GetFootstepClip(hit.transform));
             }
         }
 

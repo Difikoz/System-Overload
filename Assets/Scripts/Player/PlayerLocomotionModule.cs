@@ -19,7 +19,7 @@ namespace WinterUniverse
 
         protected override Vector3 GetLookDirection()
         {
-            return CameraManager.StaticInstance.transform.forward;
+            return GameManager.StaticInstance.PlayerCamera.transform.forward;
         }
     }
 }

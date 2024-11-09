@@ -8,7 +8,7 @@ namespace WinterUniverse
     {
         public Action OnEquipmentChanged;
 
-        private Character _owner;
+        private PawnController _owner;
 
         public WeaponItemData UnarmedWeapon;
         public WeaponSlot WeaponRightSlot;
@@ -18,7 +18,7 @@ namespace WinterUniverse
 
         private void OnEnable()
         {
-            _owner = GetComponentInParent<Character>();
+            _owner = GetComponentInParent<PawnController>();
         }
 
         public void EquipWeapon(WeaponItemData weapon, bool removeNewFromInventory = true, bool addOldToInventory = true)

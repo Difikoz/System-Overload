@@ -21,7 +21,7 @@ namespace WinterUniverse
         public List<FactionData> RequiredFaction = new();
         public List<StatRequirement> RequiredStats = new();
 
-        public virtual bool CanUse(Character character, out string error, bool fromInventory = true)
+        public virtual bool CanUse(PawnController character, out string error, bool fromInventory = true)
         {
             error = string.Empty;
             if (character.StatModule.Level < RequiredLevel)
@@ -78,7 +78,7 @@ namespace WinterUniverse
             return !fromInventory || character.InventoryModule.AmountOfItem(this) > 0;
         }
 
-        public virtual void Use(Character character, bool fromInventory = true)
+        public virtual void Use(PawnController character, bool fromInventory = true)
         {
 
         }

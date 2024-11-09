@@ -13,17 +13,17 @@ namespace WinterUniverse
         public AbilityHitTypeData EffectType;
         public float CastTime = 0.1f;
 
-        public bool CanCast(Character caster, Character target)
+        public bool CanCast(PawnController caster, PawnController target)
         {
             return CastType.CanCast(caster, target);
         }
 
-        public void CastStart(Character caster, Character target, Vector3 position, Vector3 direction)
+        public void CastStart(PawnController caster, PawnController target, Vector3 position, Vector3 direction)
         {
             CastType.OnCastStart(caster, target, position, direction, EffectType);
         }
 
-        public void CastComplete(Character caster, Character target, Vector3 position, Vector3 direction)
+        public void CastComplete(PawnController caster, PawnController target, Vector3 position, Vector3 direction)
         {
             CastType.OnCastStart(caster, target, position, direction, EffectType);
         }

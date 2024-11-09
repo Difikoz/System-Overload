@@ -20,12 +20,12 @@ namespace WinterUniverse
             return _interactionMessage;
         }
 
-        public override bool CanInteract(Character character)
+        public override bool CanInteract(PawnController character)
         {
             return true;
         }
 
-        public override void Interact(Character character)
+        public override void Interact(PawnController character)
         {
 
         }

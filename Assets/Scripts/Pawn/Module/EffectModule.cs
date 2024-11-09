@@ -6,7 +6,7 @@ namespace WinterUniverse
 {
     public class EffectModule : MonoBehaviour
     {
-        private Character _owner;
+        private PawnController _owner;
 
         [SerializeField] private GameObject _bloodSplatterVFX;
 
@@ -14,7 +14,7 @@ namespace WinterUniverse
 
         private void OnEnable()
         {
-            _owner = GetComponentInParent<Character>();
+            _owner = GetComponentInParent<PawnController>();
         }
 
         public void TickEffects(float deltaTime)

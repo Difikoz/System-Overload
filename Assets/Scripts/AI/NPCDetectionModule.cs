@@ -7,9 +7,9 @@ namespace WinterUniverse
     public class NPCDetectionModule : MonoBehaviour
     {
         private NPCController _owner;
-        private List<Character> _visibleEnemies = new();
-        private List<Character> _visibleNeutrals = new();
-        private List<Character> _visibleAllies = new();
+        private List<PawnController> _visibleEnemies = new();
+        private List<PawnController> _visibleNeutrals = new();
+        private List<PawnController> _visibleAllies = new();
 
         private void Awake()
         {
@@ -25,10 +25,10 @@ namespace WinterUniverse
             _visibleEnemies.Clear();
             _visibleNeutrals.Clear();
             _visibleAllies.Clear();
-            Collider[] colliders = Physics.OverlapSphere(_owner.CombatModule.HeadPoint.position, _owner.CombatModule.ViewDistance, WorldLayerManager.StaticInstance.CharacterMask);
+            Collider[] colliders = Physics.OverlapSphere(_owner.CombatModule.HeadPoint.position, _owner.CombatModule.ViewDistance, GameManager.StaticInstance.WorldLayer.CharacterMask);
             foreach (Collider collider in colliders)
             {
-                if (collider.TryGetComponent(out Character character) && character != _owner && !character.IsDead)
+                if (collider.TryGetComponent(out PawnController character) && character != _owner && !character.IsDead)
                 {
                     if (Vector3.Distance(transform.position, character.transform.position) <= _owner.CombatModule.HearRadius || _owner.CombatModule.TargetIsVisible(character))
                     {
@@ -53,7 +53,7 @@ namespace WinterUniverse
             }
         }
 
-        public Character GetClosestEnemy()
+        public PawnController GetClosestEnemy()
         {
             return _visibleEnemies.OrderBy(target => Vector3.Distance(target.transform.position, transform.position)).FirstOrDefault();
         }

@@ -8,7 +8,7 @@ namespace WinterUniverse
     {
         public List<EffectData> Effects = new();
 
-        public override void Hit(Character caster, Character target, Vector3 position, Vector3 direction)
+        public override void Hit(PawnController caster, PawnController target, Vector3 position, Vector3 direction)
         {
             base.Hit(caster, target, position, direction);
             foreach (EffectData data in Effects)

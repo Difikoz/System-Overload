@@ -1,3 +1,5 @@
+using Lean.Pool;
+using System.Collections;
 using UnityEngine;
 
 namespace WinterUniverse
@@ -62,7 +64,7 @@ namespace WinterUniverse
         public override void CreateCharacter(CharacterSaveData data)
         {
             base.CreateCharacter(data);
-            CameraManager.StaticInstance.transform.position = transform.position;
+            GameManager.StaticInstance.PlayerCamera.transform.position = transform.position;
             Subscribe();
         }
 
@@ -81,7 +83,7 @@ namespace WinterUniverse
 
         public override void Revive()
         {
-            transform.SetPositionAndRotation(WorldSaveGameManager.StaticInstance.CurrentSaveData.RespawnTransform.GetPosition(), WorldSaveGameManager.StaticInstance.CurrentSaveData.RespawnTransform.GetRotation());
+            transform.SetPositionAndRotation(GameManager.StaticInstance.WorldSaveGame.CurrentSaveData.RespawnTransform.GetPosition(), GameManager.StaticInstance.WorldSaveGame.CurrentSaveData.RespawnTransform.GetRotation());
             base.Revive();
         }
 
@@ -117,7 +119,7 @@ namespace WinterUniverse
             ClearCharacter();
             //ChangeRace();
             //ChangeFaction();
-            ChangeRace(WorldDataManager.StaticInstance.GetRace(data.Race));
+            ChangeRace(GameManager.StaticInstance.WorldData.GetRace(data.Race));
             if (data.Gender == "Female")
             {
                 ChangeGender(Gender.Female);
@@ -126,7 +128,7 @@ namespace WinterUniverse
             {
                 ChangeGender(Gender.Male);
             }
-            ChangeFaction(WorldDataManager.StaticInstance.GetFaction(data.Faction));
+            ChangeFaction(GameManager.StaticInstance.WorldData.GetFaction(data.Faction));
             LeanPool.Spawn(Race.Model, transform);// spawn model and get components
             AnimatorModule = GetComponentInChildren<AnimatorModule>();
             CombatModule = GetComponentInChildren<CombatModule>();
@@ -143,7 +145,7 @@ namespace WinterUniverse
             InventoryModule.CreateInventory(data.InventoryStacks);
             if (data.WeaponInRightHand != "Unarmed")
             {
-                EquipmentModule.EquipWeapon(WorldDataManager.StaticInstance.GetWeapon(data.WeaponInRightHand), false, false);
+                EquipmentModule.EquipWeapon(GameManager.StaticInstance.WorldData.GetWeapon(data.WeaponInRightHand), false, false);
             }
             else
             {
@@ -151,7 +153,7 @@ namespace WinterUniverse
             }
             if (data.WeaponInLeftHand != "Unarmed")
             {
-                EquipmentModule.EquipWeapon(WorldDataManager.StaticInstance.GetWeapon(data.WeaponInLeftHand), false, false);
+                EquipmentModule.EquipWeapon(GameManager.StaticInstance.WorldData.GetWeapon(data.WeaponInLeftHand), false, false);
             }
             else
             {
@@ -159,7 +161,7 @@ namespace WinterUniverse
             }
             StatModule.RecalculateStats();
             transform.SetPositionAndRotation(data.Transform.GetPosition(), data.Transform.GetRotation());
-            CameraManager.StaticInstance.transform.position = transform.position;
+            GameManager.StaticInstance.PlayerCamera.transform.position = transform.position;
             EquipmentModule.ForceUpdateMeshes();
             Spawned = true;
             Subscribe();

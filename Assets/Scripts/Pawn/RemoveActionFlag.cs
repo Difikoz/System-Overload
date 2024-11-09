@@ -4,7 +4,7 @@ namespace WinterUniverse
 {
     public class RemoveActionFlag : StateMachineBehaviour
     {
-        private Character _owner;
+        private PawnController _owner;
         [SerializeField] private bool _removePerfoming = true;
         [SerializeField] private bool _removeRootMotion = true;
         [SerializeField] private bool _removeDashing = true;
@@ -16,7 +16,7 @@ namespace WinterUniverse
         // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
         override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            _owner = animator.transform.parent.GetComponent<Character>();
+            _owner = animator.transform.parent.GetComponent<PawnController>();
             if (_removePerfoming)
             {
                 _owner.IsPerfomingAction = false;

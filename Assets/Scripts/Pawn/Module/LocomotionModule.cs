@@ -5,7 +5,7 @@ namespace WinterUniverse
     [RequireComponent(typeof(CharacterController))]
     public abstract class LocomotionModule : MonoBehaviour
     {
-        private Character _owner;
+        private PawnController _owner;
         [SerializeField] private Vector2 _moveInput;
         [SerializeField] private Vector3 _lookDirection;
         [SerializeField] private Vector3 _moveVelocity;
@@ -23,7 +23,7 @@ namespace WinterUniverse
 
         protected virtual void Awake()
         {
-            _owner = GetComponent<Character>();
+            _owner = GetComponent<PawnController>();
             CC = GetComponent<CharacterController>();
         }
 
@@ -57,14 +57,14 @@ namespace WinterUniverse
         {
             if (_owner.UseGravity)
             {
-                _owner.IsGrounded = _fallVelocity.y <= 0.1f && Physics.SphereCast(transform.position + CC.center, CC.radius, Vector3.down, out _groundHit, CC.center.y, WorldLayerManager.StaticInstance.ObstacleMask);
+                _owner.IsGrounded = _fallVelocity.y <= 0.1f && Physics.SphereCast(transform.position + CC.center, CC.radius, Vector3.down, out _groundHit, CC.center.y, GameManager.StaticInstance.WorldLayer.ObstacleMask);
                 if (_owner.IsGrounded)
                 {
-                    _fallVelocity.y = WorldDataManager.StaticInstance.Gravity / 5f;
+                    _fallVelocity.y = GameManager.StaticInstance.WorldData.Gravity / 5f;
                 }
                 else
                 {
-                    _fallVelocity.y += WorldDataManager.StaticInstance.Gravity * Time.deltaTime;
+                    _fallVelocity.y += GameManager.StaticInstance.WorldData.Gravity * Time.deltaTime;
                 }
                 CC.Move(_fallVelocity * Time.deltaTime);
             }
@@ -133,7 +133,7 @@ namespace WinterUniverse
             {
                 return;
             }
-            _fallVelocity.y = Mathf.Sqrt(2f * -2f * WorldDataManager.StaticInstance.Gravity);// TODO get jump power stat
+            _fallVelocity.y = Mathf.Sqrt(2f * -2f * GameManager.StaticInstance.WorldData.Gravity);// TODO get jump power stat
             _owner.StatModule.ReduceCurrentEnergy(10f);
         }
 

@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 namespace WinterUniverse
 {
-    public class WorldSoundManager : Singleton<WorldSoundManager>
+    public class WorldSoundManager : MonoBehaviour
     {
         [SerializeField] private AudioSource _ambientSource;
         [SerializeField] private AudioSource _SFXSource;

@@ -35,7 +35,7 @@ namespace WinterUniverse
             ItemType = ItemType.Weapon;
         }
 
-        public override void Use(Character character, bool fromInventory = true)// TODO проверять CanUse перед этим методом
+        public override void Use(PawnController character, bool fromInventory = true)// TODO проверять CanUse перед этим методом
         {
             character.EquipmentModule.EquipWeapon(this, fromInventory);
         }

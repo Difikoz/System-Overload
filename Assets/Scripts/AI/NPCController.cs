@@ -3,7 +3,7 @@ using UnityEngine.AI;
 
 namespace WinterUniverse
 {
-    public class NPCController : Character
+    public class NPCController : PawnController
     {
         public ALIFEMode ALIFEMode;
         public NPCActionData CurrentAction;

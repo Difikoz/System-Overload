@@ -1,7 +1,8 @@
+using Lean.Pool;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.TextCore.Text;
 
 namespace WinterUniverse
 {
@@ -112,7 +113,7 @@ namespace WinterUniverse
         public virtual void CreateCharacter(CharacterSaveData data)
         {
             ClearCharacter();
-            ChangeRace(WorldDataManager.StaticInstance.GetRace(data.Race));
+            ChangeRace(GameManager.StaticInstance.WorldData.GetRace(data.Race));
             if (data.Gender == "Female")
             {
                 ChangeGender(Gender.Female);
@@ -121,7 +122,7 @@ namespace WinterUniverse
             {
                 ChangeGender(Gender.Male);
             }
-            ChangeFaction(WorldDataManager.StaticInstance.GetFaction(data.Faction));
+            ChangeFaction(GameManager.StaticInstance.WorldData.GetFaction(data.Faction));
             LeanPool.Spawn(Race.Model, transform);// spawn model and get components
             AnimatorModule = GetComponentInChildren<AnimatorModule>();
             CombatModule = GetComponentInChildren<CombatModule>();
@@ -185,7 +186,7 @@ namespace WinterUniverse
             IsInvulnerable = false;
         }
 
-        public virtual void Die(Character source = null, bool manualSelectDeathAnimation = false)
+        public virtual void Die(PawnController source = null, bool manualSelectDeathAnimation = false)
         {
             if (!IsDead)
             {

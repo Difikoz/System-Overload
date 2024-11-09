@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace WinterUniverse
 {
-    public class LayerManager : MonoBehaviour
+    public class WorldLayerManager : MonoBehaviour
     {
         [SerializeField] private LayerMask _obstacleMask;
         [SerializeField] private LayerMask _characterMask;

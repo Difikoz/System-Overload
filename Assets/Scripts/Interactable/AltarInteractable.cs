@@ -13,18 +13,18 @@ namespace WinterUniverse
             return _interactableMessage;
         }
 
-        public override bool CanInteract(Character character)
+        public override bool CanInteract(PawnController character)
         {
             return character.GetComponent<PlayerController>() != null;
         }
 
-        public override void Interact(Character character)
+        public override void Interact(PawnController character)
         {
             character.EffectModule.RemoveNegativeEffects();
             character.StatModule.RestoreCurrentHealth(character.StatModule.HealthMax.CurrentValue);
             character.StatModule.RestoreCurrentEnergy(character.StatModule.EnergyMax.CurrentValue);
-            WorldSaveGameManager.StaticInstance.CurrentSaveData.RespawnTransform.SetPositionAndRotation(_respawnPoint.position, _respawnPoint.eulerAngles);
-            WorldSaveGameManager.StaticInstance.SaveGame();
+            GameManager.StaticInstance.WorldSaveGame.CurrentSaveData.RespawnTransform.SetPositionAndRotation(_respawnPoint.position, _respawnPoint.eulerAngles);
+            GameManager.StaticInstance.WorldSaveGame.SaveGame();
             PlayerUIManager.StaticInstance.HUD.NotificationUI.DisplayNotification(_notificationMessage);
         }
     }

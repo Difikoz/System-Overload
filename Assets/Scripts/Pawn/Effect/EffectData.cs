@@ -26,8 +26,8 @@ namespace WinterUniverse
 
     public abstract class Effect
     {
-        public Character Owner;
-        public Character Source;
+        public PawnController Owner;
+        public PawnController Source;
 
         public EffectData Data;
 

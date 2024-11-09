@@ -5,20 +5,20 @@ namespace WinterUniverse
 {
     public class OwnerBasedDamageColliderAOE : DamageColliderAOE
     {
-        [HideInInspector] public Character Owner;
+        [HideInInspector] public PawnController Owner;
         [HideInInspector] public List<EffectCreator> OwnerEffects = new();
 
-        protected override bool CanDamageTarget(Character target)
+        protected override bool CanDamageTarget(PawnController target)
         {
             return target != null && !target.IsDead && target != Owner && !_damagedCharacters.Contains(target);
         }
 
-        protected override void ApplyDamageToTarget(Character target)
+        protected override void ApplyDamageToTarget(PawnController target)
         {
             ApplyEffectsToTarget(Owner, OwnerEffects);
             foreach (DamageType type in DamageTypes)
             {
-                InstantHealthReduceEffect effect = (InstantHealthReduceEffect)WorldDataManager.StaticInstance.HealthReduceEffect.CreateEffect();
+                InstantHealthReduceEffect effect = (InstantHealthReduceEffect)GameManager.StaticInstance.WorldData.HealthReduceEffect.CreateEffect();
                 effect.Owner = target;
                 effect.Source = Owner;
                 effect.Value = type.Damage + Owner.StatModule.GetStatByName(type.Element.DamageStat.DisplayName).CurrentValue + Owner.StatModule.GetStatByName(type.Element.DamageType.DisplayName).CurrentValue;

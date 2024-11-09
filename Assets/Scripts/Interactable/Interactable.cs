@@ -5,8 +5,8 @@ namespace WinterUniverse
     public abstract class Interactable : MonoBehaviour
     {
         public abstract string GetInteractionMessage();
-        public abstract bool CanInteract(Character character);
-        public abstract void Interact(Character character);
+        public abstract bool CanInteract(PawnController character);
+        public abstract void Interact(PawnController character);
 
         protected virtual void Awake()
         {
@@ -20,7 +20,7 @@ namespace WinterUniverse
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.TryGetComponent(out Character character))
+            if (other.TryGetComponent(out PawnController character))
             {
                 OnEnter(character);
             }
@@ -28,18 +28,18 @@ namespace WinterUniverse
 
         private void OnTriggerExit(Collider other)
         {
-            if (other.TryGetComponent(out Character character))
+            if (other.TryGetComponent(out PawnController character))
             {
                 OnExit(character);
             }
         }
 
-        protected virtual void OnEnter(Character character)
+        protected virtual void OnEnter(PawnController character)
         {
             character.InteractionModule.AddInteractable(this);
         }
 
-        protected virtual void OnExit(Character character)
+        protected virtual void OnExit(PawnController character)
         {
             character.InteractionModule.RemoveInteractable(this);
         }

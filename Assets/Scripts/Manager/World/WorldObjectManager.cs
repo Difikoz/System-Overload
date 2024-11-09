@@ -2,13 +2,8 @@ using UnityEngine;
 
 namespace WinterUniverse
 {
-    public class WorldObjectManager : Singleton<WorldObjectManager>
+    public class WorldObjectManager : MonoBehaviour
     {
-        protected override void Awake()
-        {
-            base.Awake();
-        }
-
         //public RespawnPoint GetRespawnPointByID(int id)
         //{
         //    RespawnPoint[] respawnPoints = FindObjectsOfType<RespawnPoint>();

@@ -6,7 +6,7 @@ namespace WinterUniverse
     [RequireComponent(typeof(AudioSource))]
     public class SoundModule : MonoBehaviour
     {
-        private Character _owner;
+        private PawnController _owner;
 
         [HideInInspector] public AudioSource AudioSource;
 
@@ -25,7 +25,7 @@ namespace WinterUniverse
 
         private void OnEnable()
         {
-            _owner = GetComponentInParent<Character>();
+            _owner = GetComponentInParent<PawnController>();
         }
 
         public void PlayAttackClip()

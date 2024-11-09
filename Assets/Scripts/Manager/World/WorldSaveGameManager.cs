@@ -4,18 +4,13 @@ using UnityEngine.SceneManagement;
 
 namespace WinterUniverse
 {
-    public class WorldSaveGameManager : Singleton<WorldSaveGameManager>
+    public class WorldSaveGameManager : MonoBehaviour
     {
         [HideInInspector] public PlayerController Player;
 
         public CharacterSaveData CurrentSaveData;
 
         private string _currentSaveFileName;
-
-        protected override void Awake()
-        {
-            base.Awake();
-        }
 
         public void SaveGame()
         {

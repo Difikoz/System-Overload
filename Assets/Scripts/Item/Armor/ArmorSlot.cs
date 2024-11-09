@@ -5,7 +5,7 @@ namespace WinterUniverse
 {
     public class ArmorSlot : MonoBehaviour
     {
-        private Character _owner;
+        private PawnController _owner;
         private ArmorRenderer _currentRenderer;
 
         [HideInInspector] public ArmorItemData Data;
@@ -16,7 +16,7 @@ namespace WinterUniverse
 
         private void OnEnable()
         {
-            _owner = GetComponentInParent<Character>();
+            _owner = GetComponentInParent<PawnController>();
         }
 
         public void Equip(ArmorItemData armor)

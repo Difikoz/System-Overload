@@ -10,7 +10,7 @@ namespace WinterUniverse
         public bool PlayCompleteAnimation = true;
         public string CompleteAnimationName = "Cast Projectile Complete";
 
-        public virtual bool CanCast(Character caster, Character target)
+        public virtual bool CanCast(PawnController caster, PawnController target)
         {
             if (caster.IsPerfomingAction && !caster.IsCasting || caster.StatModule.EnergyCurrent < EnergyCost)
             {
@@ -19,7 +19,7 @@ namespace WinterUniverse
             return true;
         }
 
-        public virtual void OnCastStart(Character caster, Character target, Vector3 position, Vector3 direction, AbilityHitTypeData effect)
+        public virtual void OnCastStart(PawnController caster, PawnController target, Vector3 position, Vector3 direction, AbilityHitTypeData effect)
         {
             if (PlayStartAnimation)
             {
@@ -27,7 +27,7 @@ namespace WinterUniverse
             }
         }
 
-        public virtual void OnCastComplete(Character caster, Character target, Vector3 position, Vector3 direction, AbilityHitTypeData effect)
+        public virtual void OnCastComplete(PawnController caster, PawnController target, Vector3 position, Vector3 direction, AbilityHitTypeData effect)
         {
             if (PlayCompleteAnimation)
             {
