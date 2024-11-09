@@ -19,7 +19,7 @@ namespace WinterUniverse
         public Transform FootLeftPoint;
 
         [HideInInspector] public PawnController CurrentTarget;
-        [HideInInspector] public WeaponItemData CurrentWeapon;
+        [HideInInspector] public WeaponItemConfig CurrentWeapon;
         [HideInInspector] public HandSlotType CurrentSlotType;
 
         [HideInInspector] public float DistanceToTarget;
@@ -47,7 +47,7 @@ namespace WinterUniverse
             }
         }
 
-        public void UseWeaponAbility(WeaponItemData weapon, HandSlotType slot, AbilityData ability)
+        public void UseWeaponAbility(WeaponItemConfig weapon, HandSlotType slot, AbilityData ability)
         {
             if (ability.CanCast(_pawn, CurrentTarget))
             {

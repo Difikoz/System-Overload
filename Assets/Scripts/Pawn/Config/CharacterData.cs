@@ -8,9 +8,9 @@ namespace WinterUniverse
     {
         public string CharacterName = "Name";
         public int StartingLevel = 1;
-        public RaceData Race;
+        public RaceConfig Race;
         public Gender Gender;
-        public FactionData Faction;
+        public FactionConfig Faction;
         public List<ItemStack> StartingItems = new();
 
         public CharacterSaveData GetData()

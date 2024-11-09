@@ -4,7 +4,7 @@ using UnityEngine;
 namespace WinterUniverse
 {
     [CreateAssetMenu(fileName = "Consumable Item", menuName = "Winter Universe/Item/Consumable/New Item")]
-    public class ConsumableItemData : ItemData
+    public class ConsumableItemConfig : ItemConfig
     {
         [Header("Consumable Information")]
         [SerializeField] private ConsumableTypeData _consumableType;

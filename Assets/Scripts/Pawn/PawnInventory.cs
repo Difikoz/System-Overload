@@ -19,7 +19,7 @@ namespace WinterUniverse
             }
         }
 
-        public void AddItem(ItemData item, int amount = 1)
+        public void AddItem(ItemConfig item, int amount = 1)
         {
             if (item == null)
             {
@@ -54,7 +54,7 @@ namespace WinterUniverse
             UpdateInventory();
         }
 
-        public void RemoveItem(ItemData item, int amount = 1)
+        public void RemoveItem(ItemConfig item, int amount = 1)
         {
             if (item == null)
             {
@@ -86,7 +86,7 @@ namespace WinterUniverse
             UpdateInventory();
         }
 
-        public void DropItem(ItemData item, int amount = 1)
+        public void DropItem(ItemConfig item, int amount = 1)
         {
             if (item == null)
             {
@@ -119,7 +119,7 @@ namespace WinterUniverse
             UpdateInventory();
         }
 
-        public int AmountOfItem(ItemData item)
+        public int AmountOfItem(ItemConfig item)
         {
             int amount = 0;
             foreach (ItemStack stack in Stacks)
@@ -137,7 +137,7 @@ namespace WinterUniverse
             OnInventoryChanged?.Invoke(Stacks);
         }
         // find best
-        public bool GetBestWeapon(out WeaponItemData item)
+        public bool GetBestWeapon(out WeaponItemConfig item)
         {
             item = null;
             float rating = 0;
@@ -145,7 +145,7 @@ namespace WinterUniverse
             {
                 if (stack.Item.ItemType == ItemType.Weapon)
                 {
-                    WeaponItemData weapon = (WeaponItemData)stack.Item;
+                    WeaponItemConfig weapon = (WeaponItemConfig)stack.Item;
                     if (weapon.Rating > rating)
                     {
                         rating = weapon.Rating;
@@ -156,7 +156,7 @@ namespace WinterUniverse
             return item != null;
         }
 
-        public bool GetBestWeapon(WeaponHandType type, out WeaponItemData item)
+        public bool GetBestWeapon(WeaponHandType type, out WeaponItemConfig item)
         {
             item = null;
             float rating = 0;
@@ -164,7 +164,7 @@ namespace WinterUniverse
             {
                 if (stack.Item.ItemType == ItemType.Weapon)
                 {
-                    WeaponItemData weapon = (WeaponItemData)stack.Item;
+                    WeaponItemConfig weapon = (WeaponItemConfig)stack.Item;
                     if (weapon.Rating > rating && weapon.WeaponHandType == type)
                     {
                         rating = weapon.Rating;
@@ -175,7 +175,7 @@ namespace WinterUniverse
             return item != null;
         }
 
-        public bool GetBestArmor(ArmorTypeData type, out ArmorItemData item)
+        public bool GetBestArmor(ArmorTypeData type, out ArmorItemConfig item)
         {
             item = null;
             float rating = 0;
@@ -183,7 +183,7 @@ namespace WinterUniverse
             {
                 if (stack.Item.ItemType == ItemType.Armor)
                 {
-                    ArmorItemData armor = (ArmorItemData)stack.Item;
+                    ArmorItemConfig armor = (ArmorItemConfig)stack.Item;
                     if (armor.Rating > rating && armor.ArmorType == type)
                     {
                         rating = armor.Rating;
@@ -194,7 +194,7 @@ namespace WinterUniverse
             return item != null;
         }
 
-        public bool GetBestConsumable(ConsumableTypeData type, out ConsumableItemData item)
+        public bool GetBestConsumable(ConsumableTypeData type, out ConsumableItemConfig item)
         {
             item = null;
             float rating = 0;
@@ -202,7 +202,7 @@ namespace WinterUniverse
             {
                 if (stack.Item.ItemType == ItemType.Consumable)
                 {
-                    ConsumableItemData consumable = (ConsumableItemData)stack.Item;
+                    ConsumableItemConfig consumable = (ConsumableItemConfig)stack.Item;
                     if (consumable.Rating > rating && consumable.ConsumableType == type)
                     {
                         rating = consumable.Rating;

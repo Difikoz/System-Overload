@@ -17,7 +17,7 @@ namespace WinterUniverse
         [SerializeField] private TextMeshProUGUI _raceNameText;
         [SerializeField] private TextMeshProUGUI _raceDescriptionText;
         [SerializeField] private TextMeshProUGUI _raceStatsText;
-        [SerializeField] private List<RaceData> _races = new();
+        [SerializeField] private List<RaceConfig> _races = new();
         private int _currentRaceIndex;
         [Header("Gender Menu")]
         [SerializeField] private GameObject _genderMenuWindow;
@@ -35,7 +35,7 @@ namespace WinterUniverse
         [SerializeField] private Button _factionMenuButtonConfirm;
         [SerializeField] private TextMeshProUGUI _factionNameText;
         [SerializeField] private TextMeshProUGUI _factionDescriptionText;
-        [SerializeField] private List<FactionData> _factions = new();
+        [SerializeField] private List<FactionConfig> _factions = new();
         private int _currentFactionIndex;
         [Header("Complete Menu")]
         [SerializeField] private GameObject _completeMenuWindow;

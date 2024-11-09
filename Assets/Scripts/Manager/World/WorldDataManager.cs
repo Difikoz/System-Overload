@@ -5,46 +5,65 @@ namespace WinterUniverse
 {
     public class WorldDataManager : MonoBehaviour
     {
-        public GameObject PlayerPrefab;
-        public GameObject NPCPrefab;
-        public GameObject LootItemPrefab;
-        public GameObject LootBagPrefab;
-        public float Gravity = -20f;
-        public ExperienceConfig LevelConfig;
-        public InstantHealthReduceEffectConfig HealthReduceEffect;
-        public InstantHealthRestoreEffectConfig HealthRestoreEffect;
-        public InstantEnergyReduceEffectConfig EnergyReduceEffect;
-        public InstantEnergyRestoreEffectConfig EnergyRestoreEffect;
-        public List<StatConfig> Stats = new();
-        public List<RaceData> Races = new();
-        public List<FactionData> Factions = new();
-        public List<WeaponItemData> Weapons = new();
-        public List<ArmorItemData> Armors = new();
-        public List<ConsumableItemData> Consumables = new();
-        public List<ResourceItemData> Resources = new();
+        private List<Stat> _newStats = new();
+        private List<ItemConfig> _items = new();
 
-        private List<Stat> _stats = new();
-        private List<ItemData> _items = new();
+        [SerializeField] private GameObject _playerPrefab;
+        [SerializeField] private GameObject _aiPrefab;
+        [SerializeField] private GameObject _lootItemPrefab;
+        [SerializeField] private GameObject _lootBagPrefab;
+        [SerializeField] private float _gravity = -20f;
+        [SerializeField] private ExperienceConfig _levelConfig;
+        [SerializeField] private InstantHealthReduceEffectConfig _healthReduceEffect;
+        [SerializeField] private InstantHealthRestoreEffectConfig _healthRestoreEffect;
+        [SerializeField] private InstantEnergyReduceEffectConfig _energyReduceEffect;
+        [SerializeField] private InstantEnergyRestoreEffectConfig _energyRestoreEffect;
+        [SerializeField] private List<StatConfig> _stats = new();
+        [SerializeField] private List<RaceConfig> _races = new();
+        [SerializeField] private List<FactionConfig> _factions = new();
+        [SerializeField] private List<WeaponItemConfig> _weapons = new();
+        [SerializeField] private List<ArmorItemConfig> _armors = new();
+        [SerializeField] private List<ConsumableItemConfig> _consumables = new();
+        [SerializeField] private List<ResourceItemConfig> _resources = new();
+
+        public GameObject PlayerPrefab => _playerPrefab;
+        public GameObject AIPrefab => _aiPrefab;
+        public GameObject LootItemPrefab => _lootItemPrefab;
+        public GameObject LootBagPrefab => _lootBagPrefab;
+        public float Gravity => _gravity;
+        public ExperienceConfig LevelConfig => _levelConfig;
+        public InstantHealthReduceEffectConfig HealthReduceEffect => _healthReduceEffect;
+        public InstantHealthRestoreEffectConfig HealthRestoreEffect => _healthRestoreEffect;
+        public InstantEnergyReduceEffectConfig EnergyReduceEffect => _energyReduceEffect;
+        public InstantEnergyRestoreEffectConfig EnergyRestoreEffect => _energyRestoreEffect;
+        public List<StatConfig> Stats => _stats;
+        public List<RaceConfig> Races => _races;
+        public List<FactionConfig> Factions => _factions;
+        public List<ItemConfig> Items => _items;
+        public List<WeaponItemConfig> Weapons => _weapons;
+        public List<ArmorItemConfig> Armors => _armors;
+        public List<ConsumableItemConfig> Consumables => _consumables;
+        public List<ResourceItemConfig> Resources => _resources;
 
         public void Initialize()
         {
-            foreach (StatConfig data in Stats)
+            foreach (StatConfig data in _stats)
             {
-                _stats.Add(new(data));
+                _newStats.Add(new(data));
             }
-            foreach (WeaponItemData data in Weapons)
-            {
-                _items.Add(data);
-            }
-            foreach (ArmorItemData data in Armors)
+            foreach (WeaponItemConfig data in _weapons)
             {
                 _items.Add(data);
             }
-            foreach (ConsumableItemData data in Consumables)
+            foreach (ArmorItemConfig data in _armors)
             {
                 _items.Add(data);
             }
-            foreach (ResourceItemData data in Resources)
+            foreach (ConsumableItemConfig data in _consumables)
+            {
+                _items.Add(data);
+            }
+            foreach (ResourceItemConfig data in _resources)
             {
                 _items.Add(data);
             }
@@ -52,12 +71,12 @@ namespace WinterUniverse
 
         public List<Stat> GetStats()
         {
-            return _stats;
+            return _newStats;
         }
 
         public StatConfig GetStat(string name)
         {
-            foreach (StatConfig data in Stats)
+            foreach (StatConfig data in _stats)
             {
                 if (data.DisplayName == name)
                 {
@@ -67,9 +86,9 @@ namespace WinterUniverse
             return null;
         }
 
-        public RaceData GetRace(string name)
+        public RaceConfig GetRace(string name)
         {
-            foreach (RaceData data in Races)
+            foreach (RaceConfig data in _races)
             {
                 if (data.DisplayName == name)
                 {
@@ -79,9 +98,9 @@ namespace WinterUniverse
             return null;
         }
 
-        public FactionData GetFaction(string name)
+        public FactionConfig GetFaction(string name)
         {
-            foreach (FactionData data in Factions)
+            foreach (FactionConfig data in _factions)
             {
                 if (data.DisplayName == name)
                 {
@@ -91,9 +110,9 @@ namespace WinterUniverse
             return null;
         }
 
-        public ItemData GetItem(string name)
+        public ItemConfig GetItem(string name)
         {
-            foreach (ItemData data in _items)
+            foreach (ItemConfig data in _items)
             {
                 if (data.DisplayName == name)
                 {
@@ -103,9 +122,9 @@ namespace WinterUniverse
             return null;
         }
 
-        public WeaponItemData GetWeapon(string name)
+        public WeaponItemConfig GetWeapon(string name)
         {
-            foreach (WeaponItemData data in Weapons)
+            foreach (WeaponItemConfig data in _weapons)
             {
                 if (data.DisplayName == name)
                 {
@@ -115,9 +134,9 @@ namespace WinterUniverse
             return null;
         }
 
-        public ArmorItemData GetArmor(string name)
+        public ArmorItemConfig GetArmor(string name)
         {
-            foreach (ArmorItemData data in Armors)
+            foreach (ArmorItemConfig data in _armors)
             {
                 if (data.DisplayName == name)
                 {
@@ -127,9 +146,9 @@ namespace WinterUniverse
             return null;
         }
 
-        public ConsumableItemData GetConsumable(string name)
+        public ConsumableItemConfig GetConsumable(string name)
         {
-            foreach (ConsumableItemData data in Consumables)
+            foreach (ConsumableItemConfig data in _consumables)
             {
                 if (data.DisplayName == name)
                 {
@@ -139,9 +158,9 @@ namespace WinterUniverse
             return null;
         }
 
-        public ResourceItemData GetResource(string name)
+        public ResourceItemConfig GetResource(string name)
         {
-            foreach (ResourceItemData data in Resources)
+            foreach (ResourceItemConfig data in _resources)
             {
                 if (data.DisplayName == name)
                 {

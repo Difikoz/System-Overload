@@ -10,7 +10,7 @@ namespace WinterUniverse
 
         private PawnController _pawn;
 
-        public WeaponItemData UnarmedWeapon;
+        public WeaponItemConfig UnarmedWeapon;
         public WeaponSlot WeaponRightSlot;
         public WeaponSlot WeaponLeftSlot;
         public AbilityData SpellData;
@@ -21,7 +21,7 @@ namespace WinterUniverse
             _pawn = GetComponentInParent<PawnController>();
         }
 
-        public void EquipWeapon(WeaponItemData weapon, bool removeNewFromInventory = true, bool addOldToInventory = true)
+        public void EquipWeapon(WeaponItemConfig weapon, bool removeNewFromInventory = true, bool addOldToInventory = true)
         {
             if (weapon == null || _pawn.IsDead)
             {
@@ -122,7 +122,7 @@ namespace WinterUniverse
             OnEquipmentChanged?.Invoke();
         }
 
-        public void EquipArmor(ArmorItemData armor, bool removeFromInventory = true, bool addOldToInventory = true)
+        public void EquipArmor(ArmorItemConfig armor, bool removeFromInventory = true, bool addOldToInventory = true)
         {
             if (armor == null || _pawn.IsDead)
             {
@@ -144,7 +144,7 @@ namespace WinterUniverse
             OnEquipmentChanged?.Invoke();
         }
 
-        public void EquipArmor(ArmorItemData armor, ArmorSlot slot, bool removeFromInventory = true, bool addOldToInventory = true)
+        public void EquipArmor(ArmorItemConfig armor, ArmorSlot slot, bool removeFromInventory = true, bool addOldToInventory = true)
         {
             if (armor == null || slot == null || armor.ArmorType != slot.Type || _pawn.IsDead)
             {
@@ -212,13 +212,13 @@ namespace WinterUniverse
             {
                 UnequipArmor(slot);
             }
-            if (_pawn.PawnInventory.GetBestWeapon(out WeaponItemData weapon))
+            if (_pawn.PawnInventory.GetBestWeapon(out WeaponItemConfig weapon))
             {
                 EquipWeapon(weapon);
             }
             foreach (ArmorSlot slot in ArmorSlots)
             {
-                if (_pawn.PawnInventory.GetBestArmor(slot.Type, out ArmorItemData armor))
+                if (_pawn.PawnInventory.GetBestArmor(slot.Type, out ArmorItemConfig armor))
                 {
                     EquipArmor(armor, slot);
                 }

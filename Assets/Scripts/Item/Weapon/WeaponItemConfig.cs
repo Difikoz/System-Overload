@@ -4,7 +4,7 @@ using UnityEngine;
 namespace WinterUniverse
 {
     [CreateAssetMenu(fileName = "Weapon", menuName = "Winter Universe/Item/Equipment/Weapon/New Item")]
-    public class WeaponItemData : ItemData
+    public class WeaponItemConfig : ItemConfig
     {
         [Header("Equipment Modifiers")]
         [SerializeField] private List<StatModifierCreator> _modifiers = new();

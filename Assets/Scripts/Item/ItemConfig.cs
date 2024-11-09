@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace WinterUniverse
 {
-    public class ItemData : ScriptableObject
+    public class ItemConfig : ScriptableObject
     {
         [Header("Basic Information")]
         [SerializeField] protected string _displayName = "Name";
@@ -17,8 +17,8 @@ namespace WinterUniverse
         [SerializeField] protected float _rating = 1f;
         [Header("Requirements for usable items")]
         [SerializeField] protected int _requiredLevel;
-        [SerializeField] protected List<RaceData> _requiredRace = new();
-        [SerializeField] protected List<FactionData> _requiredFaction = new();
+        [SerializeField] protected List<RaceConfig> _requiredRace = new();
+        [SerializeField] protected List<FactionConfig> _requiredFaction = new();
         [SerializeField] protected List<StatRequirement> _requiredStats = new();
 
         public string DisplayName => _displayName;
@@ -31,8 +31,8 @@ namespace WinterUniverse
         public int Price => _price;
         public float Rating => _rating;
         public int RequiredLevel => _requiredLevel;
-        public List<RaceData> RequiredRace => _requiredRace;
-        public List<FactionData> RequiredFaction => _requiredFaction;
+        public List<RaceConfig> RequiredRace => _requiredRace;
+        public List<FactionConfig> RequiredFaction => _requiredFaction;
         public List<StatRequirement> RequiredStats => _requiredStats;
 
         public virtual bool CanUse(PawnController character, out string error, bool fromInventory = true)

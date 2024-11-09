@@ -5,7 +5,7 @@ namespace WinterUniverse
     public class WeaponSlot : MonoBehaviour
     {
         [HideInInspector] public PawnController Owner;
-        [HideInInspector] public WeaponItemData Data;
+        [HideInInspector] public WeaponItemConfig Data;
         [HideInInspector] public MeleeWeaponDamageCollider MeleeWeaponDamageCollider;
         public HandSlotType Type;
 
@@ -16,7 +16,7 @@ namespace WinterUniverse
             Owner = GetComponentInParent<PawnController>();
         }
 
-        public void Equip(WeaponItemData weapon)
+        public void Equip(WeaponItemConfig weapon)
         {
             if (weapon == null)
             {

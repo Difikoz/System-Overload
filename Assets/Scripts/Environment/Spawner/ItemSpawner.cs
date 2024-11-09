@@ -5,7 +5,7 @@ namespace WinterUniverse
 {
     public class ItemSpawner : MonoBehaviour
     {
-        public ItemData Item;
+        public ItemConfig Item;
         public int Amount = 1;
 
         private ItemInteractable _spawnedItem;

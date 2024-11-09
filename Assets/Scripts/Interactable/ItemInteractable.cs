@@ -4,12 +4,12 @@ namespace WinterUniverse
 {
     public class ItemInteractable : Interactable
     {
-        [HideInInspector] public ItemData Data;
+        [HideInInspector] public ItemConfig Data;
         [HideInInspector] public int Amount = 1;
 
         private GameObject _model;
 
-        public void Setup(ItemData data, int amount)
+        public void Setup(ItemConfig data, int amount)
         {
             Data = data;
             Amount = amount;

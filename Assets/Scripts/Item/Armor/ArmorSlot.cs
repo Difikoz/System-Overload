@@ -8,7 +8,7 @@ namespace WinterUniverse
         private PawnController _owner;
         private ArmorRenderer _currentRenderer;
 
-        [HideInInspector] public ArmorItemData Data;
+        [HideInInspector] public ArmorItemConfig Data;
 
         public ArmorTypeData Type;
         [SerializeField] private ArmorRenderer _defaultRenderer;
@@ -19,7 +19,7 @@ namespace WinterUniverse
             _owner = GetComponentInParent<PawnController>();
         }
 
-        public void Equip(ArmorItemData armor)
+        public void Equip(ArmorItemConfig armor)
         {
             if (armor == null)
             {
@@ -119,7 +119,7 @@ namespace WinterUniverse
     [System.Serializable]
     public class ArmorRenderer
     {
-        public ArmorItemData Data;
+        public ArmorItemConfig Data;
         public List<GameObject> NeutralParts;
         public List<GameObject> MaleParts;
         public List<GameObject> FemaleParts;

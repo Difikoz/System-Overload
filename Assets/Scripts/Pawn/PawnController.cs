@@ -32,15 +32,15 @@ namespace WinterUniverse
         public Vector3 MoveDirection => _moveDirection;
 
         //
-        public Action<RaceData> OnRaceChanged;
+        public Action<RaceConfig> OnRaceChanged;
         public Action<Gender> OnGenderChanged;
-        public Action<FactionData> OnFactionChanged;
+        public Action<FactionConfig> OnFactionChanged;
         public Action OnDied;
 
         [HideInInspector] public string CharacterName;
-        [HideInInspector] public RaceData Race;
+        [HideInInspector] public RaceConfig Race;
         [HideInInspector] public Gender Gender;
-        [HideInInspector] public FactionData Faction;
+        [HideInInspector] public FactionConfig Faction;
 
         public bool Spawned;
         public bool IsPerfomingAction;
@@ -164,7 +164,7 @@ namespace WinterUniverse
             Spawned = false;
         }
 
-        public void ChangeRace(RaceData data)
+        public void ChangeRace(RaceConfig data)
         {
             Race = data;
             OnRaceChanged?.Invoke(Race);
@@ -176,7 +176,7 @@ namespace WinterUniverse
             OnGenderChanged?.Invoke(Gender);
         }
 
-        public void ChangeFaction(FactionData data)
+        public void ChangeFaction(FactionConfig data)
         {
             Faction = data;
             OnFactionChanged?.Invoke(Faction);
