@@ -9,7 +9,7 @@ namespace WinterUniverse
 
         private PawnController _pawn;
 
-        private void Awake()
+        public void Initialize()
         {
             _pawn = GetComponentInParent<PawnController>();
         }

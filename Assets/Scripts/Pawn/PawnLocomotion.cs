@@ -16,7 +16,6 @@ namespace WinterUniverse
         [SerializeField] private LayerMask _obstacleMask;
 
         private PawnController _pawn;
-        [SerializeField] private Vector3 _moveDirection;
         private Vector3 _moveVelocity;
         private Vector3 _fallVelocity;
         private float _forwardVelocity;
@@ -28,12 +27,12 @@ namespace WinterUniverse
 
         [SerializeField] private bool _attempToJumpTestButton;
 
-        private void Awake()
+        public void Initialize()
         {
             _pawn = GetComponent<PawnController>();
         }
 
-        private void Update()
+        public void HandleLocomotion()
         {
             if (_attempToJumpTestButton)
             {
@@ -58,9 +57,9 @@ namespace WinterUniverse
                 _fallVelocity.y += _gravity * Time.deltaTime;
             }
             _jumpTimer -= Time.deltaTime;
-            if (_moveDirection != Vector3.zero)
+            if (_pawn.MoveDirection != Vector3.zero)
             {
-                _moveVelocity = Vector3.MoveTowards(_moveVelocity, _moveDirection.normalized * _maxSpeed, _acceleration * Time.deltaTime);
+                _moveVelocity = Vector3.MoveTowards(_moveVelocity, _pawn.MoveDirection.normalized * _maxSpeed, _acceleration * Time.deltaTime);
             }
             else
             {
@@ -78,11 +77,6 @@ namespace WinterUniverse
         private void ApplyJumpForce()
         {
             _fallVelocity.y = Mathf.Sqrt(_jumpForce * -2f * _gravity);
-        }
-
-        public void SetMoveDirection(Vector3 direction)
-        {
-            _moveDirection = direction;
         }
 
         public void Jump()
