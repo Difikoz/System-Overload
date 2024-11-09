@@ -118,7 +118,7 @@ namespace WinterUniverse
 
         }
 
-        public virtual void CreateCharacter(CharacterSaveData data)
+        public virtual void CreateCharacter(PawnSaveData data)
         {
             ChangeFaction(GameManager.StaticInstance.WorldData.GetFaction(data.Faction));
             CharacterName = data.CharacterName;

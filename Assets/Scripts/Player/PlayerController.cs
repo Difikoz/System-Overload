@@ -16,7 +16,6 @@ namespace WinterUniverse
             base.Awake();
             _playerLocomotion = GetComponent<PlayerLocomotion>();
             _playerInteraction = GetComponent<PlayerInteraction>();
-            GameManager.StaticInstance.SetPlayer(this);
         }
 
         protected override void Update()
@@ -41,7 +40,7 @@ namespace WinterUniverse
             //StatManager.OnStatChanged -= PlayerUIManager.StaticInstance.MenuUI.StatUI.UpdateUI;
         }
 
-        public override void CreateCharacter(CharacterSaveData data)
+        public override void CreateCharacter(PawnSaveData data)
         {
             base.CreateCharacter(data);
             GameManager.StaticInstance.PlayerCamera.transform.position = transform.position;
@@ -60,7 +59,7 @@ namespace WinterUniverse
             base.Revive();
         }
 
-        public void SaveData(ref CharacterSaveData data)
+        public void SaveData(ref PawnSaveData data)
         {
             data.CharacterName = CharacterName;
             data.Faction = Faction.DisplayName;
@@ -83,7 +82,7 @@ namespace WinterUniverse
             data.Transform.SetPositionAndRotation(transform.position, transform.eulerAngles);
         }
 
-        public void LoadData(CharacterSaveData data)
+        public void LoadData(PawnSaveData data)
         {
             ChangeFaction(GameManager.StaticInstance.WorldData.GetFaction(data.Faction));
             CharacterName = data.CharacterName;

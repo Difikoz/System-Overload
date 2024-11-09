@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace WinterUniverse
 {
@@ -27,20 +26,6 @@ namespace WinterUniverse
         {
             _camera = GetComponentInChildren<Camera>();
             _cameraDefaultOffset = _camera.transform.position.z;
-            enabled = false;
-            SceneManager.activeSceneChanged += OnSceneChanged;
-        }
-
-        private void OnSceneChanged(Scene oldScene, Scene newScene)// need???
-        {
-            if (newScene.buildIndex == 0)
-            {
-                enabled = false;
-            }
-            else
-            {
-                enabled = true;
-            }
         }
 
         private void LateUpdate()
@@ -86,11 +71,6 @@ namespace WinterUniverse
             }
             _camLocalPosition.z = Mathf.Lerp(_camera.transform.localPosition.z, _cameraTargetOffset, _collisionAvoidanceSpeed * Time.deltaTime);
             _camera.transform.localPosition = _camLocalPosition;
-        }
-
-        private void OnDestroy()
-        {
-            SceneManager.activeSceneChanged -= OnSceneChanged;
         }
     }
 }

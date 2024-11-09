@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 
 namespace WinterUniverse
 {
@@ -32,8 +31,7 @@ namespace WinterUniverse
         public void Initialize()
         {
             _inputActions = new();
-            SceneManager.activeSceneChanged += OnSceneChanged;
-            //Enable();
+            Enable();
         }
 
         private void Enable()
@@ -49,18 +47,6 @@ namespace WinterUniverse
             _moveInput = Vector2.zero;
             _lookInput = Vector2.zero;
             _runInput = false;
-        }
-
-        private void OnSceneChanged(Scene oldScene, Scene newScene)
-        {
-            if (newScene.buildIndex == 0)
-            {
-                Disable();
-            }
-            else
-            {
-                Enable();
-            }
         }
 
         private void Update()
@@ -187,7 +173,7 @@ namespace WinterUniverse
 
         private void OnDestroy()
         {
-            SceneManager.activeSceneChanged -= OnSceneChanged;
+            Disable();
         }
     }
 }

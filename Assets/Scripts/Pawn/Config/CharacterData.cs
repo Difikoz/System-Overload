@@ -10,9 +10,9 @@ namespace WinterUniverse
         public FactionConfig Faction;
         public List<ItemStack> StartingItems = new();
 
-        public CharacterSaveData GetData()
+        public PawnSaveData GetData()
         {
-            CharacterSaveData data = new()
+            PawnSaveData data = new()
             {
                 CharacterName = CharacterName,
                 Faction = Faction.DisplayName

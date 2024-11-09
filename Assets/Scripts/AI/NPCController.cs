@@ -36,7 +36,7 @@ namespace WinterUniverse
             Agent.updateRotation = false;
         }
 
-        public override void CreateCharacter(CharacterSaveData data)
+        public override void CreateCharacter(PawnSaveData data)
         {
             base.CreateCharacter(data);
             Agent.height = PawnAnimator.Height;

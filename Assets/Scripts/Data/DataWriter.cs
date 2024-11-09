@@ -19,7 +19,7 @@ namespace WinterUniverse
             }
         }
 
-        public static void CreateSaveFile(CharacterSaveData characterData, string fileName)
+        public static void CreateSaveFile(PawnSaveData characterData, string fileName)
         {
             string savePath = Path.Combine(Application.persistentDataPath, fileName);
             try
@@ -41,9 +41,9 @@ namespace WinterUniverse
             }
         }
 
-        public static CharacterSaveData LoadSavedFile(string fileName)
+        public static PawnSaveData LoadSavedFile(string fileName)
         {
-            CharacterSaveData data = null;
+            PawnSaveData data = null;
             string loadPath = Path.Combine(Application.persistentDataPath, fileName);
             if (FileExists(fileName))
             {
@@ -57,7 +57,7 @@ namespace WinterUniverse
                             dataText = fileReader.ReadToEnd();
                         }
                     }
-                    data = JsonUtility.FromJson<CharacterSaveData>(dataText);
+                    data = JsonUtility.FromJson<PawnSaveData>(dataText);
                 }
                 catch (Exception e)
                 {

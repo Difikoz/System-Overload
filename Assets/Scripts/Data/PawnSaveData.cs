@@ -1,7 +1,7 @@
 namespace WinterUniverse
 {
     [System.Serializable]
-    public class CharacterSaveData
+    public class PawnSaveData
     {
         public string CharacterName = "Faceless";
 

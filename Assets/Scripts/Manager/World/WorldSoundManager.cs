@@ -11,12 +11,16 @@ namespace WinterUniverse
         [SerializeField] private AudioSource _SFXSource;
 
         [SerializeField] private float _ambientChangeVolumeSpeed = 0.5f;
-        [SerializeField] private AudioClip _mainMenuAmbientClip;
-        [SerializeField] private AudioClip _worldAmbientClip;
+        [SerializeField] private List<AudioClip> _ambientClips = new();
 
         [SerializeField] private List<TextureSound> _footstepClips = new();
 
         private Coroutine _changeAmbientCoroutine;
+
+        public void Initialize()
+        {
+            ChangeAmbient();
+        }
 
         public AudioClip ChooseRandomClip(List<AudioClip> clips)
         {
@@ -34,43 +38,44 @@ namespace WinterUniverse
             _SFXSource.PlayOneShot(clip);
         }
 
-        public void ChangeAmbient(AudioClip clip = null)
+        public void ChangeAmbient()
         {
-            if (clip == null)
-            {
-                if (SceneManager.GetActiveScene().buildIndex == 0)
-                {
-                    clip = _mainMenuAmbientClip;
-                }
-                else
-                {
-                    clip = _worldAmbientClip;
-                }
-            }
+            ChangeAmbient(_ambientClips);
+        }
+
+        public void ChangeAmbient(List<AudioClip> clips)
+        {
             if (_changeAmbientCoroutine != null)
             {
                 StopCoroutine(_changeAmbientCoroutine);
             }
-            _changeAmbientCoroutine = StartCoroutine(ChangeAmbientTimer(clip));
+            _changeAmbientCoroutine = StartCoroutine(PlayAmbientTimer(clips));
         }
 
-        private IEnumerator ChangeAmbientTimer(AudioClip clip)
+        private IEnumerator PlayAmbientTimer(List<AudioClip> clips)
         {
-            while (_ambientSource.volume != 0f)
+            WaitForSeconds delay = new(5f);
+            while (true)
             {
-                _ambientSource.volume -= _ambientChangeVolumeSpeed * Time.deltaTime;
-                yield return null;
+                while (_ambientSource.volume != 0f)
+                {
+                    _ambientSource.volume -= _ambientChangeVolumeSpeed * Time.deltaTime;
+                    yield return null;
+                }
+                _ambientSource.volume = 0f;
+                _ambientSource.clip = clips[Random.Range(0, clips.Count)];
+                _ambientSource.Play();
+                while (_ambientSource.volume != 1f)
+                {
+                    _ambientSource.volume += _ambientChangeVolumeSpeed * Time.deltaTime;
+                    yield return null;
+                }
+                _ambientSource.volume = 1f;
+                while (_ambientSource.isPlaying)
+                {
+                    yield return delay;
+                }
             }
-            _ambientSource.volume = 0f;
-            _ambientSource.clip = clip;
-            _ambientSource.Play();
-            while (_ambientSource.volume != 1f)
-            {
-                _ambientSource.volume += _ambientChangeVolumeSpeed * Time.deltaTime;
-                yield return null;
-            }
-            _ambientSource.volume = 1f;
-            _changeAmbientCoroutine = null;
         }
 
         public AudioClip GetFootstepClip(Transform ground)
