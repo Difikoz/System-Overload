@@ -115,7 +115,7 @@ namespace WinterUniverse
 
         private void OnCharacterCreationMenuButtonCreatePressed()
         {
-            GameManager.StaticInstance.WorldSaveGame.SaveGame(CurrentSelectedSaveSlot.FileName);
+            GameManager.StaticInstance.WorldSaveLoad.SaveGame(CurrentSelectedSaveSlot.FileName);
             _characterCreationMenuWindow.SetActive(false);
             _startGameMenuWindow.SetActive(true);
             _startGameMenuButtonBack.Select();
@@ -141,7 +141,7 @@ namespace WinterUniverse
         {
             if (CurrentSelectedSaveSlot != null && CurrentSelectedSaveSlot.DataExists)
             {
-                GameManager.StaticInstance.WorldSaveGame.DeleteGame(CurrentSelectedSaveSlot.FileName);
+                GameManager.StaticInstance.WorldSaveLoad.DeleteGame(CurrentSelectedSaveSlot.FileName);
             }
             _startGameMenuWindow.SetActive(false);
             _startGameMenuWindow.SetActive(true);
@@ -170,7 +170,7 @@ namespace WinterUniverse
             }
             if (CurrentSelectedSaveSlot.DataExists)
             {
-                GameManager.StaticInstance.WorldSaveGame.LoadGame(CurrentSelectedSaveSlot);
+                GameManager.StaticInstance.WorldSaveLoad.LoadGame(CurrentSelectedSaveSlot);
             }
             else
             {

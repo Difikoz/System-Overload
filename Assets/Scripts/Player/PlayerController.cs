@@ -83,7 +83,7 @@ namespace WinterUniverse
 
         public override void Revive()
         {
-            transform.SetPositionAndRotation(GameManager.StaticInstance.WorldSaveGame.CurrentSaveData.RespawnTransform.GetPosition(), GameManager.StaticInstance.WorldSaveGame.CurrentSaveData.RespawnTransform.GetRotation());
+            transform.SetPositionAndRotation(GameManager.StaticInstance.WorldSaveLoad.CurrentSaveData.RespawnTransform.GetPosition(), GameManager.StaticInstance.WorldSaveLoad.CurrentSaveData.RespawnTransform.GetRotation());
             base.Revive();
         }
 

@@ -23,8 +23,8 @@ namespace WinterUniverse
             character.PawnEffects.RemoveNegativeEffects();
             character.PawnStats.RestoreCurrentHealth(character.PawnStats.HealthMax.CurrentValue);
             character.PawnStats.RestoreCurrentEnergy(character.PawnStats.EnergyMax.CurrentValue);
-            GameManager.StaticInstance.WorldSaveGame.CurrentSaveData.RespawnTransform.SetPositionAndRotation(_respawnPoint.position, _respawnPoint.eulerAngles);
-            GameManager.StaticInstance.WorldSaveGame.SaveGame();
+            GameManager.StaticInstance.WorldSaveLoad.CurrentSaveData.RespawnTransform.SetPositionAndRotation(_respawnPoint.position, _respawnPoint.eulerAngles);
+            GameManager.StaticInstance.WorldSaveLoad.SaveGame();
             PlayerUIManager.StaticInstance.HUD.NotificationUI.DisplayNotification(_notificationMessage);
         }
     }

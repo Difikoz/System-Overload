@@ -23,11 +23,6 @@ namespace WinterUniverse
             return clips[Random.Range(0, clips.Count)];
         }
 
-        public AudioClip ChooseRandomClip(AudioClip[] clips)
-        {
-            return clips[Random.Range(0, clips.Length)];
-        }
-
         public void PlaySFX(AudioClip clip, bool randomizePitch = true, float volume = 1f, float minPitch = 0.9f, float maxPitch = 1.1f)
         {
             if (clip == null)
@@ -100,12 +95,5 @@ namespace WinterUniverse
             }
             return null;
         }
-    }
-
-    [System.Serializable]
-    public class TextureSound
-    {
-        public Texture Texture;
-        public List<AudioClip> Clips;
     }
 }

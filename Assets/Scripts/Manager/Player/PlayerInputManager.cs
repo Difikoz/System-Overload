@@ -6,6 +6,7 @@ namespace WinterUniverse
 {
     public class PlayerInputManager : MonoBehaviour
     {
+        private PlayerInputActions _inputActions;
         private Vector2 _moveInput;
         private Vector2 _lookInput;
         private bool _runInput;
@@ -13,36 +14,52 @@ namespace WinterUniverse
         public Vector2 MoveInput => _moveInput;
         public Vector2 LookInput => _lookInput;
 
-        //private void OnApplicationFocus(bool focus)
-        //{
-        //    if (enabled)
-        //    {
-        //        if (focus)
-        //        {
-        //            _inputActions.Enable();
-        //        }
-        //        else
-        //        {
-        //            _inputActions.Disable();
-        //        }
-        //    }
-        //}
+        private void OnApplicationFocus(bool focus)
+        {
+            if (enabled)
+            {
+                if (focus)
+                {
+                    Enable();
+                }
+                else
+                {
+                    Disable();
+                }
+            }
+        }
 
         public void Initialize()
         {
+            _inputActions = new();
             SceneManager.activeSceneChanged += OnSceneChanged;
+            //Enable();
+        }
+
+        private void Enable()
+        {
+            enabled = true;
+            _inputActions.Enable();
+        }
+
+        private void Disable()
+        {
+            _inputActions.Disable();
             enabled = false;
+            _moveInput = Vector2.zero;
+            _lookInput = Vector2.zero;
+            _runInput = false;
         }
 
         private void OnSceneChanged(Scene oldScene, Scene newScene)
         {
-            if(newScene.buildIndex == 0)
+            if (newScene.buildIndex == 0)
             {
-                enabled = false;
+                Disable();
             }
             else
             {
-                enabled = true;
+                Enable();
             }
         }
 

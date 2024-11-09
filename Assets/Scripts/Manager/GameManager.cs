@@ -10,7 +10,7 @@ namespace WinterUniverse
         private WorldLayerManager _worldLayer;
         private WorldDataManager _worldData;
         private WorldObjectManager _worldObject;
-        private WorldSaveLoadManager _worldSaveGame;
+        private WorldSaveLoadManager _worldSaveLoad;
         private WorldSoundManager _worldSound;
         private WorldTimeManager _worldTime;
 
@@ -20,7 +20,7 @@ namespace WinterUniverse
         public WorldLayerManager WorldLayer => _worldLayer;
         public WorldDataManager WorldData => _worldData;
         public WorldObjectManager WorldObject => _worldObject;
-        public WorldSaveLoadManager WorldSaveGame => _worldSaveGame;
+        public WorldSaveLoadManager WorldSaveLoad => _worldSaveLoad;
         public WorldSoundManager WorldSound => _worldSound;
         public WorldTimeManager WorldTime => _worldTime;
 
@@ -32,12 +32,12 @@ namespace WinterUniverse
             _worldLayer = GetComponentInChildren<WorldLayerManager>();
             _worldData = GetComponentInChildren<WorldDataManager>();
             _worldObject = GetComponentInChildren<WorldObjectManager>();
-            _worldSaveGame = GetComponentInChildren<WorldSaveLoadManager>();
+            _worldSaveLoad = GetComponentInChildren<WorldSaveLoadManager>();
             _worldSound = GetComponentInChildren<WorldSoundManager>();
             _worldTime = GetComponentInChildren<WorldTimeManager>();
+            _playerInput.Initialize();
             _playerCamera.Initialize();
             _worldData.Initialize();
-            _worldTime.Initialize();
         }
 
         public void SetPlayer(PlayerController player)

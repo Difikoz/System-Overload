@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace WinterUniverse
 {
@@ -12,32 +11,22 @@ namespace WinterUniverse
         private bool _paused = true;
 
         [SerializeField] private float _timeScaleMultiplier = 600f;
+        [SerializeField] private float _timeScale = 1f;
+        [SerializeField] private float _second;
+        [SerializeField] private int _minute;
+        [SerializeField] private int _hour;
+        [SerializeField] private int _day;
+        [SerializeField] private int _month;
+        [SerializeField] private int _year;
 
-        public float TimeScale = 1f;
-
-        public float Second;
-        public int Minute;
-        public int Hour;
-        public int Day;
-        public int Month;
-        public int Year;
-
-        public void Initialize()
-        {
-            SceneManager.activeSceneChanged += OnSceneChanged;
-        }
-
-        private void OnSceneChanged(Scene oldScene, Scene newScene)
-        {
-            if (newScene.buildIndex == 0)
-            {
-                _paused = true;
-            }
-            else
-            {
-                _paused = false;
-            }
-        }
+        public float TimeScale => _timeScale;
+        public float Second => _second;
+        public int Minute => _minute;
+        public int Hour => _hour;
+        public int Day => _day;
+        public int Month => _month;
+        public int Year => _year;
+        public bool Paused => _paused;
 
         private void Update()
         {
@@ -45,62 +34,74 @@ namespace WinterUniverse
             {
                 return;
             }
-            Second += TimeScale * _timeScaleMultiplier * Time.deltaTime;
-            if (Second >= 60f)
+            _second += TimeScale * _timeScaleMultiplier * Time.deltaTime;
+            if (_second >= 60f)
             {
-                Second -= 60f;
+                _second -= 60f;
                 AddMinute();
             }
         }
 
+        public void PauseGame()
+        {
+            _paused = true;
+            // other logic
+        }
+
+        public void UpauseGame()
+        {
+            _paused = false;
+            // other logic
+        }
+
         public void AddMinute(int amount = 1)
         {
-            Minute += amount;
-            while (Minute >= 60)
+            _minute += amount;
+            while (_minute >= 60)
             {
-                Minute -= 60;
+                _minute -= 60;
                 AddHour();
             }
-            OnTimeChanged?.Invoke(Minute, Hour);
+            OnTimeChanged?.Invoke(_minute, _hour);
         }
 
         public void AddHour(int amount = 1)
         {
-            Hour += amount;
-            while (Hour >= 24)
+            _hour += amount;
+            while (_hour >= 24)
             {
-                Hour -= 24;
+                _hour -= 24;
                 AddDay();
             }
-            OnTimeChanged?.Invoke(Minute, Hour);
+            OnTimeChanged?.Invoke(_minute, _hour);
         }
 
         public void AddDay(int amount = 1)
         {
-            Day += amount;
-            while (Day > 30)
+            _day += amount;
+            while (_day > 30)
             {
-                Day -= 30;
+                _day -= 30;
                 AddMonth();
             }
-            OnDateChanged?.Invoke(Day, Month, Year);
+            OnDateChanged?.Invoke(_day, _month, _year);
         }
 
         public void AddMonth(int amount = 1)
         {
-            Month += amount;
-            while (Month > 12)
+            _month += amount;
+            while (_month > 12)
             {
-                Month -= 12;
+                _month -= 12;
                 AddYear();
             }
-            OnDateChanged?.Invoke(Day, Month, Year);
+            OnDateChanged?.Invoke(_day, _month, _year);
         }
 
         public void AddYear(int amount = 1)
         {
-            Year += amount;
-            OnDateChanged?.Invoke(Day, Month, Year);
+            _year += amount;
+            OnDateChanged?.Invoke(_day, _month, _year);
         }
     }
 }
