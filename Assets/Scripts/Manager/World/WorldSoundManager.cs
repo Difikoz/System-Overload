@@ -1,16 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
 
 namespace WinterUniverse
 {
     public class WorldSoundManager : MonoBehaviour
     {
+        [SerializeField] private AudioMixer _audioMixer;
         [SerializeField] private AudioSource _ambientSource;
-        [SerializeField] private AudioSource _SFXSource;
+        [SerializeField] private AudioSource _soundSource;
 
-        [SerializeField] private float _ambientChangeVolumeSpeed = 0.5f;
+        [SerializeField] private float _ambientFadeSpeed = 0.5f;
         [SerializeField] private List<AudioClip> _ambientClips = new();
 
         [SerializeField] private List<TextureSound> _footstepClips = new();
@@ -20,6 +21,21 @@ namespace WinterUniverse
         public void Initialize()
         {
             ChangeAmbient();
+        }
+
+        public void SetMasterVolume(float value)
+        {
+            _audioMixer.SetFloat("VolumeMaster", value);
+        }
+
+        public void SetAmbientVolume(float value)
+        {
+            _audioMixer.SetFloat("VolumeAmbient", value);
+        }
+
+        public void SetSoundVolume(float value)
+        {
+            _audioMixer.SetFloat("VolumeSound", value);
         }
 
         public AudioClip ChooseRandomClip(List<AudioClip> clips)
@@ -33,9 +49,9 @@ namespace WinterUniverse
             {
                 return;
             }
-            _SFXSource.volume = volume;
-            _SFXSource.pitch = randomizePitch ? Random.Range(minPitch, maxPitch) : 1f;
-            _SFXSource.PlayOneShot(clip);
+            _soundSource.volume = volume;
+            _soundSource.pitch = randomizePitch ? Random.Range(minPitch, maxPitch) : 1f;
+            _soundSource.PlayOneShot(clip);
         }
 
         public void ChangeAmbient()
@@ -59,7 +75,7 @@ namespace WinterUniverse
             {
                 while (_ambientSource.volume != 0f)
                 {
-                    _ambientSource.volume -= _ambientChangeVolumeSpeed * Time.deltaTime;
+                    _ambientSource.volume -= _ambientFadeSpeed * Time.deltaTime;
                     yield return null;
                 }
                 _ambientSource.volume = 0f;
@@ -67,7 +83,7 @@ namespace WinterUniverse
                 _ambientSource.Play();
                 while (_ambientSource.volume != 1f)
                 {
-                    _ambientSource.volume += _ambientChangeVolumeSpeed * Time.deltaTime;
+                    _ambientSource.volume += _ambientFadeSpeed * Time.deltaTime;
                     yield return null;
                 }
                 _ambientSource.volume = 1f;

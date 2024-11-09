@@ -5,38 +5,30 @@ namespace WinterUniverse
 {
     public class PlayerController : PawnController
     {
-        private PlayerLocomotion _playerLocomotion;
-        private PlayerInteraction _playerInteraction;
-
-        public PlayerLocomotion PlayerLocomotion => _playerLocomotion;
-        public PlayerInteraction PlayerInteraction => _playerInteraction;
-
-        protected override void Awake()
+        protected override Vector2 GetMoveInput()
         {
-            base.Awake();
-            _playerLocomotion = GetComponent<PlayerLocomotion>();
-            _playerInteraction = GetComponent<PlayerInteraction>();
+            return GameManager.StaticInstance.PlayerInput.MoveInput;
         }
 
-        protected override void Update()
+        protected override Vector3 GetLookDirection()
         {
-            _moveDirection = Vector3.zero;
-            base.Update();
+            return GameManager.StaticInstance.PlayerCamera.transform.forward;
         }
-        //
+
+
         protected override void OnEnable()
         {
             base.OnEnable();
-            PawnStats.OnHealthChanged += PlayerUIManager.StaticInstance.HUD.VitalityUI.SetHealthValues;
-            PawnStats.OnEnergyChanged += PlayerUIManager.StaticInstance.HUD.VitalityUI.SetEnergyValues;
+            _pawnStats.OnHealthChanged += GameManager.StaticInstance.PlayerUI.HUD.VitalityUI.SetHealthValues;
+            _pawnStats.OnEnergyChanged += GameManager.StaticInstance.PlayerUI.HUD.VitalityUI.SetEnergyValues;
             //StatManager.OnStatChanged += PlayerUIManager.StaticInstance.MenuUI.StatUI.UpdateUI;
         }
 
         protected override void OnDisable()
         {
             base.OnDisable();
-            PawnStats.OnHealthChanged -= PlayerUIManager.StaticInstance.HUD.VitalityUI.SetHealthValues;
-            PawnStats.OnEnergyChanged -= PlayerUIManager.StaticInstance.HUD.VitalityUI.SetEnergyValues;
+            _pawnStats.OnHealthChanged -= GameManager.StaticInstance.PlayerUI.HUD.VitalityUI.SetHealthValues;
+            _pawnStats.OnEnergyChanged -= GameManager.StaticInstance.PlayerUI.HUD.VitalityUI.SetEnergyValues;
             //StatManager.OnStatChanged -= PlayerUIManager.StaticInstance.MenuUI.StatUI.UpdateUI;
         }
 
@@ -48,7 +40,7 @@ namespace WinterUniverse
 
         protected override IEnumerator ProcessDeathEvent()
         {
-            PlayerUIManager.StaticInstance.HUD.NotificationUI.DisplayNotification("You Died");
+            GameManager.StaticInstance.PlayerUI.HUD.NotificationUI.DisplayNotification("You Died");
             yield return new WaitForSeconds(5f);
             Revive();
         }
@@ -61,12 +53,12 @@ namespace WinterUniverse
 
         public void SaveData(ref PawnSaveData data)
         {
-            data.CharacterName = CharacterName;
-            data.Faction = Faction.DisplayName;
-            data.Health = PawnStats.HealthCurrent;
-            data.Energy = PawnStats.EnergyCurrent;
+            data.CharacterName = _characterName;
+            data.Faction = _faction.DisplayName;
+            data.Health = _pawnStats.HealthCurrent;
+            data.Energy = _pawnStats.EnergyCurrent;
             data.InventoryStacks.Clear();
-            foreach (ItemStack stack in PawnInventory.Stacks)
+            foreach (ItemStack stack in _pawnInventory.Stacks)
             {
                 if (data.InventoryStacks.ContainsKey(stack.Item.DisplayName))
                 {
@@ -77,39 +69,39 @@ namespace WinterUniverse
                     data.InventoryStacks.Add(stack.Item.DisplayName, stack.Amount);
                 }
             }
-            data.WeaponInRightHand = PawnEquipment.WeaponRightSlot.Data.DisplayName;
-            data.WeaponInLeftHand = PawnEquipment.WeaponLeftSlot.Data.DisplayName;
+            data.WeaponInRightHand = _pawnEquipment.WeaponRightSlot.Data.DisplayName;
+            data.WeaponInLeftHand = _pawnEquipment.WeaponLeftSlot.Data.DisplayName;
             data.Transform.SetPositionAndRotation(transform.position, transform.eulerAngles);
         }
 
         public void LoadData(PawnSaveData data)
         {
             ChangeFaction(GameManager.StaticInstance.WorldData.GetFaction(data.Faction));
-            CharacterName = data.CharacterName;
-            PawnStats.CreateStats();
-            PawnStats.HealthCurrent = data.Health;
-            PawnStats.EnergyCurrent = data.Energy;
+            _characterName = data.CharacterName;
+            _pawnStats.CreateStats();
+            _pawnStats.HealthCurrent = data.Health;
+            _pawnStats.EnergyCurrent = data.Energy;
             PawnInventory.Initialize(data.InventoryStacks);
             if (data.WeaponInRightHand != "Unarmed")
             {
-                PawnEquipment.EquipWeapon(GameManager.StaticInstance.WorldData.GetWeapon(data.WeaponInRightHand), false, false);
+                _pawnEquipment.EquipWeapon(GameManager.StaticInstance.WorldData.GetWeapon(data.WeaponInRightHand), false, false);
             }
             else
             {
-                PawnEquipment.UnequipWeapon(HandSlotType.Right, false);
+                _pawnEquipment.UnequipWeapon(HandSlotType.Right, false);
             }
             if (data.WeaponInLeftHand != "Unarmed")
             {
-                PawnEquipment.EquipWeapon(GameManager.StaticInstance.WorldData.GetWeapon(data.WeaponInLeftHand), false, false);
+                _pawnEquipment.EquipWeapon(GameManager.StaticInstance.WorldData.GetWeapon(data.WeaponInLeftHand), false, false);
             }
             else
             {
-                PawnEquipment.UnequipWeapon(HandSlotType.Left, false);
+                _pawnEquipment.UnequipWeapon(HandSlotType.Left, false);
             }
-            PawnStats.RecalculateStats();
+            _pawnStats.RecalculateStats();
             transform.SetPositionAndRotation(data.Transform.GetPosition(), data.Transform.GetRotation());
             GameManager.StaticInstance.PlayerCamera.transform.position = transform.position;
-            PawnEquipment.ForceUpdateMeshes();
+            _pawnEquipment.ForceUpdateMeshes();
         }
     }
 }

@@ -6,7 +6,7 @@ namespace WinterUniverse
     {
         public PawnSaveData CurrentSaveData;
 
-        [SerializeField] private string _fileName;
+        [SerializeField] private string _fileName = "SaveData";
 
         public void SaveGame()
         {

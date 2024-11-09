@@ -7,10 +7,11 @@ namespace WinterUniverse
     public class PawnEffects : MonoBehaviour
     {
         private PawnController _pawn;
+        private List<Effect> _effects = new();
 
         [SerializeField] private GameObject _bloodSplatterVFX;
 
-        [HideInInspector] public List<Effect> Effects = new();
+        public List<Effect> Effects => _effects;
 
         public virtual void Initialize()
         {
@@ -19,48 +20,48 @@ namespace WinterUniverse
 
         public void TickEffects(float deltaTime)
         {
-            for (int i = Effects.Count - 1; i >= 0; i--)
+            for (int i = _effects.Count - 1; i >= 0; i--)
             {
-                Effects[i].OnTick(deltaTime);
+                _effects[i].OnTick(deltaTime);
             }
         }
 
         public void AddEffect(Effect effect)
         {
             // change to spawning prefab
-            Effects.Add(effect);
+            _effects.Add(effect);
             effect.OnApply();
         }
 
         public void RemoveEffect(Effect effect)
         {
-            if (Effects.Contains(effect))
+            if (_effects.Contains(effect))
             {
                 effect.OnRemove();
-                Effects.Remove(effect);
+                _effects.Remove(effect);
             }
         }
 
         public void RemovePositiveEffects()
         {
-            for (int i = Effects.Count - 1; i >= 0; i--)
+            for (int i = _effects.Count - 1; i >= 0; i--)
             {
-                if (Effects[i].Config.IsPositive)
+                if (_effects[i].Config.IsPositive)
                 {
-                    Effects[i].OnRemove();
-                    Effects.RemoveAt(i);
+                    _effects[i].OnRemove();
+                    _effects.RemoveAt(i);
                 }
             }
         }
 
         public void RemoveNegativeEffects()
         {
-            for (int i = Effects.Count - 1; i >= 0; i--)
+            for (int i = _effects.Count - 1; i >= 0; i--)
             {
-                if (!Effects[i].Config.IsPositive)
+                if (!_effects[i].Config.IsPositive)
                 {
-                    Effects[i].OnRemove();
-                    Effects.RemoveAt(i);
+                    _effects[i].OnRemove();
+                    _effects.RemoveAt(i);
                 }
             }
         }

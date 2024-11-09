@@ -25,7 +25,7 @@ namespace WinterUniverse
             _visibleEnemies.Clear();
             _visibleNeutrals.Clear();
             _visibleAllies.Clear();
-            Collider[] colliders = Physics.OverlapSphere(_owner.PawnCombat.HeadPoint.position, _owner.PawnCombat.ViewDistance, GameManager.StaticInstance.WorldLayer.CharacterMask);
+            Collider[] colliders = Physics.OverlapSphere(_owner.PawnCombat.HeadPoint.position, _owner.PawnCombat.ViewDistance, GameManager.StaticInstance.WorldLayer.PawnMask);
             foreach (Collider collider in colliders)
             {
                 if (collider.TryGetComponent(out PawnController character) && character != _owner && !character.IsDead)

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -8,15 +9,27 @@ namespace WinterUniverse
         [SerializeField] private CanvasGroup _canvasGroup;
         [SerializeField] private TextMeshProUGUI _messageText;
 
-        public void DisplayMessage(string message)
+        public void Initialize()
         {
-            _messageText.text = message;
-            _canvasGroup.alpha = 1f;
+            GameManager.StaticInstance.Player.PawnInteraction.OnRefreshInteractables += OnRefreshInteractables;
         }
 
-        public void HideMessage()
+        private void OnRefreshInteractables(List<Interactable> interactables)
         {
-            _canvasGroup.alpha = 0f;
+            if(interactables.Count > 0)
+            {
+                _messageText.text = interactables[0].GetInteractionMessage();
+                _canvasGroup.alpha = 1f;
+            }
+            else
+            {
+                _canvasGroup.alpha = 0f;
+            }
+        }
+
+        private void OnDestroy()
+        {
+            GameManager.StaticInstance.Player.PawnInteraction.OnRefreshInteractables -= OnRefreshInteractables;
         }
     }
 }

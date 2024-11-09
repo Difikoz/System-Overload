@@ -16,16 +16,39 @@ namespace WinterUniverse
 
         [HideInInspector] public NavMeshAgent Agent;
         [HideInInspector] public NPCDetectionModule NPCDetectionModule;
-        [HideInInspector] public NPCLocomotionModule NPCLocomotionModule;
         [HideInInspector] public Vector3 RootPosition;
         [HideInInspector] public bool ReachedDestination;
+
+        protected override Vector2 GetMoveInput()
+        {
+            if (!ReachedDestination)
+            {
+                return new Vector2(Vector3.Dot(Agent.desiredVelocity, transform.right), Vector3.Dot(Agent.desiredVelocity, transform.forward)).normalized;
+            }
+            return Vector2.zero;
+        }
+
+        protected override Vector3 GetLookDirection()
+        {
+            if (PawnCombat.CurrentTarget != null && PawnCombat.CurrentTargetIsVisible())
+            {
+                return (PawnCombat.CurrentTarget.transform.position - transform.position).normalized;
+            }
+            else if (!ReachedDestination)
+            {
+                return Agent.desiredVelocity;
+            }
+            else
+            {
+                return Vector3.zero;
+            }
+        }
 
         protected override void Awake()
         {
             base.Awake();
             Agent = GetComponentInChildren<NavMeshAgent>();
             NPCDetectionModule = GetComponent<NPCDetectionModule>();
-            NPCLocomotionModule = GetComponent<NPCLocomotionModule>();
             IdleState = Instantiate(IdleState);
             ChaseState = Instantiate(ChaseState);
             CombatPhase = Instantiate(CombatPhase);

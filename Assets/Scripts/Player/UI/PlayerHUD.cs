@@ -25,7 +25,6 @@ namespace WinterUniverse
         {
             VitalityUI.HideBars();
             NotificationUI.HideNotifications();
-            InteractionUI.HideMessage();
         }
     }
 }

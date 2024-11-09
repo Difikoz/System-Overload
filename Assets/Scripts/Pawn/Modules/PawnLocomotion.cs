@@ -28,6 +28,7 @@ namespace WinterUniverse
         protected abstract Vector2 GetMoveInput();
         protected abstract Vector3 GetLookDirection();
 
+        private bool CanJump => _jumpTimer > 0f && _groundedTimer > 0f && !_pawn.IsDead && !_pawn.IsPerfomingAction && _pawn.PawnStats.EnergyCurrent >= 10f;
         public Vector3 MoveVelocity => _moveVelocity;
 
         public virtual void Initialize()
@@ -47,42 +48,6 @@ namespace WinterUniverse
             }
             _moveInput = GetMoveInput();
             _lookDirection = GetLookDirection();
-            if (_jumpTimer > 0f && _groundedTimer > 0f)
-            {
-                _jumpTimer = 0f;
-                _groundedTimer = 0f;
-                ApplyJumpForce();
-            }
-            _isGrounded = _fallVelocity.y <= 0f && Physics.SphereCast(transform.position + _cc.center, _cc.radius, Vector3.down, out _groundHit, _cc.center.y - (_cc.radius / 2f), GameManager.StaticInstance.WorldLayer.ObstacleMask);
-            if (_isGrounded)
-            {
-                _groundedTimer = _timeToFall;
-                _fallVelocity.y = GameManager.StaticInstance.WorldData.Gravity / 10f;
-            }
-            else
-            {
-                _groundedTimer -= Time.deltaTime;
-                _fallVelocity.y += GameManager.StaticInstance.WorldData.Gravity * Time.deltaTime;
-            }
-            _jumpTimer -= Time.deltaTime;
-            if (_pawn.MoveDirection != Vector3.zero)
-            {
-                _moveVelocity = Vector3.MoveTowards(_moveVelocity, _pawn.MoveDirection.normalized * _maxSpeed, _acceleration * Time.deltaTime);
-            }
-            else
-            {
-                _moveVelocity = Vector3.MoveTowards(_moveVelocity, Vector3.zero, _deceleration * Time.deltaTime);
-            }
-            _forwardVelocity = Vector3.Dot(_moveVelocity, transform.forward);
-            _rightVelocity = Vector3.Dot(_moveVelocity, transform.right);
-            _pawn.PawnAnimator.SetBool("IsMoving", _moveVelocity != Vector3.zero);
-            _pawn.PawnAnimator.SetFloat("ForwardVelocity", _forwardVelocity / _maxSpeed);
-            _pawn.PawnAnimator.SetFloat("RightVelocity", _rightVelocity / _maxSpeed);
-            _cc.Move(_moveVelocity * Time.deltaTime);
-            _cc.Move(_fallVelocity * Time.deltaTime);
-
-            //
-
             HandleGravity();
             HandleMovement();
             HandleRotation();
@@ -101,29 +66,28 @@ namespace WinterUniverse
             _pawn.PawnAnimator.UpdateAnimatorMovement(_rightVelocity, _forwardVelocity, _pawn.PawnStats.MoveSpeed.CurrentValue);
         }
 
-        private void ApplyJumpForce()
-        {
-            _fallVelocity.y = Mathf.Sqrt(_jumpForce * -2f * GameManager.StaticInstance.WorldData.Gravity);
-        }
-
-        public void Jump()
-        {
-            _jumpTimer = _timeToJump;
-        }
-        //
         private void HandleGravity()
         {
             if (_pawn.UseGravity)
             {
-                _pawn.IsGrounded = _fallVelocity.y <= 0.1f && Physics.SphereCast(transform.position + _cc.center, _cc.radius, Vector3.down, out _groundHit, _cc.center.y, GameManager.StaticInstance.WorldLayer.ObstacleMask);
+                if (CanJump)
+                {
+                    _jumpTimer = 0f;
+                    _groundedTimer = 0f;
+                    ApplyJumpForce();
+                }
+                _pawn.IsGrounded = _fallVelocity.y <= 0.1f && Physics.SphereCast(transform.position + _cc.center, _cc.radius, Vector3.down, out _groundHit, _cc.center.y - (_cc.radius / 2f), GameManager.StaticInstance.WorldLayer.ObstacleMask);
                 if (_pawn.IsGrounded)
                 {
+                    _groundedTimer = _timeToFall;
                     _fallVelocity.y = GameManager.StaticInstance.WorldData.Gravity / 5f;
                 }
                 else
                 {
+                    _groundedTimer -= Time.deltaTime;
                     _fallVelocity.y += GameManager.StaticInstance.WorldData.Gravity * Time.deltaTime;
                 }
+                _jumpTimer -= Time.deltaTime;
                 _cc.Move(_fallVelocity * Time.deltaTime);
             }
         }
@@ -141,18 +105,18 @@ namespace WinterUniverse
                 {
                     _moveInput *= 2f;
                 }
-                _moveVelocity = Vector3.MoveTowards(_moveVelocity, (transform.right * _moveInput.x + transform.forward * _moveInput.y) * 4f, 8f * Time.deltaTime);// TODO get move speed and  acceleration stat
+                _moveVelocity = Vector3.MoveTowards(_moveVelocity, (transform.right * _moveInput.x + transform.forward * _moveInput.y) * _maxSpeed, _acceleration * Time.deltaTime);// TODO get move speed and  acceleration stat
             }
             else
             {
-                _moveVelocity = Vector3.MoveTowards(_moveVelocity, Vector3.zero, 8f * Time.deltaTime);// TODO get deceleration stat
+                _moveVelocity = Vector3.MoveTowards(_moveVelocity, Vector3.zero, _deceleration * Time.deltaTime);// TODO get deceleration stat
             }
             _cc.Move(_moveVelocity * Time.deltaTime);
         }
 
         private void HandleRotation()
         {
-            if (_pawn.IsDead || !_pawn.CanRotate)
+            if (!_pawn.CanRotate)
             {
                 return;
             }
@@ -187,11 +151,12 @@ namespace WinterUniverse
 
         public void TryPerformJump()
         {
-            if (_pawn.IsDead || _pawn.IsPerfomingAction || !_pawn.IsGrounded || _pawn.PawnStats.EnergyCurrent < 10f)// TODO get jump energy cost stat
-            {
-                return;
-            }
-            _fallVelocity.y = Mathf.Sqrt(2f * -2f * GameManager.StaticInstance.WorldData.Gravity);// TODO get jump power stat
+            _jumpTimer = _timeToJump;
+        }
+
+        private void ApplyJumpForce()
+        {
+            _fallVelocity.y = Mathf.Sqrt(_jumpForce * -2f * GameManager.StaticInstance.WorldData.Gravity);
             _pawn.PawnStats.ReduceCurrentEnergy(10f);
         }
 
@@ -205,15 +170,6 @@ namespace WinterUniverse
             _pawn.PawnAnimator.PlayActionAnimation("Dash Forward", true);
             _pawn.PawnStats.ReduceCurrentEnergy(10f);// TODO get dodge energy cost stat
             _pawn.IsDashing = true;
-        }
-
-        private void OnDrawGizmos()
-        {
-            if (_cc != null)
-            {
-                Gizmos.color = Color.yellow;
-                Gizmos.DrawWireSphere(transform.position + _cc.center + Vector3.down * (_cc.center.y - (_cc.radius / 2f)), _cc.radius);
-            }
         }
     }
 }

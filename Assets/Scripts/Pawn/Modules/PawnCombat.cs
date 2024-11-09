@@ -31,7 +31,7 @@ namespace WinterUniverse
             _pawn = GetComponent<PawnController>();
         }
 
-        private void FixedUpdate()
+        public void HandleTargeting()
         {
             if (CurrentTarget != null && !_pawn.IsDead)
             {

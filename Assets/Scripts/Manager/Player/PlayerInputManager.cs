@@ -60,7 +60,7 @@ namespace WinterUniverse
 
         private void HandleRunInput()
         {
-            if (_moveInput != Vector2.zero && _runInput && GameManager.StaticInstance.Player.PlayerLocomotion.HandleRunning())
+            if (_moveInput != Vector2.zero && _runInput && GameManager.StaticInstance.Player.PawnLocomotion.HandleRunning())
             {
                 GameManager.StaticInstance.Player.IsRunning = true;
             }
@@ -91,7 +91,7 @@ namespace WinterUniverse
             {
                 return;
             }
-            GameManager.StaticInstance.Player.PlayerLocomotion.TryPerformDash();
+            GameManager.StaticInstance.Player.PawnLocomotion.TryPerformDash();
         }
 
         public void OnInteract()
@@ -100,7 +100,7 @@ namespace WinterUniverse
             {
                 return;
             }
-            GameManager.StaticInstance.Player.PlayerInteraction.Interact();
+            GameManager.StaticInstance.Player.PawnInteraction.Interact();
         }
 
         public void OnJump()
@@ -109,7 +109,7 @@ namespace WinterUniverse
             {
                 return;
             }
-            GameManager.StaticInstance.Player.PlayerLocomotion.TryPerformJump();
+            GameManager.StaticInstance.Player.PawnLocomotion.TryPerformJump();
         }
 
         public void OnActionPrimaryRight()

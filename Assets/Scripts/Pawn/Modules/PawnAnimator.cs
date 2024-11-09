@@ -22,11 +22,11 @@ namespace WinterUniverse
             _animator = GetComponent<Animator>();
         }
 
-        public void UpdateAnimatorMovement(float horizontal, float vertical, float moveSpeed)
+        public void UpdateAnimatorMovement(float horizontal, float vertical, float maxSpeed)
         {
             _animator.SetFloat("RightVelocity", horizontal);
             _animator.SetFloat("ForwardVelocity", vertical);
-            _animator.SetFloat("MoveSpeed", moveSpeed / _baseMoveSpeed);
+            _animator.SetFloat("MoveSpeed", maxSpeed / _baseMoveSpeed);
             _animator.SetBool("IsGrounded", _pawn.IsGrounded);
             _animator.SetBool("IsMoving", _pawn.IsMoving);
         }
@@ -41,7 +41,7 @@ namespace WinterUniverse
             _animator.SetBool(name, value);
         }
 
-        public void PlayActionAnimation(string name, bool isPerfoming, bool useRootMotion = true, bool canMove = false, bool canRotate = false)
+        public void PlayActionAnimation(string name, bool isPerfoming, float fadeDelay = 0.1f, bool useRootMotion = true, bool canMove = false, bool canRotate = false)
         {
             if (_pawn.PawnCombat.CurrentWeapon != null)
             {
@@ -52,7 +52,7 @@ namespace WinterUniverse
             _pawn.UseRootMotion = useRootMotion;
             _pawn.CanMove = canMove;
             _pawn.CanRotate = canRotate;
-            _animator.CrossFade(name, 0.2f);
+            _animator.CrossFade(name, fadeDelay);
         }
 
         public void FootR()

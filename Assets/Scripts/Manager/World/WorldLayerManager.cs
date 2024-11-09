@@ -5,11 +5,9 @@ namespace WinterUniverse
     public class WorldLayerManager : MonoBehaviour
     {
         [SerializeField] private LayerMask _obstacleMask;
-        [SerializeField] private LayerMask _characterMask;
-        [SerializeField] private LayerMask _damageableMask;
+        [SerializeField] private LayerMask _pawnMask;
 
         public LayerMask ObstacleMask => _obstacleMask;
-        public LayerMask CharacterMask => _characterMask;
-        public LayerMask DamageableMask => _damageableMask;
+        public LayerMask PawnMask => _pawnMask;
     }
 }

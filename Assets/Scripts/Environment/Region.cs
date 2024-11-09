@@ -13,7 +13,7 @@ namespace WinterUniverse
             if (other.TryGetComponent(out _player))
             {
                 GameManager.StaticInstance.WorldSound.ChangeAmbient(Data.AmbientClips);
-                PlayerUIManager.StaticInstance.HUD.NotificationUI.DisplayNotification($"Entered [{Data.DisplayName}]");
+                GameManager.StaticInstance.PlayerUI.HUD.NotificationUI.DisplayNotification($"Entered [{Data.DisplayName}]");
                 foreach (StatModifierCreator creator in Data.Modifiers)
                 {
                     _player.PawnStats.AddStatModifier(creator);
@@ -26,7 +26,7 @@ namespace WinterUniverse
             if (other.TryGetComponent(out _player))
             {
                 GameManager.StaticInstance.WorldSound.ChangeAmbient();
-                PlayerUIManager.StaticInstance.HUD.NotificationUI.DisplayNotification($"Quited [{Data.DisplayName}]");
+                GameManager.StaticInstance.PlayerUI.HUD.NotificationUI.DisplayNotification($"Quited [{Data.DisplayName}]");
                 foreach (StatModifierCreator creator in Data.Modifiers)
                 {
                     _player.PawnStats.RemoveStatModifier(creator);

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -5,8 +6,10 @@ namespace WinterUniverse
 {
     public class PawnInteraction : MonoBehaviour
     {
+        public Action<List<Interactable>> OnRefreshInteractables;
+
         private PawnController _pawn;
-        protected List<Interactable> _interactables = new();
+        private List<Interactable> _interactables = new();
 
         public virtual void Initialize()
         {
@@ -31,7 +34,7 @@ namespace WinterUniverse
             RefreshInteractables();
         }
 
-        public virtual void RefreshInteractables()
+        public void RefreshInteractables()
         {
             for (int i = _interactables.Count - 1; i >= 0; i--)
             {
@@ -40,6 +43,7 @@ namespace WinterUniverse
                     _interactables.RemoveAt(i);
                 }
             }
+            OnRefreshInteractables?.Invoke(_interactables);
         }
 
         public void Interact()

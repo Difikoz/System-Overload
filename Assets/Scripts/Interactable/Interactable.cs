@@ -36,12 +36,12 @@ namespace WinterUniverse
 
         protected virtual void OnEnter(PawnController character)
         {
-            character.InteractionModule.AddInteractable(this);
+            character.PawnInteraction.AddInteractable(this);
         }
 
         protected virtual void OnExit(PawnController character)
         {
-            character.InteractionModule.RemoveInteractable(this);
+            character.PawnInteraction.RemoveInteractable(this);
         }
     }
 }
