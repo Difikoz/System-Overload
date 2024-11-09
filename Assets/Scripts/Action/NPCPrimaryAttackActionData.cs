@@ -9,40 +9,40 @@ namespace WinterUniverse
 
         public override void AttempToPerformAction(NPCController npc)
         {
-            if (Slot == HandSlotType.Right || npc.EquipmentModule.WeaponLeftSlot.Data.DisplayName == "Unarmed")
+            if (Slot == HandSlotType.Right || npc.PawnEquipment.WeaponLeftSlot.Data.DisplayName == "Unarmed")
             {
-                npc.CombatModule.UseWeaponAbility(npc.EquipmentModule.WeaponRightSlot.Data, HandSlotType.Right, npc.EquipmentModule.WeaponRightSlot.Data.PrimaryAbility);
+                npc.PawnCombat.UseWeaponAbility(npc.PawnEquipment.WeaponRightSlot.Data, HandSlotType.Right, npc.PawnEquipment.WeaponRightSlot.Data.PrimaryAbility);
             }
             else
             {
-                npc.CombatModule.UseWeaponAbility(npc.EquipmentModule.WeaponLeftSlot.Data, HandSlotType.Left, npc.EquipmentModule.WeaponLeftSlot.Data.PrimaryAbility);
+                npc.PawnCombat.UseWeaponAbility(npc.PawnEquipment.WeaponLeftSlot.Data, HandSlotType.Left, npc.PawnEquipment.WeaponLeftSlot.Data.PrimaryAbility);
             }
         }
 
         public override bool InRangeToUse(NPCController npc)
         {
-            if (Slot == HandSlotType.Right || npc.EquipmentModule.WeaponLeftSlot.Data.DisplayName == "Unarmed")
+            if (Slot == HandSlotType.Right || npc.PawnEquipment.WeaponLeftSlot.Data.DisplayName == "Unarmed")
             {
-                MinDistance = npc.EquipmentModule.WeaponRightSlot.Data.MinDistance;
-                MaxDistance = npc.EquipmentModule.WeaponRightSlot.Data.MaxDistance;
+                MinDistance = npc.PawnEquipment.WeaponRightSlot.Data.MinDistance;
+                MaxDistance = npc.PawnEquipment.WeaponRightSlot.Data.MaxDistance;
             }
             else
             {
-                MinDistance = npc.EquipmentModule.WeaponLeftSlot.Data.MinDistance;
-                MaxDistance = npc.EquipmentModule.WeaponLeftSlot.Data.MaxDistance;
+                MinDistance = npc.PawnEquipment.WeaponLeftSlot.Data.MinDistance;
+                MaxDistance = npc.PawnEquipment.WeaponLeftSlot.Data.MaxDistance;
             }
             return base.InRangeToUse(npc);
         }
 
         public override bool InAngleToUse(NPCController npc)
         {
-            if (Slot == HandSlotType.Right || npc.EquipmentModule.WeaponLeftSlot.Data.DisplayName == "Unarmed")
+            if (Slot == HandSlotType.Right || npc.PawnEquipment.WeaponLeftSlot.Data.DisplayName == "Unarmed")
             {
-                Angle = npc.EquipmentModule.WeaponRightSlot.Data.Angle;
+                Angle = npc.PawnEquipment.WeaponRightSlot.Data.Angle;
             }
             else
             {
-                Angle = npc.EquipmentModule.WeaponLeftSlot.Data.Angle;
+                Angle = npc.PawnEquipment.WeaponLeftSlot.Data.Angle;
             }
             return base.InAngleToUse(npc);
         }

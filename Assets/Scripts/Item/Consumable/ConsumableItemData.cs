@@ -30,12 +30,12 @@ namespace WinterUniverse
                         effect.Value = creator.Value;
                         effect.Duration = creator.Duration;
                     }
-                    character.EffectModule.AddEffect(effect);
+                    character.PawnEffects.AddEffect(effect);
                 }
             }
             if (fromInventory)
             {
-                character.InventoryModule.RemoveItem(this);
+                character.PawnInventory.RemoveItem(this);
             }
         }
     }

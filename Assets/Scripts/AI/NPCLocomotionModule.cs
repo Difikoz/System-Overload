@@ -2,34 +2,34 @@ using UnityEngine;
 
 namespace WinterUniverse
 {
-    public class NPCLocomotionModule : LocomotionModule
+    public class NPCLocomotionModule : PawnLocomotion
     {
-        private NPCController _npc;
+        private NPCController _ai;
 
-        protected override void Awake()
+        public override void Initialize()
         {
-            base.Awake();
-            _npc = GetComponent<NPCController>();
+            base.Initialize();
+            _ai = GetComponent<NPCController>();
         }
 
         protected override Vector2 GetMoveInput()
         {
-            if (!_npc.ReachedDestination)
+            if (!_ai.ReachedDestination)
             {
-                return new Vector2(Vector3.Dot(_npc.Agent.desiredVelocity, transform.right), Vector3.Dot(_npc.Agent.desiredVelocity, transform.forward)).normalized;
+                return new Vector2(Vector3.Dot(_ai.Agent.desiredVelocity, transform.right), Vector3.Dot(_ai.Agent.desiredVelocity, transform.forward)).normalized;
             }
             return Vector2.zero;
         }
 
         protected override Vector3 GetLookDirection()
         {
-            if (_npc.CombatModule.CurrentTarget != null && _npc.CombatModule.CurrentTargetIsVisible())
+            if (_ai.PawnCombat.CurrentTarget != null && _ai.PawnCombat.CurrentTargetIsVisible())
             {
-                return (_npc.CombatModule.CurrentTarget.transform.position - transform.position).normalized;
+                return (_ai.PawnCombat.CurrentTarget.transform.position - transform.position).normalized;
             }
-            else if (!_npc.ReachedDestination)
+            else if (!_ai.ReachedDestination)
             {
-                return _npc.Agent.desiredVelocity;
+                return _ai.Agent.desiredVelocity;
             }
             else
             {

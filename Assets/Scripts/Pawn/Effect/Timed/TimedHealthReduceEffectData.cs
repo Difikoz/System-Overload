@@ -75,7 +75,7 @@ namespace WinterUniverse
             }
             else
             {
-                Owner.EffectModule.RemoveEffect(this);
+                Owner.PawnEffects.RemoveEffect(this);
             }
         }
 
@@ -85,7 +85,7 @@ namespace WinterUniverse
             {
                 return;
             }
-            Owner.StatModule.ReduceCurrentHealth(Value * deltaTime, Element, Source);
+            Owner.PawnStats.ReduceCurrentHealth(Value * deltaTime, Element, Source);
         }
     }
 }

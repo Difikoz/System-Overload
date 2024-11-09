@@ -19,8 +19,8 @@ namespace WinterUniverse
 
         public override void OnApply()
         {
-            Owner.StatModule.RestoreCurrentHealth(Value);
-            Owner.EffectModule.RemoveEffect(this);
+            Owner.PawnStats.RestoreCurrentHealth(Value);
+            Owner.PawnEffects.RemoveEffect(this);
         }
     }
 }

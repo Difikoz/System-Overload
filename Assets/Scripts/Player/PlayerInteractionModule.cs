@@ -2,13 +2,13 @@ using UnityEngine;
 
 namespace WinterUniverse
 {
-    public class PlayerInteractionModule : InteractionModule
+    public class PlayerInteractionModule : PawnInteraction
     {
         private PlayerController _player;
 
-        protected override void Awake()
+        public override void Initialize()
         {
-            base.Awake();
+            base.Initialize();
             _player = GetComponent<PlayerController>();
         }
 

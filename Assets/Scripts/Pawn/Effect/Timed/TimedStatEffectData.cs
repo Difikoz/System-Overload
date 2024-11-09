@@ -25,7 +25,7 @@ namespace WinterUniverse
 
         public override void OnApply()
         {
-            Owner.StatModule.AddStatModifier(Modifier);
+            Owner.PawnStats.AddStatModifier(Modifier);
         }
 
         public override void OnTick(float deltaTime)
@@ -36,13 +36,13 @@ namespace WinterUniverse
             }
             else
             {
-                Owner.EffectModule.RemoveEffect(this);
+                Owner.PawnEffects.RemoveEffect(this);
             }
         }
 
         public override void OnRemove()
         {
-            Owner.StatModule.RemoveStatModifier(Modifier);
+            Owner.PawnStats.RemoveStatModifier(Modifier);
         }
     }
 }

@@ -25,7 +25,7 @@ namespace WinterUniverse
             Data = weapon;// TODO add instantiate?
             foreach (StatModifierCreator creator in Data.Modifiers)
             {
-                Owner.StatModule.AddStatModifier(creator);
+                Owner.PawnStats.AddStatModifier(creator);
             }
             _model = Instantiate(Data.Model, transform);// TODO pool spawn
             _model.transform.SetLocalPositionAndRotation(Data.LocalPosition, Data.LocalRotation);
@@ -41,7 +41,7 @@ namespace WinterUniverse
             }
             foreach (StatModifierCreator creator in Data.Modifiers)
             {
-                Owner.StatModule.RemoveStatModifier(creator);
+                Owner.PawnStats.RemoveStatModifier(creator);
             }
             Data = null;
             if (_model != null)

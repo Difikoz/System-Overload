@@ -16,7 +16,7 @@ namespace WinterUniverse
                 Effect effect = data.CreateEffect();
                 effect.Owner = target;
                 effect.Source = caster;
-                target.EffectModule.AddEffect(effect);
+                target.PawnEffects.AddEffect(effect);
             }
         }
     }

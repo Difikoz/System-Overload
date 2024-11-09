@@ -4,11 +4,11 @@ using UnityEngine;
 
 namespace WinterUniverse
 {
-    public class EquipmentModule : MonoBehaviour
+    public class PawnEquipment : MonoBehaviour
     {
         public Action OnEquipmentChanged;
 
-        private PawnController _owner;
+        private PawnController _pawn;
 
         public WeaponItemData UnarmedWeapon;
         public WeaponSlot WeaponRightSlot;
@@ -16,20 +16,20 @@ namespace WinterUniverse
         public AbilityData SpellData;
         public List<ArmorSlot> ArmorSlots = new();
 
-        private void OnEnable()
+        public virtual void Initialize()
         {
-            _owner = GetComponentInParent<PawnController>();
+            _pawn = GetComponentInParent<PawnController>();
         }
 
         public void EquipWeapon(WeaponItemData weapon, bool removeNewFromInventory = true, bool addOldToInventory = true)
         {
-            if (weapon == null || _owner.IsDead)
+            if (weapon == null || _pawn.IsDead)
             {
                 return;
             }
             if (removeNewFromInventory)
             {
-                _owner.InventoryModule.RemoveItem(weapon);
+                _pawn.PawnInventory.RemoveItem(weapon);
             }
             HandSlotType slot = HandSlotType.Right;
             WeaponHandType currentRightHandType = WeaponHandType.OneHand;
@@ -68,15 +68,15 @@ namespace WinterUniverse
             }
             if (WeaponRightSlot.Data != UnarmedWeapon || WeaponLeftSlot.Data == null || WeaponLeftSlot.Data == UnarmedWeapon)
             {
-                _owner.CombatModule.CurrentWeapon = WeaponRightSlot.Data;
-                _owner.CombatModule.CurrentSlotType = HandSlotType.Right;
+                _pawn.PawnCombat.CurrentWeapon = WeaponRightSlot.Data;
+                _pawn.PawnCombat.CurrentSlotType = HandSlotType.Right;
             }
             else
             {
-                _owner.CombatModule.CurrentWeapon = WeaponLeftSlot.Data;
-                _owner.CombatModule.CurrentSlotType = HandSlotType.Left;
+                _pawn.PawnCombat.CurrentWeapon = WeaponLeftSlot.Data;
+                _pawn.PawnCombat.CurrentSlotType = HandSlotType.Left;
             }
-            _owner.AnimatorModule.PlayActionAnimation($"Swap {slot} Weapon", true);
+            _pawn.PawnAnimator.PlayActionAnimation($"Swap {slot} Weapon", true);
             OnEquipmentChanged?.Invoke();
         }
 
@@ -90,7 +90,7 @@ namespace WinterUniverse
                 }
                 if (addToInventory)
                 {
-                    _owner.InventoryModule.AddItem(WeaponRightSlot.Data);
+                    _pawn.PawnInventory.AddItem(WeaponRightSlot.Data);
                 }
                 WeaponRightSlot.Unequip();
                 WeaponRightSlot.Equip(UnarmedWeapon);
@@ -103,28 +103,28 @@ namespace WinterUniverse
                 }
                 if (addToInventory)
                 {
-                    _owner.InventoryModule.AddItem(WeaponLeftSlot.Data);
+                    _pawn.PawnInventory.AddItem(WeaponLeftSlot.Data);
                 }
                 WeaponLeftSlot.Unequip();
                 WeaponLeftSlot.Equip(UnarmedWeapon);
             }
             if (WeaponRightSlot.Data != UnarmedWeapon || WeaponLeftSlot.Data == null || WeaponLeftSlot.Data == UnarmedWeapon)
             {
-                _owner.CombatModule.CurrentWeapon = WeaponRightSlot.Data;
-                _owner.CombatModule.CurrentSlotType = HandSlotType.Right;
+                _pawn.PawnCombat.CurrentWeapon = WeaponRightSlot.Data;
+                _pawn.PawnCombat.CurrentSlotType = HandSlotType.Right;
             }
             else
             {
-                _owner.CombatModule.CurrentWeapon = WeaponLeftSlot.Data;
-                _owner.CombatModule.CurrentSlotType = HandSlotType.Left;
+                _pawn.PawnCombat.CurrentWeapon = WeaponLeftSlot.Data;
+                _pawn.PawnCombat.CurrentSlotType = HandSlotType.Left;
             }
-            _owner.AnimatorModule.PlayActionAnimation($"Swap {slot} Weapon", true);
+            _pawn.PawnAnimator.PlayActionAnimation($"Swap {slot} Weapon", true);
             OnEquipmentChanged?.Invoke();
         }
 
         public void EquipArmor(ArmorItemData armor, bool removeFromInventory = true, bool addOldToInventory = true)
         {
-            if (armor == null || _owner.IsDead)
+            if (armor == null || _pawn.IsDead)
             {
                 return;
             }
@@ -134,7 +134,7 @@ namespace WinterUniverse
                 {
                     if (removeFromInventory)
                     {
-                        _owner.InventoryModule.RemoveItem(armor);
+                        _pawn.PawnInventory.RemoveItem(armor);
                     }
                     UnequipArmor(slot, addOldToInventory);
                     slot.Equip(armor);
@@ -146,13 +146,13 @@ namespace WinterUniverse
 
         public void EquipArmor(ArmorItemData armor, ArmorSlot slot, bool removeFromInventory = true, bool addOldToInventory = true)
         {
-            if (armor == null || slot == null || armor.ArmorType != slot.Type || _owner.IsDead)
+            if (armor == null || slot == null || armor.ArmorType != slot.Type || _pawn.IsDead)
             {
                 return;
             }
             if (removeFromInventory)
             {
-                _owner.InventoryModule.RemoveItem(armor);
+                _pawn.PawnInventory.RemoveItem(armor);
             }
             UnequipArmor(slot, addOldToInventory);
             slot.Equip(armor);
@@ -163,7 +163,7 @@ namespace WinterUniverse
         {
             if (addToInventory)
             {
-                _owner.InventoryModule.AddItem(slot.Data);
+                _pawn.PawnInventory.AddItem(slot.Data);
             }
             slot.Unequip();
             OnEquipmentChanged?.Invoke();
@@ -177,7 +177,7 @@ namespace WinterUniverse
                 {
                     if (addToInventory)
                     {
-                        _owner.InventoryModule.AddItem(slot.Data);
+                        _pawn.PawnInventory.AddItem(slot.Data);
                     }
                     slot.Unequip();
                     break;
@@ -212,13 +212,13 @@ namespace WinterUniverse
             {
                 UnequipArmor(slot);
             }
-            if (_owner.InventoryModule.GetBestWeapon(out WeaponItemData weapon))
+            if (_pawn.PawnInventory.GetBestWeapon(out WeaponItemData weapon))
             {
                 EquipWeapon(weapon);
             }
             foreach (ArmorSlot slot in ArmorSlots)
             {
-                if (_owner.InventoryModule.GetBestArmor(slot.Type, out ArmorItemData armor))
+                if (_pawn.PawnInventory.GetBestArmor(slot.Type, out ArmorItemData armor))
                 {
                     EquipArmor(armor, slot);
                 }
@@ -227,22 +227,22 @@ namespace WinterUniverse
 
         public void OpenDamageCollider()
         {
-            _owner.SoundModule.PlayAttackClip();
-            if (_owner.CombatModule.CurrentSlotType == HandSlotType.Right)
+            _pawn.PawnSound.PlayAttackClip();
+            if (_pawn.PawnCombat.CurrentSlotType == HandSlotType.Right)
             {
                 WeaponRightSlot.MeleeWeaponDamageCollider.EnableDamageCollider();
-                _owner.SoundModule.PlaySound(WeaponRightSlot.Data.AttackClips);
+                _pawn.PawnSound.PlaySound(WeaponRightSlot.Data.AttackClips);
             }
             else
             {
                 WeaponLeftSlot.MeleeWeaponDamageCollider.EnableDamageCollider();
-                _owner.SoundModule.PlaySound(WeaponLeftSlot.Data.AttackClips);
+                _pawn.PawnSound.PlaySound(WeaponLeftSlot.Data.AttackClips);
             }
         }
 
         public void CloseDamageCollider()
         {
-            if (_owner.CombatModule.CurrentSlotType == HandSlotType.Right)
+            if (_pawn.PawnCombat.CurrentSlotType == HandSlotType.Right)
             {
                 WeaponRightSlot.MeleeWeaponDamageCollider.DisableDamageCollider();
             }
@@ -254,16 +254,16 @@ namespace WinterUniverse
 
         public void PerformRangedAttack()// TODO
         {
-            _owner.SoundModule.PlayAttackClip();
-            if (_owner.CombatModule.CurrentSlotType == HandSlotType.Right)
+            _pawn.PawnSound.PlayAttackClip();
+            if (_pawn.PawnCombat.CurrentSlotType == HandSlotType.Right)
             {
                 //RightHandSlot.Weapon.MeleeDamageCollider.EnableDamageCollider();
-                _owner.SoundModule.PlaySound(WeaponRightSlot.Data.AttackClips);
+                _pawn.PawnSound.PlaySound(WeaponRightSlot.Data.AttackClips);
             }
             else
             {
                 //LeftHandSlot.Weapon.MeleeDamageCollider.EnableDamageCollider();
-                _owner.SoundModule.PlaySound(WeaponLeftSlot.Data.AttackClips);
+                _pawn.PawnSound.PlaySound(WeaponLeftSlot.Data.AttackClips);
             }
         }
     }

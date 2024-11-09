@@ -11,7 +11,7 @@ namespace WinterUniverse
         {
             if (CanChase)
             {
-                if (npc.CombatModule.CurrentTarget != null)
+                if (npc.PawnCombat.CurrentTarget != null)
                 {
                     return SwitchState(npc, npc.ChaseState);
                 }

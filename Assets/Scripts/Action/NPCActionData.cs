@@ -19,12 +19,12 @@ namespace WinterUniverse
 
         public virtual bool InRangeToUse(NPCController npc)
         {
-            return npc.CombatModule.DistanceToTarget > MinDistance && npc.CombatModule.DistanceToTarget < MaxDistance;
+            return npc.PawnCombat.DistanceToTarget > MinDistance && npc.PawnCombat.DistanceToTarget < MaxDistance;
         }
 
         public virtual bool InAngleToUse(NPCController npc)
         {
-            return Mathf.Abs(npc.CombatModule.AngleToTarget) < Angle / 2f;
+            return Mathf.Abs(npc.PawnCombat.AngleToTarget) < Angle / 2f;
         }
     }
 }

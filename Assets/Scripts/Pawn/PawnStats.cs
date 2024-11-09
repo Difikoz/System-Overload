@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace WinterUniverse
 {
-    public class StatModule : MonoBehaviour
+    public class PawnStats : MonoBehaviour
     {
         public Action<float, float> OnHealthChanged;
         public Action<float, float> OnEnergyChanged;
@@ -12,7 +12,7 @@ namespace WinterUniverse
         public Action<int> OnLevelChanged;
         public Action<List<Stat>> OnStatChanged;
 
-        private PawnController _owner;
+        private PawnController _pawn;
 
         #region Stats
         [HideInInspector] public List<Stat> Stats = new();
@@ -100,9 +100,9 @@ namespace WinterUniverse
         public int KillExperience => Mathf.FloorToInt(Level + Strength.CurrentValue + Perception.CurrentValue + Endurance.CurrentValue + Charisma.CurrentValue + Intelligence.CurrentValue + Agility.CurrentValue + Luck.CurrentValue + Experience / 2f);
         public float HealthPercent => HealthCurrent / HealthMax.CurrentValue;
 
-        private void OnEnable()
+        public virtual void Initialize()
         {
-            _owner = GetComponentInParent<PawnController>();
+            _pawn = GetComponent<PawnController>();
         }
 
         public void AddExperience(int exp)
@@ -137,12 +137,12 @@ namespace WinterUniverse
 
         public void ReduceCurrentHealth(float value, ElementData element, PawnController source = null)
         {
-            if (_owner.IsDead || value <= 0f)
+            if (_pawn.IsDead || value <= 0f)
             {
                 return;
             }
             float resistance = GetStatByName(element.ResistanceStat.DisplayName).CurrentValue + GetStatByName(element.ResistanceType.DisplayName).CurrentValue;
-            if (resistance < 100f && !_owner.IsInvulnerable)
+            if (resistance < 100f && !_pawn.IsInvulnerable)
             {
                 if (resistance != 0f)
                 {
@@ -154,7 +154,7 @@ namespace WinterUniverse
                 _healthRegenerationTimer = 0f;
                 if (HealthCurrent <= 0f)
                 {
-                    _owner.Die(source);
+                    _pawn.Die(source);
                 }
             }
             else if (resistance > 100f)
@@ -167,7 +167,7 @@ namespace WinterUniverse
 
         public void RestoreCurrentHealth(float value)
         {
-            if (_owner.IsDead || value <= 0f)
+            if (_pawn.IsDead || value <= 0f)
             {
                 return;
             }
@@ -177,7 +177,7 @@ namespace WinterUniverse
 
         public void ReduceCurrentEnergy(float value)
         {
-            if (_owner.IsDead || value <= 0f)
+            if (_pawn.IsDead || value <= 0f)
             {
                 return;
             }
@@ -188,7 +188,7 @@ namespace WinterUniverse
 
         public void RestoreCurrentEnergy(float value)
         {
-            if (_owner.IsDead || value <= 0f)
+            if (_pawn.IsDead || value <= 0f)
             {
                 return;
             }
@@ -378,7 +378,7 @@ namespace WinterUniverse
                     CriticalHitPower = s;
                 }
             }
-            foreach (StatModifierCreator creator in _owner.Race.Modifiers)
+            foreach (StatModifierCreator creator in _pawn.Race.Modifiers)
             {
                 AddStatModifier(creator);
             }
@@ -452,7 +452,7 @@ namespace WinterUniverse
 
         public void RegenerateEnergy()
         {
-            if (_owner.IsRunning || _owner.IsPerfomingAction)
+            if (_pawn.IsRunning || _pawn.IsPerfomingAction)
             {
                 return;
             }

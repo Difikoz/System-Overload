@@ -29,7 +29,7 @@ namespace WinterUniverse
             Data = armor;// TODO need instantiate?
             foreach (StatModifierCreator creator in Data.Modifiers)
             {
-                _owner.StatModule.AddStatModifier(creator);
+                _owner.PawnStats.AddStatModifier(creator);
             }
             foreach (ArmorRenderer ar in _renderers)
             {
@@ -50,7 +50,7 @@ namespace WinterUniverse
             }
             foreach (StatModifierCreator creator in Data.Modifiers)
             {
-                _owner.StatModule.RemoveStatModifier(creator);
+                _owner.PawnStats.RemoveStatModifier(creator);
             }
             Data = null;
             DisableMeshes(_currentRenderer);

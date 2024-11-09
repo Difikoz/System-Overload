@@ -18,19 +18,19 @@ namespace WinterUniverse
 
         public void FindTargetInViewRange()
         {
-            if (_owner.CombatModule.CurrentTarget != null || !_owner.CanTargeting)
+            if (_owner.PawnCombat.CurrentTarget != null || !_owner.CanTargeting)
             {
                 return;
             }
             _visibleEnemies.Clear();
             _visibleNeutrals.Clear();
             _visibleAllies.Clear();
-            Collider[] colliders = Physics.OverlapSphere(_owner.CombatModule.HeadPoint.position, _owner.CombatModule.ViewDistance, GameManager.StaticInstance.WorldLayer.CharacterMask);
+            Collider[] colliders = Physics.OverlapSphere(_owner.PawnCombat.HeadPoint.position, _owner.PawnCombat.ViewDistance, GameManager.StaticInstance.WorldLayer.CharacterMask);
             foreach (Collider collider in colliders)
             {
                 if (collider.TryGetComponent(out PawnController character) && character != _owner && !character.IsDead)
                 {
-                    if (Vector3.Distance(transform.position, character.transform.position) <= _owner.CombatModule.HearRadius || _owner.CombatModule.TargetIsVisible(character))
+                    if (Vector3.Distance(transform.position, character.transform.position) <= _owner.PawnCombat.HearRadius || _owner.PawnCombat.TargetIsVisible(character))
                     {
                         switch (_owner.Faction.GetState(character.Faction))
                         {
@@ -49,7 +49,7 @@ namespace WinterUniverse
             }
             if (_visibleEnemies.Count > 0)
             {
-                _owner.CombatModule.SetTarget(GetClosestEnemy());
+                _owner.PawnCombat.SetTarget(GetClosestEnemy());
             }
         }
 

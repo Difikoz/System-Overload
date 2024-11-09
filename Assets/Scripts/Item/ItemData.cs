@@ -38,7 +38,7 @@ namespace WinterUniverse
         public virtual bool CanUse(PawnController character, out string error, bool fromInventory = true)
         {
             error = string.Empty;
-            if (character.StatModule.Level < _requiredLevel)
+            if (character.PawnStats.Level < _requiredLevel)
             {
                 error = "Low Level";
                 return false;
@@ -65,7 +65,7 @@ namespace WinterUniverse
                 {
                     if (requirement.Type == RequirementType.GreaterOrEqual)
                     {
-                        if (character.StatModule.GetStatByName(requirement.Stat.DisplayName).CurrentValue < requirement.Value)
+                        if (character.PawnStats.GetStatByName(requirement.Stat.DisplayName).CurrentValue < requirement.Value)
                         {
                             error = $"Low {requirement.Stat.DisplayName}. Need {requirement.Value}";
                             return false;
@@ -73,7 +73,7 @@ namespace WinterUniverse
                     }
                     else if (requirement.Type == RequirementType.LessOrEqual)
                     {
-                        if (character.StatModule.GetStatByName(requirement.Stat.DisplayName).CurrentValue > requirement.Value)
+                        if (character.PawnStats.GetStatByName(requirement.Stat.DisplayName).CurrentValue > requirement.Value)
                         {
                             error = $"High {requirement.Stat.DisplayName}. Need {requirement.Value}";
                             return false;
@@ -81,7 +81,7 @@ namespace WinterUniverse
                     }
                     else if (requirement.Type == RequirementType.Equal)
                     {
-                        if (character.StatModule.GetStatByName(requirement.Stat.DisplayName).CurrentValue != requirement.Value)
+                        if (character.PawnStats.GetStatByName(requirement.Stat.DisplayName).CurrentValue != requirement.Value)
                         {
                             error = $"Not equal {requirement.Stat.DisplayName}. Need {requirement.Value}";
                             return false;
@@ -89,7 +89,7 @@ namespace WinterUniverse
                     }
                 }
             }
-            return !fromInventory || character.InventoryModule.AmountOfItem(this) > 0;
+            return !fromInventory || character.PawnInventory.AmountOfItem(this) > 0;
         }
 
         public virtual void Use(PawnController character, bool fromInventory = true)

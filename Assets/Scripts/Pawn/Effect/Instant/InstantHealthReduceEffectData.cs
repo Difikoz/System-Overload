@@ -31,7 +31,7 @@ namespace WinterUniverse
         public override void OnApply()
         {
             ProcessEffect();
-            Owner.EffectModule.RemoveEffect(this);
+            Owner.PawnEffects.RemoveEffect(this);
         }
 
         private void ProcessEffect()
@@ -44,9 +44,9 @@ namespace WinterUniverse
             {
                 if (Element.HitClips.Count > 0)
                 {
-                    Owner.SoundModule.PlaySound(GameManager.StaticInstance.WorldSound.ChooseRandomClip(Element.HitClips));
+                    Owner.PawnSound.PlaySound(GameManager.StaticInstance.WorldSound.ChooseRandomClip(Element.HitClips));
                 }
-                Owner.SoundModule.PlayGetHitClip();
+                Owner.PawnSound.PlayGetHitClip();
             }
             if (PlayDamageVFX)
             {
@@ -54,36 +54,36 @@ namespace WinterUniverse
                 {
                     LeanPool.Spawn(Element.HitVFX[Random.Range(0, Element.HitVFX.Count)], HitPoint, HitDirection != Vector3.zero ? Quaternion.LookRotation(HitDirection) : Quaternion.identity);
                 }
-                Owner.EffectModule.SpawnBloodSplatterVFX(HitPoint, HitDirection);
+                Owner.PawnEffects.SpawnBloodSplatterVFX(HitPoint, HitDirection);
             }
             if (PlayDamageAnimation)
             {
                 PlayDirectionBasedDamageAnimation();
             }
-            Owner.StatModule.ReduceCurrentHealth(Value < 1f ? 1f : Value, Element, Source);
+            Owner.PawnStats.ReduceCurrentHealth(Value < 1f ? 1f : Value, Element, Source);
         }
 
         private void PlayDirectionBasedDamageAnimation()
         {
             if ((AngleHitFrom >= 135f && AngleHitFrom <= 180f) || (AngleHitFrom <= -135f && AngleHitFrom >= -180f))//front
             {
-                Owner.AnimatorModule.PlayActionAnimation("Get Hit Forward", true);
+                Owner.PawnAnimator.PlayActionAnimation("Get Hit Forward", true);
             }
             else if (AngleHitFrom >= -45f && AngleHitFrom <= 45f)//back
             {
-                Owner.AnimatorModule.PlayActionAnimation("Get Hit Backward", true);
+                Owner.PawnAnimator.PlayActionAnimation("Get Hit Backward", true);
             }
             else if (AngleHitFrom >= 45f && AngleHitFrom <= 135f)//right
             {
-                Owner.AnimatorModule.PlayActionAnimation("Get Hit Right", true);
+                Owner.PawnAnimator.PlayActionAnimation("Get Hit Right", true);
             }
             else if (AngleHitFrom >= -135f && AngleHitFrom <= -45f)//left
             {
-                Owner.AnimatorModule.PlayActionAnimation("Get Hit Left", true);
+                Owner.PawnAnimator.PlayActionAnimation("Get Hit Left", true);
             }
             else
             {
-                Owner.AnimatorModule.PlayActionAnimation("Get Hit Forward", true);
+                Owner.PawnAnimator.PlayActionAnimation("Get Hit Forward", true);
             }
         }
     }

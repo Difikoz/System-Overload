@@ -3,14 +3,14 @@ using UnityEngine;
 
 namespace WinterUniverse
 {
-    public class InteractionModule : MonoBehaviour
+    public class PawnInteraction : MonoBehaviour
     {
-        private PawnController _owner;
+        private PawnController _pawn;
         protected List<Interactable> _interactables = new();
 
-        protected virtual void Awake()
+        public virtual void Initialize()
         {
-            _owner = GetComponent<PawnController>();
+            _pawn = GetComponent<PawnController>();
         }
 
         public void AddInteractable(Interactable interactable)
@@ -44,16 +44,16 @@ namespace WinterUniverse
 
         public void Interact()
         {
-            if (_owner.IsPerfomingAction)
+            if (_pawn.IsPerfomingAction)
             {
                 return;
             }
             RefreshInteractables();
             if (_interactables.Count > 0)
             {
-                if (_interactables[0].CanInteract(_owner))
+                if (_interactables[0].CanInteract(_pawn))
                 {
-                    _interactables[0].Interact(_owner);
+                    _interactables[0].Interact(_pawn);
                     _interactables.RemoveAt(0);
                     RefreshInteractables();
                 }

@@ -36,13 +36,13 @@ namespace WinterUniverse
                 _hitDirection = GetHitDirection(target);
                 _angleFromTarget = GetAngleFromTarget(target);
                 _angleFromHit = GetAngleFromHit(target);
-                if (Evadable && _angleFromTarget <= 15f && target.CombatModule.AttempToEvadeAttack())
+                if (Evadable && _angleFromTarget <= 15f && target.PawnCombat.AttempToEvadeAttack())
                 {
                     return;
                 }
-                if (Blockable && target.CombatModule.AttempToBlockAttack(_angleFromTarget))
+                if (Blockable && target.PawnCombat.AttempToBlockAttack(_angleFromTarget))
                 {
-                    _targetBlockPower = target.StatModule.BlockPower.CurrentValue / 100f;
+                    _targetBlockPower = target.PawnStats.BlockPower.CurrentValue / 100f;
                 }
                 else
                 {
@@ -85,7 +85,7 @@ namespace WinterUniverse
                 effect.HitPoint = _hitPoint;
                 effect.HitDirection = _hitDirection;
                 effect.AngleHitFrom = _angleFromHit;
-                target.EffectModule.AddEffect(effect);
+                target.PawnEffects.AddEffect(effect);
             }
             ApplyEffectsToTarget(target, TargetEffects);
         }
@@ -107,7 +107,7 @@ namespace WinterUniverse
                         effect.Value = creator.Value;
                         effect.Duration = creator.Duration;
                     }
-                    target.EffectModule.AddEffect(effect);
+                    target.PawnEffects.AddEffect(effect);
                 }
             }
         }

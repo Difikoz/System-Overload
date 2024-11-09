@@ -21,12 +21,12 @@ namespace WinterUniverse
         {
             if (Duration > 0f)
             {
-                Owner.StatModule.ReduceCurrentEnergy(Value * deltaTime);
+                Owner.PawnStats.ReduceCurrentEnergy(Value * deltaTime);
                 Duration -= deltaTime;
             }
             else
             {
-                Owner.EffectModule.RemoveEffect(this);
+                Owner.PawnEffects.RemoveEffect(this);
             }
         }
     }

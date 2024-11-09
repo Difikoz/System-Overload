@@ -4,17 +4,17 @@ using UnityEngine;
 
 namespace WinterUniverse
 {
-    public class EffectModule : MonoBehaviour
+    public class PawnEffects : MonoBehaviour
     {
-        private PawnController _owner;
+        private PawnController _pawn;
 
         [SerializeField] private GameObject _bloodSplatterVFX;
 
         [HideInInspector] public List<Effect> Effects = new();
 
-        private void OnEnable()
+        public virtual void Initialize()
         {
-            _owner = GetComponentInParent<PawnController>();
+            _pawn = GetComponent<PawnController>();
         }
 
         public void TickEffects(float deltaTime)

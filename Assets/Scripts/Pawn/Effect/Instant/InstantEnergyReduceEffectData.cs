@@ -19,8 +19,8 @@ namespace WinterUniverse
 
         public override void OnApply()
         {
-            Owner.StatModule.ReduceCurrentEnergy(Value);
-            Owner.EffectModule.RemoveEffect(this);
+            Owner.PawnStats.ReduceCurrentEnergy(Value);
+            Owner.PawnEffects.RemoveEffect(this);
         }
     }
 }

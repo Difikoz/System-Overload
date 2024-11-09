@@ -12,15 +12,15 @@ namespace WinterUniverse
             {
                 return this;
             }
-            if (npc.CombatModule.CurrentTarget == null || npc.CombatModule.CurrentTarget.IsDead)
+            if (npc.PawnCombat.CurrentTarget == null || npc.PawnCombat.CurrentTarget.IsDead)
             {
                 return SwitchState(npc, npc.IdleState);
             }
-            if (npc.CombatModule.DistanceToTarget <= npc.CombatPhase.CurrentPhase.State.MaxCombatRadius)
+            if (npc.PawnCombat.DistanceToTarget <= npc.CombatPhase.CurrentPhase.State.MaxCombatRadius)
             {
                 return SwitchState(npc, npc.CombatPhase.CurrentPhase.State);
             }
-            npc.Agent.SetDestination(npc.CombatModule.CurrentTarget.transform.position);
+            npc.Agent.SetDestination(npc.PawnCombat.CurrentTarget.transform.position);
             //NavMeshPath path = new();
             //npc.Agent.CalculatePath(npc.NPCCombatManager.CurrentTarget.transform.position, path);
             //npc.Agent.SetPath(path);

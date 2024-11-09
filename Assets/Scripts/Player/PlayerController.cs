@@ -41,9 +41,9 @@ namespace WinterUniverse
         {
             if (!_hasSubscription && Spawned)
             {
-                StatModule.OnHealthChanged += PlayerUIManager.StaticInstance.HUD.VitalityUI.SetHealthValues;
-                StatModule.OnEnergyChanged += PlayerUIManager.StaticInstance.HUD.VitalityUI.SetEnergyValues;
-                StatModule.OnExperienceChanged += PlayerUIManager.StaticInstance.HUD.VitalityUI.SetExperienceValues;
+                PawnStats.OnHealthChanged += PlayerUIManager.StaticInstance.HUD.VitalityUI.SetHealthValues;
+                PawnStats.OnEnergyChanged += PlayerUIManager.StaticInstance.HUD.VitalityUI.SetEnergyValues;
+                PawnStats.OnExperienceChanged += PlayerUIManager.StaticInstance.HUD.VitalityUI.SetExperienceValues;
                 //StatManager.OnStatChanged += PlayerUIManager.StaticInstance.MenuUI.StatUI.UpdateUI;
                 _hasSubscription = true;
             }
@@ -53,9 +53,9 @@ namespace WinterUniverse
         {
             if (_hasSubscription && Spawned)
             {
-                StatModule.OnHealthChanged -= PlayerUIManager.StaticInstance.HUD.VitalityUI.SetHealthValues;
-                StatModule.OnEnergyChanged -= PlayerUIManager.StaticInstance.HUD.VitalityUI.SetEnergyValues;
-                StatModule.OnExperienceChanged -= PlayerUIManager.StaticInstance.HUD.VitalityUI.SetExperienceValues;
+                PawnStats.OnHealthChanged -= PlayerUIManager.StaticInstance.HUD.VitalityUI.SetHealthValues;
+                PawnStats.OnEnergyChanged -= PlayerUIManager.StaticInstance.HUD.VitalityUI.SetEnergyValues;
+                PawnStats.OnExperienceChanged -= PlayerUIManager.StaticInstance.HUD.VitalityUI.SetExperienceValues;
                 //StatManager.OnStatChanged -= PlayerUIManager.StaticInstance.MenuUI.StatUI.UpdateUI;
                 _hasSubscription = false;
             }
@@ -93,12 +93,12 @@ namespace WinterUniverse
             data.Race = Race.DisplayName;
             data.Gender = Gender.ToString();
             data.Faction = Faction.DisplayName;
-            data.Level = StatModule.Level;
-            data.Experience = StatModule.Experience;
-            data.Health = StatModule.HealthCurrent;
-            data.Energy = StatModule.EnergyCurrent;
+            data.Level = PawnStats.Level;
+            data.Experience = PawnStats.Experience;
+            data.Health = PawnStats.HealthCurrent;
+            data.Energy = PawnStats.EnergyCurrent;
             data.InventoryStacks.Clear();
-            foreach (ItemStack stack in InventoryModule.Stacks)
+            foreach (ItemStack stack in PawnInventory.Stacks)
             {
                 if (data.InventoryStacks.ContainsKey(stack.Item.DisplayName))
                 {
@@ -109,8 +109,8 @@ namespace WinterUniverse
                     data.InventoryStacks.Add(stack.Item.DisplayName, stack.Amount);
                 }
             }
-            data.WeaponInRightHand = EquipmentModule.WeaponRightSlot.Data.DisplayName;
-            data.WeaponInLeftHand = EquipmentModule.WeaponLeftSlot.Data.DisplayName;
+            data.WeaponInRightHand = PawnEquipment.WeaponRightSlot.Data.DisplayName;
+            data.WeaponInLeftHand = PawnEquipment.WeaponLeftSlot.Data.DisplayName;
             data.Transform.SetPositionAndRotation(transform.position, transform.eulerAngles);
         }
 
@@ -130,39 +130,35 @@ namespace WinterUniverse
             }
             ChangeFaction(GameManager.StaticInstance.WorldData.GetFaction(data.Faction));
             LeanPool.Spawn(Race.Model, transform);// spawn model and get components
-            AnimatorModule = GetComponentInChildren<AnimatorModule>();
-            CombatModule = GetComponentInChildren<CombatModule>();
-            EffectModule = GetComponentInChildren<EffectModule>();
-            EquipmentModule = GetComponentInChildren<EquipmentModule>();
-            SoundModule = GetComponentInChildren<SoundModule>();
-            StatModule = GetComponentInChildren<StatModule>();
+            _pawnAnimator = GetComponentInChildren<PawnAnimator>();
+            _pawnEquipment = GetComponentInChildren<PawnEquipment>();
             CharacterName = data.CharacterName;
-            StatModule.Level = data.Level;
-            StatModule.Experience = data.Experience;
-            StatModule.CreateStats();
-            StatModule.HealthCurrent = data.Health;
-            StatModule.EnergyCurrent = data.Energy;
-            InventoryModule.CreateInventory(data.InventoryStacks);
+            PawnStats.Level = data.Level;
+            PawnStats.Experience = data.Experience;
+            PawnStats.CreateStats();
+            PawnStats.HealthCurrent = data.Health;
+            PawnStats.EnergyCurrent = data.Energy;
+            PawnInventory.Initialize(data.InventoryStacks);
             if (data.WeaponInRightHand != "Unarmed")
             {
-                EquipmentModule.EquipWeapon(GameManager.StaticInstance.WorldData.GetWeapon(data.WeaponInRightHand), false, false);
+                PawnEquipment.EquipWeapon(GameManager.StaticInstance.WorldData.GetWeapon(data.WeaponInRightHand), false, false);
             }
             else
             {
-                EquipmentModule.UnequipWeapon(HandSlotType.Right, false);
+                PawnEquipment.UnequipWeapon(HandSlotType.Right, false);
             }
             if (data.WeaponInLeftHand != "Unarmed")
             {
-                EquipmentModule.EquipWeapon(GameManager.StaticInstance.WorldData.GetWeapon(data.WeaponInLeftHand), false, false);
+                PawnEquipment.EquipWeapon(GameManager.StaticInstance.WorldData.GetWeapon(data.WeaponInLeftHand), false, false);
             }
             else
             {
-                EquipmentModule.UnequipWeapon(HandSlotType.Left, false);
+                PawnEquipment.UnequipWeapon(HandSlotType.Left, false);
             }
-            StatModule.RecalculateStats();
+            PawnStats.RecalculateStats();
             transform.SetPositionAndRotation(data.Transform.GetPosition(), data.Transform.GetRotation());
             GameManager.StaticInstance.PlayerCamera.transform.position = transform.position;
-            EquipmentModule.ForceUpdateMeshes();
+            PawnEquipment.ForceUpdateMeshes();
             Spawned = true;
             Subscribe();
         }

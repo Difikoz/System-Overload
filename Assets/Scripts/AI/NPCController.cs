@@ -39,8 +39,8 @@ namespace WinterUniverse
         public override void CreateCharacter(CharacterSaveData data)
         {
             base.CreateCharacter(data);
-            Agent.height = AnimatorModule.Height;
-            Agent.radius = AnimatorModule.Radius;
+            Agent.height = PawnAnimator.Height;
+            Agent.radius = PawnAnimator.Radius;
         }
 
         protected override void FixedUpdate()
@@ -77,9 +77,9 @@ namespace WinterUniverse
 
         private void ProcessStateMachine()
         {
-            if (!IsPerfomingAction && CombatPhase.IsReadyToChangePhase(StatModule.HealthPercent))
+            if (!IsPerfomingAction && CombatPhase.IsReadyToChangePhase(PawnStats.HealthPercent))
             {
-                AnimatorModule.PlayActionAnimation("Phase Change", true);
+                PawnAnimator.PlayActionAnimation("Phase Change", true);
             }
             NPCState nextState = CurrentState?.Tick(this);
             if (nextState != null)

@@ -29,11 +29,11 @@ namespace WinterUniverse
             {
                 return this;
             }
-            if (npc.CombatModule.CurrentTarget == null || npc.CombatModule.CurrentTarget.IsDead)
+            if (npc.PawnCombat.CurrentTarget == null || npc.PawnCombat.CurrentTarget.IsDead)
             {
                 return SwitchState(npc, npc.IdleState);
             }
-            if (npc.CombatModule.DistanceToTarget > MaxCombatRadius)
+            if (npc.PawnCombat.DistanceToTarget > MaxCombatRadius)
             {
                 return SwitchState(npc, npc.ChaseState);
             }
@@ -46,7 +46,7 @@ namespace WinterUniverse
             {
                 GetNewAction(npc);
             }
-            npc.Agent.SetDestination(npc.CombatModule.CurrentTarget.transform.position);
+            npc.Agent.SetDestination(npc.PawnCombat.CurrentTarget.transform.position);
             return this;
         }
 

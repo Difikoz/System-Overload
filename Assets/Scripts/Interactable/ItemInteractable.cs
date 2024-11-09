@@ -32,7 +32,7 @@ namespace WinterUniverse
 
         public override void Interact(PawnController character)
         {
-            character.InventoryModule.AddItem(Data, Amount);
+            character.PawnInventory.AddItem(Data, Amount);
             if (character.GetComponent<PlayerController>())
             {
                 PlayerUIManager.StaticInstance.HUD.NotificationUI.DisplayNotification($"Added {(Amount > 1 ? $"{Amount} " : "")}{Data.DisplayName}");

@@ -2,17 +2,17 @@ using UnityEngine;
 
 namespace WinterUniverse
 {
-    [RequireComponent(typeof(InventoryModule))]
+    [RequireComponent(typeof(PawnInventory))]
     public class ChestInteractable : Interactable
     {
         [SerializeField] private string _interactionMessage = "Open Chest";
-        [HideInInspector] public InventoryModule Inventory;
+        [HideInInspector] public PawnInventory Inventory;
         public bool DespawnOnEmpty;
 
         protected override void Awake()
         {
             base.Awake();
-            Inventory = GetComponent<InventoryModule>();
+            Inventory = GetComponent<PawnInventory>();
         }
 
         public override string GetInteractionMessage()

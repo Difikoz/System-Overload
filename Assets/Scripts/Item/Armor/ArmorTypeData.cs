@@ -5,7 +5,10 @@ namespace WinterUniverse
     [CreateAssetMenu(fileName = "Armor Type", menuName = "Winter Universe/Item/Equipment/Armor/New Type")]
     public class ArmorTypeData : ScriptableObject
     {
-        public string DisplayName = "Type";
-        public Sprite Icon;
+        [SerializeField] private string _displayName = "Type";
+        [SerializeField] private Sprite _icon;
+
+        public string DisplayName => _displayName;
+        public Sprite Icon => _icon;
     }
 }

@@ -55,7 +55,7 @@ namespace WinterUniverse
 
         public override void Use(PawnController character, bool fromInventory = true)// TODO проверять CanUse перед этим методом
         {
-            character.EquipmentModule.EquipWeapon(this, fromInventory);
+            character.PawnEquipment.EquipWeapon(this, fromInventory);
         }
     }
 }

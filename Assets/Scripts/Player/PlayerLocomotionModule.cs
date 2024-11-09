@@ -2,13 +2,13 @@ using UnityEngine;
 
 namespace WinterUniverse
 {
-    public class PlayerLocomotionModule : LocomotionModule
+    public class PlayerLocomotionModule : PawnLocomotion
     {
         private PlayerController _player;
 
-        protected override void Awake()
+        public override void Initialize()
         {
-            base.Awake();
+            base.Initialize();
             _player = GetComponent<PlayerController>();
         }
 

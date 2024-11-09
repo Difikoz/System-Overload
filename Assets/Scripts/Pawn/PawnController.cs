@@ -8,15 +8,27 @@ namespace WinterUniverse
 {
     public abstract class PawnController : MonoBehaviour
     {
-        private PawnAnimator _pawnAnimator;
-        private PawnLocomotion _pawnLocomotion;
-        private PawnCombat _pawnCombat;
+        protected PawnAnimator _pawnAnimator;
+        protected PawnLocomotion _pawnLocomotion;
+        protected PawnCombat _pawnCombat;
+        protected PawnEffects _pawnEffects;
+        protected PawnEquipment _pawnEquipment;
+        protected PawnInventory _pawnInventory;
+        protected PawnSound _pawnSound;
+        protected PawnStats _pawnStats;
+        protected PawnInteraction _pawnInteraction;
 
-        protected Vector3 _moveDirection;
+        protected Vector3 _moveDirection;//???
 
         public PawnAnimator PawnAnimator => _pawnAnimator;
         public PawnLocomotion PawnLocomotion => _pawnLocomotion;
         public PawnCombat PawnCombat => _pawnCombat;
+        public PawnEffects PawnEffects => _pawnEffects;
+        public PawnEquipment PawnEquipment => _pawnEquipment;
+        public PawnInventory PawnInventory => _pawnInventory;
+        public PawnSound PawnSound => _pawnSound;
+        public PawnStats PawnStats => _pawnStats;
+        public PawnInteraction InteractionModule => _pawnInteraction;
         public Vector3 MoveDirection => _moveDirection;
 
         //
@@ -24,16 +36,6 @@ namespace WinterUniverse
         public Action<Gender> OnGenderChanged;
         public Action<FactionData> OnFactionChanged;
         public Action OnDied;
-
-        [HideInInspector] public AnimatorModule AnimatorModule;
-        [HideInInspector] public CombatModule CombatModule;
-        [HideInInspector] public EffectModule EffectModule;
-        [HideInInspector] public EquipmentModule EquipmentModule;
-        [HideInInspector] public InventoryModule InventoryModule;
-        [HideInInspector] public LocomotionModule LocomotionModule;
-        [HideInInspector] public SoundModule SoundModule;
-        [HideInInspector] public StatModule StatModule;
-        [HideInInspector] public InteractionModule InteractionModule;
 
         [HideInInspector] public string CharacterName;
         [HideInInspector] public RaceData Race;
@@ -61,12 +63,20 @@ namespace WinterUniverse
 
         protected virtual void Awake()
         {
-            _pawnAnimator = GetComponentInChildren<PawnAnimator>();
             _pawnLocomotion = GetComponent<PawnLocomotion>();
+            _pawnInteraction = GetComponent<PawnInteraction>();
+            _pawnInventory = GetComponent<PawnInventory>();
+            _pawnSound = GetComponent<PawnSound>();
+            _pawnStats = GetComponent<PawnStats>();
             _pawnCombat = GetComponent<PawnCombat>();
-            _pawnAnimator.Initialize();
+            _pawnEffects = GetComponent<PawnEffects>();
             _pawnLocomotion.Initialize();
             _pawnCombat.Initialize();
+            _pawnInteraction.Initialize();
+            _pawnEffects.Initialize();
+            _pawnSound.Initialize();
+            _pawnStats.Initialize();
+            DontDestroyOnLoad(this);
         }
 
         protected virtual void OnEnable()
@@ -92,8 +102,8 @@ namespace WinterUniverse
             {
                 if (!IsDead)
                 {
-                    StatModule.RegenerateHealth();
-                    StatModule.RegenerateEnergy();
+                    PawnStats.RegenerateHealth();
+                    PawnStats.RegenerateEnergy();
                 }
                 _pawnLocomotion.HandleLocomotion();
             }
@@ -124,28 +134,24 @@ namespace WinterUniverse
             }
             ChangeFaction(GameManager.StaticInstance.WorldData.GetFaction(data.Faction));
             LeanPool.Spawn(Race.Model, transform);// spawn model and get components
-            AnimatorModule = GetComponentInChildren<AnimatorModule>();
-            CombatModule = GetComponentInChildren<CombatModule>();
-            EffectModule = GetComponentInChildren<EffectModule>();
-            EquipmentModule = GetComponentInChildren<EquipmentModule>();
-            SoundModule = GetComponentInChildren<SoundModule>();
-            StatModule = GetComponentInChildren<StatModule>();
+            _pawnAnimator = GetComponentInChildren<PawnAnimator>();
+            _pawnEquipment = GetComponentInChildren<PawnEquipment>();
+            //
+            _pawnAnimator.Initialize();
+            _pawnEquipment.Initialize();
             //CharacterUI = GetComponentInChildren<CharacterUI>();
-            LocomotionModule.CC.height = AnimatorModule.Height;
-            LocomotionModule.CC.radius = AnimatorModule.Radius;
-            LocomotionModule.CC.center = AnimatorModule.Height * Vector3.up / 2f;
             IgnoreMyOwnColliders();
             CharacterName = data.CharacterName;
             // maybe delayed call?
-            StatModule.Level = data.Level;
-            StatModule.CreateStats();
-            InventoryModule.CreateInventory(data.InventoryStacks);
-            EquipmentModule.ClearEquipment();
-            EquipmentModule.EquipBestItems();
-            StatModule.RecalculateStats();
-            StatModule.RestoreCurrentHealth(StatModule.HealthMax.CurrentValue);
-            StatModule.RestoreCurrentEnergy(StatModule.EnergyMax.CurrentValue);
-            EquipmentModule.ForceUpdateMeshes();
+            PawnStats.Level = data.Level;
+            PawnStats.CreateStats();
+            PawnInventory.Initialize(data.InventoryStacks);
+            PawnEquipment.ClearEquipment();
+            PawnEquipment.EquipBestItems();
+            PawnStats.RecalculateStats();
+            PawnStats.RestoreCurrentHealth(PawnStats.HealthMax.CurrentValue);
+            PawnStats.RestoreCurrentEnergy(PawnStats.EnergyMax.CurrentValue);
+            PawnEquipment.ForceUpdateMeshes();
             Spawned = true;
         }
 
@@ -153,7 +159,7 @@ namespace WinterUniverse
         {
             if (Spawned)
             {
-                LeanPool.Despawn(AnimatorModule.gameObject);
+                LeanPool.Despawn(PawnAnimator.gameObject);
             }
             Spawned = false;
         }
@@ -190,24 +196,24 @@ namespace WinterUniverse
         {
             if (!IsDead)
             {
-                StatModule.HealthCurrent = 0f;
+                PawnStats.HealthCurrent = 0f;
                 IsDead = true;
                 if (!manualSelectDeathAnimation)
                 {
-                    AnimatorModule.PlayActionAnimation("Death", true);
+                    PawnAnimator.PlayActionAnimation("Death", true);
                 }
                 if (source != null)
                 {
                     if (source != null)
                     {
-                        source.StatModule.AddExperience(StatModule.KillExperience);
-                        Debug.Log($"Add {StatModule.KillExperience} experience to {source.gameObject.name} from {gameObject.name}");
+                        source.PawnStats.AddExperience(PawnStats.KillExperience);
+                        Debug.Log($"Add {PawnStats.KillExperience} experience to {source.gameObject.name} from {gameObject.name}");
                     }
                     //CharacterStatManager.Experience = Mathf.CeilToInt(CharacterStatManager.Experience / 2f);// терять опыт при смерти?
                 }
-                SoundModule.PlayDeathClip();
-                CombatModule.SetTarget();
-                EquipmentModule.CloseDamageCollider();
+                PawnSound.PlayDeathClip();
+                PawnCombat.SetTarget();
+                PawnEquipment.CloseDamageCollider();
                 OnDied?.Invoke();
                 StartCoroutine(ProcessDeathEvent());
             }
@@ -224,9 +230,9 @@ namespace WinterUniverse
             if (IsDead)
             {
                 IsDead = false;
-                StatModule.RestoreCurrentHealth(StatModule.HealthMax.CurrentValue);
-                StatModule.RestoreCurrentEnergy(StatModule.EnergyMax.CurrentValue);
-                AnimatorModule.PlayActionAnimation("Revive", true);
+                PawnStats.RestoreCurrentHealth(PawnStats.HealthMax.CurrentValue);
+                PawnStats.RestoreCurrentEnergy(PawnStats.EnergyMax.CurrentValue);
+                PawnAnimator.PlayActionAnimation("Revive", true);
             }
         }
 

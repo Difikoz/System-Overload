@@ -4,13 +4,13 @@ using UnityEngine;
 
 namespace WinterUniverse
 {
-    public class InventoryModule : MonoBehaviour
+    public class PawnInventory : MonoBehaviour
     {
         public Action<List<ItemStack>> OnInventoryChanged;
 
         public List<ItemStack> Stacks = new();
 
-        public void CreateInventory(SerializableDictionary<string, int> stacks)
+        public virtual void Initialize(SerializableDictionary<string, int> stacks)
         {
             Stacks.Clear();
             foreach (KeyValuePair<string, int> stack in stacks)

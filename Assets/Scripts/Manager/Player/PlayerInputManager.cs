@@ -115,7 +115,7 @@ namespace WinterUniverse
             {
                 return;
             }
-            GameManager.StaticInstance.Player.CombatModule.UseWeaponAbility(GameManager.StaticInstance.Player.EquipmentModule.WeaponRightSlot.Data, HandSlotType.Right, GameManager.StaticInstance.Player.EquipmentModule.WeaponRightSlot.Data.PrimaryAbility);
+            GameManager.StaticInstance.Player.PawnCombat.UseWeaponAbility(GameManager.StaticInstance.Player.PawnEquipment.WeaponRightSlot.Data, HandSlotType.Right, GameManager.StaticInstance.Player.PawnEquipment.WeaponRightSlot.Data.PrimaryAbility);
         }
 
         public void OnActionPrimaryLeft()
@@ -124,13 +124,13 @@ namespace WinterUniverse
             {
                 return;
             }
-            if (GameManager.StaticInstance.Player.EquipmentModule.WeaponRightSlot.Data.WeaponHandType == WeaponHandType.TwoHand)
+            if (GameManager.StaticInstance.Player.PawnEquipment.WeaponRightSlot.Data.WeaponHandType == WeaponHandType.TwoHand)
             {
                 OnActionPrimaryRight();
             }
             else
             {
-                GameManager.StaticInstance.Player.CombatModule.UseWeaponAbility(GameManager.StaticInstance.Player.EquipmentModule.WeaponLeftSlot.Data, HandSlotType.Left, GameManager.StaticInstance.Player.EquipmentModule.WeaponLeftSlot.Data.PrimaryAbility);
+                GameManager.StaticInstance.Player.PawnCombat.UseWeaponAbility(GameManager.StaticInstance.Player.PawnEquipment.WeaponLeftSlot.Data, HandSlotType.Left, GameManager.StaticInstance.Player.PawnEquipment.WeaponLeftSlot.Data.PrimaryAbility);
             }
         }
 
@@ -140,7 +140,7 @@ namespace WinterUniverse
             {
                 return;
             }
-            GameManager.StaticInstance.Player.CombatModule.UseWeaponAbility(GameManager.StaticInstance.Player.EquipmentModule.WeaponRightSlot.Data, HandSlotType.Right, GameManager.StaticInstance.Player.EquipmentModule.WeaponRightSlot.Data.SecondaryAbility);
+            GameManager.StaticInstance.Player.PawnCombat.UseWeaponAbility(GameManager.StaticInstance.Player.PawnEquipment.WeaponRightSlot.Data, HandSlotType.Right, GameManager.StaticInstance.Player.PawnEquipment.WeaponRightSlot.Data.SecondaryAbility);
         }
 
         public void OnActionSecondaryLeft()
@@ -149,13 +149,13 @@ namespace WinterUniverse
             {
                 return;
             }
-            if (GameManager.StaticInstance.Player.EquipmentModule.WeaponRightSlot.Data.WeaponHandType == WeaponHandType.TwoHand)
+            if (GameManager.StaticInstance.Player.PawnEquipment.WeaponRightSlot.Data.WeaponHandType == WeaponHandType.TwoHand)
             {
                 OnActionSecondaryRight();
             }
             else
             {
-                GameManager.StaticInstance.Player.CombatModule.UseWeaponAbility(GameManager.StaticInstance.Player.EquipmentModule.WeaponLeftSlot.Data, HandSlotType.Left, GameManager.StaticInstance.Player.EquipmentModule.WeaponLeftSlot.Data.SecondaryAbility);
+                GameManager.StaticInstance.Player.PawnCombat.UseWeaponAbility(GameManager.StaticInstance.Player.PawnEquipment.WeaponLeftSlot.Data, HandSlotType.Left, GameManager.StaticInstance.Player.PawnEquipment.WeaponLeftSlot.Data.SecondaryAbility);
             }
         }
 
@@ -165,7 +165,7 @@ namespace WinterUniverse
             {
                 return;
             }
-            GameManager.StaticInstance.Player.CombatModule.UseSpellAbility(GameManager.StaticInstance.Player.EquipmentModule.SpellData);
+            GameManager.StaticInstance.Player.PawnCombat.UseSpellAbility(GameManager.StaticInstance.Player.PawnEquipment.SpellData);
         }
 
         private void OnDestroy()

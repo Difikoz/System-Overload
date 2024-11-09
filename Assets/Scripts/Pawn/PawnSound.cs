@@ -4,11 +4,10 @@ using UnityEngine;
 namespace WinterUniverse
 {
     [RequireComponent(typeof(AudioSource))]
-    public class SoundModule : MonoBehaviour
+    public class PawnSound : MonoBehaviour
     {
-        private PawnController _owner;
-
-        [HideInInspector] public AudioSource AudioSource;
+        private PawnController _pawn;
+        private AudioSource _audioSource;
 
         [SerializeField] private List<AudioClip> _maleAttackClips = new();
         [SerializeField] private List<AudioClip> _maleGetHitClips = new();
@@ -18,23 +17,19 @@ namespace WinterUniverse
         [SerializeField] private List<AudioClip> _femaleGetHitClips = new();
         [SerializeField] private List<AudioClip> _femaleDeathClips = new();
 
-        private void Awake()
+        public virtual void Initialize()
         {
-            AudioSource = GetComponent<AudioSource>();
-        }
-
-        private void OnEnable()
-        {
-            _owner = GetComponentInParent<PawnController>();
+            _pawn = GetComponent<PawnController>();
+            _audioSource = GetComponent<AudioSource>();
         }
 
         public void PlayAttackClip()
         {
-            if (_owner.Gender == Gender.Male && _maleAttackClips.Count > 0)
+            if (_pawn.Gender == Gender.Male && _maleAttackClips.Count > 0)
             {
                 PlaySound(_maleAttackClips);
             }
-            else if (_owner.Gender == Gender.Female && _femaleAttackClips.Count > 0)
+            else if (_pawn.Gender == Gender.Female && _femaleAttackClips.Count > 0)
             {
                 PlaySound(_femaleAttackClips);
             }
@@ -42,11 +37,11 @@ namespace WinterUniverse
 
         public void PlayGetHitClip()
         {
-            if (_owner.Gender == Gender.Male && _maleGetHitClips.Count > 0)
+            if (_pawn.Gender == Gender.Male && _maleGetHitClips.Count > 0)
             {
                 PlaySound(_maleGetHitClips);
             }
-            else if (_owner.Gender == Gender.Female && _femaleGetHitClips.Count > 0)
+            else if (_pawn.Gender == Gender.Female && _femaleGetHitClips.Count > 0)
             {
                 PlaySound(_femaleGetHitClips);
             }
@@ -54,11 +49,11 @@ namespace WinterUniverse
 
         public void PlayDeathClip()
         {
-            if (_owner.Gender == Gender.Male && _maleDeathClips.Count > 0)
+            if (_pawn.Gender == Gender.Male && _maleDeathClips.Count > 0)
             {
                 PlaySound(_maleDeathClips);
             }
-            else if (_owner.Gender == Gender.Female && _femaleDeathClips.Count > 0)
+            else if (_pawn.Gender == Gender.Female && _femaleDeathClips.Count > 0)
             {
                 PlaySound(_femaleDeathClips);
             }
@@ -70,9 +65,9 @@ namespace WinterUniverse
             {
                 return;
             }
-            AudioSource.volume = volume;
-            AudioSource.pitch = randomizePitch ? Random.Range(minPitch, maxPitch) : 1f;
-            AudioSource.PlayOneShot(clip);
+            _audioSource.volume = volume;
+            _audioSource.pitch = randomizePitch ? Random.Range(minPitch, maxPitch) : 1f;
+            _audioSource.PlayOneShot(clip);
         }
 
         public void PlaySound(List<AudioClip> clips, bool randomizePitch = true, float volume = 1f, float minPitch = 0.9f, float maxPitch = 1.1f)

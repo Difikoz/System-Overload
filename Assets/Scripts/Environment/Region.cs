@@ -16,7 +16,7 @@ namespace WinterUniverse
                 PlayerUIManager.StaticInstance.HUD.NotificationUI.DisplayNotification($"Entered [{Data.DisplayName}]");
                 foreach (StatModifierCreator creator in Data.Modifiers)
                 {
-                    _player.StatModule.AddStatModifier(creator);
+                    _player.PawnStats.AddStatModifier(creator);
                 }
             }
         }
@@ -29,7 +29,7 @@ namespace WinterUniverse
                 PlayerUIManager.StaticInstance.HUD.NotificationUI.DisplayNotification($"Quited [{Data.DisplayName}]");
                 foreach (StatModifierCreator creator in Data.Modifiers)
                 {
-                    _player.StatModule.RemoveStatModifier(creator);
+                    _player.PawnStats.RemoveStatModifier(creator);
                 }
             }
         }
