@@ -35,7 +35,7 @@ namespace WinterUniverse
             character.PawnInventory.AddItem(Data, Amount);
             if (character.GetComponent<PlayerController>())
             {
-                GameManager.StaticInstance.PlayerUI.HUD.NotificationUI.DisplayNotification($"Added {(Amount > 1 ? $"{Amount} " : "")}{Data.DisplayName}");
+                GameManager.StaticInstance.PlayerUI.NotificationUI.DisplayNotification($"Added {(Amount > 1 ? $"{Amount} " : "")}{Data.DisplayName}");
             }
             Destroy(gameObject);// TODO pool despawn
         }

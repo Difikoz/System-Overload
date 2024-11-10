@@ -8,6 +8,12 @@ namespace WinterUniverse
         [SerializeField] private VitalityBarUI _healthBar;
         [SerializeField] private VitalityBarUI _energyBar;
 
+        public void Initialize()
+        {
+            GameManager.StaticInstance.Player.PawnStats.OnHealthChanged += SetHealthValues;
+            GameManager.StaticInstance.Player.PawnStats.OnEnergyChanged += SetEnergyValues;
+        }
+
         public void ShowBars()
         {
             _canvasGroup.alpha = 1f;
@@ -18,14 +24,20 @@ namespace WinterUniverse
             _canvasGroup.alpha = 0f;
         }
 
-        public void SetHealthValues(float cur, float max)
+        private void SetHealthValues(float cur, float max)
         {
             _healthBar.SetValues(cur, max);
         }
 
-        public void SetEnergyValues(float cur, float max)
+        private void SetEnergyValues(float cur, float max)
         {
             _energyBar.SetValues(cur, max);
+        }
+
+        private void OnDestroy()
+        {
+            GameManager.StaticInstance.Player.PawnStats.OnHealthChanged -= SetHealthValues;
+            GameManager.StaticInstance.Player.PawnStats.OnEnergyChanged -= SetEnergyValues;
         }
     }
 }

@@ -76,6 +76,10 @@ namespace WinterUniverse
 
         protected virtual void Update()
         {
+            if (!Created)
+            {
+                return;
+            }
             if (!IsDead)
             {
                 _pawnEffects.TickEffects(Time.deltaTime);
@@ -86,7 +90,6 @@ namespace WinterUniverse
             _pawnLocomotion.HandleLocomotion();
         }
 
-        //
         protected virtual void LateUpdate()
         {
 
@@ -140,26 +143,24 @@ namespace WinterUniverse
             OnFactionChanged?.Invoke(_faction);
         }
 
-        public virtual void EnableInvulnerable()
+        public void EnableInvulnerable()
         {
             IsInvulnerable = true;
         }
 
-        public virtual void DisableInvulnerable()
+        public void DisableInvulnerable()
         {
             IsInvulnerable = false;
         }
 
-        public virtual void Die(PawnController source = null, bool manualSelectDeathAnimation = false)
+        public void Die(PawnController source = null, string animationName = "Death")
         {
             if (!IsDead)
             {
                 _pawnStats.HealthCurrent = 0f;
+                _pawnStats.OnHealthChanged?.Invoke(0f, _pawnStats.HealthMax.CurrentValue);
                 IsDead = true;
-                if (!manualSelectDeathAnimation)
-                {
-                    _pawnAnimator.PlayActionAnimation("Death", true);
-                }
+                _pawnAnimator.PlayActionAnimation(animationName, true);
                 if (source != null)
                 {
 

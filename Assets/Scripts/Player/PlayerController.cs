@@ -17,8 +17,8 @@ namespace WinterUniverse
 
         protected override IEnumerator ProcessDeathEvent()
         {
-            GameManager.StaticInstance.PlayerUI.HUD.NotificationUI.DisplayNotification("You Died");
-            yield return new WaitForSeconds(5f);
+            GameManager.StaticInstance.PlayerUI.NotificationUI.DisplayNotification("You Died");
+            yield return base.ProcessDeathEvent();
             Revive();
         }
 
@@ -54,24 +54,11 @@ namespace WinterUniverse
 
         public void LoadData(PawnSaveData data)
         {
-            if (!Created)
-            {
-                _pawnStats.OnHealthChanged += GameManager.StaticInstance.PlayerUI.HUD.VitalityUI.SetHealthValues;
-                _pawnStats.OnEnergyChanged += GameManager.StaticInstance.PlayerUI.HUD.VitalityUI.SetEnergyValues;
-                //StatManager.OnStatChanged += PlayerUIManager.StaticInstance.MenuUI.StatUI.UpdateUI;
-            }
             CreateCharacter(data);
             _pawnStats.HealthCurrent = data.Health;
             _pawnStats.EnergyCurrent = data.Energy;
             transform.SetPositionAndRotation(data.Transform.GetPosition(), data.Transform.GetRotation());
             GameManager.StaticInstance.PlayerCamera.transform.position = transform.position;
-        }
-
-        private void OnDestroy()
-        {
-            _pawnStats.OnHealthChanged -= GameManager.StaticInstance.PlayerUI.HUD.VitalityUI.SetHealthValues;
-            _pawnStats.OnEnergyChanged -= GameManager.StaticInstance.PlayerUI.HUD.VitalityUI.SetEnergyValues;
-            //StatManager.OnStatChanged -= PlayerUIManager.StaticInstance.MenuUI.StatUI.UpdateUI;
         }
     }
 }

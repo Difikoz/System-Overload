@@ -6,10 +6,10 @@ namespace WinterUniverse
     [System.Serializable]
     public class Stat
     {
-        [SerializeField] private StatConfig _data;
-        [SerializeField] private float _currentValue;
-        [SerializeField] private List<float> _flatModifiers = new();
-        [SerializeField] private List<float> _multiplierModifiers = new();
+        private StatConfig _data;
+        private float _currentValue;
+        private List<float> _flatModifiers = new();
+        private List<float> _multiplierModifiers = new();
 
         public StatConfig Data => _data;
         public float CurrentValue => _currentValue;

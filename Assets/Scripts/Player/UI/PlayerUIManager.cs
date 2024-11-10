@@ -4,23 +4,51 @@ namespace WinterUniverse
 {
     public class PlayerUIManager : MonoBehaviour
     {
-        public PlayerHUD HUD;
-        public PlayerMenuUI MenuUI;
+        private PlayerVitalityBarUI _vitalityUI;
+        private PlayerNotificationUI _notificationUI;
+        private PlayerInteractionUI _interactionUI;
+        private PlayerStatUI _statUI;
+        private PlayerEquipmentUI _equipmentUI;
+        private PlayerInventoryUI _inventoryUI;
+        private PlayerFactionUI _factionUI;
+
+        [SerializeField] private GameObject _menuWindow;
+
+        public PlayerNotificationUI NotificationUI => _notificationUI;
 
         public void Initialize()
         {
-            HUD = GetComponentInChildren<PlayerHUD>();
-            MenuUI = GetComponentInChildren<PlayerMenuUI>();
+            _vitalityUI = GetComponentInChildren<PlayerVitalityBarUI>();
+            _notificationUI = GetComponentInChildren<PlayerNotificationUI>();
+            _interactionUI = GetComponentInChildren<PlayerInteractionUI>();
+            _statUI = GetComponentInChildren<PlayerStatUI>();
+            _equipmentUI = GetComponentInChildren<PlayerEquipmentUI>();
+            _inventoryUI = GetComponentInChildren<PlayerInventoryUI>();
+            _factionUI = GetComponentInChildren<PlayerFactionUI>();
+            _vitalityUI.Initialize();
+            _interactionUI.Initialize();
         }
 
-        public void ShowUI()
+        public void ShowHUD()
         {
-            HUD.ShowHud();
+            _vitalityUI.ShowBars();
+            _notificationUI.ShowNotifications();
         }
 
-        public void HideUI()
+        public void HideHUD()
         {
-            HUD.HideHUD();
+            _vitalityUI.HideBars();
+            _notificationUI.HideNotifications();
+        }
+
+        public void ShowMenu()
+        {
+            _menuWindow.SetActive(true);
+        }
+
+        public void HideMenu()
+        {
+            _menuWindow.SetActive(false);
         }
     }
 }
