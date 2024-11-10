@@ -1295,9 +1295,11 @@ GameObject:
   - component: {fileID: 1479141679}
   - component: {fileID: 1479141678}
   - component: {fileID: 1479141677}
+  - component: {fileID: 1479141683}
   - component: {fileID: 1479141676}
   - component: {fileID: 1479141675}
   - component: {fileID: 1479141674}
+  - component: {fileID: 1479141682}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -1763,6 +1765,49 @@ MonoBehaviour:
   IsTargeting: 0
   IsInvulnerable: 0
   IsDead: 0
+--- !u!143 &1479141682
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1479141672}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1479141683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1479141672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18369be495225474695faf0776004714, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _acceleration: 20
+  _deceleration: 40
+  _maxSpeed: 10
+  _jumpForce: 2
+  _timeToJump: 0.25
+  _timeToFall: 0.25
 --- !u!1 &1747374927
 GameObject:
   m_ObjectHideFlags: 0
@@ -2347,7 +2392,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2013590067
 Transform:
   m_ObjectHideFlags: 0

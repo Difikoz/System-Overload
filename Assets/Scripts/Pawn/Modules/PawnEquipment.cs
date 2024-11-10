@@ -13,7 +13,6 @@ namespace WinterUniverse
         public WeaponItemConfig UnarmedWeapon;
         public WeaponSlot WeaponRightSlot;
         public WeaponSlot WeaponLeftSlot;
-        public AbilityData SpellData;
         public List<ArmorSlot> ArmorSlots = new();
 
         public virtual void Initialize()
@@ -249,21 +248,6 @@ namespace WinterUniverse
             else
             {
                 WeaponLeftSlot.MeleeWeaponDamageCollider.DisableDamageCollider();
-            }
-        }
-
-        public void PerformRangedAttack()// TODO
-        {
-            _pawn.PawnSound.PlayAttackClip();
-            if (_pawn.PawnCombat.CurrentSlotType == HandSlotType.Right)
-            {
-                //RightHandSlot.Weapon.MeleeDamageCollider.EnableDamageCollider();
-                _pawn.PawnSound.PlaySound(WeaponRightSlot.Data.AttackClips);
-            }
-            else
-            {
-                //LeftHandSlot.Weapon.MeleeDamageCollider.EnableDamageCollider();
-                _pawn.PawnSound.PlaySound(WeaponLeftSlot.Data.AttackClips);
             }
         }
     }

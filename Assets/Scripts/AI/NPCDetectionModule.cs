@@ -18,7 +18,7 @@ namespace WinterUniverse
 
         public void FindTargetInViewRange()
         {
-            if (_owner.PawnCombat.CurrentTarget != null || !_owner.CanTargeting)
+            if (_owner.PawnCombat.CurrentTarget != null)
             {
                 return;
             }

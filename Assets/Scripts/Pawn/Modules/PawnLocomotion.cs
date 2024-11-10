@@ -3,7 +3,7 @@ using UnityEngine;
 namespace WinterUniverse
 {
     [RequireComponent(typeof(CharacterController))]
-    public abstract class PawnLocomotion : MonoBehaviour
+    public class PawnLocomotion : MonoBehaviour
     {
         private CharacterController _cc;
         private PawnController _pawn;
@@ -25,9 +25,6 @@ namespace WinterUniverse
         [SerializeField] private float _timeToJump = 0.25f;
         [SerializeField] private float _timeToFall = 0.25f;
 
-        protected abstract Vector2 GetMoveInput();
-        protected abstract Vector3 GetLookDirection();
-
         private bool CanJump => _jumpTimer > 0f && _groundedTimer > 0f && !_pawn.IsDead && !_pawn.IsPerfomingAction && _pawn.PawnStats.EnergyCurrent >= 10f;
         public Vector3 MoveVelocity => _moveVelocity;
 
@@ -46,8 +43,8 @@ namespace WinterUniverse
             {
                 return;
             }
-            _moveInput = GetMoveInput();
-            _lookDirection = GetLookDirection();
+            _moveInput =_pawn.GetMoveInput();
+            _lookDirection = _pawn.GetLookDirection();
             HandleGravity();
             HandleMovement();
             HandleRotation();
@@ -126,15 +123,15 @@ namespace WinterUniverse
                 float _rotateDirection = Vector3.Dot(_lookDirection, transform.forward);
                 if (_rotateDirection > 15f)
                 {
-                    _pawn.PawnAnimator.SetFloat("Turn Direction", 1f);// TODO
+                    _pawn.PawnAnimator.SetFloat("TurnDirection", 1f);// TODO
                 }
                 else if (_rotateDirection < -15f)
                 {
-                    _pawn.PawnAnimator.SetFloat("Turn Direction", -1f);// TODO
+                    _pawn.PawnAnimator.SetFloat("TurnDirection", -1f);// TODO
                 }
                 else
                 {
-                    _pawn.PawnAnimator.SetFloat("Turn Direction", 0f);// TODO
+                    _pawn.PawnAnimator.SetFloat("TurnDirection", 0f);// TODO
                 }
             }
         }
@@ -158,18 +155,6 @@ namespace WinterUniverse
         {
             _fallVelocity.y = Mathf.Sqrt(_jumpForce * -2f * GameManager.StaticInstance.WorldData.Gravity);
             _pawn.PawnStats.ReduceCurrentEnergy(10f);
-        }
-
-        public void TryPerformDash()
-        {
-            if (_pawn.IsDead || _pawn.IsPerfomingAction || _pawn.PawnStats.EnergyCurrent < 10f)// TODO get dodge energy cost stat
-            {
-                return;
-            }
-            _moveVelocity = Vector3.zero;
-            _pawn.PawnAnimator.PlayActionAnimation("Dash Forward", true);
-            _pawn.PawnStats.ReduceCurrentEnergy(10f);// TODO get dodge energy cost stat
-            _pawn.IsDashing = true;
         }
     }
 }

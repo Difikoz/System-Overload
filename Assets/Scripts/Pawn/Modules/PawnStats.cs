@@ -15,14 +15,6 @@ namespace WinterUniverse
         #region Stats
         [HideInInspector] public List<Stat> Stats = new();
 
-        [HideInInspector] public Stat Strength;
-        [HideInInspector] public Stat Perception;
-        [HideInInspector] public Stat Endurance;
-        [HideInInspector] public Stat Charisma;
-        [HideInInspector] public Stat Intelligence;
-        [HideInInspector] public Stat Agility;
-        [HideInInspector] public Stat Luck;
-
         [HideInInspector] public float HealthCurrent;
         [HideInInspector] public float EnergyCurrent;
 
@@ -34,13 +26,9 @@ namespace WinterUniverse
 
         [HideInInspector] public Stat DamageDealt;
 
-        [HideInInspector] public Stat PhysicalDamage;
-
         [HideInInspector] public Stat SlicingDamage;
         [HideInInspector] public Stat PiercingDamage;
         [HideInInspector] public Stat BluntDamage;
-
-        [HideInInspector] public Stat MagicalDamage;
 
         [HideInInspector] public Stat FireDamage;
         [HideInInspector] public Stat WaterDamage;
@@ -48,18 +36,13 @@ namespace WinterUniverse
 
         [HideInInspector] public Stat HolyDamage;
         [HideInInspector] public Stat DarknessDamage;
-        [HideInInspector] public Stat BloodDamage;
         [HideInInspector] public Stat ChemicalDamage;
 
         [HideInInspector] public Stat DamageTaken;
 
-        [HideInInspector] public Stat PhysicalResistance;
-
         [HideInInspector] public Stat SlicingResistance;
         [HideInInspector] public Stat PiercingResistance;
         [HideInInspector] public Stat BluntResistance;
-
-        [HideInInspector] public Stat MagicalResistance;
 
         [HideInInspector] public Stat FireResistance;
         [HideInInspector] public Stat WaterResistance;
@@ -67,19 +50,9 @@ namespace WinterUniverse
 
         [HideInInspector] public Stat HolyResistance;
         [HideInInspector] public Stat DarknessResistance;
-        [HideInInspector] public Stat BloodResistance;
         [HideInInspector] public Stat ChemicalResistance;
 
         [HideInInspector] public Stat MoveSpeed;
-
-        [HideInInspector] public Stat EvadeChance;
-
-        [HideInInspector] public Stat BlockChance;
-        [HideInInspector] public Stat BlockAngle;
-        [HideInInspector] public Stat BlockPower;
-
-        [HideInInspector] public Stat CriticalHitChance;
-        [HideInInspector] public Stat CriticalHitPower;
         #endregion
 
         [SerializeField] private float _regenerationTickDelay = 1f;
@@ -104,7 +77,7 @@ namespace WinterUniverse
             {
                 return;
             }
-            float resistance = GetStatByName(element.ResistanceStat.DisplayName).CurrentValue + GetStatByName(element.ResistanceType.DisplayName).CurrentValue;
+            float resistance = GetStatByName(element.ResistanceStat.DisplayName).CurrentValue;
             if (resistance < 100f && !_pawn.IsInvulnerable)
             {
                 if (resistance != 0f)
@@ -162,37 +135,14 @@ namespace WinterUniverse
         public void CreateStats()
         {
             Stats = new(GameManager.StaticInstance.WorldData.GetStats());
+            AssignStats();
+        }
+
+        public void AssignStats()
+        {
             foreach (Stat s in Stats)
             {
-                if (s.Data.DisplayName == "Strength")
-                {
-                    Strength = s;
-                }
-                else if (s.Data.DisplayName == "Perception")
-                {
-                    Perception = s;
-                }
-                else if (s.Data.DisplayName == "Endurance")
-                {
-                    Endurance = s;
-                }
-                else if (s.Data.DisplayName == "Charisma")
-                {
-                    Charisma = s;
-                }
-                else if (s.Data.DisplayName == "Intelligence")
-                {
-                    Intelligence = s;
-                }
-                else if (s.Data.DisplayName == "Agility")
-                {
-                    Agility = s;
-                }
-                else if (s.Data.DisplayName == "Luck")
-                {
-                    Luck = s;
-                }
-                else if (s.Data.DisplayName == "Health")
+                if (s.Data.DisplayName == "Health")
                 {
                     HealthMax = s;
                 }
@@ -212,10 +162,6 @@ namespace WinterUniverse
                 {
                     DamageDealt = s;
                 }
-                else if (s.Data.DisplayName == "Physical Damage")
-                {
-                    PhysicalDamage = s;
-                }
                 else if (s.Data.DisplayName == "Slicing Damage")
                 {
                     SlicingDamage = s;
@@ -227,10 +173,6 @@ namespace WinterUniverse
                 else if (s.Data.DisplayName == "Blunt Damage")
                 {
                     BluntDamage = s;
-                }
-                else if (s.Data.DisplayName == "Magical Damage")
-                {
-                    MagicalDamage = s;
                 }
                 else if (s.Data.DisplayName == "Fire Damage")
                 {
@@ -252,10 +194,6 @@ namespace WinterUniverse
                 {
                     DarknessDamage = s;
                 }
-                else if (s.Data.DisplayName == "Blood Damage")
-                {
-                    BloodDamage = s;
-                }
                 else if (s.Data.DisplayName == "Chemical Damage")
                 {
                     ChemicalDamage = s;
@@ -263,10 +201,6 @@ namespace WinterUniverse
                 else if (s.Data.DisplayName == "Damage Taken")
                 {
                     DamageTaken = s;
-                }
-                else if (s.Data.DisplayName == "Physical Resistance")
-                {
-                    PhysicalResistance = s;
                 }
                 else if (s.Data.DisplayName == "Slicing Resistance")
                 {
@@ -279,10 +213,6 @@ namespace WinterUniverse
                 else if (s.Data.DisplayName == "Blunt Resistance")
                 {
                     BluntResistance = s;
-                }
-                else if (s.Data.DisplayName == "Magical Resistance")
-                {
-                    MagicalResistance = s;
                 }
                 else if (s.Data.DisplayName == "Fire Resistance")
                 {
@@ -304,10 +234,6 @@ namespace WinterUniverse
                 {
                     DarknessResistance = s;
                 }
-                else if (s.Data.DisplayName == "Blood Resistance")
-                {
-                    BloodResistance = s;
-                }
                 else if (s.Data.DisplayName == "Chemical Resistance")
                 {
                     ChemicalResistance = s;
@@ -315,30 +241,6 @@ namespace WinterUniverse
                 else if (s.Data.DisplayName == "Move Speed")
                 {
                     MoveSpeed = s;
-                }
-                else if (s.Data.DisplayName == "Evade Chance")
-                {
-                    EvadeChance = s;
-                }
-                else if (s.Data.DisplayName == "Block Chance")
-                {
-                    BlockChance = s;
-                }
-                else if (s.Data.DisplayName == "Block Angle")
-                {
-                    BlockAngle = s;
-                }
-                else if (s.Data.DisplayName == "Block Power")
-                {
-                    BlockPower = s;
-                }
-                else if (s.Data.DisplayName == "Critical Hit Chance")
-                {
-                    CriticalHitChance = s;
-                }
-                else if (s.Data.DisplayName == "Critical Hit Power")
-                {
-                    CriticalHitPower = s;
                 }
             }
         }

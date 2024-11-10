@@ -27,10 +27,7 @@ namespace WinterUniverse
             ApplyEffectsToTarget(Owner, source, OwnerEffects);
             foreach (DamageType type in DamageTypes)
             {
-                float damage = type.Damage + Owner.PawnStats.GetStatByName(type.Element.DamageStat.DisplayName).CurrentValue + Owner.PawnStats.GetStatByName(type.Element.DamageType.DisplayName).CurrentValue;
-                damage *= Owner.PawnStats.DamageDealt.CurrentValue / 100f;
-                damage -= damage * _targetBlockPower;
-                InstantHealthReduceEffect effect = (InstantHealthReduceEffect)GameManager.StaticInstance.WorldData.HealthReduceEffect.CreateEffect(target, source, damage, 0f);
+                InstantHealthReduceEffect effect = (InstantHealthReduceEffect)GameManager.StaticInstance.WorldData.HealthReduceEffect.CreateEffect(target, source, Owner.PawnStats.GetStatByName(type.Element.DamageStat.DisplayName).CurrentValue * Owner.PawnStats.DamageDealt.CurrentValue / 100f + type.Damage, 0f);
                 effect.Initialize(type.Element, _hitPoint, _hitDirection, _angleFromHit);
                 target.PawnEffects.AddEffect(effect);
             }

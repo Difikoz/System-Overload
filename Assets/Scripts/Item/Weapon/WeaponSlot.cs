@@ -11,7 +11,7 @@ namespace WinterUniverse
 
         private GameObject _model;
 
-        private void OnEnable()
+        public void Initialize()
         {
             Owner = GetComponentInParent<PawnController>();
         }

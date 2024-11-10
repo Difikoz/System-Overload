@@ -12,7 +12,7 @@ namespace WinterUniverse
 
         public virtual bool CanCast(PawnController caster, PawnController target)
         {
-            if (caster.IsPerfomingAction && !caster.IsCasting || caster.PawnStats.EnergyCurrent < EnergyCost)
+            if (caster.IsPerfomingAction || caster.PawnStats.EnergyCurrent < EnergyCost)
             {
                 return false;
             }

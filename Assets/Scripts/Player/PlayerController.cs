@@ -5,12 +5,12 @@ namespace WinterUniverse
 {
     public class PlayerController : PawnController
     {
-        protected override Vector2 GetMoveInput()
+        public override Vector2 GetMoveInput()
         {
             return GameManager.StaticInstance.PlayerInput.MoveInput;
         }
 
-        protected override Vector3 GetLookDirection()
+        public override Vector3 GetLookDirection()
         {
             return GameManager.StaticInstance.PlayerCamera.transform.forward;
         }

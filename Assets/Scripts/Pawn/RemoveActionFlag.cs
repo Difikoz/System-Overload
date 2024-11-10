@@ -7,8 +7,6 @@ namespace WinterUniverse
         private PawnController _owner;
         [SerializeField] private bool _removePerfoming = true;
         [SerializeField] private bool _removeRootMotion = true;
-        [SerializeField] private bool _removeDashing = true;
-        [SerializeField] private bool _removeCasting = true;
         [SerializeField] private bool _restoreUseGravity = true;
         [SerializeField] private bool _restoreCanMove = true;
         [SerializeField] private bool _restoreCanRotate = true;
@@ -25,14 +23,6 @@ namespace WinterUniverse
             {
                 animator.applyRootMotion = false;
                 _owner.UseRootMotion = false;
-            }
-            if (_removeDashing)
-            {
-                _owner.IsDashing = false;
-            }
-            if (_removeCasting)
-            {
-                _owner.IsCasting = false;
             }
             if (_restoreUseGravity)
             {

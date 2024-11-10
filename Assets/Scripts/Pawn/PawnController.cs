@@ -39,21 +39,16 @@ namespace WinterUniverse
         public bool UseGravity = true;
         public bool CanMove = true;
         public bool CanRotate = true;
-        public bool CanTargeting = true;
-        public bool IsTargetable = true;
 
         public bool IsGrounded = true;
         public bool IsMoving;
         public bool IsRunning;
-        public bool IsDashing;
-        public bool IsCasting;
-        public bool IsTargeting;
         public bool IsInvulnerable;
         public bool IsDead;
-        //
-        protected abstract Vector2 GetMoveInput();
-        protected abstract Vector3 GetLookDirection();
-        //
+
+        public abstract Vector2 GetMoveInput();
+        public abstract Vector3 GetLookDirection();
+
         protected virtual void Awake()
         {
             _pawnAnimator = GetComponentInChildren<PawnAnimator>();

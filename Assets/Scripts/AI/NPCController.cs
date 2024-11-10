@@ -19,7 +19,7 @@ namespace WinterUniverse
         [HideInInspector] public Vector3 RootPosition;
         [HideInInspector] public bool ReachedDestination;
 
-        protected override Vector2 GetMoveInput()
+        public override Vector2 GetMoveInput()
         {
             if (!ReachedDestination)
             {
@@ -28,7 +28,7 @@ namespace WinterUniverse
             return Vector2.zero;
         }
 
-        protected override Vector3 GetLookDirection()
+        public override Vector3 GetLookDirection()
         {
             if (PawnCombat.CurrentTarget != null && PawnCombat.CurrentTargetIsVisible())
             {

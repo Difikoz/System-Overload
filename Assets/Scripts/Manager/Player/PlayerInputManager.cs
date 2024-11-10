@@ -85,15 +85,6 @@ namespace WinterUniverse
             _runInput = value.isPressed;
         }
 
-        public void OnDash()
-        {
-            if (GameManager.StaticInstance.Player == null)
-            {
-                return;
-            }
-            GameManager.StaticInstance.Player.PawnLocomotion.TryPerformDash();
-        }
-
         public void OnInteract()
         {
             if (GameManager.StaticInstance.Player == null)
@@ -160,15 +151,6 @@ namespace WinterUniverse
             {
                 GameManager.StaticInstance.Player.PawnCombat.UseWeaponAbility(GameManager.StaticInstance.Player.PawnEquipment.WeaponLeftSlot.Data, HandSlotType.Left, GameManager.StaticInstance.Player.PawnEquipment.WeaponLeftSlot.Data.SecondaryAbility);
             }
-        }
-
-        public void OnCastSpell()
-        {
-            if (GameManager.StaticInstance.Player == null)
-            {
-                return;
-            }
-            GameManager.StaticInstance.Player.PawnCombat.UseSpellAbility(GameManager.StaticInstance.Player.PawnEquipment.SpellData);
         }
 
         private void OnDestroy()

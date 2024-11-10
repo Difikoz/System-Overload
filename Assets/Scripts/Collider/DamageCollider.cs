@@ -8,8 +8,6 @@ namespace WinterUniverse
     {
         public Action OnHitted;
 
-        public bool Evadable = true;
-        public bool Blockable = true;
         public List<DamageType> DamageTypes = new();
         public List<EffectCreator> TargetEffects = new();
 
@@ -18,7 +16,6 @@ namespace WinterUniverse
         protected Vector3 _hitDirection;
         protected float _angleFromTarget;
         protected float _angleFromHit;
-        protected float _targetBlockPower;
         protected List<PawnController> _damagedCharacters = new();
 
         protected virtual void Awake()
@@ -36,18 +33,6 @@ namespace WinterUniverse
                 _hitDirection = GetHitDirection(target);
                 _angleFromTarget = GetAngleFromTarget(target);
                 _angleFromHit = GetAngleFromHit(target);
-                if (Evadable && _angleFromTarget <= 15f && target.PawnCombat.AttempToEvadeAttack())
-                {
-                    return;
-                }
-                if (Blockable && target.PawnCombat.AttempToBlockAttack(_angleFromTarget))
-                {
-                    _targetBlockPower = target.PawnStats.BlockPower.CurrentValue / 100f;
-                }
-                else
-                {
-                    _targetBlockPower = 0f;
-                }
                 ApplyDamageToTarget(target, source);
                 OnHitted?.Invoke();
             }
@@ -78,7 +63,7 @@ namespace WinterUniverse
         {
             foreach (DamageType type in DamageTypes)
             {
-                InstantHealthReduceEffect effect = (InstantHealthReduceEffect)GameManager.StaticInstance.WorldData.HealthReduceEffect.CreateEffect(target, source, type.Damage - (type.Damage * _targetBlockPower), 0f);
+                InstantHealthReduceEffect effect = (InstantHealthReduceEffect)GameManager.StaticInstance.WorldData.HealthReduceEffect.CreateEffect(target, source, type.Damage, 0f);
                 effect.Initialize(type.Element, _hitPoint, _hitDirection, _angleFromHit);
                 target.PawnEffects.AddEffect(effect);
             }
