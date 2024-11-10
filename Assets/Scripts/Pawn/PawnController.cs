@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace WinterUniverse
 {
+    [RequireComponent(typeof(Rigidbody))]
     public abstract class PawnController : MonoBehaviour
     {
         public Action<FactionConfig> OnFactionChanged;
@@ -61,15 +62,15 @@ namespace WinterUniverse
             _pawnSound = GetComponent<PawnSound>();
             _pawnStats = GetComponent<PawnStats>();
             //CharacterUI = GetComponentInChildren<CharacterUI>();
-            _pawnAnimator.Initialize();
-            _pawnCombat.Initialize();
-            _pawnEffects.Initialize();
-            _pawnEquipment.Initialize();
-            _pawnInteraction.Initialize();
+            _pawnAnimator.Initialize(this);
+            _pawnCombat.Initialize(this);
+            _pawnEffects.Initialize(this);
+            _pawnEquipment.Initialize(this);
+            _pawnInteraction.Initialize(this);
             //_pawnInventory.Initialize();
-            _pawnLocomotion.Initialize();
-            _pawnSound.Initialize();
-            _pawnStats.Initialize();
+            _pawnLocomotion.Initialize(this);
+            _pawnSound.Initialize(this);
+            _pawnStats.Initialize(this);
             IgnoreMyOwnColliders();
             DontDestroyOnLoad(this);
         }

@@ -16,9 +16,9 @@ namespace WinterUniverse
         public float Height => _height;
         public float Radius => _radius;
 
-        public virtual void Initialize()
+        public void Initialize(PawnController pawn)
         {
-            _pawn = GetComponentInParent<PawnController>();
+            _pawn = pawn;
             _animator = GetComponent<Animator>();
         }
 

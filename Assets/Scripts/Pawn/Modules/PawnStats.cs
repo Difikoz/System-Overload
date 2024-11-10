@@ -66,9 +66,9 @@ namespace WinterUniverse
 
         public float HealthPercent => HealthCurrent / HealthMax.CurrentValue;
 
-        public virtual void Initialize()
+        public void Initialize(PawnController pawn)
         {
-            _pawn = GetComponent<PawnController>();
+            _pawn = pawn;
         }
 
         public void ReduceCurrentHealth(float value, ElementConfig element, PawnController source = null)

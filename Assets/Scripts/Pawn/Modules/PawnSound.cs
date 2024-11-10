@@ -13,9 +13,9 @@ namespace WinterUniverse
         [SerializeField] private List<AudioClip> _getHitClips = new();
         [SerializeField] private List<AudioClip> _deathClips = new();
 
-        public virtual void Initialize()
+        public void Initialize(PawnController pawn)
         {
-            _pawn = GetComponent<PawnController>();
+            _pawn = pawn;
             _audioSource = GetComponent<AudioSource>();
         }
 

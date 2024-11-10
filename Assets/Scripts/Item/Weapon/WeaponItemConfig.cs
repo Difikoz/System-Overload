@@ -22,8 +22,8 @@ namespace WinterUniverse
         [SerializeField] private List<DamageType> _damageTypes = new();
         [SerializeField] private List<EffectCreator> _ownerEffects = new();
         [SerializeField] private List<EffectCreator> _targetEffects = new();
-        [Header("Block")]
-        [SerializeField] private List<AudioClip> _blockClips = new();
+        [SerializeField] private bool _doSplashDamage = false;
+        [SerializeField] private float _splashRadius = 1f;
         [Header("For NPC")]
         [SerializeField] private float _cooldown = 1.5f;
         [SerializeField] private float _angle = 90f;
@@ -42,7 +42,8 @@ namespace WinterUniverse
         public List<DamageType> DamageTypes => _damageTypes;
         public List<EffectCreator> OwnerEffects => _ownerEffects;
         public List<EffectCreator> TargetEffects => _targetEffects;
-        public List<AudioClip> BlockClips => _blockClips;
+        public bool DoSplashDamage => _doSplashDamage;
+        public float SplashRadius => _splashRadius;
         public float Cooldown => _cooldown;
         public float Angle => _angle;
         public float MinDistance => _minDistance;

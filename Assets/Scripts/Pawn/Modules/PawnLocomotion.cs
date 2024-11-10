@@ -28,9 +28,9 @@ namespace WinterUniverse
         private bool CanJump => _jumpTimer > 0f && _groundedTimer > 0f && !_pawn.IsDead && !_pawn.IsPerfomingAction && _pawn.PawnStats.EnergyCurrent >= 10f;
         public Vector3 MoveVelocity => _moveVelocity;
 
-        public virtual void Initialize()
+        public void Initialize(PawnController pawn)
         {
-            _pawn = GetComponent<PawnController>();
+            _pawn = pawn;
             _cc = GetComponent<CharacterController>();
             _cc.height = _pawn.PawnAnimator.Height;
             _cc.radius = _pawn.PawnAnimator.Radius;
@@ -43,7 +43,7 @@ namespace WinterUniverse
             {
                 return;
             }
-            _moveInput =_pawn.GetMoveInput();
+            _moveInput = _pawn.GetMoveInput();
             _lookDirection = _pawn.GetLookDirection();
             HandleGravity();
             HandleMovement();
