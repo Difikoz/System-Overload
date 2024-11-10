@@ -894,11 +894,6 @@ MonoBehaviour:
       _values: 
     WeaponInRightHand: Unarmed
     WeaponInLeftHand: Unarmed
-    HeadArmor: Empty
-    ChestArmor: Empty
-    PantsArmor: Empty
-    BootsArmor: Empty
-    GlovesArmor: Empty
   _fileName: SaveData
 --- !u!1 &919766341
 GameObject:
@@ -1133,8 +1128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6be9b31bb05243f4aa4e591e54d59cdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HUD: {fileID: 0}
-  MenuUI: {fileID: 0}
+  _menuWindow: {fileID: 0}
 --- !u!1 &1090001253
 GameObject:
   m_ObjectHideFlags: 0
@@ -1300,6 +1294,7 @@ GameObject:
   - component: {fileID: 1479141675}
   - component: {fileID: 1479141674}
   - component: {fileID: 1479141682}
+  - component: {fileID: 1479141684}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -1433,228 +1428,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Stats: []
-  Strength:
-    _data: {fileID: 0}
-    _currentValue: 0
-    _flatModifiers: []
-    _multiplierModifiers: []
-  Perception:
-    _data: {fileID: 0}
-    _currentValue: 0
-    _flatModifiers: []
-    _multiplierModifiers: []
-  Endurance:
-    _data: {fileID: 0}
-    _currentValue: 0
-    _flatModifiers: []
-    _multiplierModifiers: []
-  Charisma:
-    _data: {fileID: 0}
-    _currentValue: 0
-    _flatModifiers: []
-    _multiplierModifiers: []
-  Intelligence:
-    _data: {fileID: 0}
-    _currentValue: 0
-    _flatModifiers: []
-    _multiplierModifiers: []
-  Agility:
-    _data: {fileID: 0}
-    _currentValue: 0
-    _flatModifiers: []
-    _multiplierModifiers: []
-  Luck:
-    _data: {fileID: 0}
-    _currentValue: 0
-    _flatModifiers: []
-    _multiplierModifiers: []
   HealthCurrent: 0
   EnergyCurrent: 0
-  HealthMax:
-    _data: {fileID: 0}
-    _currentValue: 0
-    _flatModifiers: []
-    _multiplierModifiers: []
-  EnergyMax:
-    _data: {fileID: 0}
-    _currentValue: 0
-    _flatModifiers: []
-    _multiplierModifiers: []
-  HealthRegeneration:
-    _data: {fileID: 0}
-    _currentValue: 0
-    _flatModifiers: []
-    _multiplierModifiers: []
-  EnergyRegeneration:
-    _data: {fileID: 0}
-    _currentValue: 0
-    _flatModifiers: []
-    _multiplierModifiers: []
-  DamageDealt:
-    _data: {fileID: 0}
-    _currentValue: 0
-    _flatModifiers: []
-    _multiplierModifiers: []
-  PhysicalDamage:
-    _data: {fileID: 0}
-    _currentValue: 0
-    _flatModifiers: []
-    _multiplierModifiers: []
-  SlicingDamage:
-    _data: {fileID: 0}
-    _currentValue: 0
-    _flatModifiers: []
-    _multiplierModifiers: []
-  PiercingDamage:
-    _data: {fileID: 0}
-    _currentValue: 0
-    _flatModifiers: []
-    _multiplierModifiers: []
-  BluntDamage:
-    _data: {fileID: 0}
-    _currentValue: 0
-    _flatModifiers: []
-    _multiplierModifiers: []
-  MagicalDamage:
-    _data: {fileID: 0}
-    _currentValue: 0
-    _flatModifiers: []
-    _multiplierModifiers: []
-  FireDamage:
-    _data: {fileID: 0}
-    _currentValue: 0
-    _flatModifiers: []
-    _multiplierModifiers: []
-  WaterDamage:
-    _data: {fileID: 0}
-    _currentValue: 0
-    _flatModifiers: []
-    _multiplierModifiers: []
-  AirDamage:
-    _data: {fileID: 0}
-    _currentValue: 0
-    _flatModifiers: []
-    _multiplierModifiers: []
-  HolyDamage:
-    _data: {fileID: 0}
-    _currentValue: 0
-    _flatModifiers: []
-    _multiplierModifiers: []
-  DarknessDamage:
-    _data: {fileID: 0}
-    _currentValue: 0
-    _flatModifiers: []
-    _multiplierModifiers: []
-  BloodDamage:
-    _data: {fileID: 0}
-    _currentValue: 0
-    _flatModifiers: []
-    _multiplierModifiers: []
-  ChemicalDamage:
-    _data: {fileID: 0}
-    _currentValue: 0
-    _flatModifiers: []
-    _multiplierModifiers: []
-  DamageTaken:
-    _data: {fileID: 0}
-    _currentValue: 0
-    _flatModifiers: []
-    _multiplierModifiers: []
-  PhysicalResistance:
-    _data: {fileID: 0}
-    _currentValue: 0
-    _flatModifiers: []
-    _multiplierModifiers: []
-  SlicingResistance:
-    _data: {fileID: 0}
-    _currentValue: 0
-    _flatModifiers: []
-    _multiplierModifiers: []
-  PiercingResistance:
-    _data: {fileID: 0}
-    _currentValue: 0
-    _flatModifiers: []
-    _multiplierModifiers: []
-  BluntResistance:
-    _data: {fileID: 0}
-    _currentValue: 0
-    _flatModifiers: []
-    _multiplierModifiers: []
-  MagicalResistance:
-    _data: {fileID: 0}
-    _currentValue: 0
-    _flatModifiers: []
-    _multiplierModifiers: []
-  FireResistance:
-    _data: {fileID: 0}
-    _currentValue: 0
-    _flatModifiers: []
-    _multiplierModifiers: []
-  WaterResistance:
-    _data: {fileID: 0}
-    _currentValue: 0
-    _flatModifiers: []
-    _multiplierModifiers: []
-  AirResistance:
-    _data: {fileID: 0}
-    _currentValue: 0
-    _flatModifiers: []
-    _multiplierModifiers: []
-  HolyResistance:
-    _data: {fileID: 0}
-    _currentValue: 0
-    _flatModifiers: []
-    _multiplierModifiers: []
-  DarknessResistance:
-    _data: {fileID: 0}
-    _currentValue: 0
-    _flatModifiers: []
-    _multiplierModifiers: []
-  BloodResistance:
-    _data: {fileID: 0}
-    _currentValue: 0
-    _flatModifiers: []
-    _multiplierModifiers: []
-  ChemicalResistance:
-    _data: {fileID: 0}
-    _currentValue: 0
-    _flatModifiers: []
-    _multiplierModifiers: []
-  MoveSpeed:
-    _data: {fileID: 0}
-    _currentValue: 0
-    _flatModifiers: []
-    _multiplierModifiers: []
-  EvadeChance:
-    _data: {fileID: 0}
-    _currentValue: 0
-    _flatModifiers: []
-    _multiplierModifiers: []
-  BlockChance:
-    _data: {fileID: 0}
-    _currentValue: 0
-    _flatModifiers: []
-    _multiplierModifiers: []
-  BlockAngle:
-    _data: {fileID: 0}
-    _currentValue: 0
-    _flatModifiers: []
-    _multiplierModifiers: []
-  BlockPower:
-    _data: {fileID: 0}
-    _currentValue: 0
-    _flatModifiers: []
-    _multiplierModifiers: []
-  CriticalHitChance:
-    _data: {fileID: 0}
-    _currentValue: 0
-    _flatModifiers: []
-    _multiplierModifiers: []
-  CriticalHitPower:
-    _data: {fileID: 0}
-    _currentValue: 0
-    _flatModifiers: []
-    _multiplierModifiers: []
   _regenerationTickDelay: 1
   _healthRegenerationDelay: 10
   _energyRegenerationDelay: 5
@@ -1723,8 +1498,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dac23c46dcea5c542ab9e0d33f632718, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EvadeEnergyCost: 10
-  BlockEnergyCost: 10
   HearRadius: 5
   ViewDistance: 40
   ViewAngle: 90
@@ -1750,19 +1523,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f60ad0658dc634498a0d15ef70d68dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Created: 0
   IsPerfomingAction: 0
   UseRootMotion: 0
   UseGravity: 1
   CanMove: 1
   CanRotate: 1
-  CanTargeting: 1
-  IsTargetable: 1
   IsGrounded: 1
   IsMoving: 0
   IsRunning: 0
-  IsDashing: 0
-  IsCasting: 0
-  IsTargeting: 0
   IsInvulnerable: 0
   IsDead: 0
 --- !u!143 &1479141682
@@ -1808,6 +1577,33 @@ MonoBehaviour:
   _jumpForce: 2
   _timeToJump: 0.25
   _timeToFall: 0.25
+--- !u!54 &1479141684
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1479141672}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 14
+  m_CollisionDetection: 0
 --- !u!1 &1747374927
 GameObject:
   m_ObjectHideFlags: 0

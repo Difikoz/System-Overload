@@ -6,7 +6,6 @@ namespace WinterUniverse
 {
     public class GameManager : Singleton<GameManager>
     {
-        private MainMenuManager _mainMenu;
         private PlayerController _player;
         private PlayerInputManager _playerInput;
         private PlayerCameraManager _playerCamera;
@@ -18,7 +17,6 @@ namespace WinterUniverse
         private WorldSoundManager _worldSound;
         private WorldTimeManager _worldTime;
 
-        public MainMenuManager MainMenu => _mainMenu;
         public PlayerController Player => _player;
         public PlayerInputManager PlayerInput => _playerInput;
         public PlayerCameraManager PlayerCamera => _playerCamera;
@@ -39,8 +37,6 @@ namespace WinterUniverse
         private IEnumerator LoadingTimer()
         {
             yield return null;
-            _mainMenu = GetComponentInChildren<MainMenuManager>();
-            yield return null;
             _playerInput = GetComponentInChildren<PlayerInputManager>();
             yield return null;
             _playerCamera = GetComponentInChildren<PlayerCameraManager>();
@@ -59,45 +55,42 @@ namespace WinterUniverse
             yield return null;
             _worldTime = GetComponentInChildren<WorldTimeManager>();
             yield return null;
-            _mainMenu.UpdateLoadingScreen("Initialize Main Menu", 0, 1);
-            _mainMenu.Initialize();
-            yield return new WaitForSeconds(0.25f);
-            _mainMenu.UpdateLoadingScreen("Initialize Main Menu", 1, 1);
-            yield return new WaitForSeconds(0.25f);
-            _mainMenu.UpdateLoadingScreen("Initialize Player", 0, 1);
+            _playerUI.LoadingScreenUI.Show();
+            yield return null;
+            _playerUI.LoadingScreenUI.UpdateLoadingScreen("Initialize Player", 0, 1);
             _player = LeanPool.Spawn(_worldData.PlayerPrefab).GetComponent<PlayerController>();
             yield return new WaitForSeconds(0.25f);
-            _mainMenu.UpdateLoadingScreen("Initialize Player", 1, 1);
+            _playerUI.LoadingScreenUI.UpdateLoadingScreen("Initialize Player", 1, 1);
             yield return new WaitForSeconds(0.25f);
-            _mainMenu.UpdateLoadingScreen("Initialize Player Input", 0, 1);
+            _playerUI.LoadingScreenUI.UpdateLoadingScreen("Initialize Player Input", 0, 1);
             _playerInput.Initialize();
             yield return new WaitForSeconds(0.25f);
-            _mainMenu.UpdateLoadingScreen("Initialize Player Input", 1, 1);
+            _playerUI.LoadingScreenUI.UpdateLoadingScreen("Initialize Player Input", 1, 1);
             yield return new WaitForSeconds(0.25f);
-            _mainMenu.UpdateLoadingScreen("Initialize Player Camera", 0, 1);
+            _playerUI.LoadingScreenUI.UpdateLoadingScreen("Initialize Player Camera", 0, 1);
             _playerCamera.Initialize();
             yield return new WaitForSeconds(0.25f);
-            _mainMenu.UpdateLoadingScreen("Initialize Player Camera", 1, 1);
+            _playerUI.LoadingScreenUI.UpdateLoadingScreen("Initialize Player Camera", 1, 1);
             yield return new WaitForSeconds(0.25f);
-            _mainMenu.UpdateLoadingScreen("Initialize Player UI", 0, 1);
+            _playerUI.LoadingScreenUI.UpdateLoadingScreen("Initialize Player UI", 0, 1);
             _playerUI.Initialize();
             yield return new WaitForSeconds(0.25f);
-            _mainMenu.UpdateLoadingScreen("Initialize Player UI", 1, 1);
+            _playerUI.LoadingScreenUI.UpdateLoadingScreen("Initialize Player UI", 1, 1);
             yield return new WaitForSeconds(0.25f);
-            _mainMenu.UpdateLoadingScreen("Initialize World Data", 0, 1);
+            _playerUI.LoadingScreenUI.UpdateLoadingScreen("Initialize World Data", 0, 1);
             _worldData.Initialize();
             yield return new WaitForSeconds(0.25f);
-            _mainMenu.UpdateLoadingScreen("Initialize World Data", 1, 1);
+            _playerUI.LoadingScreenUI.UpdateLoadingScreen("Initialize World Data", 1, 1);
             yield return new WaitForSeconds(0.25f);
-            _mainMenu.UpdateLoadingScreen("Initialize World Sound", 0, 1);
+            _playerUI.LoadingScreenUI.UpdateLoadingScreen("Initialize World Sound", 0, 1);
             _worldSound.Initialize();
             yield return new WaitForSeconds(0.25f);
-            _mainMenu.UpdateLoadingScreen("Initialize World Sound", 1, 1);
+            _playerUI.LoadingScreenUI.UpdateLoadingScreen("Initialize World Sound", 1, 1);
             yield return new WaitForSeconds(0.25f);
-            _mainMenu.UpdateLoadingScreen("Load Saved Data", 0, 1);
+            _playerUI.LoadingScreenUI.UpdateLoadingScreen("Load Saved Data", 0, 1);
             _worldSaveLoad.LoadGame();
             yield return new WaitForSeconds(0.25f);
-            _mainMenu.UpdateLoadingScreen("Load Saved Data", 1, 1);
+            _playerUI.LoadingScreenUI.UpdateLoadingScreen("Load Saved Data", 1, 1);
             yield return new WaitForSeconds(0.25f);
             //_mainMenu.OpenMainMenuWindow();
             Debug.Log($"Loaded : {Time.timeSinceLevelLoad} seconds.");

@@ -4,29 +4,42 @@ namespace WinterUniverse
 {
     public class PlayerUIManager : MonoBehaviour
     {
+        [SerializeField] private LoadingScreenUI _loadingScreenUI;
+        private MainMenuUI _mainMenuUI;
+        private SettingsUI _settingsUI;
         private PlayerVitalityBarUI _vitalityUI;
         private PlayerNotificationUI _notificationUI;
         private PlayerInteractionUI _interactionUI;
-        private PlayerStatUI _statUI;
-        private PlayerEquipmentUI _equipmentUI;
-        private PlayerInventoryUI _inventoryUI;
-        private PlayerFactionUI _factionUI;
+        private StatUI _statUI;
+        private EquipmentUI _equipmentUI;
+        private InventoryUI _inventoryUI;
+        private FactionUI _factionUI;
 
         [SerializeField] private GameObject _menuWindow;
 
+        public LoadingScreenUI LoadingScreenUI => _loadingScreenUI;
         public PlayerNotificationUI NotificationUI => _notificationUI;
 
         public void Initialize()
         {
+            //_loadingScreen = GetComponentInChildren<LoadingScreenUI>();
+            _mainMenuUI = GetComponentInChildren<MainMenuUI>();
+            _settingsUI = GetComponentInChildren<SettingsUI>();
             _vitalityUI = GetComponentInChildren<PlayerVitalityBarUI>();
             _notificationUI = GetComponentInChildren<PlayerNotificationUI>();
             _interactionUI = GetComponentInChildren<PlayerInteractionUI>();
-            _statUI = GetComponentInChildren<PlayerStatUI>();
-            _equipmentUI = GetComponentInChildren<PlayerEquipmentUI>();
-            _inventoryUI = GetComponentInChildren<PlayerInventoryUI>();
-            _factionUI = GetComponentInChildren<PlayerFactionUI>();
+            _statUI = GetComponentInChildren<StatUI>();
+            _equipmentUI = GetComponentInChildren<EquipmentUI>();
+            _inventoryUI = GetComponentInChildren<InventoryUI>();
+            _factionUI = GetComponentInChildren<FactionUI>();
+            _mainMenuUI.Initialize();
+            _settingsUI.Initialize();
             _vitalityUI.Initialize();
             _interactionUI.Initialize();
+            _statUI.Initialize();
+            _equipmentUI.Initialize();
+            _inventoryUI.Initialize();
+            _factionUI.Initialize();
         }
 
         public void ShowHUD()
