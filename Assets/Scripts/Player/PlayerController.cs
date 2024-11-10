@@ -15,29 +15,6 @@ namespace WinterUniverse
             return GameManager.StaticInstance.PlayerCamera.transform.forward;
         }
 
-
-        protected override void OnEnable()
-        {
-            base.OnEnable();
-            _pawnStats.OnHealthChanged += GameManager.StaticInstance.PlayerUI.HUD.VitalityUI.SetHealthValues;
-            _pawnStats.OnEnergyChanged += GameManager.StaticInstance.PlayerUI.HUD.VitalityUI.SetEnergyValues;
-            //StatManager.OnStatChanged += PlayerUIManager.StaticInstance.MenuUI.StatUI.UpdateUI;
-        }
-
-        protected override void OnDisable()
-        {
-            base.OnDisable();
-            _pawnStats.OnHealthChanged -= GameManager.StaticInstance.PlayerUI.HUD.VitalityUI.SetHealthValues;
-            _pawnStats.OnEnergyChanged -= GameManager.StaticInstance.PlayerUI.HUD.VitalityUI.SetEnergyValues;
-            //StatManager.OnStatChanged -= PlayerUIManager.StaticInstance.MenuUI.StatUI.UpdateUI;
-        }
-
-        public override void CreateCharacter(PawnSaveData data)
-        {
-            base.CreateCharacter(data);
-            GameManager.StaticInstance.PlayerCamera.transform.position = transform.position;
-        }
-
         protected override IEnumerator ProcessDeathEvent()
         {
             GameManager.StaticInstance.PlayerUI.HUD.NotificationUI.DisplayNotification("You Died");
@@ -71,23 +48,30 @@ namespace WinterUniverse
             }
             data.WeaponInRightHand = _pawnEquipment.WeaponRightSlot.Data.DisplayName;
             data.WeaponInLeftHand = _pawnEquipment.WeaponLeftSlot.Data.DisplayName;
+            // save armors
             data.Transform.SetPositionAndRotation(transform.position, transform.eulerAngles);
         }
 
         public void LoadData(PawnSaveData data)
         {
-            ChangeFaction(GameManager.StaticInstance.WorldData.GetFaction(data.Faction));
-            _characterName = data.CharacterName;
-            _pawnStats.CreateStats();
+            if (!Created)
+            {
+                _pawnStats.OnHealthChanged += GameManager.StaticInstance.PlayerUI.HUD.VitalityUI.SetHealthValues;
+                _pawnStats.OnEnergyChanged += GameManager.StaticInstance.PlayerUI.HUD.VitalityUI.SetEnergyValues;
+                //StatManager.OnStatChanged += PlayerUIManager.StaticInstance.MenuUI.StatUI.UpdateUI;
+            }
+            CreateCharacter(data);
             _pawnStats.HealthCurrent = data.Health;
             _pawnStats.EnergyCurrent = data.Energy;
-            PawnInventory.Initialize(data.InventoryStacks);
-            _pawnEquipment.EquipWeapon(GameManager.StaticInstance.WorldData.GetWeapon(data.WeaponInRightHand), false, false);
-            _pawnEquipment.EquipWeapon(GameManager.StaticInstance.WorldData.GetWeapon(data.WeaponInLeftHand), false, false);
-            _pawnStats.RecalculateStats();
             transform.SetPositionAndRotation(data.Transform.GetPosition(), data.Transform.GetRotation());
             GameManager.StaticInstance.PlayerCamera.transform.position = transform.position;
-            _pawnEquipment.ForceUpdateMeshes();
+        }
+
+        private void OnDestroy()
+        {
+            _pawnStats.OnHealthChanged -= GameManager.StaticInstance.PlayerUI.HUD.VitalityUI.SetHealthValues;
+            _pawnStats.OnEnergyChanged -= GameManager.StaticInstance.PlayerUI.HUD.VitalityUI.SetEnergyValues;
+            //StatManager.OnStatChanged -= PlayerUIManager.StaticInstance.MenuUI.StatUI.UpdateUI;
         }
     }
 }

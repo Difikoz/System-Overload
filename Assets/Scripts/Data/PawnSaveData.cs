@@ -15,13 +15,7 @@ namespace WinterUniverse
 
         public SerializableDictionary<string, int> InventoryStacks = new();
 
-        public string WeaponInRightHand = "Unarmed";
-        public string WeaponInLeftHand = "Unarmed";
-
-        public string HeadArmor = "Empty";
-        public string ChestArmor = "Empty";
-        public string PantsArmor = "Empty";
-        public string BootsArmor = "Empty";
-        public string GlovesArmor = "Empty";
+        public string WeaponInRightHand;
+        public string WeaponInLeftHand;
     }
 }

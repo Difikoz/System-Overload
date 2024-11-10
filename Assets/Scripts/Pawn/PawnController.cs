@@ -35,6 +35,8 @@ namespace WinterUniverse
         public PawnStats PawnStats => _pawnStats;
         public PawnInteraction PawnInteraction => _pawnInteraction;
 
+        public bool Created;
+
         public bool IsPerfomingAction;
         public bool UseRootMotion;
         public bool UseGravity = true;
@@ -76,6 +78,7 @@ namespace WinterUniverse
         {
             if (!IsDead)
             {
+                _pawnEffects.TickEffects(Time.deltaTime);
                 _pawnStats.RegenerateHealth();
                 _pawnStats.RegenerateEnergy();
                 _pawnCombat.HandleTargeting();
@@ -96,6 +99,7 @@ namespace WinterUniverse
 
         public virtual void CreateCharacter(PawnSaveData data)
         {
+            Created = false;
             _characterName = data.CharacterName;
             _pawnAnimator = GetComponentInChildren<PawnAnimator>();
             _pawnCombat = GetComponent<PawnCombat>();
@@ -117,13 +121,17 @@ namespace WinterUniverse
             _pawnSound.Initialize(this);
             _pawnStats.Initialize(this);
             _pawnStats.CreateStats();
-            _pawnEquipment.EquipBestItems();
+            IgnoreMyOwnColliders();// this order??? or on end???
+            _pawnEquipment.EquipWeapon(GameManager.StaticInstance.WorldData.GetWeapon(data.WeaponInRightHand), false, false);
+            _pawnEquipment.EquipWeapon(GameManager.StaticInstance.WorldData.GetWeapon(data.WeaponInLeftHand), false, false);
+            // equip starting armors
+            //_pawnEquipment.EquipBestItems();
             _pawnStats.RecalculateStats();
             _pawnStats.RestoreCurrentHealth(_pawnStats.HealthMax.CurrentValue);
             _pawnStats.RestoreCurrentEnergy(_pawnStats.EnergyMax.CurrentValue);
             _pawnEquipment.ForceUpdateMeshes();
             ChangeFaction(GameManager.StaticInstance.WorldData.GetFaction(data.Faction));
-            IgnoreMyOwnColliders();
+            Created = true;
         }
 
         public void ChangeFaction(FactionConfig data)

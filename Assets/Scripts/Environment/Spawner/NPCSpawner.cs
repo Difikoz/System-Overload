@@ -5,7 +5,7 @@ namespace WinterUniverse
 {
     public class NPCSpawner : MonoBehaviour
     {
-        public CharacterData Data;
+        public PawnConfig Data;
 
         private AIController _spawnedNPC;
 
