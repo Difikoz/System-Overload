@@ -12,17 +12,17 @@ namespace WinterUniverse
         public NPCActionData ComboAction;
         [Range(0f, 1f)] public float ComboChance = 0.25f;
 
-        public virtual void AttempToPerformAction(NPCController npc)
+        public virtual void AttempToPerformAction(AIController npc)
         {
 
         }
 
-        public virtual bool InRangeToUse(NPCController npc)
+        public virtual bool InRangeToUse(AIController npc)
         {
             return npc.PawnCombat.DistanceToTarget > MinDistance && npc.PawnCombat.DistanceToTarget < MaxDistance;
         }
 
-        public virtual bool InAngleToUse(NPCController npc)
+        public virtual bool InAngleToUse(AIController npc)
         {
             return Mathf.Abs(npc.PawnCombat.AngleToTarget) < Angle / 2f;
         }

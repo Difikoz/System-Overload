@@ -52,27 +52,7 @@ namespace WinterUniverse
 
         protected virtual void Awake()
         {
-            _pawnAnimator = GetComponentInChildren<PawnAnimator>();
-            _pawnCombat = GetComponent<PawnCombat>();
-            _pawnEffects = GetComponent<PawnEffects>();
-            _pawnEquipment = GetComponentInChildren<PawnEquipment>();
-            _pawnInteraction = GetComponent<PawnInteraction>();
-            _pawnInventory = GetComponent<PawnInventory>();
-            _pawnLocomotion = GetComponent<PawnLocomotion>();
-            _pawnSound = GetComponent<PawnSound>();
-            _pawnStats = GetComponent<PawnStats>();
-            //CharacterUI = GetComponentInChildren<CharacterUI>();
-            _pawnAnimator.Initialize(this);
-            _pawnCombat.Initialize(this);
-            _pawnEffects.Initialize(this);
-            _pawnEquipment.Initialize(this);
-            _pawnInteraction.Initialize(this);
-            //_pawnInventory.Initialize();
-            _pawnLocomotion.Initialize(this);
-            _pawnSound.Initialize(this);
-            _pawnStats.Initialize(this);
-            IgnoreMyOwnColliders();
-            DontDestroyOnLoad(this);
+
         }
 
         protected virtual void OnEnable()
@@ -116,16 +96,34 @@ namespace WinterUniverse
 
         public virtual void CreateCharacter(PawnSaveData data)
         {
-            ChangeFaction(GameManager.StaticInstance.WorldData.GetFaction(data.Faction));
             _characterName = data.CharacterName;
-            _pawnStats.CreateStats();
+            _pawnAnimator = GetComponentInChildren<PawnAnimator>();
+            _pawnCombat = GetComponent<PawnCombat>();
+            _pawnEffects = GetComponent<PawnEffects>();
+            _pawnEquipment = GetComponentInChildren<PawnEquipment>();
+            _pawnInteraction = GetComponent<PawnInteraction>();
+            _pawnInventory = GetComponent<PawnInventory>();
+            _pawnLocomotion = GetComponent<PawnLocomotion>();
+            _pawnSound = GetComponent<PawnSound>();
+            _pawnStats = GetComponent<PawnStats>();
+            //CharacterUI = GetComponentInChildren<CharacterUI>();
+            _pawnAnimator.Initialize(this);
+            _pawnCombat.Initialize(this);
+            _pawnEffects.Initialize(this);
+            _pawnEquipment.Initialize(this);
+            _pawnInteraction.Initialize(this);
             _pawnInventory.Initialize(data.InventoryStacks);
-            _pawnEquipment.ClearEquipment();
+            _pawnLocomotion.Initialize(this);
+            _pawnSound.Initialize(this);
+            _pawnStats.Initialize(this);
+            _pawnStats.CreateStats();
             _pawnEquipment.EquipBestItems();
             _pawnStats.RecalculateStats();
             _pawnStats.RestoreCurrentHealth(_pawnStats.HealthMax.CurrentValue);
             _pawnStats.RestoreCurrentEnergy(_pawnStats.EnergyMax.CurrentValue);
             _pawnEquipment.ForceUpdateMeshes();
+            ChangeFaction(GameManager.StaticInstance.WorldData.GetFaction(data.Faction));
+            IgnoreMyOwnColliders();
         }
 
         public void ChangeFaction(FactionConfig data)

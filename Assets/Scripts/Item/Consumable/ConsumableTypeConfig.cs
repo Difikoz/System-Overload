@@ -2,8 +2,8 @@ using UnityEngine;
 
 namespace WinterUniverse
 {
-    [CreateAssetMenu(fileName = "Armor Type", menuName = "Winter Universe/Item/Equipment/Armor/New Type")]
-    public class ArmorTypeData : ScriptableObject
+    [CreateAssetMenu(fileName = "Consumable Type", menuName = "Winter Universe/Item/Consumable/New Type")]
+    public class ConsumableTypeConfig : ScriptableObject
     {
         [SerializeField] private string _displayName = "Type";
         [SerializeField] private Sprite _icon;

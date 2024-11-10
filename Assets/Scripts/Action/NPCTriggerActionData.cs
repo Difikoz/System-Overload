@@ -7,7 +7,7 @@ namespace WinterUniverse
     {
         public string AnimName = "Dodge Backward";
 
-        public override void AttempToPerformAction(NPCController npc)
+        public override void AttempToPerformAction(AIController npc)
         {
             npc.PawnAnimator.PlayActionAnimation(AnimName, true);
         }

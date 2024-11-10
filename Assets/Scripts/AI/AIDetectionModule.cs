@@ -4,16 +4,16 @@ using UnityEngine;
 
 namespace WinterUniverse
 {
-    public class NPCDetectionModule : MonoBehaviour
+    public class AIDetectionModule : MonoBehaviour
     {
-        private NPCController _owner;
+        private AIController _owner;
         private List<PawnController> _visibleEnemies = new();
         private List<PawnController> _visibleNeutrals = new();
         private List<PawnController> _visibleAllies = new();
 
         private void Awake()
         {
-            _owner = GetComponent<NPCController>();
+            _owner = GetComponent<AIController>();
         }
 
         public void FindTargetInViewRange()

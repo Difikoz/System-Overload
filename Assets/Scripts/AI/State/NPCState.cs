@@ -4,18 +4,18 @@ namespace WinterUniverse
 {
     public class NPCState : ScriptableObject
     {
-        public virtual NPCState Tick(NPCController npc)
+        public virtual NPCState Tick(AIController npc)
         {
             return this;
         }
 
-        protected virtual NPCState SwitchState(NPCController npc, NPCState state)
+        protected virtual NPCState SwitchState(AIController npc, NPCState state)
         {
             ResetFlags(npc);
             return state;
         }
 
-        protected virtual void ResetFlags(NPCController npc)
+        protected virtual void ResetFlags(AIController npc)
         {
 
         }

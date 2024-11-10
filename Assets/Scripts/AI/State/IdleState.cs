@@ -7,7 +7,7 @@ namespace WinterUniverse
     {
         public bool CanChase = true;
 
-        public override NPCState Tick(NPCController npc)
+        public override NPCState Tick(AIController npc)
         {
             if (CanChase)
             {
@@ -17,7 +17,7 @@ namespace WinterUniverse
                 }
                 else
                 {
-                    npc.NPCDetectionModule.FindTargetInViewRange();
+                    npc.AIDetectionModule.FindTargetInViewRange();
                 }
             }
             return this;

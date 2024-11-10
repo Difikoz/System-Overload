@@ -9,10 +9,10 @@ namespace WinterUniverse
         [Header("Equipment Modifiers")]
         [SerializeField] private List<StatModifierCreator> _modifiers = new();
         [Header("Armor Information")]
-        [SerializeField] private ArmorTypeData _armorType;
+        [SerializeField] private ArmorTypeConfig _armorType;
 
         public List<StatModifierCreator> Modifiers => _modifiers;
-        public ArmorTypeData ArmorType => _armorType;
+        public ArmorTypeConfig ArmorType => _armorType;
 
         private void OnValidate()
         {

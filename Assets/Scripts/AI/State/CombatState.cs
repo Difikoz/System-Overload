@@ -23,7 +23,7 @@ namespace WinterUniverse
             }
         }
 
-        public override NPCState Tick(NPCController npc)
+        public override NPCState Tick(AIController npc)
         {
             if (npc.IsPerfomingAction)
             {
@@ -50,7 +50,7 @@ namespace WinterUniverse
             return this;
         }
 
-        protected virtual void GetNewAction(NPCController npc)
+        protected virtual void GetNewAction(AIController npc)
         {
             _potentialActions.Clear();
             foreach (NPCActionData potential in Actions)
@@ -94,7 +94,7 @@ namespace WinterUniverse
             return Random.value < outcomeChance;
         }
 
-        protected override void ResetFlags(NPCController npc)
+        protected override void ResetFlags(AIController npc)
         {
             base.ResetFlags(npc);
             _hasAction = false;

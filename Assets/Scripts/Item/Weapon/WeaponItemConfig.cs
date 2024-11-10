@@ -10,8 +10,7 @@ namespace WinterUniverse
         [SerializeField] private List<StatModifierCreator> _modifiers = new();
         [Header("Weapon Information")]
         [SerializeField] private AnimatorOverrideController _controller;
-        [SerializeField] private WeaponTypeData _weaponType;
-        [SerializeField] private WeaponHandType _weaponHandType;
+        [SerializeField] private WeaponTypeConfig _weaponType;
         [Header("Local Transform Values")]
         [SerializeField] private Vector3 _localPosition;
         [SerializeField] private Quaternion _localRotation;
@@ -32,8 +31,7 @@ namespace WinterUniverse
 
         public List<StatModifierCreator> Modifiers => _modifiers;
         public AnimatorOverrideController Controller => _controller;
-        public WeaponTypeData WeaponType => _weaponType;
-        public WeaponHandType WeaponHandType => _weaponHandType;
+        public WeaponTypeConfig WeaponType => _weaponType;
         public Vector3 LocalPosition => _localPosition;
         public Quaternion LocalRotation => _localRotation;
         public AbilityData PrimaryAbility => _primaryAbility;

@@ -11,7 +11,7 @@ namespace WinterUniverse
         protected bool _hasPerfomedComboAction;
         protected bool _willPerformCombo;
 
-        public override NPCState Tick(NPCController npc)
+        public override NPCState Tick(AIController npc)
         {
             if (npc.IsPerfomingAction)
             {
@@ -52,25 +52,25 @@ namespace WinterUniverse
             return SwitchState(npc, npc.CombatPhase.CurrentPhase.State);
         }
 
-        protected void PerformAction(NPCController npc)
+        protected void PerformAction(AIController npc)
         {
             _hasPerfomedAction = true;
             Action.AttempToPerformAction(npc);
-            npc.ActionRecoveryTimer = Action.Cooldown;
-            npc.CurrentAction = Action;
+            //npc.ActionRecoveryTimer = Action.Cooldown;
+            //npc.CurrentAction = Action;
             _willPerformCombo = Action.ComboAction != null && Action.ComboChance >= Random.value;
 
         }
 
-        protected void PerformComboAction(NPCController npc)
+        protected void PerformComboAction(AIController npc)
         {
             _hasPerfomedComboAction = true;
             Action.ComboAction.AttempToPerformAction(npc);
-            npc.ActionRecoveryTimer = Action.ComboAction.Cooldown;
-            npc.CurrentAction = Action.ComboAction;
+            //npc.ActionRecoveryTimer = Action.ComboAction.Cooldown;
+            //npc.CurrentAction = Action.ComboAction;
         }
 
-        protected override void ResetFlags(NPCController npc)
+        protected override void ResetFlags(AIController npc)
         {
             base.ResetFlags(npc);
             _hasPerfomedAction = false;

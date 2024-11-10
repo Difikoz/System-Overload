@@ -156,7 +156,7 @@ namespace WinterUniverse
             return item != null;
         }
 
-        public bool GetBestWeapon(WeaponHandType type, out WeaponItemConfig item)
+        public bool GetBestWeapon(WeaponTypeConfig type, out WeaponItemConfig item)
         {
             item = null;
             float rating = 0;
@@ -165,7 +165,7 @@ namespace WinterUniverse
                 if (stack.Item.ItemType == ItemType.Weapon)
                 {
                     WeaponItemConfig weapon = (WeaponItemConfig)stack.Item;
-                    if (weapon.Rating > rating && weapon.WeaponHandType == type)
+                    if (weapon.Rating > rating && weapon.WeaponType == type)
                     {
                         rating = weapon.Rating;
                         item = weapon;
@@ -175,7 +175,7 @@ namespace WinterUniverse
             return item != null;
         }
 
-        public bool GetBestArmor(ArmorTypeData type, out ArmorItemConfig item)
+        public bool GetBestArmor(ArmorTypeConfig type, out ArmorItemConfig item)
         {
             item = null;
             float rating = 0;
@@ -194,7 +194,7 @@ namespace WinterUniverse
             return item != null;
         }
 
-        public bool GetBestConsumable(ConsumableTypeData type, out ConsumableItemConfig item)
+        public bool GetBestConsumable(ConsumableTypeConfig type, out ConsumableItemConfig item)
         {
             item = null;
             float rating = 0;

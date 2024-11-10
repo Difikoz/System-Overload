@@ -82,22 +82,8 @@ namespace WinterUniverse
             _pawnStats.HealthCurrent = data.Health;
             _pawnStats.EnergyCurrent = data.Energy;
             PawnInventory.Initialize(data.InventoryStacks);
-            if (data.WeaponInRightHand != "Unarmed")
-            {
-                _pawnEquipment.EquipWeapon(GameManager.StaticInstance.WorldData.GetWeapon(data.WeaponInRightHand), false, false);
-            }
-            else
-            {
-                _pawnEquipment.UnequipWeapon(HandSlotType.Right, false);
-            }
-            if (data.WeaponInLeftHand != "Unarmed")
-            {
-                _pawnEquipment.EquipWeapon(GameManager.StaticInstance.WorldData.GetWeapon(data.WeaponInLeftHand), false, false);
-            }
-            else
-            {
-                _pawnEquipment.UnequipWeapon(HandSlotType.Left, false);
-            }
+            _pawnEquipment.EquipWeapon(GameManager.StaticInstance.WorldData.GetWeapon(data.WeaponInRightHand), false, false);
+            _pawnEquipment.EquipWeapon(GameManager.StaticInstance.WorldData.GetWeapon(data.WeaponInLeftHand), false, false);
             _pawnStats.RecalculateStats();
             transform.SetPositionAndRotation(data.Transform.GetPosition(), data.Transform.GetRotation());
             GameManager.StaticInstance.PlayerCamera.transform.position = transform.position;

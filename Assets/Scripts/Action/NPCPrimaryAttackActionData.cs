@@ -7,7 +7,7 @@ namespace WinterUniverse
     {
         public HandSlotType Slot;
 
-        public override void AttempToPerformAction(NPCController npc)
+        public override void AttempToPerformAction(AIController npc)
         {
             if (Slot == HandSlotType.Right || npc.PawnEquipment.WeaponLeftSlot.Data.DisplayName == "Unarmed")
             {
@@ -19,7 +19,7 @@ namespace WinterUniverse
             }
         }
 
-        public override bool InRangeToUse(NPCController npc)
+        public override bool InRangeToUse(AIController npc)
         {
             if (Slot == HandSlotType.Right || npc.PawnEquipment.WeaponLeftSlot.Data.DisplayName == "Unarmed")
             {
@@ -34,7 +34,7 @@ namespace WinterUniverse
             return base.InRangeToUse(npc);
         }
 
-        public override bool InAngleToUse(NPCController npc)
+        public override bool InAngleToUse(AIController npc)
         {
             if (Slot == HandSlotType.Right || npc.PawnEquipment.WeaponLeftSlot.Data.DisplayName == "Unarmed")
             {

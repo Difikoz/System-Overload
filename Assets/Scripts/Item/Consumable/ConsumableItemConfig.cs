@@ -7,10 +7,10 @@ namespace WinterUniverse
     public class ConsumableItemConfig : ItemConfig
     {
         [Header("Consumable Information")]
-        [SerializeField] private ConsumableTypeData _consumableType;
+        [SerializeField] private ConsumableTypeConfig _consumableType;
         [SerializeField] private List<EffectCreator> _effects = new();
 
-        public ConsumableTypeData ConsumableType => _consumableType;
+        public ConsumableTypeConfig ConsumableType => _consumableType;
         public List<EffectCreator> Effects => _effects;
 
         private void OnValidate()

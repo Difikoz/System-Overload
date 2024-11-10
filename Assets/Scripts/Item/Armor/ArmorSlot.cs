@@ -5,18 +5,24 @@ namespace WinterUniverse
 {
     public class ArmorSlot : MonoBehaviour
     {
-        private PawnController _owner;
+        private PawnController _pawn;
         private ArmorRenderer _currentRenderer;
 
-        [HideInInspector] public ArmorItemConfig Data;
-
-        public ArmorTypeData Type;
-        [SerializeField] private ArmorRenderer _defaultRenderer;
+        [SerializeField] private ArmorItemConfig _data;
+        [SerializeField] private ArmorTypeConfig _type;
         [SerializeField] private List<ArmorRenderer> _renderers = new();
 
-        private void OnEnable()
+        public ArmorItemConfig Data => _data;
+        public ArmorTypeConfig Type => _type;
+
+        public void Initialize(PawnController pawn)
         {
-            _owner = GetComponentInParent<PawnController>();
+            _pawn = pawn;
+            foreach (StatModifierCreator creator in _data.Modifiers)
+            {
+                _pawn.PawnStats.AddStatModifier(creator);
+            }
+            ForceUpdateMeshes();
         }
 
         public void Equip(ArmorItemConfig armor)
@@ -25,36 +31,24 @@ namespace WinterUniverse
             {
                 return;
             }
-            DisableMeshes(_currentRenderer);
-            Data = armor;// TODO need instantiate?
-            foreach (StatModifierCreator creator in Data.Modifiers)
+            foreach (StatModifierCreator creator in _data.Modifiers)
             {
-                _owner.PawnStats.AddStatModifier(creator);
+                _pawn.PawnStats.RemoveStatModifier(creator);
+            }
+            DisableMeshes(_currentRenderer);
+            _data = armor;
+            foreach (StatModifierCreator creator in _data.Modifiers)
+            {
+                _pawn.PawnStats.AddStatModifier(creator);
             }
             foreach (ArmorRenderer ar in _renderers)
             {
-                if (ar.Data == Data)
+                if (ar.Data == _data)
                 {
                     _currentRenderer = ar;
                     break;
                 }
             }
-            EnableMeshes(_currentRenderer);
-        }
-
-        public void Unequip()
-        {
-            if (Data == null)
-            {
-                return;
-            }
-            foreach (StatModifierCreator creator in Data.Modifiers)
-            {
-                _owner.PawnStats.RemoveStatModifier(creator);
-            }
-            Data = null;
-            DisableMeshes(_currentRenderer);
-            _currentRenderer = _defaultRenderer;
             EnableMeshes(_currentRenderer);
         }
 
@@ -64,21 +58,13 @@ namespace WinterUniverse
             {
                 DisableMeshes(ar);
             }
-            DisableMeshes(_defaultRenderer);
-            if (Data != null)
+            foreach (ArmorRenderer ar in _renderers)
             {
-                foreach (ArmorRenderer ar in _renderers)
+                if (ar.Data == _data)
                 {
-                    if (ar.Data == Data)
-                    {
-                        _currentRenderer = ar;
-                        break;
-                    }
+                    _currentRenderer = ar;
+                    break;
                 }
-            }
-            else
-            {
-                _currentRenderer = _defaultRenderer;
             }
             EnableMeshes(_currentRenderer);
         }

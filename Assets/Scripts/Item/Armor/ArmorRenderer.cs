@@ -6,7 +6,10 @@ namespace WinterUniverse
     [System.Serializable]
     public class ArmorRenderer
     {
-        public ArmorItemConfig Data;
-        public List<GameObject> Meshes;
+        [SerializeField] private ArmorItemConfig _data;
+        [SerializeField] private List<GameObject> _meshes = new();
+
+        public ArmorItemConfig Data => _data;
+        public List<GameObject> Meshes => _meshes;
     }
 }

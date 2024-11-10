@@ -6,7 +6,7 @@ namespace WinterUniverse
     [CreateAssetMenu(fileName = "Chase State", menuName = "Winter Universe/Character/NPC/State/New Chase State")]
     public class ChaseState : NPCState
     {
-        public override NPCState Tick(NPCController npc)
+        public override NPCState Tick(AIController npc)
         {
             if (npc.IsPerfomingAction)
             {
