@@ -22,11 +22,11 @@ namespace WinterUniverse
             _animator = GetComponent<Animator>();
         }
 
-        public void UpdateAnimatorMovement(float horizontal, float vertical, float maxSpeed)
+        public void UpdateAnimatorMovement(float horizontal, float vertical, float moveSpeed)
         {
-            _animator.SetFloat("RightVelocity", horizontal);
-            _animator.SetFloat("ForwardVelocity", vertical);
-            _animator.SetFloat("MoveSpeed", maxSpeed / _baseMoveSpeed);
+            _animator.SetFloat("RightVelocity", horizontal / moveSpeed);
+            _animator.SetFloat("ForwardVelocity", vertical / moveSpeed);
+            _animator.SetFloat("MoveSpeed", moveSpeed / _baseMoveSpeed);
             _animator.SetBool("IsGrounded", _pawn.IsGrounded);
             _animator.SetBool("IsMoving", _pawn.IsMoving);
         }

@@ -4,11 +4,10 @@ namespace WinterUniverse
 {
     public class Singleton<T> : MonoBehaviour where T : Singleton<T>
     {
-        protected static T _staticInstance;
+        private static T _staticInstance;
         public static T StaticInstance => _staticInstance;
 
         [SerializeField] private bool _dontDestroyOnLoad = true;
-        [SerializeField] private float _setupDelay = 0.1f;
 
         protected virtual void Awake()
         {
@@ -25,12 +24,6 @@ namespace WinterUniverse
             {
                 DontDestroyOnLoad(gameObject);
             }
-            Invoke(nameof(Setup), _setupDelay);
-        }
-
-        protected virtual void Setup()
-        {
-
         }
     }
 }

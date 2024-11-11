@@ -17,6 +17,7 @@ namespace WinterUniverse
             OnSettingsSliderMasterVolumeChanged(PlayerPrefs.GetFloat("MasterVolume", 1f));
             OnSettingsSliderAmbientVolumeChanged(PlayerPrefs.GetFloat("AmbientVolume", 0.5f));
             OnSettingsSliderSoundVolumeChanged(PlayerPrefs.GetFloat("SoundVolume", 0.5f));
+            gameObject.SetActive(false);
         }
 
         private void OnSettingsSliderMasterVolumeChanged(float value)

@@ -20,7 +20,6 @@ namespace WinterUniverse
 
         [SerializeField] private float _acceleration = 20f;
         [SerializeField] private float _deceleration = 40f;
-        [SerializeField] private float _maxSpeed = 10f;
         [SerializeField] private float _jumpForce = 2f;
         [SerializeField] private float _timeToJump = 0.25f;
         [SerializeField] private float _timeToFall = 0.25f;
@@ -102,13 +101,13 @@ namespace WinterUniverse
                 {
                     _moveInput *= 2f;
                 }
-                _moveVelocity = Vector3.MoveTowards(_moveVelocity, (transform.right * _moveInput.x + transform.forward * _moveInput.y) * _maxSpeed, _acceleration * Time.deltaTime);// TODO get move speed and  acceleration stat
+                _moveVelocity = Vector3.MoveTowards(_moveVelocity, (transform.right * _moveInput.x + transform.forward * _moveInput.y) * _pawn.PawnStats.MoveSpeed.CurrentValue, _acceleration * Time.deltaTime);// TODO get acceleration stat
             }
             else
             {
                 _moveVelocity = Vector3.MoveTowards(_moveVelocity, Vector3.zero, _deceleration * Time.deltaTime);// TODO get deceleration stat
             }
-            _cc.Move(_moveVelocity * Time.deltaTime);
+            _cc.Move(_moveVelocity * Time.deltaTime);// disabled for root motion movement
         }
 
         private void HandleRotation()

@@ -3,11 +3,9 @@ using UnityEngine;
 
 namespace WinterUniverse
 {
-    [CreateAssetMenu(fileName = "Weapon", menuName = "Winter Universe/Item/Equipment/Weapon/New Item")]
+    [CreateAssetMenu(fileName = "Weapon", menuName = "Winter Universe/Item/Weapon/New Item")]
     public class WeaponItemConfig : ItemConfig
     {
-        [Header("Equipment Modifiers")]
-        [SerializeField] private List<StatModifierCreator> _modifiers = new();
         [Header("Weapon Information")]
         [SerializeField] private AnimatorOverrideController _controller;
         [SerializeField] private WeaponTypeConfig _weaponType;
@@ -23,6 +21,8 @@ namespace WinterUniverse
         [SerializeField] private List<EffectCreator> _targetEffects = new();
         [SerializeField] private bool _doSplashDamage = false;
         [SerializeField] private float _splashRadius = 1f;
+        [Header("Modifiers")]
+        [SerializeField] private List<StatModifierCreator> _modifiers = new();
         [Header("For NPC")]
         [SerializeField] private float _cooldown = 1.5f;
         [SerializeField] private float _angle = 90f;

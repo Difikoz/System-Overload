@@ -5,9 +5,8 @@ namespace WinterUniverse
     public class PlayerUIManager : MonoBehaviour
     {
         [SerializeField] private LoadingScreenUI _loadingScreenUI;
-        private MainMenuUI _mainMenuUI;
         private SettingsUI _settingsUI;
-        private PlayerVitalityBarUI _vitalityUI;
+        private PlayerVitalityUI _vitalityUI;
         private PlayerNotificationUI _notificationUI;
         private PlayerInteractionUI _interactionUI;
         private StatUI _statUI;
@@ -23,16 +22,14 @@ namespace WinterUniverse
         public void Initialize()
         {
             //_loadingScreen = GetComponentInChildren<LoadingScreenUI>();
-            _mainMenuUI = GetComponentInChildren<MainMenuUI>();
             _settingsUI = GetComponentInChildren<SettingsUI>();
-            _vitalityUI = GetComponentInChildren<PlayerVitalityBarUI>();
+            _vitalityUI = GetComponentInChildren<PlayerVitalityUI>();
             _notificationUI = GetComponentInChildren<PlayerNotificationUI>();
             _interactionUI = GetComponentInChildren<PlayerInteractionUI>();
             _statUI = GetComponentInChildren<StatUI>();
             _equipmentUI = GetComponentInChildren<EquipmentUI>();
             _inventoryUI = GetComponentInChildren<InventoryUI>();
             _factionUI = GetComponentInChildren<FactionUI>();
-            _mainMenuUI.Initialize();
             _settingsUI.Initialize();
             _vitalityUI.Initialize();
             _interactionUI.Initialize();
@@ -40,6 +37,7 @@ namespace WinterUniverse
             _equipmentUI.Initialize();
             _inventoryUI.Initialize();
             _factionUI.Initialize();
+            HideMenu();
         }
 
         public void ShowHUD()

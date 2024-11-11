@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1eeb77435a0de7644ab262c3d2aef732, type: 3}
+  m_Name: Chemical
+  m_EditorClassIdentifier: 
+  _displayName: Chemical
+  _description: Description
+  _icon: {fileID: 0}
+  _damageStat: {fileID: 11400000, guid: 777849d7fce2c95479c67b9781300b55, type: 2}
+  _resistanceStat: {fileID: 11400000, guid: 3ec31b5acc5a75245ba102dd6d545efa, type: 2}
+  _hitVFX: []
+  _hitClips: []

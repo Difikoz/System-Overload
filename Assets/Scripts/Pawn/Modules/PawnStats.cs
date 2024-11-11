@@ -31,8 +31,8 @@ namespace WinterUniverse
         [HideInInspector] public Stat BluntDamage;
 
         [HideInInspector] public Stat FireDamage;
-        [HideInInspector] public Stat WaterDamage;
-        [HideInInspector] public Stat AirDamage;
+        [HideInInspector] public Stat IceDamage;
+        [HideInInspector] public Stat ElectricalDamage;
 
         [HideInInspector] public Stat HolyDamage;
         [HideInInspector] public Stat DarknessDamage;
@@ -45,8 +45,8 @@ namespace WinterUniverse
         [HideInInspector] public Stat BluntResistance;
 
         [HideInInspector] public Stat FireResistance;
-        [HideInInspector] public Stat WaterResistance;
-        [HideInInspector] public Stat AirResistance;
+        [HideInInspector] public Stat IceResistance;
+        [HideInInspector] public Stat ElectricalResistance;
 
         [HideInInspector] public Stat HolyResistance;
         [HideInInspector] public Stat DarknessResistance;
@@ -178,13 +178,13 @@ namespace WinterUniverse
                 {
                     FireDamage = s;
                 }
-                else if (s.Data.DisplayName == "Water Damage")
+                else if (s.Data.DisplayName == "Ice Damage")
                 {
-                    WaterDamage = s;
+                    IceDamage = s;
                 }
-                else if (s.Data.DisplayName == "Air Damage")
+                else if (s.Data.DisplayName == "Electrical Damage")
                 {
-                    AirDamage = s;
+                    ElectricalDamage = s;
                 }
                 else if (s.Data.DisplayName == "Holy Damage")
                 {
@@ -218,13 +218,13 @@ namespace WinterUniverse
                 {
                     FireResistance = s;
                 }
-                else if (s.Data.DisplayName == "Water Resistance")
+                else if (s.Data.DisplayName == "Ice Resistance")
                 {
-                    WaterResistance = s;
+                    IceResistance = s;
                 }
-                else if (s.Data.DisplayName == "Air Resistance")
+                else if (s.Data.DisplayName == "Electrical Resistance")
                 {
-                    AirResistance = s;
+                    ElectricalResistance = s;
                 }
                 else if (s.Data.DisplayName == "Holy Resistance")
                 {

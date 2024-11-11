@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd981da6a113acd4b9e24dfab3dc43ff, type: 3}
+  m_Name: Gloves Leather
+  m_EditorClassIdentifier: 
+  _displayName: Leather Gloves
+  _description: Description
+  _icon: {fileID: 0}
+  _itemType: 1
+  _model: {fileID: 0}
+  _weight: 1
+  _maxCountInStack: 1
+  _price: 100
+  _rating: 1
+  _requiredFaction: []
+  _requiredStats: []
+  _armorType: {fileID: 11400000, guid: e8da7580acc61834cb61942079349f27, type: 2}
+  _modifiers: []

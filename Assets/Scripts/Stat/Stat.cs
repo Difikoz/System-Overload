@@ -19,7 +19,7 @@ namespace WinterUniverse
         public Stat(StatConfig data)
         {
             _data = data;
-            _currentValue = Data.BaseValue;
+            _currentValue = 0f;// Data.BaseValue;
         }
 
         public void AddModifier(StatModifier modifier)
@@ -50,7 +50,7 @@ namespace WinterUniverse
 
         public void CalculateCurrentValue()
         {
-            float value = _data.BaseValue;
+            float value = 0f;// _data.BaseValue;
             foreach (float f in _flatModifiers)
             {
                 value += f;

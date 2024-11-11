@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace WinterUniverse
@@ -7,9 +6,9 @@ namespace WinterUniverse
     public class StatConfig : ScriptableObject
     {
         [SerializeField] private string _displayName = "Name";
-        [SerializeField, TextArea] private string _description;
+        [SerializeField, TextArea] private string _description = "Description";
         [SerializeField] private Sprite _icon;
-        [SerializeField] private float _baseValue;
+        //[SerializeField] private float _baseValue;
         [SerializeField] private bool _clampMinValue;
         [SerializeField] private float _minValue;
         [SerializeField] private bool _clampMaxValue;
@@ -19,7 +18,7 @@ namespace WinterUniverse
         public string DisplayName => _displayName;
         public string Description => _description;
         public Sprite Icon => _icon;
-        public float BaseValue => _baseValue;
+        //public float BaseValue => _baseValue;
         public bool ClampMinValue => _clampMinValue;
         public float MinValue => _minValue;
         public bool ClampMaxValue => _clampMaxValue;

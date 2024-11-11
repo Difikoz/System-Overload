@@ -12,12 +12,12 @@ namespace WinterUniverse
 
         [SerializeField] private float _timeScaleMultiplier = 600f;
         [SerializeField] private float _timeScale = 1f;
-        [SerializeField] private float _second;
-        [SerializeField] private int _minute;
-        [SerializeField] private int _hour;
-        [SerializeField] private int _day;
-        [SerializeField] private int _month;
-        [SerializeField] private int _year;
+        private float _second;
+        private int _minute;
+        private int _hour;
+        private int _day;
+        private int _month;
+        private int _year;
 
         public float TimeScale => _timeScale;
         public float Second => _second;

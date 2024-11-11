@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb0c7ed9746c0f6479c6640a0b8c5a32, type: 3}
+  m_Name: Pistol Reaver
+  m_EditorClassIdentifier: 
+  _displayName: Reaver
+  _description: Description
+  _icon: {fileID: 0}
+  _itemType: 0
+  _model: {fileID: 0}
+  _weight: 1
+  _maxCountInStack: 1
+  _price: 100
+  _rating: 1
+  _requiredFaction: []
+  _requiredStats: []
+  _controller: {fileID: 0}
+  _weaponType: {fileID: 11400000, guid: f7fc228951978aa4381cec211a61e732, type: 2}
+  _localPosition: {x: 0, y: 0, z: 0}
+  _localRotation: {x: 0, y: 0, z: 0, w: 0}
+  _primaryAbility: {fileID: 0}
+  _secondaryAbility: {fileID: 0}
+  _attackClips: []
+  _damageTypes: []
+  _ownerEffects: []
+  _targetEffects: []
+  _doSplashDamage: 0
+  _splashRadius: 1
+  _modifiers: []
+  _cooldown: 1.5
+  _angle: 90
+  _minDistance: 0.5
+  _maxDistance: 1.5
