@@ -7,7 +7,7 @@ namespace WinterUniverse
     public class PlayerInteractionUI : MonoBehaviour
     {
         [SerializeField] private CanvasGroup _canvasGroup;
-        [SerializeField] private TextMeshProUGUI _messageText;
+        [SerializeField] private TMP_Text _messageText;
 
         public void Initialize()
         {

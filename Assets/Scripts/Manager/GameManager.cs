@@ -92,6 +92,7 @@ namespace WinterUniverse
             yield return new WaitForSeconds(0.25f);
             _playerUI.LoadingScreenUI.UpdateLoadingScreen("Load Saved Data", 1, 1);
             yield return new WaitForSeconds(0.25f);
+            _playerUI.LoadingScreenUI.Hide();
             //_mainMenu.OpenMainMenuWindow();
             Debug.Log($"Loaded : {Time.timeSinceLevelLoad} seconds.");
         }

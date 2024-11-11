@@ -6,6 +6,6 @@ namespace WinterUniverse
     public class MessageSlotUI : MonoBehaviour
     {
         public CanvasGroup CanvasGroup;
-        public TextMeshProUGUI MessageText;
+        public TMP_Text MessageText;
     }
 }

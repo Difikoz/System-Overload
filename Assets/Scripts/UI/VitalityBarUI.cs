@@ -11,7 +11,7 @@ namespace WinterUniverse
         [SerializeField] private Image _foregroundFill;
         [SerializeField] private Color _reduceColor;
         [SerializeField] private Color _restoreColor;
-        //[SerializeField] private TextMeshProUGUI _valueText;
+        //[SerializeField] private TMP_Text _valueText;
 
         private float _floatValue;
         private float _currentValue;

@@ -5,7 +5,7 @@ namespace WinterUniverse
 {
     public class StatSlotUI : MonoBehaviour
     {
-        [SerializeField] private TextMeshProUGUI _text;
+        [SerializeField] private TMP_Text _text;
 
         public void Setup(Stat stat)
         {
