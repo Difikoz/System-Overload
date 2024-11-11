@@ -18,13 +18,10 @@ namespace WinterUniverse
         private bool _isGrounded;
         private RaycastHit _groundHit;
 
-        [SerializeField] private float _acceleration = 20f;
-        [SerializeField] private float _deceleration = 40f;
-        [SerializeField] private float _jumpForce = 2f;
         [SerializeField] private float _timeToJump = 0.25f;
         [SerializeField] private float _timeToFall = 0.25f;
 
-        private bool CanJump => _jumpTimer > 0f && _groundedTimer > 0f && !_pawn.IsDead && !_pawn.IsPerfomingAction && _pawn.PawnStats.EnergyCurrent >= 10f;
+        private bool CanJump => _jumpTimer > 0f && _groundedTimer > 0f && !_pawn.IsDead && !_pawn.IsPerfomingAction && _pawn.PawnStats.EnergyCurrent >= _pawn.PawnStats.JumpEnergyCost.CurrentValue;
         public Vector3 MoveVelocity => _moveVelocity;
 
         public void Initialize(PawnController pawn)
@@ -101,11 +98,11 @@ namespace WinterUniverse
                 {
                     _moveInput *= 2f;
                 }
-                _moveVelocity = Vector3.MoveTowards(_moveVelocity, (transform.right * _moveInput.x + transform.forward * _moveInput.y) * _pawn.PawnStats.MoveSpeed.CurrentValue, _acceleration * Time.deltaTime);// TODO get acceleration stat
+                _moveVelocity = Vector3.MoveTowards(_moveVelocity, (transform.right * _moveInput.x + transform.forward * _moveInput.y) * _pawn.PawnStats.MoveSpeed.CurrentValue, _pawn.PawnStats.Acceleration.CurrentValue * Time.deltaTime);// TODO get acceleration stat
             }
             else
             {
-                _moveVelocity = Vector3.MoveTowards(_moveVelocity, Vector3.zero, _deceleration * Time.deltaTime);// TODO get deceleration stat
+                _moveVelocity = Vector3.MoveTowards(_moveVelocity, Vector3.zero, _pawn.PawnStats.Deceleration.CurrentValue * Time.deltaTime);// TODO get deceleration stat
             }
             _cc.Move(_moveVelocity * Time.deltaTime);// disabled for root motion movement
         }
@@ -137,11 +134,11 @@ namespace WinterUniverse
 
         public bool HandleRunning()
         {
-            if (_pawn.IsDead || _pawn.IsPerfomingAction || _pawn.PawnStats.EnergyCurrent <= 1f || _moveInput.magnitude < 0.5f)
+            if (_pawn.IsDead || _pawn.IsPerfomingAction || _pawn.PawnStats.EnergyCurrent <= _pawn.PawnStats.RunEnergyCost.CurrentValue || _moveInput.magnitude < 0.5f)
             {
                 return false;
             }
-            _pawn.PawnStats.ReduceCurrentEnergy(4f * Time.deltaTime);// TODO get run energy cost stat
+            _pawn.PawnStats.ReduceCurrentEnergy(_pawn.PawnStats.RunEnergyCost.CurrentValue * Time.deltaTime);// TODO get run energy cost stat
             return true;
         }
 
@@ -152,8 +149,8 @@ namespace WinterUniverse
 
         private void ApplyJumpForce()
         {
-            _fallVelocity.y = Mathf.Sqrt(_jumpForce * -2f * GameManager.StaticInstance.WorldData.Gravity);
-            _pawn.PawnStats.ReduceCurrentEnergy(10f);
+            _fallVelocity.y = Mathf.Sqrt(_pawn.PawnStats.JumpForce.CurrentValue * -2f * GameManager.StaticInstance.WorldData.Gravity);
+            _pawn.PawnStats.ReduceCurrentEnergy(_pawn.PawnStats.JumpEnergyCost.CurrentValue);
         }
     }
 }

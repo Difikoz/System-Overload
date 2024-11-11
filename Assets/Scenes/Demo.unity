@@ -1143,8 +1143,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b8fe1cae53d47a4b9864e1b26902b0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _fileName: SaveData
   CurrentSaveData:
-    CharacterName: Faceless
+    CharacterName: Loner
     Faction: Tramps
     Health: 0
     Energy: 0
@@ -1165,9 +1166,8 @@ MonoBehaviour:
     InventoryStacks:
       _keys: []
       _values: 
-    WeaponInRightHand: Unarmed
-    WeaponInLeftHand: Unarmed
-  _fileName: SaveData
+    WeaponInRightHand: 
+    WeaponInLeftHand: 
 --- !u!1 &919766341
 GameObject:
   m_ObjectHideFlags: 0
@@ -1217,16 +1217,63 @@ MonoBehaviour:
   _lootItemPrefab: {fileID: 0}
   _lootBagPrefab: {fileID: 0}
   _gravity: -20
-  _healthReduceEffect: {fileID: 0}
-  _healthRestoreEffect: {fileID: 0}
-  _energyReduceEffect: {fileID: 0}
-  _energyRestoreEffect: {fileID: 0}
-  _stats: []
-  _factions: []
-  _weapons: []
-  _armors: []
-  _consumables: []
-  _resources: []
+  _healthReduceEffect: {fileID: 11400000, guid: 9eebb0263c3a8e74e9e93cf551a947b2, type: 2}
+  _healthRestoreEffect: {fileID: 11400000, guid: fa1333dc30b9584489c186ed67468dc7, type: 2}
+  _energyReduceEffect: {fileID: 11400000, guid: dc0ec6329d61acf43a042f0f86e03746, type: 2}
+  _energyRestoreEffect: {fileID: 11400000, guid: 2563c800c0b1bce4b8693e2d318af01b, type: 2}
+  _stats:
+  - {fileID: 11400000, guid: 17149165ad543f84d81813ef18b6d237, type: 2}
+  - {fileID: 11400000, guid: d4d43718dbfae3d4bbd258fb44d74034, type: 2}
+  - {fileID: 11400000, guid: dc2f6745659aeda4598cc08eed1a4f30, type: 2}
+  - {fileID: 11400000, guid: 777849d7fce2c95479c67b9781300b55, type: 2}
+  - {fileID: 11400000, guid: 3ec31b5acc5a75245ba102dd6d545efa, type: 2}
+  - {fileID: 11400000, guid: 1a43558787f13c54da4bacc43e67734c, type: 2}
+  - {fileID: 11400000, guid: c416c0e414413714385ae9a1af38b223, type: 2}
+  - {fileID: 11400000, guid: ff68587b4a08fb045b3e600c51b58e4e, type: 2}
+  - {fileID: 11400000, guid: 23705103cfb03db48a5c6a0914e1bf4c, type: 2}
+  - {fileID: 11400000, guid: 4ddc227d79976fe4b97db6426aae9a7e, type: 2}
+  - {fileID: 11400000, guid: bef406e40eb8b254881ea383bc1e0448, type: 2}
+  - {fileID: 11400000, guid: 82f6f284bd30a13429caa530f21f4520, type: 2}
+  - {fileID: 11400000, guid: 43c65deddb177ec409ff69bdf32b1583, type: 2}
+  - {fileID: 11400000, guid: 134b5f55d9181d74990157a9fb81dbe5, type: 2}
+  - {fileID: 11400000, guid: 89b702d700a942d43a7f4274f4311c3f, type: 2}
+  - {fileID: 11400000, guid: 55aea83921374e74880b4882987dd8a8, type: 2}
+  - {fileID: 11400000, guid: 6952922381bc8434aaee5bfa03195b05, type: 2}
+  - {fileID: 11400000, guid: 8120a913e0e5db54cb7a3dfd7630718e, type: 2}
+  - {fileID: 11400000, guid: 954ca16291f0b3145bb7857572e0a1e8, type: 2}
+  - {fileID: 11400000, guid: 414f7df4a0e0c054eafc74a4274f4d3a, type: 2}
+  - {fileID: 11400000, guid: 502a757288f23ea4aa016f3a81d5031f, type: 2}
+  - {fileID: 11400000, guid: 4a72276a7b5c9bf4e9721f5fa8c2929d, type: 2}
+  - {fileID: 11400000, guid: e52108720e177894db2f52fd9fb935a4, type: 2}
+  - {fileID: 11400000, guid: 6343b25afc23b784e85bc9bf0f31b586, type: 2}
+  - {fileID: 11400000, guid: 51f3716fa27753d449ebb24d2ad816ba, type: 2}
+  - {fileID: 11400000, guid: 7558da2a425118f49afdd88d69d3ebeb, type: 2}
+  - {fileID: 11400000, guid: d574b50f9fd5d8b4892cb5095e49aae4, type: 2}
+  - {fileID: 11400000, guid: 1442e6ebe5461ae4ab85c963a4181077, type: 2}
+  _factions:
+  - {fileID: 11400000, guid: 547e1af124e9b8945b0d3f3e11ba7c73, type: 2}
+  - {fileID: 11400000, guid: 4599ab3740c19ba4e9b9d537fba4dd39, type: 2}
+  _weapons:
+  - {fileID: 11400000, guid: 9a4f3cdae0d30394b854fb253e8119e0, type: 2}
+  - {fileID: 11400000, guid: 07713a3acc18bb943b92170dee3428e0, type: 2}
+  _armors:
+  - {fileID: 11400000, guid: 0928e4ca0680caf4bbbaf6a7eaa4828e, type: 2}
+  - {fileID: 11400000, guid: 5865c8035890ad3408899e6b73b41171, type: 2}
+  - {fileID: 11400000, guid: ea2527c587e66f54992fef94590483bc, type: 2}
+  - {fileID: 11400000, guid: 976d2466e0930724ab5ff199f20a11ec, type: 2}
+  - {fileID: 11400000, guid: 4e3c6708ae0ce9741978e5722003ada8, type: 2}
+  - {fileID: 11400000, guid: 243a7099a60f5d54ebb54686b945bee0, type: 2}
+  - {fileID: 11400000, guid: 47995bfccd6ec494faf7a402d0e491ae, type: 2}
+  - {fileID: 11400000, guid: b25bff9dd43d0f241a5abf8c271ed8fa, type: 2}
+  - {fileID: 11400000, guid: fb479c0521b13924897bbd4dd30365f8, type: 2}
+  - {fileID: 11400000, guid: 6ff19e3c053b1d148b82acfebf730fc2, type: 2}
+  - {fileID: 11400000, guid: 2d26587cbee678f4492e541b3481580f, type: 2}
+  _consumables:
+  - {fileID: 11400000, guid: 4c2a16b946962714da433e472e6c7a2e, type: 2}
+  - {fileID: 11400000, guid: c9cf61f410a8ee144b3c33e529ce7804, type: 2}
+  - {fileID: 11400000, guid: 33f4efe50c594754da09f68ff161392d, type: 2}
+  _resources:
+  - {fileID: 11400000, guid: 0c298f9313f1bd14c8aede37bf5dcefd, type: 2}
 --- !u!1 &944743348
 GameObject:
   m_ObjectHideFlags: 0

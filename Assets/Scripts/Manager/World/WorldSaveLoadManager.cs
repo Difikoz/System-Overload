@@ -4,9 +4,8 @@ namespace WinterUniverse
 {
     public class WorldSaveLoadManager : MonoBehaviour
     {
-        public PawnSaveData CurrentSaveData;
-
         [SerializeField] private string _fileName = "SaveData";
+        public PawnSaveData CurrentSaveData;
 
         public void SaveGame()
         {

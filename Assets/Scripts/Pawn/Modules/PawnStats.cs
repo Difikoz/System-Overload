@@ -52,7 +52,13 @@ namespace WinterUniverse
         [HideInInspector] public Stat DarknessResistance;
         [HideInInspector] public Stat ChemicalResistance;
 
+        [HideInInspector] public Stat JumpForce;
+        [HideInInspector] public Stat Acceleration;
+        [HideInInspector] public Stat Deceleration;
         [HideInInspector] public Stat MoveSpeed;
+
+        [HideInInspector] public Stat JumpEnergyCost;
+        [HideInInspector] public Stat RunEnergyCost;
         #endregion
 
         [SerializeField] private float _regenerationTickDelay = 1f;
@@ -238,9 +244,29 @@ namespace WinterUniverse
                 {
                     ChemicalResistance = s;
                 }
+                else if (s.Data.DisplayName == "Jump Force")
+                {
+                    JumpForce = s;
+                }
+                else if (s.Data.DisplayName == "Acceleration")
+                {
+                    Acceleration = s;
+                }
+                else if (s.Data.DisplayName == "Deceleration")
+                {
+                    Deceleration = s;
+                }
                 else if (s.Data.DisplayName == "Move Speed")
                 {
                     MoveSpeed = s;
+                }
+                else if (s.Data.DisplayName == "Jump Energy Cost")
+                {
+                    JumpEnergyCost = s;
+                }
+                else if (s.Data.DisplayName == "Run Energy Cost")
+                {
+                    RunEnergyCost = s;
                 }
             }
         }
