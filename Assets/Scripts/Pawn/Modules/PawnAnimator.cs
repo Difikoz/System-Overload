@@ -86,7 +86,7 @@ namespace WinterUniverse
 
         private void OnAnimatorMove()
         {
-            if (_pawn.UseRootMotion)
+            if (_pawn != null && _pawn.UseRootMotion)
             {
                 _pawn.transform.position += _animator.deltaPosition;
                 _pawn.transform.rotation *= _animator.deltaRotation;

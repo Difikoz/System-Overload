@@ -17,6 +17,8 @@ namespace WinterUniverse
         private WorldSoundManager _worldSound;
         private WorldTimeManager _worldTime;
 
+        private bool _completed;
+
         public PlayerController Player => _player;
         public PlayerInputManager PlayerInput => _playerInput;
         public PlayerCameraManager PlayerCamera => _playerCamera;
@@ -96,6 +98,27 @@ namespace WinterUniverse
             _playerUI.LoadingScreenUI.Hide();
             //_mainMenu.OpenMainMenuWindow();
             Debug.Log($"Loaded : {Time.timeSinceLevelLoad} seconds.");
+            yield return null;
+            _completed = true;
+        }
+
+        private void Update()
+        {
+            if (!_completed)
+            {
+                return;
+            }
+            _playerInput.HandleUpdate();
+            _worldTime.HandleUpdate();
+        }
+
+        private void LateUpdate()
+        {
+            if (!_completed)
+            {
+                return;
+            }
+            _playerCamera.HandleUpdate();
         }
     }
 }

@@ -28,7 +28,7 @@ namespace WinterUniverse
         public int Year => _year;
         public bool Paused => _paused;
 
-        private void Update()
+        public void HandleUpdate()
         {
             if (_paused)
             {

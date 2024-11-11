@@ -113,10 +113,10 @@ namespace WinterUniverse
                         _pawn.PawnInventory.AddItem(slot.Data);
                     }
                     slot.Equip(armor);
+                    OnEquipmentChanged?.Invoke();
                     break;
                 }
             }
-            OnEquipmentChanged?.Invoke();
         }
 
         public void EquipArmor(ArmorItemConfig armor, ArmorSlot slot, bool removeFromInventory = true, bool addOldToInventory = true)// for drag and drop

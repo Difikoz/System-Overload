@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace WinterUniverse
 {
@@ -38,10 +37,30 @@ namespace WinterUniverse
         {
             enabled = true;
             _inputActions.Enable();
+            _inputActions.Character.Move.performed += ctx => _moveInput = ctx.ReadValue<Vector2>();
+            _inputActions.Camera.Look.performed += ctx => _lookInput = ctx.ReadValue<Vector2>();
+            _inputActions.Character.Run.performed += ctx => _runInput = true;
+            _inputActions.Character.Run.canceled += ctx => _runInput = false;
+            _inputActions.Character.Interact.performed += ctx => GameManager.StaticInstance.Player.PawnInteraction.Interact();
+            _inputActions.Character.Jump.performed += ctx => GameManager.StaticInstance.Player.PawnLocomotion.TryPerformJump();
+            _inputActions.Character.ActionPrimaryRight.performed += ctx => GameManager.StaticInstance.Player.PawnCombat.UseWeaponAbility(GameManager.StaticInstance.Player.PawnEquipment.WeaponRightSlot.Data, HandSlotType.Right, GameManager.StaticInstance.Player.PawnEquipment.WeaponRightSlot.Data.PrimaryAbility);
+            _inputActions.Character.ActionPrimaryLeft.performed += ctx => GameManager.StaticInstance.Player.PawnCombat.UseWeaponAbility(GameManager.StaticInstance.Player.PawnEquipment.WeaponLeftSlot.Data, HandSlotType.Left, GameManager.StaticInstance.Player.PawnEquipment.WeaponLeftSlot.Data.PrimaryAbility);
+            _inputActions.Character.ActionSecondaryRight.performed += ctx => GameManager.StaticInstance.Player.PawnCombat.UseWeaponAbility(GameManager.StaticInstance.Player.PawnEquipment.WeaponRightSlot.Data, HandSlotType.Right, GameManager.StaticInstance.Player.PawnEquipment.WeaponRightSlot.Data.SecondaryAbility);
+            _inputActions.Character.ActionSecondaryLeft.performed += ctx => GameManager.StaticInstance.Player.PawnCombat.UseWeaponAbility(GameManager.StaticInstance.Player.PawnEquipment.WeaponLeftSlot.Data, HandSlotType.Left, GameManager.StaticInstance.Player.PawnEquipment.WeaponLeftSlot.Data.SecondaryAbility);
         }
 
         private void Disable()
         {
+            _inputActions.Character.Move.performed -= ctx => _moveInput = ctx.ReadValue<Vector2>();
+            _inputActions.Camera.Look.performed -= ctx => _lookInput = ctx.ReadValue<Vector2>();
+            _inputActions.Character.Run.performed -= ctx => _runInput = true;
+            _inputActions.Character.Run.canceled -= ctx => _runInput = false;
+            _inputActions.Character.Interact.performed -= ctx => GameManager.StaticInstance.Player.PawnInteraction.Interact();
+            _inputActions.Character.Jump.performed -= ctx => GameManager.StaticInstance.Player.PawnLocomotion.TryPerformJump();
+            _inputActions.Character.ActionPrimaryRight.performed -= ctx => GameManager.StaticInstance.Player.PawnCombat.UseWeaponAbility(GameManager.StaticInstance.Player.PawnEquipment.WeaponRightSlot.Data, HandSlotType.Right, GameManager.StaticInstance.Player.PawnEquipment.WeaponRightSlot.Data.PrimaryAbility);
+            _inputActions.Character.ActionPrimaryLeft.performed -= ctx => GameManager.StaticInstance.Player.PawnCombat.UseWeaponAbility(GameManager.StaticInstance.Player.PawnEquipment.WeaponLeftSlot.Data, HandSlotType.Left, GameManager.StaticInstance.Player.PawnEquipment.WeaponLeftSlot.Data.PrimaryAbility);
+            _inputActions.Character.ActionSecondaryRight.performed -= ctx => GameManager.StaticInstance.Player.PawnCombat.UseWeaponAbility(GameManager.StaticInstance.Player.PawnEquipment.WeaponRightSlot.Data, HandSlotType.Right, GameManager.StaticInstance.Player.PawnEquipment.WeaponRightSlot.Data.SecondaryAbility);
+            _inputActions.Character.ActionSecondaryLeft.performed -= ctx => GameManager.StaticInstance.Player.PawnCombat.UseWeaponAbility(GameManager.StaticInstance.Player.PawnEquipment.WeaponLeftSlot.Data, HandSlotType.Left, GameManager.StaticInstance.Player.PawnEquipment.WeaponLeftSlot.Data.SecondaryAbility);
             _inputActions.Disable();
             enabled = false;
             _moveInput = Vector2.zero;
@@ -49,12 +68,8 @@ namespace WinterUniverse
             _runInput = false;
         }
 
-        private void Update()
+        public void HandleUpdate()
         {
-            if (GameManager.StaticInstance.Player == null)
-            {
-                return;
-            }
             HandleRunInput();
         }
 
@@ -68,75 +83,6 @@ namespace WinterUniverse
             {
                 GameManager.StaticInstance.Player.IsRunning = false;
             }
-        }
-
-        public void OnMove(InputValue value)
-        {
-            _moveInput = value.Get<Vector2>();
-        }
-
-        public void OnLook(InputValue value)
-        {
-            _lookInput = value.Get<Vector2>();
-        }
-
-        public void OnRun(InputValue value)
-        {
-            _runInput = value.isPressed;
-        }
-
-        public void OnInteract()
-        {
-            if (GameManager.StaticInstance.Player == null)
-            {
-                return;
-            }
-            GameManager.StaticInstance.Player.PawnInteraction.Interact();
-        }
-
-        public void OnJump()
-        {
-            if (GameManager.StaticInstance.Player == null)
-            {
-                return;
-            }
-            GameManager.StaticInstance.Player.PawnLocomotion.TryPerformJump();
-        }
-
-        public void OnActionPrimaryRight()
-        {
-            if (GameManager.StaticInstance.Player == null)
-            {
-                return;
-            }
-            GameManager.StaticInstance.Player.PawnCombat.UseWeaponAbility(GameManager.StaticInstance.Player.PawnEquipment.WeaponRightSlot.Data, HandSlotType.Right, GameManager.StaticInstance.Player.PawnEquipment.WeaponRightSlot.Data.PrimaryAbility);
-        }
-
-        public void OnActionPrimaryLeft()
-        {
-            if (GameManager.StaticInstance.Player == null)
-            {
-                return;
-            }
-            GameManager.StaticInstance.Player.PawnCombat.UseWeaponAbility(GameManager.StaticInstance.Player.PawnEquipment.WeaponLeftSlot.Data, HandSlotType.Left, GameManager.StaticInstance.Player.PawnEquipment.WeaponLeftSlot.Data.PrimaryAbility);
-        }
-
-        public void OnActionSecondaryRight()
-        {
-            if (GameManager.StaticInstance.Player == null)
-            {
-                return;
-            }
-            GameManager.StaticInstance.Player.PawnCombat.UseWeaponAbility(GameManager.StaticInstance.Player.PawnEquipment.WeaponRightSlot.Data, HandSlotType.Right, GameManager.StaticInstance.Player.PawnEquipment.WeaponRightSlot.Data.SecondaryAbility);
-        }
-
-        public void OnActionSecondaryLeft()
-        {
-            if (GameManager.StaticInstance.Player == null)
-            {
-                return;
-            }
-            GameManager.StaticInstance.Player.PawnCombat.UseWeaponAbility(GameManager.StaticInstance.Player.PawnEquipment.WeaponLeftSlot.Data, HandSlotType.Left, GameManager.StaticInstance.Player.PawnEquipment.WeaponLeftSlot.Data.SecondaryAbility);
         }
 
         private void OnDestroy()

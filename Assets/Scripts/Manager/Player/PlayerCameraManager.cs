@@ -28,15 +28,12 @@ namespace WinterUniverse
             _cameraDefaultOffset = _camera.transform.position.z;
         }
 
-        private void LateUpdate()
+        public void HandleUpdate()
         {
-            if (GameManager.StaticInstance.Player != null)
-            {
-                transform.position = Vector3.Lerp(transform.position, GameManager.StaticInstance.Player.transform.position, _followSpeed * Time.deltaTime);
-                GetInput();
-                HandleRotation();
-                HandleCollision();
-            }
+            transform.position = Vector3.Lerp(transform.position, GameManager.StaticInstance.Player.transform.position, _followSpeed * Time.deltaTime);
+            GetInput();
+            HandleRotation();
+            HandleCollision();
         }
 
         private void GetInput()
