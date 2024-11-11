@@ -75,6 +75,7 @@ namespace WinterUniverse
             _playerUI.LoadingScreenUI.UpdateLoadingScreen("Initialize Player UI", 0, 1);
             _playerUI.Initialize();
             yield return new WaitForSeconds(0.25f);
+            _playerUI.MenuUI.CloseMenu();
             _playerUI.LoadingScreenUI.UpdateLoadingScreen("Initialize Player UI", 1, 1);
             yield return new WaitForSeconds(0.25f);
             _playerUI.LoadingScreenUI.UpdateLoadingScreen("Initialize World Data", 0, 1);

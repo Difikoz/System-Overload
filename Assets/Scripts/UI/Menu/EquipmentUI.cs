@@ -12,7 +12,6 @@ namespace WinterUniverse
         public void Initialize()
         {
             //GameManager.StaticInstance.Player.PawnStats.OnStatChanged += UpdateUI;
-            gameObject.SetActive(false);
         }
 
         //private void UpdateUI(List<Stat> stats)

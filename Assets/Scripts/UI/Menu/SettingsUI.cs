@@ -5,19 +5,22 @@ namespace WinterUniverse
 {
     public class SettingsUI : MonoBehaviour
     {
+        [Header("Audio")]
         [SerializeField] private Slider _settingsSliderMasterVolume;
         [SerializeField] private Slider _settingsSliderAmbientVolume;
         [SerializeField] private Slider _settingsSliderSoundVolume;
+        [Header("Other")]
+        [SerializeField] private Button _settingButtonQuitGame;
 
         public void Initialize()
         {
             _settingsSliderMasterVolume.onValueChanged.AddListener(OnSettingsSliderMasterVolumeChanged);
             _settingsSliderAmbientVolume.onValueChanged.AddListener(OnSettingsSliderAmbientVolumeChanged);
             _settingsSliderSoundVolume.onValueChanged.AddListener(OnSettingsSliderSoundVolumeChanged);
+            _settingButtonQuitGame.onClick.AddListener(OnSettingsButtonQuitGamePressed);
             OnSettingsSliderMasterVolumeChanged(PlayerPrefs.GetFloat("MasterVolume", 1f));
             OnSettingsSliderAmbientVolumeChanged(PlayerPrefs.GetFloat("AmbientVolume", 0.5f));
             OnSettingsSliderSoundVolumeChanged(PlayerPrefs.GetFloat("SoundVolume", 0.5f));
-            gameObject.SetActive(false);
         }
 
         private void OnSettingsSliderMasterVolumeChanged(float value)
@@ -36,6 +39,11 @@ namespace WinterUniverse
         {
             PlayerPrefs.SetFloat("SoundVolume", value);
             GameManager.StaticInstance.WorldSound.SetSoundVolume(value);
+        }
+
+        private void OnSettingsButtonQuitGamePressed()
+        {
+            Application.Quit();
         }
     }
 }

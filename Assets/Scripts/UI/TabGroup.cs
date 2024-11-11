@@ -12,6 +12,11 @@ namespace WinterUniverse
 
         private TabButton _selectedTab;
 
+        private void Awake()
+        {
+            OnTabButtonPressed(Buttons[0]);
+        }
+
         public void OnTabButtonPressed(TabButton button)
         {
             if (_selectedTab != null)
