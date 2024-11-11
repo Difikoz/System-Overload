@@ -9,11 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76c8acc3deb7f6741b9a5477fb4dd2ac, type: 3}
-  m_Name: Player
+  m_Script: {fileID: 11500000, guid: e4f82002d0cc96242aa78bfc2fa1b2c8, type: 3}
+  m_Name: View Distance
   m_EditorClassIdentifier: 
-  CharacterName: Player
-  Faction: {fileID: 11400000, guid: 4599ab3740c19ba4e9b9d537fba4dd39, type: 2}
-  WeaponInRightHand: {fileID: 0}
-  WeaponInLeftHand: {fileID: 0}
-  StartingItems: []
+  _displayName: View Distance
+  _description: Description
+  _icon: {fileID: 0}
+  _clampMinValue: 1
+  _minValue: 0
+  _clampMaxValue: 0
+  _maxValue: 0
+  _isPercent: 0

@@ -7,15 +7,6 @@ namespace WinterUniverse
     {
         private PawnController _pawn;
 
-        public float HearRadius = 5f;// TODO create stat
-        public float ViewDistance = 40f;// TODO create stat
-        public float ViewAngle = 90f;// TODO create stat
-
-        public Transform HeadPoint;
-        public Transform BodyPoint;
-        public Transform FootRightPoint;
-        public Transform FootLeftPoint;
-
         [HideInInspector] public PawnController CurrentTarget;
         [HideInInspector] public WeaponItemConfig CurrentWeapon;
         [HideInInspector] public HandSlotType CurrentSlotType;
@@ -100,10 +91,10 @@ namespace WinterUniverse
             return TargetInViewAngle(CurrentTarget);
         }
 
-        public bool TargetInViewAngle(PawnController cm)
+        public bool TargetInViewAngle(PawnController target)
         {
             //Debug.Log(Vector3.Angle(HeadPoint.forward, (cm.CharacterCombatManager.BodyPoint.position - HeadPoint.position).normalized));
-            return Vector3.Angle(HeadPoint.forward, (cm.PawnCombat.BodyPoint.position - HeadPoint.position).normalized) <= ViewAngle / 2f;// TODO
+            return Vector3.Angle(_pawn.PawnAnimator.HeadPoint.forward, (target.PawnAnimator.BodyPoint.position - _pawn.PawnAnimator.HeadPoint.position).normalized) <= _pawn.PawnStats.ViewAngle.CurrentValue / 2f;// TODO
         }
 
         public bool CurrentTargetBlockedByObstacle()
@@ -111,9 +102,9 @@ namespace WinterUniverse
             return TargetBlockedByObstacle(CurrentTarget);
         }
 
-        public bool TargetBlockedByObstacle(PawnController cm)
+        public bool TargetBlockedByObstacle(PawnController target)
         {
-            return Physics.Linecast(HeadPoint.position, cm.PawnCombat.BodyPoint.position, GameManager.StaticInstance.WorldLayer.ObstacleMask);
+            return Physics.Linecast(_pawn.PawnAnimator.HeadPoint.position, target.PawnAnimator.BodyPoint.position, GameManager.StaticInstance.WorldLayer.ObstacleMask);
         }
 
         public bool CurrentTargetIsVisible()
@@ -121,9 +112,9 @@ namespace WinterUniverse
             return TargetIsVisible(CurrentTarget);
         }
 
-        public bool TargetIsVisible(PawnController cm)
+        public bool TargetIsVisible(PawnController target)
         {
-            return TargetInViewAngle(cm) && !TargetBlockedByObstacle(cm);
+            return TargetInViewAngle(target) && !TargetBlockedByObstacle(target);
         }
     }
 }

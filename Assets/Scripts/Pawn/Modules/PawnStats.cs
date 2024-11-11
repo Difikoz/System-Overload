@@ -59,6 +59,10 @@ namespace WinterUniverse
 
         [HideInInspector] public Stat JumpEnergyCost;
         [HideInInspector] public Stat RunEnergyCost;
+
+        [HideInInspector] public Stat HearRadius;
+        [HideInInspector] public Stat ViewDistance;
+        [HideInInspector] public Stat ViewAngle;
         #endregion
 
         [SerializeField] private float _regenerationTickDelay = 1f;
@@ -267,6 +271,18 @@ namespace WinterUniverse
                 else if (s.Data.DisplayName == "Run Energy Cost")
                 {
                     RunEnergyCost = s;
+                }
+                else if (s.Data.DisplayName == "Hear Radius")
+                {
+                    HearRadius = s;
+                }
+                else if (s.Data.DisplayName == "View Distance")
+                {
+                    ViewDistance = s;
+                }
+                else if (s.Data.DisplayName == "View Angle")
+                {
+                    ViewAngle = s;
                 }
             }
         }

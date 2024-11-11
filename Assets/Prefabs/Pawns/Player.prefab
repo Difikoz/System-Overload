@@ -103,7 +103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ec6f6be56236c64484a94c030646ecd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bloodSplatterVFX: {fileID: 0}
+  _bloodSplatterVFX: {fileID: 6800464503443647601, guid: 8314f40a78c8f3b468ae40211e0102b3, type: 3}
 --- !u!114 &3425100509912142015
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,10 +141,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18369be495225474695faf0776004714, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _acceleration: 20
-  _deceleration: 40
-  _maxSpeed: 10
-  _jumpForce: 2
   _timeToJump: 0.25
   _timeToFall: 0.25
 --- !u!114 &3486705084818926493
@@ -159,9 +155,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d99a8d05c4672e4409f5737ea74d1c42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _attackClips: []
-  _getHitClips: []
-  _deathClips: []
+  _attackClips:
+  - {fileID: 8300000, guid: b9eae9e53659c044db3ed0339a36f746, type: 3}
+  - {fileID: 8300000, guid: 3851594efa46c934ba2f05cb44869ffd, type: 3}
+  - {fileID: 8300000, guid: 7dc545b91a9ae624db494f72365113cf, type: 3}
+  - {fileID: 8300000, guid: ffab003f22d62f046ac7fcf5410e7504, type: 3}
+  - {fileID: 8300000, guid: ea3ac6a7f93403a4b97fc65fe0666541, type: 3}
+  - {fileID: 8300000, guid: a9d6f68f31f2c804c8caa25d9343331d, type: 3}
+  - {fileID: 8300000, guid: e765812c66dce594997287b6ac3a8a01, type: 3}
+  - {fileID: 8300000, guid: e074d44c3f01b7649a0e54e5dc27cb73, type: 3}
+  - {fileID: 8300000, guid: ae728b02f0dc31b48a7934e3f9385011, type: 3}
+  - {fileID: 8300000, guid: fe8d314bdd8590243860ad788f86f211, type: 3}
+  _getHitClips:
+  - {fileID: 8300000, guid: 0552d397b63530d498b31fbec22b16f9, type: 3}
+  - {fileID: 8300000, guid: ad6b07ba9e7248643a980695160ed915, type: 3}
+  - {fileID: 8300000, guid: 072af073e78df1842a48b96cf25c559c, type: 3}
+  - {fileID: 8300000, guid: 7014a644d4e05224fa0ad7f364bfe8b7, type: 3}
+  - {fileID: 8300000, guid: f920b5b415773bb44b3ebe76fa3df67e, type: 3}
+  - {fileID: 8300000, guid: d2a081d02ff35734ab87613792729d32, type: 3}
+  - {fileID: 8300000, guid: bb40a3d965f6399469c1e53658168eab, type: 3}
+  - {fileID: 8300000, guid: a3c82bb90f409eb4cac8543b8573550b, type: 3}
+  - {fileID: 8300000, guid: dd5f395e34c957843a95955bc486471a, type: 3}
+  - {fileID: 8300000, guid: 638ce68d28a80f74d81276b1492242b4, type: 3}
+  - {fileID: 8300000, guid: d79576c0ace1e644982bf98712d12bc6, type: 3}
+  - {fileID: 8300000, guid: 32d18cd052e377b44869662875aa6ca2, type: 3}
+  - {fileID: 8300000, guid: 45cca2c3ab30a6849b6a6ec2f93e2810, type: 3}
+  _deathClips:
+  - {fileID: 8300000, guid: 06abcb3861b3bb9468e270de54876a56, type: 3}
+  - {fileID: 8300000, guid: 31566dde7eb57ca46ba187fbedd94f39, type: 3}
+  - {fileID: 8300000, guid: 9723e3abed5996142aafb597a9f74fe2, type: 3}
+  - {fileID: 8300000, guid: f6bdbaa0756bd6044bae9141eaceec44, type: 3}
 --- !u!114 &5468796712375377663
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -301,7 +324,7 @@ CharacterController:
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!54 &321485543267668274
 Rigidbody:
   m_ObjectHideFlags: 0

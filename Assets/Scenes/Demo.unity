@@ -3848,6 +3848,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7558da2a425118f49afdd88d69d3ebeb, type: 2}
   - {fileID: 11400000, guid: d574b50f9fd5d8b4892cb5095e49aae4, type: 2}
   - {fileID: 11400000, guid: 1442e6ebe5461ae4ab85c963a4181077, type: 2}
+  - {fileID: 11400000, guid: 66e940ec65da5d947bb3bbd5a5d4e571, type: 2}
+  - {fileID: 11400000, guid: d2f5ef6c393932f41a616702c263f25a, type: 2}
+  - {fileID: 11400000, guid: cd7bc1752c5c04b4da22de538bd043c3, type: 2}
   _factions:
   - {fileID: 11400000, guid: 547e1af124e9b8945b0d3f3e11ba7c73, type: 2}
   - {fileID: 11400000, guid: 4599ab3740c19ba4e9b9d537fba4dd39, type: 2}

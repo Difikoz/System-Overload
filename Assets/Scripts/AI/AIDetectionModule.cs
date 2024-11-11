@@ -6,33 +6,33 @@ namespace WinterUniverse
 {
     public class AIDetectionModule : MonoBehaviour
     {
-        private AIController _owner;
+        private AIController _ai;
         private List<PawnController> _visibleEnemies = new();
         private List<PawnController> _visibleNeutrals = new();
         private List<PawnController> _visibleAllies = new();
 
         private void Awake()
         {
-            _owner = GetComponent<AIController>();
+            _ai = GetComponent<AIController>();
         }
 
         public void FindTargetInViewRange()
         {
-            if (_owner.PawnCombat.CurrentTarget != null)
+            if (_ai.PawnCombat.CurrentTarget != null)
             {
                 return;
             }
             _visibleEnemies.Clear();
             _visibleNeutrals.Clear();
             _visibleAllies.Clear();
-            Collider[] colliders = Physics.OverlapSphere(_owner.PawnCombat.HeadPoint.position, _owner.PawnCombat.ViewDistance, GameManager.StaticInstance.WorldLayer.PawnMask);
+            Collider[] colliders = Physics.OverlapSphere(_ai.PawnAnimator.HeadPoint.position, _ai.PawnStats.ViewDistance.CurrentValue, GameManager.StaticInstance.WorldLayer.PawnMask);
             foreach (Collider collider in colliders)
             {
-                if (collider.TryGetComponent(out PawnController character) && character != _owner && !character.IsDead)
+                if (collider.TryGetComponent(out PawnController character) && character != _ai && !character.IsDead)
                 {
-                    if (Vector3.Distance(transform.position, character.transform.position) <= _owner.PawnCombat.HearRadius || _owner.PawnCombat.TargetIsVisible(character))
+                    if (Vector3.Distance(transform.position, character.transform.position) <= _ai.PawnStats.HearRadius.CurrentValue || _ai.PawnCombat.TargetIsVisible(character))
                     {
-                        switch (_owner.Faction.GetState(character.Faction))
+                        switch (_ai.Faction.GetState(character.Faction))
                         {
                             case RelationshipState.Enemy:
                                 _visibleEnemies.Add(character);
@@ -49,7 +49,7 @@ namespace WinterUniverse
             }
             if (_visibleEnemies.Count > 0)
             {
-                _owner.PawnCombat.SetTarget(GetClosestEnemy());
+                _ai.PawnCombat.SetTarget(GetClosestEnemy());
             }
         }
 

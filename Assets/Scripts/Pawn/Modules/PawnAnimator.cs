@@ -8,10 +8,18 @@ namespace WinterUniverse
         private PawnController _pawn;
         private Animator _animator;
 
+        [SerializeField] private Transform _headPoint;
+        [SerializeField] private Transform _bodyPoint;
+        [SerializeField] private Transform _footRightPoint;
+        [SerializeField] private Transform _footLeftPoint;
         [SerializeField] private float _baseMoveSpeed = 4f;
         [SerializeField] private float _height = 2f;
         [SerializeField] private float _radius = 0.5f;
 
+        public Transform HeadPoint => _headPoint;
+        public Transform BodyPoint => _bodyPoint;
+        public Transform FootRightPoint => _footRightPoint;
+        public Transform FootLeftPoint => _footLeftPoint;
         public float BaseMoveSpeed => _baseMoveSpeed;
         public float Height => _height;
         public float Radius => _radius;
@@ -57,7 +65,7 @@ namespace WinterUniverse
 
         public void FootR()
         {
-            if (Physics.Raycast(_pawn.PawnCombat.FootRightPoint.position, -transform.up, out RaycastHit hit, 0.1f, GameManager.StaticInstance.WorldLayer.ObstacleMask))
+            if (Physics.Raycast(_footRightPoint.position, -transform.up, out RaycastHit hit, 0.1f, GameManager.StaticInstance.WorldLayer.ObstacleMask))
             {
                 _pawn.PawnSound.PlaySound(GameManager.StaticInstance.WorldSound.GetFootstepClip(hit.transform));
             }
@@ -65,7 +73,7 @@ namespace WinterUniverse
 
         public void FootL()
         {
-            if (Physics.Raycast(_pawn.PawnCombat.FootLeftPoint.position, -transform.up, out RaycastHit hit, 0.1f, GameManager.StaticInstance.WorldLayer.ObstacleMask))
+            if (Physics.Raycast(_footLeftPoint.position, -transform.up, out RaycastHit hit, 0.1f, GameManager.StaticInstance.WorldLayer.ObstacleMask))
             {
                 _pawn.PawnSound.PlaySound(GameManager.StaticInstance.WorldSound.GetFootstepClip(hit.transform));
             }
