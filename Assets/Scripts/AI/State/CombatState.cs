@@ -8,11 +8,11 @@ namespace WinterUniverse
     {
         public float MaxCombatRadius = 10f;
 
-        public List<NPCActionData> Actions = new();
+        public List<AIActionConfig> Actions = new();
 
-        protected List<NPCActionData> _potentialActions = new();
-        protected NPCActionData _currentAction;
-        protected NPCActionData _lastAction;
+        protected List<AIActionConfig> _potentialActions = new();
+        protected AIActionConfig _currentAction;
+        protected AIActionConfig _lastAction;
         protected bool _hasAction;
 
         public CombatState()
@@ -53,7 +53,7 @@ namespace WinterUniverse
         protected virtual void GetNewAction(AIController npc)
         {
             _potentialActions.Clear();
-            foreach (NPCActionData potential in Actions)
+            foreach (AIActionConfig potential in Actions)
             {
                 if (!potential.InRangeToUse(npc))
                 {
@@ -70,13 +70,13 @@ namespace WinterUniverse
                 return;
             }
             float totalWeight = 0;
-            foreach (NPCActionData potential in _potentialActions)
+            foreach (AIActionConfig potential in _potentialActions)
             {
                 totalWeight += potential.Weight;
             }
             float randomWeight = Random.Range(0f, totalWeight);
             float currentWeight = 0f;
-            foreach (NPCActionData potential in _potentialActions)
+            foreach (AIActionConfig potential in _potentialActions)
             {
                 currentWeight += potential.Weight;
                 if (randomWeight <= currentWeight)

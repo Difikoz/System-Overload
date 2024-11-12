@@ -34,7 +34,7 @@ namespace WinterUniverse
             {
                 return;
             }
-            if (_weaponRightSlot.Data.Price >= _weaponLeftSlot.Data.Price)
+            if (_weaponRightSlot.Config.Price >= _weaponLeftSlot.Config.Price)
             {
                 EquipWeaponToRightSlot(weapon, removeNewFromInventory, addOldToInventory);
             }
@@ -68,10 +68,10 @@ namespace WinterUniverse
             }
             if (addOldToInventory)
             {
-                _pawn.PawnInventory.AddItem(_weaponLeftSlot.Data);
+                _pawn.PawnInventory.AddItem(_weaponLeftSlot.Config);
             }
             _weaponLeftSlot.Equip(weapon);
-            _pawn.PawnCombat.CurrentWeapon = _weaponRightSlot.Data;
+            _pawn.PawnCombat.CurrentWeapon = _weaponRightSlot.Config;
             _pawn.PawnCombat.CurrentSlotType = HandSlotType.Right;
             _pawn.PawnAnimator.PlayActionAnimation($"Swap Right Weapon", true);
             OnEquipmentChanged?.Invoke();
@@ -85,10 +85,10 @@ namespace WinterUniverse
             }
             if (addOldToInventory)
             {
-                _pawn.PawnInventory.AddItem(_weaponRightSlot.Data);
+                _pawn.PawnInventory.AddItem(_weaponRightSlot.Config);
             }
             _weaponRightSlot.Equip(weapon);
-            _pawn.PawnCombat.CurrentWeapon = _weaponLeftSlot.Data;
+            _pawn.PawnCombat.CurrentWeapon = _weaponLeftSlot.Config;
             _pawn.PawnCombat.CurrentSlotType = HandSlotType.Left;
             _pawn.PawnAnimator.PlayActionAnimation($"Swap Left Weapon", true);
             OnEquipmentChanged?.Invoke();
@@ -149,11 +149,11 @@ namespace WinterUniverse
         {
             if (_pawn.PawnInventory.GetBestWeapon(out WeaponItemConfig weapon))
             {
-                if (weapon.Price > _weaponRightSlot.Data.Price)
+                if (weapon.Price > _weaponRightSlot.Config.Price)
                 {
                     EquipWeapon(weapon, HandSlotType.Right);
                 }
-                else if (weapon.Price > _weaponLeftSlot.Data.Price)
+                else if (weapon.Price > _weaponLeftSlot.Config.Price)
                 {
                     EquipWeapon(weapon, HandSlotType.Left);
                 }
@@ -173,12 +173,12 @@ namespace WinterUniverse
             if (_pawn.PawnCombat.CurrentSlotType == HandSlotType.Right)
             {
                 _weaponRightSlot.DamageCollider.EnableDamageCollider();
-                _pawn.PawnSound.PlaySound(_weaponRightSlot.Data.AttackClips);
+                _pawn.PawnSound.PlaySound(_weaponRightSlot.Config.AttackClips);
             }
             else
             {
                 _weaponLeftSlot.DamageCollider.EnableDamageCollider();
-                _pawn.PawnSound.PlaySound(_weaponLeftSlot.Data.AttackClips);
+                _pawn.PawnSound.PlaySound(_weaponLeftSlot.Config.AttackClips);
             }
         }
 

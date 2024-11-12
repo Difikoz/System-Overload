@@ -5,7 +5,7 @@ namespace WinterUniverse
 {
     public class WeaponSlot : MonoBehaviour
     {
-        [SerializeField] private WeaponItemConfig _data;
+        [SerializeField] private WeaponItemConfig _config;
         [SerializeField] private HandSlotType _type;
 
         private PawnController _pawn;
@@ -13,21 +13,21 @@ namespace WinterUniverse
         private GameObject _model;
 
         public PawnController Pawn => _pawn;
-        public WeaponItemConfig Data => _data;
+        public WeaponItemConfig Config => _config;
         public HandSlotType Type => _type;
         public DamageCollider DamageCollider => _damageCollider;
 
         public void Initialize(PawnController pawn)
         {
             _pawn = pawn;
-            foreach (StatModifierCreator creator in _data.Modifiers)
+            foreach (StatModifierCreator creator in _config.Modifiers)
             {
                 _pawn.PawnStats.AddStatModifier(creator);
             }
-            _model = LeanPool.Spawn(_data.Model, transform);
-            _model.transform.SetLocalPositionAndRotation(_data.LocalPosition, _data.LocalRotation);
+            _model = LeanPool.Spawn(_config.Model, transform);
+            _model.transform.SetLocalPositionAndRotation(_config.LocalPosition, _config.LocalRotation);
             _damageCollider = _model.GetComponentInChildren<DamageCollider>();
-            _damageCollider.Initialize(_pawn, _data.DamageTypes, _data.OwnerEffects, _data.TargetEffects, _data.DoSplashDamage, _data.SplashRadius);
+            _damageCollider.Initialize(_pawn, _config.DamageTypes, _config.OwnerEffects, _config.TargetEffects, _config.DoSplashDamage, _config.SplashRadius);
         }
 
         public void Equip(WeaponItemConfig weapon)
@@ -36,20 +36,20 @@ namespace WinterUniverse
             {
                 return;
             }
-            foreach (StatModifierCreator creator in _data.Modifiers)
+            foreach (StatModifierCreator creator in _config.Modifiers)
             {
                 _pawn.PawnStats.RemoveStatModifier(creator);
             }
             LeanPool.Despawn(_model);
-            _data = weapon;
-            foreach (StatModifierCreator creator in _data.Modifiers)
+            _config = weapon;
+            foreach (StatModifierCreator creator in _config.Modifiers)
             {
                 _pawn.PawnStats.AddStatModifier(creator);
             }
-            _model = LeanPool.Spawn(_data.Model, transform);
-            _model.transform.SetLocalPositionAndRotation(_data.LocalPosition, _data.LocalRotation);
+            _model = LeanPool.Spawn(_config.Model, transform);
+            _model.transform.SetLocalPositionAndRotation(_config.LocalPosition, _config.LocalRotation);
             _damageCollider = _model.GetComponentInChildren<DamageCollider>();
-            _damageCollider.Initialize(_pawn, _data.DamageTypes, _data.OwnerEffects, _data.TargetEffects, _data.DoSplashDamage, _data.SplashRadius);
+            _damageCollider.Initialize(_pawn, _config.DamageTypes, _config.OwnerEffects, _config.TargetEffects, _config.DoSplashDamage, _config.SplashRadius);
         }
     }
 }

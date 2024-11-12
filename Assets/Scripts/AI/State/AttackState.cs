@@ -5,7 +5,7 @@ namespace WinterUniverse
     [CreateAssetMenu(fileName = "Attack State", menuName = "Winter Universe/Character/NPC/State/New Attack State")]
     public class AttackState : NPCState
     {
-        [HideInInspector] public NPCActionData Action;
+        [HideInInspector] public AIActionConfig Action;
 
         protected bool _hasPerfomedAction;
         protected bool _hasPerfomedComboAction;

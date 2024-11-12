@@ -6,7 +6,7 @@ namespace WinterUniverse
     public class AIController : PawnController
     {
         private ALIFEMode _ALIFEMode;
-        private NPCActionData _currentAction;
+        private AIActionConfig _currentAction;
         private NPCState _currentState;
         private IdleState _idleState;
         private ChaseState _chaseState;
@@ -24,7 +24,7 @@ namespace WinterUniverse
         public Vector3 RootPosition => _rootPosition;
         public bool ReachedDestination => _reachedDestination;
         public ALIFEMode ALIFEMode => _ALIFEMode;
-        public NPCActionData CurrentAction => _currentAction;
+        public AIActionConfig CurrentAction => _currentAction;
         public NPCState CurrentState => _currentState;
         public IdleState IdleState => _idleState;
         public ChaseState ChaseState => _chaseState;

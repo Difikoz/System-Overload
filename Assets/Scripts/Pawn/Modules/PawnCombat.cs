@@ -9,6 +9,7 @@ namespace WinterUniverse
 
         [HideInInspector] public PawnController CurrentTarget;
         [HideInInspector] public WeaponItemConfig CurrentWeapon;
+        [HideInInspector] public AttackType CurrentAttackType;
         [HideInInspector] public HandSlotType CurrentSlotType;
 
         [HideInInspector] public float DistanceToTarget;
@@ -36,12 +37,19 @@ namespace WinterUniverse
             }
         }
 
-        public void UseWeaponAbility(WeaponItemConfig weapon, HandSlotType slot, AbilityData ability)
+        public void UseWeaponAction(WeaponItemConfig weapon, AttackType type, HandSlotType slot)
         {
-            if (ability.CanCast(_pawn, CurrentTarget))
+            CurrentWeapon = weapon;
+            CurrentAttackType = type;
+            CurrentSlotType = slot;
+            switch (CurrentAttackType)
             {
-                ability.CastStart(_pawn, CurrentTarget, transform.position, transform.forward);
-                StartCoroutine(CastAbilityTimer(ability));
+                case AttackType.Primary:
+                    CurrentWeapon.PrimaryAction.AttempToPerformAction(_pawn);
+                    break;
+                case AttackType.Secondary:
+                    CurrentWeapon.SecondaryAction.AttempToPerformAction(_pawn);
+                    break;
             }
         }
 

@@ -3872,7 +3872,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerPrefab: {fileID: 5838612897740544063, guid: eb6eef775d1a09d4aba461591c7ba187, type: 3}
   _aiPrefab: {fileID: 0}
-  _lootItemPrefab: {fileID: 0}
+  _lootItemPrefab: {fileID: 6898418262779158037, guid: 1162e82339e3d6f4797fdc5194a42aba, type: 3}
   _lootBagPrefab: {fileID: 0}
   _gravity: -20
   _healthReduceEffect: {fileID: 11400000, guid: 9eebb0263c3a8e74e9e93cf551a947b2, type: 2}

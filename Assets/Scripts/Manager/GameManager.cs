@@ -38,7 +38,7 @@ namespace WinterUniverse
 
         private IEnumerator LoadingTimer()
         {
-            WaitForSeconds delay = new(1f);
+            WaitForSeconds delay = new(0.25f);
             yield return null;
             _playerInput = GetComponentInChildren<PlayerInputManager>();
             yield return null;

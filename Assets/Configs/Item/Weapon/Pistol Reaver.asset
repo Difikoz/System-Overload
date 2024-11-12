@@ -27,8 +27,8 @@ MonoBehaviour:
   _weaponType: {fileID: 11400000, guid: f7fc228951978aa4381cec211a61e732, type: 2}
   _localPosition: {x: 0, y: 0, z: 0}
   _localRotation: {x: 0, y: 0, z: 0, w: 0}
-  _primaryAbility: {fileID: 0}
-  _secondaryAbility: {fileID: 0}
+  _primaryAction: {fileID: 11400000, guid: 7cbe50555abad5e47b5f8c728676cae2, type: 2}
+  _secondaryAction: {fileID: 11400000, guid: 7cbe50555abad5e47b5f8c728676cae2, type: 2}
   _attackClips: []
   _damageTypes: []
   _ownerEffects: []
