@@ -25,7 +25,7 @@ namespace WinterUniverse
         public void Initialize()
         {
             _camera = GetComponentInChildren<Camera>();
-            _cameraDefaultOffset = _camera.transform.position.z;
+            _cameraDefaultOffset = _camera.transform.localPosition.z;
         }
 
         public void HandleUpdate()

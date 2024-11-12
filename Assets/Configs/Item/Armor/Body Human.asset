@@ -40,7 +40,7 @@ MonoBehaviour:
   - _stat: {fileID: 11400000, guid: 6e1e8f87c2d5bef4e9f86f19afb14735, type: 2}
     _modifier:
       _type: 0
-      _value: 1
+      _value: 4
   - _stat: {fileID: 11400000, guid: 6952922381bc8434aaee5bfa03195b05, type: 2}
     _modifier:
       _type: 0

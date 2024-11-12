@@ -88,7 +88,8 @@ namespace WinterUniverse
         {
             if (_pawn != null && _pawn.UseRootMotion)
             {
-                _pawn.transform.position += _animator.deltaPosition;
+                _pawn.PawnLocomotion.CC.Move(_animator.deltaPosition);
+                //_pawn.transform.position += _animator.deltaPosition;
                 _pawn.transform.rotation *= _animator.deltaRotation;
             }
         }

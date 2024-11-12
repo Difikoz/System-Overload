@@ -16,14 +16,15 @@ namespace WinterUniverse
         private float _rotateDirection;
         private float _jumpTimer;
         private float _groundedTimer;
-        private bool _isGrounded;
         private RaycastHit _groundHit;
 
+        [SerializeField] private float _maxTurnAngle = 15f;
         [SerializeField] private float _timeToJump = 0.25f;
         [SerializeField] private float _timeToFall = 0.25f;
 
         private bool CanJump => _jumpTimer > 0f && _groundedTimer > 0f && !_pawn.IsDead && !_pawn.IsPerfomingAction && _pawn.PawnStats.EnergyCurrent >= _pawn.PawnStats.JumpEnergyCost.CurrentValue;
         public Vector3 MoveVelocity => _moveVelocity;
+        public CharacterController CC => _cc;
 
         public void Initialize(PawnController pawn)
         {
@@ -36,7 +37,7 @@ namespace WinterUniverse
 
         public void HandleLocomotion()
         {
-            if (_pawn.IsDead && _pawn.IsGrounded)//???
+            if (_pawn.IsDead && _pawn.IsGrounded)
             {
                 return;
             }
@@ -105,7 +106,7 @@ namespace WinterUniverse
             {
                 _moveVelocity = Vector3.MoveTowards(_moveVelocity, Vector3.zero, _pawn.PawnStats.Deceleration.CurrentValue * Time.deltaTime);
             }
-            _cc.Move(_moveVelocity * Time.deltaTime);
+            //_cc.Move(_moveVelocity * Time.deltaTime);
         }
 
         private void HandleRotation()
@@ -116,24 +117,16 @@ namespace WinterUniverse
             }
             if (_lookDirection != Vector3.zero)
             {
-                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(_lookDirection), _pawn.PawnStats.RotateSpeed.CurrentValue * Time.deltaTime);
                 _rotateDirection = ExtraTools.GetSignedAngleToDirection(transform.forward, _lookDirection);
-                if (_rotateDirection > 5f)
+                _pawn.PawnAnimator.SetFloat("TurnDirection", _rotateDirection);
+                if (!_pawn.IsMoving && Mathf.Abs(_rotateDirection) > _maxTurnAngle)
                 {
-                    _pawn.PawnAnimator.SetFloat("TurnDirection", 1f);
-                }
-                else if (_rotateDirection < -5f)
-                {
-                    _pawn.PawnAnimator.SetFloat("TurnDirection", -1f);
+                    _pawn.PawnAnimator.PlayActionAnimation("Turn", true);
                 }
                 else
                 {
-                    _pawn.PawnAnimator.SetFloat("TurnDirection", 0f);
+                    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(_lookDirection), _pawn.PawnStats.RotateSpeed.CurrentValue * Time.deltaTime);
                 }
-            }
-            else
-            {
-                _pawn.PawnAnimator.SetFloat("TurnDirection", 0f);
             }
         }
 

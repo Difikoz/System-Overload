@@ -57,7 +57,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Created: 0
   IsPerfomingAction: 0
-  UseRootMotion: 0
+  UseRootMotion: 1
   UseGravity: 1
   CanMove: 1
   CanRotate: 1
@@ -78,15 +78,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dac23c46dcea5c542ab9e0d33f632718, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HearRadius: 5
-  ViewDistance: 40
-  ViewAngle: 90
-  HeadPoint: {fileID: 0}
-  BodyPoint: {fileID: 0}
-  FootRightPoint: {fileID: 0}
-  FootLeftPoint: {fileID: 0}
   CurrentTarget: {fileID: 0}
   CurrentWeapon: {fileID: 0}
+  CurrentAttackType: 0
   CurrentSlotType: 0
   DistanceToTarget: 0
   AngleToTarget: 0
@@ -141,6 +135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18369be495225474695faf0776004714, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _maxTurnAngle: 5
   _timeToJump: 0.25
   _timeToFall: 0.25
 --- !u!114 &3486705084818926493
