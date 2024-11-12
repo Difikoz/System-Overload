@@ -24,4 +24,36 @@ MonoBehaviour:
   _requiredFaction: []
   _requiredStats: []
   _armorType: {fileID: 11400000, guid: da3cbcca341c5fb41ab62957a239a1db, type: 2}
-  _modifiers: []
+  _modifiers:
+  - _stat: {fileID: 11400000, guid: 17149165ad543f84d81813ef18b6d237, type: 2}
+    _modifier:
+      _type: 0
+      _value: 8
+  - _stat: {fileID: 11400000, guid: 4ddc227d79976fe4b97db6426aae9a7e, type: 2}
+    _modifier:
+      _type: 0
+      _value: 16
+  - _stat: {fileID: 11400000, guid: 6343b25afc23b784e85bc9bf0f31b586, type: 2}
+    _modifier:
+      _type: 0
+      _value: 4
+  - _stat: {fileID: 11400000, guid: 6e1e8f87c2d5bef4e9f86f19afb14735, type: 2}
+    _modifier:
+      _type: 0
+      _value: 1
+  - _stat: {fileID: 11400000, guid: 6952922381bc8434aaee5bfa03195b05, type: 2}
+    _modifier:
+      _type: 0
+      _value: 100
+  - _stat: {fileID: 11400000, guid: 43c65deddb177ec409ff69bdf32b1583, type: 2}
+    _modifier:
+      _type: 0
+      _value: 100
+  - _stat: {fileID: 11400000, guid: 43c65deddb177ec409ff69bdf32b1583, type: 2}
+    _modifier:
+      _type: 0
+      _value: 1
+  - _stat: {fileID: 11400000, guid: 134b5f55d9181d74990157a9fb81dbe5, type: 2}
+    _modifier:
+      _type: 0
+      _value: 5

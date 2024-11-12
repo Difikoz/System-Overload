@@ -56,6 +56,7 @@ namespace WinterUniverse
         [HideInInspector] public Stat Acceleration;
         [HideInInspector] public Stat Deceleration;
         [HideInInspector] public Stat MoveSpeed;
+        [HideInInspector] public Stat RotateSpeed;
 
         [HideInInspector] public Stat JumpEnergyCost;
         [HideInInspector] public Stat RunEnergyCost;
@@ -263,6 +264,10 @@ namespace WinterUniverse
                 else if (s.Data.DisplayName == "Move Speed")
                 {
                     MoveSpeed = s;
+                }
+                else if (s.Data.DisplayName == "Rotate Speed")
+                {
+                    RotateSpeed = s;
                 }
                 else if (s.Data.DisplayName == "Jump Energy Cost")
                 {

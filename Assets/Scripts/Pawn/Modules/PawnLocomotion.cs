@@ -98,13 +98,13 @@ namespace WinterUniverse
                 {
                     _moveInput *= 2f;
                 }
-                _moveVelocity = Vector3.MoveTowards(_moveVelocity, (transform.right * _moveInput.x + transform.forward * _moveInput.y) * _pawn.PawnStats.MoveSpeed.CurrentValue, _pawn.PawnStats.Acceleration.CurrentValue * Time.deltaTime);// TODO get acceleration stat
+                _moveVelocity = Vector3.MoveTowards(_moveVelocity, (transform.right * _moveInput.x + transform.forward * _moveInput.y) * _pawn.PawnStats.MoveSpeed.CurrentValue, _pawn.PawnStats.Acceleration.CurrentValue * Time.deltaTime);
             }
             else
             {
-                _moveVelocity = Vector3.MoveTowards(_moveVelocity, Vector3.zero, _pawn.PawnStats.Deceleration.CurrentValue * Time.deltaTime);// TODO get deceleration stat
+                _moveVelocity = Vector3.MoveTowards(_moveVelocity, Vector3.zero, _pawn.PawnStats.Deceleration.CurrentValue * Time.deltaTime);
             }
-            _cc.Move(_moveVelocity * Time.deltaTime);// disabled for root motion movement
+            _cc.Move(_moveVelocity * Time.deltaTime);
         }
 
         private void HandleRotation()
@@ -115,13 +115,13 @@ namespace WinterUniverse
             }
             if (_lookDirection != Vector3.zero)
             {
-                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(_lookDirection), 4f * Time.deltaTime);// TODO get rotate speed stat
+                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(_lookDirection), _pawn.PawnStats.RotateSpeed.CurrentValue * Time.deltaTime);
                 float _rotateDirection = Vector3.Dot(_lookDirection, transform.forward);
-                if (_rotateDirection > 15f)
+                if (_rotateDirection > 5f)
                 {
                     _pawn.PawnAnimator.SetFloat("TurnDirection", 1f);// TODO
                 }
-                else if (_rotateDirection < -15f)
+                else if (_rotateDirection < -5f)
                 {
                     _pawn.PawnAnimator.SetFloat("TurnDirection", -1f);// TODO
                 }
@@ -138,7 +138,7 @@ namespace WinterUniverse
             {
                 return false;
             }
-            _pawn.PawnStats.ReduceCurrentEnergy(_pawn.PawnStats.RunEnergyCost.CurrentValue * Time.deltaTime);// TODO get run energy cost stat
+            _pawn.PawnStats.ReduceCurrentEnergy(_pawn.PawnStats.RunEnergyCost.CurrentValue * Time.deltaTime);
             return true;
         }
 
