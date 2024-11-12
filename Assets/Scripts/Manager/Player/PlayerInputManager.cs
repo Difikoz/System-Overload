@@ -14,24 +14,23 @@ namespace WinterUniverse
 
         private void OnApplicationFocus(bool focus)
         {
-            if (enabled && _inputActions != null)
-            {
-                if (focus)
-                {
-                    Enable();
-                }
-                else
-                {
-                    Disable();
-                }
-            }
+            //if (enabled && _inputActions != null)
+            //{
+            //    if (focus)
+            //    {
+            //        Enable();
+            //    }
+            //    else
+            //    {
+            //        Disable();
+            //    }
+            //}
         }
 
         public void Initialize()
         {
-            enabled = false;
             _inputActions = new();
-            Enable();
+            enabled = false;
         }
 
         public void Enable()

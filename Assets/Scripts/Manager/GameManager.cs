@@ -41,21 +41,13 @@ namespace WinterUniverse
             WaitForSeconds delay = new(0.25f);
             yield return null;
             _playerInput = GetComponentInChildren<PlayerInputManager>();
-            yield return null;
             _playerCamera = GetComponentInChildren<PlayerCameraManager>();
-            yield return null;
             _playerUI = GetComponentInChildren<PlayerUIManager>();
-            yield return null;
             _worldLayer = GetComponentInChildren<WorldLayerManager>();
-            yield return null;
             _worldData = GetComponentInChildren<WorldDataManager>();
-            yield return null;
             _worldObject = GetComponentInChildren<WorldObjectManager>();
-            yield return null;
             _worldSaveLoad = GetComponentInChildren<WorldSaveLoadManager>();
-            yield return null;
             _worldSound = GetComponentInChildren<WorldSoundManager>();
-            yield return null;
             _worldTime = GetComponentInChildren<WorldTimeManager>();
             yield return null;
             _playerUI.LoadingScreenUI.Show();
@@ -102,8 +94,9 @@ namespace WinterUniverse
             _playerUI.LoadingScreenUI.UpdateLoadingScreen("Load Saved Data", 1, 1);
             yield return delay;
             _playerUI.LoadingScreenUI.Hide();
-            //_mainMenu.OpenMainMenuWindow();
             Debug.Log($"Loaded : {Time.timeSinceLevelLoad} seconds.");
+            yield return null;
+            _playerInput.Enable();
             yield return null;
             _completed = true;
         }
