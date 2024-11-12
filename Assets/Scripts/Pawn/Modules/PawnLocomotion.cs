@@ -13,6 +13,7 @@ namespace WinterUniverse
         private Vector3 _lookDirection;
         private float _forwardVelocity;
         private float _rightVelocity;
+        private float _rotateDirection;
         private float _jumpTimer;
         private float _groundedTimer;
         private bool _isGrounded;
@@ -116,19 +117,23 @@ namespace WinterUniverse
             if (_lookDirection != Vector3.zero)
             {
                 transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(_lookDirection), _pawn.PawnStats.RotateSpeed.CurrentValue * Time.deltaTime);
-                float _rotateDirection = Vector3.Dot(_lookDirection, transform.forward);
+                _rotateDirection = ExtraTools.GetSignedAngleToDirection(transform.forward, _lookDirection);
                 if (_rotateDirection > 5f)
                 {
-                    _pawn.PawnAnimator.SetFloat("TurnDirection", 1f);// TODO
+                    _pawn.PawnAnimator.SetFloat("TurnDirection", 1f);
                 }
                 else if (_rotateDirection < -5f)
                 {
-                    _pawn.PawnAnimator.SetFloat("TurnDirection", -1f);// TODO
+                    _pawn.PawnAnimator.SetFloat("TurnDirection", -1f);
                 }
                 else
                 {
-                    _pawn.PawnAnimator.SetFloat("TurnDirection", 0f);// TODO
+                    _pawn.PawnAnimator.SetFloat("TurnDirection", 0f);
                 }
+            }
+            else
+            {
+                _pawn.PawnAnimator.SetFloat("TurnDirection", 0f);
             }
         }
 

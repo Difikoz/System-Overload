@@ -116,13 +116,13 @@ namespace WinterUniverse
             _pawnAnimator.Initialize(this);
             _pawnCombat.Initialize(this);
             _pawnEffects.Initialize(this);
+            _pawnStats.Initialize(this);
+            _pawnStats.CreateStats();
             _pawnEquipment.Initialize(this);
             _pawnInteraction.Initialize(this);
             _pawnInventory.Initialize(data.InventoryStacks);
             _pawnLocomotion.Initialize(this);
             _pawnSound.Initialize(this);
-            _pawnStats.Initialize(this);
-            _pawnStats.CreateStats();
             IgnoreMyOwnColliders();// this order??? or on end???
             _pawnEquipment.EquipWeapon(GameManager.StaticInstance.WorldData.GetWeapon(data.WeaponInRightHand), false, false);
             _pawnEquipment.EquipWeapon(GameManager.StaticInstance.WorldData.GetWeapon(data.WeaponInLeftHand), false, false);
