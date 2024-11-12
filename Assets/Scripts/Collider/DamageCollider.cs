@@ -8,6 +8,7 @@ namespace WinterUniverse
     {
         public Action OnHitted;
 
+        [SerializeField] protected Collider _collider;
         [SerializeField] protected List<DamageType> _damageTypes = new();
         [SerializeField] protected List<EffectCreator> _targetEffects = new();
         [SerializeField] protected bool _doSplashDamage;
@@ -15,15 +16,9 @@ namespace WinterUniverse
 
         protected PawnController _owner;
         protected List<EffectCreator> _ownerEffects = new();
-        protected Collider _collider;
         protected Vector3 _hitPoint;
         protected Vector3 _hitDirection;
         protected List<PawnController> _damagedCharacters = new();
-
-        protected virtual void Awake()
-        {
-            _collider = GetComponent<Collider>();
-        }
 
         public virtual void Initialize(PawnController owner, List<DamageType> damageTypes, List<EffectCreator> ownerEffects, List<EffectCreator> targetEffects, bool doSplashDamage, float splashRadius)
         {

@@ -21,16 +21,15 @@ namespace WinterUniverse
 
         public void Initialize()
         {
-            //_loadingScreen = GetComponentInChildren<LoadingScreenUI>();
-            _menuUI = GetComponentInChildren<MenuUI>();
-            _settingsUI = GetComponentInChildren<SettingsUI>();
-            _statUI = GetComponentInChildren<StatUI>();
-            _equipmentUI = GetComponentInChildren<EquipmentUI>();
-            _inventoryUI = GetComponentInChildren<InventoryUI>();
-            _factionUI = GetComponentInChildren<FactionUI>();
-            _vitalityUI = GetComponentInChildren<PlayerVitalityUI>();
-            _notificationUI = GetComponentInChildren<PlayerNotificationUI>();
-            _interactionUI = GetComponentInChildren<PlayerInteractionUI>();
+            _menuUI = GetComponentInChildren<MenuUI>(true);
+            _settingsUI = GetComponentInChildren<SettingsUI>(true);
+            _statUI = GetComponentInChildren<StatUI>(true);
+            _equipmentUI = GetComponentInChildren<EquipmentUI>(true);
+            _inventoryUI = GetComponentInChildren<InventoryUI>(true);
+            _factionUI = GetComponentInChildren<FactionUI>(true);
+            _vitalityUI = GetComponentInChildren<PlayerVitalityUI>(true);
+            _notificationUI = GetComponentInChildren<PlayerNotificationUI>(true);
+            _interactionUI = GetComponentInChildren<PlayerInteractionUI>(true);
             _menuUI.Initialize();
             _settingsUI.Initialize();
             _statUI.Initialize();

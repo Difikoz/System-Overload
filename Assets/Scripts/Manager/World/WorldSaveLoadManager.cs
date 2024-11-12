@@ -22,6 +22,7 @@ namespace WinterUniverse
             else
             {
                 CurrentSaveData = new();
+                GameManager.StaticInstance.Player.CreateCharacter(CurrentSaveData);
                 SaveGame();
             }
             GameManager.StaticInstance.Player.LoadData(CurrentSaveData);

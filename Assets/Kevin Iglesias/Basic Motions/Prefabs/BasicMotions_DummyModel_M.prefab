@@ -244,7 +244,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _data: {fileID: 11400000, guid: 0928e4ca0680caf4bbbaf6a7eaa4828e, type: 2}
   _type: {fileID: 11400000, guid: da3cbcca341c5fb41ab62957a239a1db, type: 2}
-  _renderers: []
+  _renderers:
+  - _data: {fileID: 11400000, guid: 0928e4ca0680caf4bbbaf6a7eaa4828e, type: 2}
+    _meshes:
+    - {fileID: 4795651024172175849}
 --- !u!1 &1245028195968658989
 GameObject:
   m_ObjectHideFlags: 0
@@ -502,6 +505,7 @@ Transform:
   - {fileID: 3433237925708534447}
   - {fileID: 672930481268983819}
   - {fileID: 3187346010872201538}
+  - {fileID: 2521529365982663325}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &5103900588920211198
@@ -1366,6 +1370,37 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2632861926243625182}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4795651024172175849
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2521529365982663325}
+  m_Layer: 2
+  m_Name: Body Human
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2521529365982663325
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4795651024172175849}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1167732337576959108}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4826593152995328420
 GameObject:

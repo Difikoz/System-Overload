@@ -16,14 +16,14 @@ MonoBehaviour:
   _description: Description
   _icon: {fileID: 0}
   _itemType: 0
-  _model: {fileID: 0}
+  _model: {fileID: 965678708658033111, guid: 49435d5b882d779408c45406aded2d63, type: 3}
   _weight: 1
   _maxCountInStack: 1
   _price: 100
   _rating: 1
   _requiredFaction: []
   _requiredStats: []
-  _controller: {fileID: 0}
+  _controller: {fileID: 22100000, guid: 5a1faf2d6d259a4439a40aa53fb43ba2, type: 2}
   _weaponType: {fileID: 11400000, guid: 101b1f12d6ca95e428b4285f6e98c707, type: 2}
   _localPosition: {x: 0, y: 0, z: 0}
   _localRotation: {x: 0, y: 0, z: 0, w: 0}

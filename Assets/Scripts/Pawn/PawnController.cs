@@ -54,7 +54,16 @@ namespace WinterUniverse
 
         protected virtual void Awake()
         {
-
+            _pawnAnimator = GetComponentInChildren<PawnAnimator>();
+            _pawnCombat = GetComponent<PawnCombat>();
+            _pawnEffects = GetComponent<PawnEffects>();
+            _pawnEquipment = GetComponentInChildren<PawnEquipment>();
+            _pawnInteraction = GetComponent<PawnInteraction>();
+            _pawnInventory = GetComponent<PawnInventory>();
+            _pawnLocomotion = GetComponent<PawnLocomotion>();
+            _pawnSound = GetComponent<PawnSound>();
+            _pawnStats = GetComponent<PawnStats>();
+            //CharacterUI = GetComponentInChildren<CharacterUI>();
         }
 
         protected virtual void OnEnable()
@@ -104,16 +113,6 @@ namespace WinterUniverse
         {
             Created = false;
             _characterName = data.CharacterName;
-            _pawnAnimator = GetComponentInChildren<PawnAnimator>();
-            _pawnCombat = GetComponent<PawnCombat>();
-            _pawnEffects = GetComponent<PawnEffects>();
-            _pawnEquipment = GetComponentInChildren<PawnEquipment>();
-            _pawnInteraction = GetComponent<PawnInteraction>();
-            _pawnInventory = GetComponent<PawnInventory>();
-            _pawnLocomotion = GetComponent<PawnLocomotion>();
-            _pawnSound = GetComponent<PawnSound>();
-            _pawnStats = GetComponent<PawnStats>();
-            //CharacterUI = GetComponentInChildren<CharacterUI>();
             _pawnAnimator.Initialize(this);
             _pawnCombat.Initialize(this);
             _pawnEffects.Initialize(this);

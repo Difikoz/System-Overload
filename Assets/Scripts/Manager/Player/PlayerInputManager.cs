@@ -14,7 +14,7 @@ namespace WinterUniverse
 
         private void OnApplicationFocus(bool focus)
         {
-            if (enabled)
+            if (enabled && _inputActions != null)
             {
                 if (focus)
                 {
@@ -29,12 +29,17 @@ namespace WinterUniverse
 
         public void Initialize()
         {
+            enabled = false;
             _inputActions = new();
             Enable();
         }
 
-        private void Enable()
+        public void Enable()
         {
+            if (enabled)
+            {
+                return;
+            }
             enabled = true;
             _inputActions.Enable();
             _inputActions.Character.Move.performed += ctx => _moveInput = ctx.ReadValue<Vector2>();
@@ -49,8 +54,12 @@ namespace WinterUniverse
             _inputActions.Character.ActionSecondaryLeft.performed += ctx => GameManager.StaticInstance.Player.PawnCombat.UseWeaponAbility(GameManager.StaticInstance.Player.PawnEquipment.WeaponLeftSlot.Data, HandSlotType.Left, GameManager.StaticInstance.Player.PawnEquipment.WeaponLeftSlot.Data.SecondaryAbility);
         }
 
-        private void Disable()
+        public void Disable()
         {
+            if (!enabled)
+            {
+                return;
+            }
             _inputActions.Character.Move.performed -= ctx => _moveInput = ctx.ReadValue<Vector2>();
             _inputActions.Camera.Look.performed -= ctx => _lookInput = ctx.ReadValue<Vector2>();
             _inputActions.Character.Run.performed -= ctx => _runInput = true;
@@ -70,6 +79,10 @@ namespace WinterUniverse
 
         public void HandleUpdate()
         {
+            if (!enabled)
+            {
+                return;
+            }
             HandleRunInput();
         }
 
