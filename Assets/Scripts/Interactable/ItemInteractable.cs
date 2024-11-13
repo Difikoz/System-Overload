@@ -1,3 +1,4 @@
+using Lean.Pool;
 using UnityEngine;
 
 namespace WinterUniverse
@@ -15,9 +16,9 @@ namespace WinterUniverse
             Amount = amount;
             if (_model != null)
             {
-                Destroy(_model);// TODO pool despawn
+                LeanPool.Despawn(_model);// TODO pool despawn
             }
-            _model = Instantiate(Data.Model, transform);// TODO pool spawn
+            _model = LeanPool.Spawn(Data.Model, transform);// TODO pool spawn
         }
 
         public override string GetInteractionMessage()
@@ -37,7 +38,7 @@ namespace WinterUniverse
             {
                 GameManager.StaticInstance.PlayerUI.NotificationUI.DisplayNotification($"Added {(Amount > 1 ? $"{Amount} " : "")}{Data.DisplayName}");
             }
-            Destroy(gameObject);// TODO pool despawn
+            LeanPool.Despawn(gameObject);// TODO pool despawn
         }
     }
 }

@@ -68,7 +68,7 @@ namespace WinterUniverse
             }
             if (addOldToInventory)
             {
-                _pawn.PawnInventory.AddItem(_weaponLeftSlot.Config);
+                _pawn.PawnInventory.AddItem(_weaponRightSlot.Config);
             }
             _weaponLeftSlot.Equip(weapon);
             _pawn.PawnCombat.CurrentWeapon = _weaponRightSlot.Config;
@@ -85,7 +85,7 @@ namespace WinterUniverse
             }
             if (addOldToInventory)
             {
-                _pawn.PawnInventory.AddItem(_weaponRightSlot.Config);
+                _pawn.PawnInventory.AddItem(_weaponLeftSlot.Config);
             }
             _weaponRightSlot.Equip(weapon);
             _pawn.PawnCombat.CurrentWeapon = _weaponLeftSlot.Config;
