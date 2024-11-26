@@ -11,9 +11,9 @@ namespace WinterUniverse
         private PawnController _pawn;
         private List<Interactable> _interactables = new();
 
-        public void Initialize(PawnController pawn)
+        public void Initialize()
         {
-            _pawn = pawn;
+            _pawn = GetComponent<PawnController>();
         }
 
         public void AddInteractable(Interactable interactable)

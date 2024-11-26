@@ -26,9 +26,9 @@ namespace WinterUniverse
         public Vector3 MoveVelocity => _moveVelocity;
         public CharacterController CC => _cc;
 
-        public void Initialize(PawnController pawn)
+        public void Initialize()
         {
-            _pawn = pawn;
+            _pawn = GetComponent<PawnController>();
             _cc = GetComponent<CharacterController>();
             _cc.height = _pawn.PawnAnimator.Height;
             _cc.radius = _pawn.PawnAnimator.Radius;
@@ -119,11 +119,7 @@ namespace WinterUniverse
             {
                 _rotateDirection = ExtraTools.GetSignedAngleToDirection(transform.forward, _lookDirection);
                 _pawn.PawnAnimator.SetFloat("TurnDirection", _rotateDirection);
-                if (!_pawn.IsMoving && Mathf.Abs(_rotateDirection) > _maxTurnAngle)
-                {
-                    _pawn.PawnAnimator.PlayActionAnimation("Turn", true);
-                }
-                else
+                if (_pawn.IsMoving)
                 {
                     transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(_lookDirection), _pawn.PawnStats.RotateSpeed.CurrentValue * Time.deltaTime);
                 }

@@ -1,10 +1,13 @@
+using Lean.Pool;
 using UnityEngine;
 using UnityEngine.AI;
 
 namespace WinterUniverse
 {
-    public class AIController : PawnController
+    public class AIController : MonoBehaviour
     {
+        private PawnController _pawn;
+
         private ALIFEMode _ALIFEMode;
         private AIActionConfig _currentAction;
         private NPCState _currentState;
@@ -19,6 +22,7 @@ namespace WinterUniverse
         private Vector3 _rootPosition;
         private bool _reachedDestination;
 
+        public PawnController Pawn => _pawn;
         public NavMeshAgent Agent => _agent;
         public AIDetectionModule AIDetectionModule => _aiDetectionModule;
         public Vector3 RootPosition => _rootPosition;
@@ -32,34 +36,10 @@ namespace WinterUniverse
         public AttackState AttackState => _attackState;
         public float ActionRecoveryTimer => _actionRecoveryTimer;
 
-        public override Vector2 GetMoveInput()
+        public void Initialize()
         {
-            if (!_reachedDestination)
-            {
-                return new Vector2(Vector3.Dot(_agent.desiredVelocity, transform.right), Vector3.Dot(_agent.desiredVelocity, transform.forward)).normalized;
-            }
-            return Vector2.zero;
-        }
-
-        public override Vector3 GetLookDirection()
-        {
-            if (PawnCombat.CurrentTarget != null && PawnCombat.CurrentTargetIsVisible())
-            {
-                return (PawnCombat.CurrentTarget.transform.position - transform.position).normalized;
-            }
-            else if (!_reachedDestination)
-            {
-                return _agent.desiredVelocity;
-            }
-            else
-            {
-                return Vector3.zero;
-            }
-        }
-
-        public override void CreateCharacter(PawnSaveData data)
-        {
-            _agent = GetComponentInChildren<NavMeshAgent>();
+            _pawn = LeanPool.Spawn(GameManager.StaticInstance.WorldData.PawnPrefab).GetComponent<PawnController>();
+            _agent = GetComponent<NavMeshAgent>();
             _aiDetectionModule = GetComponent<AIDetectionModule>();
             _idleState = Instantiate(_idleState);
             _chaseState = Instantiate(_chaseState);
@@ -69,15 +49,28 @@ namespace WinterUniverse
             _attackState = Instantiate(_attackState);
             _currentState = _idleState;
             _agent.updateRotation = false;
-            _agent.height = _pawnAnimator.Height;
-            _agent.radius = _pawnAnimator.Radius;
-            base.CreateCharacter(data);
+            _agent.height = _pawn.PawnAnimator.Height;
+            _agent.radius = _pawn.PawnAnimator.Radius;
         }
 
-        protected override void FixedUpdate()
+        public void OnUpdate()
         {
-            base.FixedUpdate();
-            if (_actionRecoveryTimer > 0f && !IsPerfomingAction)
+            _pawn.MoveDirection = _agent.desiredVelocity;
+            if (_pawn.PawnCombat.CurrentTarget != null && _pawn.PawnCombat.CurrentTargetIsVisible())
+            {
+                _pawn.LookDirection = (_pawn.PawnCombat.CurrentTarget.transform.position - transform.position).normalized;
+            }
+            else if (!_reachedDestination)
+            {
+                _pawn.LookDirection = _agent.desiredVelocity;
+            }
+            else
+            {
+                _pawn.LookDirection = Vector3.zero;
+            }
+            transform.SetPositionAndRotation(_pawn.transform.position, _pawn.transform.rotation);
+            //
+            if (_actionRecoveryTimer > 0f && !_pawn.IsPerfomingAction)
             {
                 _actionRecoveryTimer -= Time.fixedDeltaTime;
             }
@@ -104,9 +97,9 @@ namespace WinterUniverse
 
         private void ProcessStateMachine()
         {
-            if (!IsPerfomingAction && _combatPhase.IsReadyToChangePhase(PawnStats.HealthPercent))
+            if (!_pawn.IsPerfomingAction && _combatPhase.IsReadyToChangePhase(_pawn.PawnStats.HealthPercent))
             {
-                PawnAnimator.PlayActionAnimation("Phase Change", true);
+                _pawn.PawnAnimator.PlayActionAnimation("Phase Change", true);
             }
             NPCState nextState = _currentState?.Tick(this);
             if (nextState != null)
@@ -119,7 +112,7 @@ namespace WinterUniverse
             if (_agent.enabled && _agent.hasPath && _agent.remainingDistance > _agent.stoppingDistance)
             {
                 _reachedDestination = false;
-                if (IsPerfomingAction)
+                if (_pawn.IsPerfomingAction)
                 {
                     StopMovement();// TODO ???
                 }

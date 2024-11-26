@@ -5,7 +5,7 @@ namespace WinterUniverse
     public class RemoveActionFlag : StateMachineBehaviour
     {
         private PawnController _owner;
-        [SerializeField] private bool _removePerfoming = true;
+        [SerializeField] private bool _removeIsPerfoming = true;
         [SerializeField] private bool _removeRootMotion = true;
         [SerializeField] private bool _restoreUseGravity = true;
         [SerializeField] private bool _restoreCanMove = true;
@@ -15,7 +15,7 @@ namespace WinterUniverse
         override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             _owner = animator.transform.parent.GetComponent<PawnController>();
-            if (_removePerfoming)
+            if (_removeIsPerfoming)
             {
                 _owner.IsPerfomingAction = false;
             }

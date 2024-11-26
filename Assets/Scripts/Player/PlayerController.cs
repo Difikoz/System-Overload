@@ -1,41 +1,43 @@
-using System.Collections;
+using Lean.Pool;
 using UnityEngine;
 
 namespace WinterUniverse
 {
-    public class PlayerController : PawnController
+    public class PlayerController : MonoBehaviour
     {
-        public override Vector2 GetMoveInput()
+        private PawnController _pawn;
+
+        public PawnController Pawn => _pawn;
+
+        public void Initialize()
         {
-            return GameManager.StaticInstance.PlayerInput.MoveInput;
+            _pawn = LeanPool.Spawn(GameManager.StaticInstance.WorldData.PawnPrefab).GetComponent<PawnController>();
         }
 
-        public override Vector3 GetLookDirection()
+        public void OnUpdate()
         {
-            return GameManager.StaticInstance.PlayerCamera.transform.forward;
+            _pawn.MoveDirection = GameManager.StaticInstance.PlayerCamera.transform.right * GameManager.StaticInstance.PlayerInput.MoveInput.x + GameManager.StaticInstance.PlayerCamera.transform.forward * GameManager.StaticInstance.PlayerInput.MoveInput.y;
+            _pawn.LookDirection = GameManager.StaticInstance.PlayerCamera.transform.forward;
         }
 
-        protected override IEnumerator ProcessDeathEvent()
+        private void OnDeath()
         {
             GameManager.StaticInstance.PlayerUI.NotificationUI.DisplayNotification("You Died");
-            yield return base.ProcessDeathEvent();
-            Revive();
         }
 
-        public override void Revive()
+        private void OnRevive()
         {
             transform.SetPositionAndRotation(GameManager.StaticInstance.WorldSaveLoad.CurrentSaveData.RespawnTransform.GetPosition(), GameManager.StaticInstance.WorldSaveLoad.CurrentSaveData.RespawnTransform.GetRotation());
-            base.Revive();
         }
 
         public void SaveData(ref PawnSaveData data)
         {
-            data.CharacterName = _characterName;
-            data.Faction = _faction.DisplayName;
-            data.Health = _pawnStats.HealthCurrent;
-            data.Energy = _pawnStats.EnergyCurrent;
+            data.CharacterName = _pawn.CharacterName;
+            data.Faction = _pawn.Faction.DisplayName;
+            data.Health = _pawn.PawnStats.HealthCurrent;
+            data.Energy = _pawn.PawnStats.EnergyCurrent;
             data.InventoryStacks.Clear();
-            foreach (ItemStack stack in _pawnInventory.Stacks)
+            foreach (ItemStack stack in _pawn.PawnInventory.Stacks)
             {
                 if (data.InventoryStacks.ContainsKey(stack.Item.DisplayName))
                 {
@@ -46,19 +48,19 @@ namespace WinterUniverse
                     data.InventoryStacks.Add(stack.Item.DisplayName, stack.Amount);
                 }
             }
-            data.WeaponInRightHand = _pawnEquipment.WeaponRightSlot.Config.DisplayName;
-            data.WeaponInLeftHand = _pawnEquipment.WeaponLeftSlot.Config.DisplayName;
+            data.WeaponInRightHand = _pawn.PawnEquipment.WeaponRightSlot.Config.DisplayName;
+            data.WeaponInLeftHand = _pawn.PawnEquipment.WeaponLeftSlot.Config.DisplayName;
             // save armors
-            data.Transform.SetPositionAndRotation(transform.position, transform.eulerAngles);
+            data.Transform.SetPositionAndRotation(_pawn.transform.position, _pawn.transform.eulerAngles);
         }
 
         public void LoadData(PawnSaveData data)
         {
-            CreateCharacter(data);
-            _pawnStats.HealthCurrent = data.Health;
-            _pawnStats.EnergyCurrent = data.Energy;
-            transform.SetPositionAndRotation(data.Transform.GetPosition(), data.Transform.GetRotation());
-            GameManager.StaticInstance.PlayerCamera.transform.position = transform.position;
+            _pawn.CreateCharacter(data);
+            _pawn.PawnStats.HealthCurrent = data.Health;
+            _pawn.PawnStats.EnergyCurrent = data.Energy;
+            _pawn.transform.SetPositionAndRotation(data.Transform.GetPosition(), data.Transform.GetRotation());
+            GameManager.StaticInstance.PlayerCamera.transform.position = _pawn.transform.position;
         }
     }
 }

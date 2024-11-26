@@ -10,8 +10,8 @@ namespace WinterUniverse
 
         public void Initialize()
         {
-            GameManager.StaticInstance.Player.PawnStats.OnHealthChanged += SetHealthValues;
-            GameManager.StaticInstance.Player.PawnStats.OnEnergyChanged += SetEnergyValues;
+            GameManager.StaticInstance.Player.Pawn.PawnStats.OnHealthChanged += SetHealthValues;
+            GameManager.StaticInstance.Player.Pawn.PawnStats.OnEnergyChanged += SetEnergyValues;
         }
 
         public void ShowBars()
@@ -36,8 +36,8 @@ namespace WinterUniverse
 
         private void OnDestroy()
         {
-            GameManager.StaticInstance.Player.PawnStats.OnHealthChanged -= SetHealthValues;
-            GameManager.StaticInstance.Player.PawnStats.OnEnergyChanged -= SetEnergyValues;
+            GameManager.StaticInstance.Player.Pawn.PawnStats.OnHealthChanged -= SetHealthValues;
+            GameManager.StaticInstance.Player.Pawn.PawnStats.OnEnergyChanged -= SetEnergyValues;
         }
     }
 }

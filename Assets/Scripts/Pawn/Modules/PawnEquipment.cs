@@ -17,9 +17,9 @@ namespace WinterUniverse
         public WeaponSlot WeaponRightSlot => _weaponRightSlot;
         public WeaponSlot WeaponLeftSlot => _weaponLeftSlot;
 
-        public void Initialize(PawnController pawn)
+        public void Initialize()
         {
-            _pawn = pawn;
+            _pawn = GetComponent<PawnController>();
             _weaponRightSlot.Initialize(_pawn);
             _weaponLeftSlot.Initialize(_pawn);
             foreach (ArmorSlot slot in _armorSlots)

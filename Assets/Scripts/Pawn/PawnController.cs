@@ -6,7 +6,7 @@ using UnityEngine;
 namespace WinterUniverse
 {
     [RequireComponent(typeof(Rigidbody))]
-    public abstract class PawnController : MonoBehaviour
+    public class PawnController : MonoBehaviour
     {
         public Action<FactionConfig> OnFactionChanged;
         public Action OnDied;
@@ -36,7 +36,8 @@ namespace WinterUniverse
         public PawnInteraction PawnInteraction => _pawnInteraction;
 
         public bool Created;
-
+        public Vector3 MoveDirection;
+        public Vector3 LookDirection;
         public bool IsPerfomingAction;
         public bool UseRootMotion;
         public bool UseGravity = true;
@@ -49,41 +50,30 @@ namespace WinterUniverse
         public bool IsInvulnerable;
         public bool IsDead;
 
-        public abstract Vector2 GetMoveInput();
-        public abstract Vector3 GetLookDirection();
-
-        protected virtual void Awake()
+        public void Initialize()
         {
-            _pawnAnimator = GetComponentInChildren<PawnAnimator>();
+            _pawnAnimator = GetComponent<PawnAnimator>();
             _pawnCombat = GetComponent<PawnCombat>();
             _pawnEffects = GetComponent<PawnEffects>();
-            _pawnEquipment = GetComponentInChildren<PawnEquipment>();
+            _pawnEquipment = GetComponent<PawnEquipment>();
             _pawnInteraction = GetComponent<PawnInteraction>();
             _pawnInventory = GetComponent<PawnInventory>();
             _pawnLocomotion = GetComponent<PawnLocomotion>();
             _pawnSound = GetComponent<PawnSound>();
             _pawnStats = GetComponent<PawnStats>();
             //CharacterUI = GetComponentInChildren<CharacterUI>();
+            _pawnAnimator.Initialize();
+            _pawnCombat.Initialize();
+            _pawnEffects.Initialize();
+            _pawnStats.Initialize();
+            _pawnStats.CreateStats();
+            _pawnEquipment.Initialize();
+            _pawnInteraction.Initialize();
+            _pawnLocomotion.Initialize();
+            _pawnSound.Initialize();
         }
 
-        protected virtual void OnEnable()
-        {
-            //if (CharacterUI != null)
-            //{
-            //    CharacterUI.SetCharacterName(CharacterName);
-            //    StatModule.OnHealthChanged += CharacterUI.SetHealthValues;
-            //}
-        }
-
-        protected virtual void OnDisable()
-        {
-            //if (CharacterUI != null)
-            //{
-            //    StatModule.OnHealthChanged -= CharacterUI.SetHealthValues;
-            //}
-        }
-
-        protected virtual void Update()
+        private void Update()
         {
             if (!Created)
             {
@@ -92,37 +82,17 @@ namespace WinterUniverse
             if (!IsDead)
             {
                 _pawnEffects.TickEffects(Time.deltaTime);
-                _pawnStats.RegenerateHealth();
-                _pawnStats.RegenerateEnergy();
+                _pawnStats.HandleRegeneration();
                 _pawnCombat.HandleTargeting();
             }
             _pawnLocomotion.HandleLocomotion();
         }
 
-        protected virtual void LateUpdate()
-        {
-
-        }
-
-        protected virtual void FixedUpdate()
-        {
-
-        }
-
-        public virtual void CreateCharacter(PawnSaveData data)
+        public void CreateCharacter(PawnSaveData data)
         {
             Created = false;
             _characterName = data.CharacterName;
-            _pawnAnimator.Initialize(this);
-            _pawnCombat.Initialize(this);
-            _pawnEffects.Initialize(this);
-            _pawnStats.Initialize(this);
-            _pawnStats.CreateStats();
-            _pawnEquipment.Initialize(this);
-            _pawnInteraction.Initialize(this);
             _pawnInventory.Initialize(data.InventoryStacks);
-            _pawnLocomotion.Initialize(this);
-            _pawnSound.Initialize(this);
             IgnoreMyOwnColliders();// this order??? or on end???
             _pawnEquipment.EquipWeapon(GameManager.StaticInstance.WorldData.GetWeapon(data.WeaponInRightHand), false, false);
             _pawnEquipment.EquipWeapon(GameManager.StaticInstance.WorldData.GetWeapon(data.WeaponInLeftHand), false, false);
@@ -140,16 +110,6 @@ namespace WinterUniverse
         {
             _faction = data;
             OnFactionChanged?.Invoke(_faction);
-        }
-
-        public void EnableInvulnerable()
-        {
-            IsInvulnerable = true;
-        }
-
-        public void DisableInvulnerable()
-        {
-            IsInvulnerable = false;
         }
 
         public void Die(PawnController source = null, string animationName = "Death")
@@ -172,13 +132,13 @@ namespace WinterUniverse
             }
         }
 
-        protected virtual IEnumerator ProcessDeathEvent()
+        private IEnumerator ProcessDeathEvent()
         {
             yield return new WaitForSeconds(5f);
             //LeanPool.Despawn(gameObject);
         }
 
-        public virtual void Revive()
+        public void Revive()
         {
             if (IsDead)
             {

@@ -77,9 +77,9 @@ namespace WinterUniverse
 
         public float HealthPercent => HealthCurrent / HealthMax.CurrentValue;
 
-        public void Initialize(PawnController pawn)
+        public void Initialize()
         {
-            _pawn = pawn;
+            _pawn = GetComponent<PawnController>();
         }
 
         public void ReduceCurrentHealth(float value, ElementConfig element, PawnController source = null)
@@ -328,7 +328,13 @@ namespace WinterUniverse
             OnEnergyChanged?.Invoke(EnergyCurrent, EnergyMax.CurrentValue);
         }
 
-        public void RegenerateHealth()
+        public void HandleRegeneration()
+        {
+            RegenerateHealth();
+            RegenerateEnergy();
+        }
+
+        private void RegenerateHealth()
         {
             if (_healthRegenerationTimer >= _healthRegenerationDelay)
             {
@@ -348,7 +354,7 @@ namespace WinterUniverse
             }
         }
 
-        public void RegenerateEnergy()
+        private void RegenerateEnergy()
         {
             if (_pawn.IsRunning || _pawn.IsPerfomingAction)
             {

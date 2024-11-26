@@ -13,9 +13,9 @@ namespace WinterUniverse
 
         public List<Effect> Effects => _effects;
 
-        public void Initialize(PawnController pawn)
+        public void Initialize()
         {
-            _pawn = pawn;
+            _pawn = GetComponent<PawnController>();
         }
 
         public void TickEffects(float deltaTime)

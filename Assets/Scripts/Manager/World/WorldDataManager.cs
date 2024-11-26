@@ -8,6 +8,7 @@ namespace WinterUniverse
         private List<Stat> _newStats = new();
         private List<ItemConfig> _items = new();
 
+        [SerializeField] private GameObject _pawnPrefab;
         [SerializeField] private GameObject _playerPrefab;
         [SerializeField] private GameObject _aiPrefab;
         [SerializeField] private GameObject _lootItemPrefab;
@@ -24,6 +25,7 @@ namespace WinterUniverse
         [SerializeField] private List<ConsumableItemConfig> _consumables = new();
         [SerializeField] private List<ResourceItemConfig> _resources = new();
 
+        public GameObject PawnPrefab => _pawnPrefab;
         public GameObject PlayerPrefab => _playerPrefab;
         public GameObject AIPrefab => _aiPrefab;
         public GameObject LootItemPrefab => _lootItemPrefab;
