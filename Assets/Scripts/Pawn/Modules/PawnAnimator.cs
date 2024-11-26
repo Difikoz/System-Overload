@@ -12,7 +12,6 @@ namespace WinterUniverse
         [SerializeField] private Transform _bodyPoint;
         [SerializeField] private Transform _footRightPoint;
         [SerializeField] private Transform _footLeftPoint;
-        [SerializeField] private float _baseMoveSpeed = 4f;
         [SerializeField] private float _height = 2f;
         [SerializeField] private float _radius = 0.5f;
         [SerializeField] private float _maxTurnAngle = 45f;
@@ -21,7 +20,6 @@ namespace WinterUniverse
         public Transform BodyPoint => _bodyPoint;
         public Transform FootRightPoint => _footRightPoint;
         public Transform FootLeftPoint => _footLeftPoint;
-        public float BaseMoveSpeed => _baseMoveSpeed;
         public float Height => _height;
         public float Radius => _radius;
 
@@ -33,9 +31,9 @@ namespace WinterUniverse
 
         public void OnUpdate()
         {
-            _animator.SetFloat("RightVelocity", _pawn.RightVelocity / _pawn.PawnStats.MoveSpeed.CurrentValue);
-            _animator.SetFloat("ForwardVelocity", _pawn.ForwardVelocity / _pawn.PawnStats.MoveSpeed.CurrentValue);
-            _animator.SetFloat("MoveSpeed", _pawn.PawnStats.MoveSpeed.CurrentValue);
+            _animator.SetFloat("RightVelocity", _pawn.RightVelocity);
+            _animator.SetFloat("ForwardVelocity", _pawn.ForwardVelocity);
+            _animator.SetFloat("MoveSpeed", _pawn.PawnStats.MoveSpeed.CurrentValue / 100f);
             _animator.SetFloat("FallVelocity", _pawn.FallVelocity);
             _animator.SetFloat("TurnVelocity", _pawn.TurnVelocity / _maxTurnAngle);
             _animator.SetBool("IsMoving", _pawn.IsMoving);
@@ -52,15 +50,10 @@ namespace WinterUniverse
             _animator.SetBool(name, value);
         }
 
-        public void PlayActionAnimation(string name, bool isPerfoming, float fadeDelay = 0.1f, bool useRootMotion = true, bool canMove = false, bool canRotate = false)
+        public void PlayActionAnimation(string name, bool isPerfoming = true, float fadeDelay = 0.1f, bool canMove = false, bool canRotate = false)
         {
-            if (_pawn.PawnCombat.CurrentWeapon != null)
-            {
-                _animator.runtimeAnimatorController = _pawn.PawnCombat.CurrentWeapon.Controller;
-            }
-            _animator.applyRootMotion = useRootMotion;
+            _animator.runtimeAnimatorController = _pawn.PawnEquipment.WeaponSlot.Config.Controller;
             _pawn.IsPerfomingAction = isPerfoming;
-            _pawn.UseRootMotion = useRootMotion;
             _pawn.CanMove = canMove;
             _pawn.CanRotate = canRotate;
             _animator.CrossFade(name, fadeDelay);
@@ -85,16 +78,6 @@ namespace WinterUniverse
         public void Land()
         {
 
-        }
-
-        private void OnAnimatorMove()
-        {
-            if (_pawn != null && _pawn.UseRootMotion)
-            {
-                _pawn.PawnLocomotion.CC.Move(_animator.deltaPosition);
-                //_pawn.transform.position += _animator.deltaPosition;
-                _pawn.transform.rotation *= _animator.deltaRotation;
-            }
         }
     }
 }

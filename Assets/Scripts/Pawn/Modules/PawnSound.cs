@@ -21,6 +21,10 @@ namespace WinterUniverse
 
         public void PlayAttackClip()
         {
+            if (_audioSource.isPlaying)
+            {
+                return;
+            }
             if (_attackClips.Count > 0)
             {
                 PlaySound(_attackClips);
@@ -29,6 +33,10 @@ namespace WinterUniverse
 
         public void PlayGetHitClip()
         {
+            if (_audioSource.isPlaying)
+            {
+                return;
+            }
             if (_getHitClips.Count > 0)
             {
                 PlaySound(_getHitClips);

@@ -2,8 +2,8 @@ using UnityEngine;
 
 namespace WinterUniverse
 {
-    [CreateAssetMenu(fileName = "Attack Action", menuName = "Winter Universe/Action/Weapon/New Attack")]
-    public class WeaponAttackActionConfig : WeaponActionConfig
+    [CreateAssetMenu(fileName = "Fire Action", menuName = "Winter Universe/Action/Weapon/New Fire")]
+    public class WeaponFireActionConfig : WeaponActionConfig
     {
         public override void AttempToPerformAction(PawnController pawn)
         {
@@ -11,7 +11,7 @@ namespace WinterUniverse
             {
                 return;
             }
-            pawn.PawnAnimator.PlayActionAnimation($"Attack");
+            pawn.PawnAnimator.PlayActionAnimation($"Fire", false, 0f, true, true);
         }
     }
 }

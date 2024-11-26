@@ -8,11 +8,13 @@ namespace WinterUniverse
     {
         public Action<List<ItemStack>> OnInventoryChanged;
 
-        public List<ItemStack> Stacks = new();
+        private List<ItemStack> _stacks = new();
+
+        public List<ItemStack> Stacks => _stacks;
 
         public virtual void Initialize(SerializableDictionary<string, int> stacks)
         {
-            Stacks.Clear();
+            _stacks.Clear();
             foreach (KeyValuePair<string, int> stack in stacks)
             {
                 AddItem(GameManager.StaticInstance.WorldData.GetItem(stack.Key), stack.Value);
@@ -25,7 +27,7 @@ namespace WinterUniverse
             {
                 return;
             }
-            foreach (ItemStack stack in Stacks)
+            foreach (ItemStack stack in _stacks)
             {
                 if (stack.Item == item)
                 {
@@ -43,7 +45,7 @@ namespace WinterUniverse
             while (amount > 0)
             {
                 ItemStack newStack = new(item);
-                Stacks.Add(newStack);
+                _stacks.Add(newStack);
                 amount--;
                 while (newStack.HasFreeSpace && amount > 0)
                 {
@@ -60,18 +62,18 @@ namespace WinterUniverse
             {
                 return;
             }
-            for (int i = Stacks.Count - 1; i >= 0; i--)
+            for (int i = _stacks.Count - 1; i >= 0; i--)
             {
-                if (Stacks[i].Item == item)
+                if (_stacks[i].Item == item)
                 {
-                    while (!Stacks[i].Empty && amount > 0)
+                    while (!_stacks[i].Empty && amount > 0)
                     {
-                        Stacks[i].RemoveFromStack();
+                        _stacks[i].RemoveFromStack();
                         amount--;
                     }
-                    if (Stacks[i].Empty)
+                    if (_stacks[i].Empty)
                     {
-                        Stacks.RemoveAt(i);
+                        _stacks.RemoveAt(i);
                     }
                 }
                 if (amount == 0)
@@ -93,18 +95,18 @@ namespace WinterUniverse
                 return;
             }
             // add drop mechanic
-            for (int i = Stacks.Count - 1; i >= 0; i--)
+            for (int i = _stacks.Count - 1; i >= 0; i--)
             {
-                if (Stacks[i].Item == item)
+                if (_stacks[i].Item == item)
                 {
-                    while (!Stacks[i].Empty && amount > 0)
+                    while (!_stacks[i].Empty && amount > 0)
                     {
-                        Stacks[i].RemoveFromStack();
+                        _stacks[i].RemoveFromStack();
                         amount--;
                     }
-                    if (Stacks[i].Empty)
+                    if (_stacks[i].Empty)
                     {
-                        Stacks.RemoveAt(i);
+                        _stacks.RemoveAt(i);
                     }
                 }
                 if (amount == 0)
@@ -122,7 +124,7 @@ namespace WinterUniverse
         public int AmountOfItem(ItemConfig item)
         {
             int amount = 0;
-            foreach (ItemStack stack in Stacks)
+            foreach (ItemStack stack in _stacks)
             {
                 if (stack.Item == item)
                 {
@@ -134,16 +136,16 @@ namespace WinterUniverse
 
         public void UpdateInventory()
         {
-            OnInventoryChanged?.Invoke(Stacks);
+            OnInventoryChanged?.Invoke(_stacks);
         }
         // find best
         public bool GetBestWeapon(out WeaponItemConfig item)
         {
             item = null;
             float rating = 0;
-            foreach (ItemStack stack in Stacks)
+            foreach (ItemStack stack in _stacks)
             {
-                if (stack.Item.ItemType == ItemType.Weapon)
+                if (stack.Item.ItemType.DisplayName == "Weapon")
                 {
                     WeaponItemConfig weapon = (WeaponItemConfig)stack.Item;
                     if (weapon.Rating > rating)
@@ -156,35 +158,16 @@ namespace WinterUniverse
             return item != null;
         }
 
-        public bool GetBestWeapon(WeaponTypeConfig type, out WeaponItemConfig item)
+        public bool GetBestArmor(out ArmorItemConfig item)
         {
             item = null;
             float rating = 0;
-            foreach (ItemStack stack in Stacks)
+            foreach (ItemStack stack in _stacks)
             {
-                if (stack.Item.ItemType == ItemType.Weapon)
-                {
-                    WeaponItemConfig weapon = (WeaponItemConfig)stack.Item;
-                    if (weapon.Rating > rating && weapon.WeaponType == type)
-                    {
-                        rating = weapon.Rating;
-                        item = weapon;
-                    }
-                }
-            }
-            return item != null;
-        }
-
-        public bool GetBestArmor(ArmorTypeConfig type, out ArmorItemConfig item)
-        {
-            item = null;
-            float rating = 0;
-            foreach (ItemStack stack in Stacks)
-            {
-                if (stack.Item.ItemType == ItemType.Armor)
+                if (stack.Item.ItemType.DisplayName == "Armor")
                 {
                     ArmorItemConfig armor = (ArmorItemConfig)stack.Item;
-                    if (armor.Rating > rating && armor.ArmorType == type)
+                    if (armor.Rating > rating)
                     {
                         rating = armor.Rating;
                         item = armor;
@@ -198,12 +181,31 @@ namespace WinterUniverse
         {
             item = null;
             float rating = 0;
-            foreach (ItemStack stack in Stacks)
+            foreach (ItemStack stack in _stacks)
             {
-                if (stack.Item.ItemType == ItemType.Consumable)
+                if (stack.Item.ItemType.DisplayName == "Consumable")
                 {
                     ConsumableItemConfig consumable = (ConsumableItemConfig)stack.Item;
                     if (consumable.Rating > rating && consumable.ConsumableType == type)
+                    {
+                        rating = consumable.Rating;
+                        item = consumable;
+                    }
+                }
+            }
+            return item != null;
+        }
+
+        public bool GetBestConsumable(string type, out ConsumableItemConfig item)
+        {
+            item = null;
+            float rating = 0;
+            foreach (ItemStack stack in _stacks)
+            {
+                if (stack.Item.ItemType.DisplayName == "Consumable")
+                {
+                    ConsumableItemConfig consumable = (ConsumableItemConfig)stack.Item;
+                    if (consumable.Rating > rating && consumable.ConsumableType.DisplayName == type)
                     {
                         rating = consumable.Rating;
                         item = consumable;

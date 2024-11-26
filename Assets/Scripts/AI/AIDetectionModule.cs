@@ -30,7 +30,7 @@ namespace WinterUniverse
             {
                 if (collider.TryGetComponent(out PawnController character) && character != _ai && !character.IsDead)
                 {
-                    if (Vector3.Distance(transform.position, character.transform.position) <= _ai.Pawn.PawnStats.HearRadius.CurrentValue || _ai.Pawn.PawnCombat.TargetIsVisible(character))
+                    if (Vector3.Distance(transform.position, character.transform.position) <= _ai.Pawn.PawnStats.HearRadius.CurrentValue || _ai.Pawn.PawnCombat.OtherTargetIsVisible(character))
                     {
                         switch (_ai.Pawn.Faction.GetState(character.Faction))
                         {

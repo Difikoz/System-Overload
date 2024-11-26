@@ -8,20 +8,15 @@ namespace WinterUniverse
     {
         [Header("Armor Information")]
         [SerializeField] private ArmorTypeConfig _armorType;
-        [Header("Modifiers")]
         [SerializeField] private List<StatModifierCreator> _modifiers = new();
 
         public ArmorTypeConfig ArmorType => _armorType;
         public List<StatModifierCreator> Modifiers => _modifiers;
 
-        private void OnValidate()
-        {
-            _itemType = ItemType.Armor;
-        }
-
-        public override void Use(PawnController character, bool fromInventory = true)
+        public override bool Use(PawnController character, bool fromInventory = true)
         {
             character.PawnEquipment.EquipArmor(this, fromInventory);
+            return true;
         }
     }
 }

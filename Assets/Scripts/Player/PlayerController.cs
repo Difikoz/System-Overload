@@ -49,9 +49,8 @@ namespace WinterUniverse
                     data.InventoryStacks.Add(stack.Item.DisplayName, stack.Amount);
                 }
             }
-            data.WeaponInRightHand = _pawn.PawnEquipment.WeaponRightSlot.Config.DisplayName;
-            data.WeaponInLeftHand = _pawn.PawnEquipment.WeaponLeftSlot.Config.DisplayName;
-            // save armors
+            data.Weapon = _pawn.PawnEquipment.WeaponSlot.Config.DisplayName;
+            data.Armor = _pawn.PawnEquipment.ArmorSlot.Config.DisplayName;
             data.Transform.SetPositionAndRotation(_pawn.transform.position, _pawn.transform.eulerAngles);
         }
 

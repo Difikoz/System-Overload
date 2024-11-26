@@ -14,20 +14,13 @@ namespace WinterUniverse
         public void Setup(ItemStack stack)
         {
             _item = stack.Item;
-            _icon.sprite = _item.Icon;
+            _icon.sprite = _item.IconSprite;
             _text.text = $"{stack.Item.DisplayName}{(stack.Amount > 1 ? $" ({stack.Amount})" : "")}";
         }
 
         public void Use()
         {
-            if (_item.CanUse(GameManager.StaticInstance.Player.Pawn, out string error))
-            {
-                _item.Use(GameManager.StaticInstance.Player.Pawn);
-            }
-            else
-            {
-                GameManager.StaticInstance.PlayerUI.NotificationUI.DisplayNotification(error);
-            }
+            _item.Use(GameManager.StaticInstance.Player.Pawn);
         }
     }
 }

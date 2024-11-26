@@ -15,7 +15,7 @@ namespace WinterUniverse
 
         public SerializableDictionary<string, int> InventoryStacks = new();
 
-        public string WeaponInRightHand;
-        public string WeaponInLeftHand;
+        public string Weapon;
+        public string Armor;
     }
 }

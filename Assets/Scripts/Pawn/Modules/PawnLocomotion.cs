@@ -15,12 +15,12 @@ namespace WinterUniverse
         private float _groundedTimer;
         private RaycastHit _groundHit;
 
+        [SerializeField] private float _acceleration = 2f;
+        [SerializeField] private float _deceleration = 4f;
         [SerializeField] private float _timeToJump = 0.25f;
         [SerializeField] private float _timeToFall = 0.25f;
 
         private bool CanJump => _jumpTimer > 0f && _groundedTimer > 0f && !_pawn.IsDead && !_pawn.IsPerfomingAction && _pawn.PawnStats.EnergyCurrent >= _pawn.PawnStats.JumpEnergyCost.CurrentValue;
-        public Vector3 MoveVelocity => _moveVelocity;
-        public CharacterController CC => _cc;
 
         public void Initialize()
         {
@@ -54,6 +54,7 @@ namespace WinterUniverse
                 _pawn.RightVelocity = 0f;
                 _pawn.IsMoving = false;
             }
+            _pawn.FallVelocity = _fallVelocity.y;
         }
 
         private void HandleGravity()
@@ -84,22 +85,22 @@ namespace WinterUniverse
 
         private void HandleMovement()
         {
-            if (!_pawn.CanMove)
+            if (!_pawn.IsGrounded)
             {
-                _moveVelocity = Vector3.zero;
+                _cc.Move(_moveVelocity * Time.deltaTime);
                 return;
             }
-            if (_moveDirection != Vector3.zero)
+            if (_moveDirection != Vector3.zero && _pawn.CanMove)
             {
                 if (_pawn.IsRunning)
                 {
                     _moveDirection *= 2f;
                 }
-                _moveVelocity = Vector3.MoveTowards(_moveVelocity, _moveDirection * _pawn.PawnStats.MoveSpeed.CurrentValue, _pawn.PawnStats.Acceleration.CurrentValue * Time.deltaTime);
+                _moveVelocity = Vector3.MoveTowards(_moveVelocity, _moveDirection, _acceleration * Time.deltaTime);
             }
             else
             {
-                _moveVelocity = Vector3.MoveTowards(_moveVelocity, Vector3.zero, _pawn.PawnStats.Deceleration.CurrentValue * Time.deltaTime);
+                _moveVelocity = Vector3.MoveTowards(_moveVelocity, Vector3.zero, _deceleration * Time.deltaTime);
             }
         }
 

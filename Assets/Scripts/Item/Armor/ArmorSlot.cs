@@ -8,42 +8,40 @@ namespace WinterUniverse
         private PawnController _pawn;
         private ArmorRenderer _currentRenderer;
 
-        [SerializeField] private ArmorItemConfig _data;
-        [SerializeField] private ArmorTypeConfig _type;
+        [SerializeField] private ArmorItemConfig _config;
         [SerializeField] private List<ArmorRenderer> _renderers = new();
 
-        public ArmorItemConfig Data => _data;
-        public ArmorTypeConfig Type => _type;
+        public ArmorItemConfig Config => _config;
 
-        public void Initialize(PawnController pawn)
+        public void Initialize()
         {
-            _pawn = pawn;
-            foreach (StatModifierCreator creator in _data.Modifiers)
+            _pawn = GetComponentInParent<PawnController>();
+            foreach (StatModifierCreator creator in _config.Modifiers)
             {
                 _pawn.PawnStats.AddStatModifier(creator);
             }
             ForceUpdateMeshes();
         }
 
-        public void Equip(ArmorItemConfig armor)
+        public void Setup(ArmorItemConfig armor)
         {
             if (armor == null)
             {
                 return;
             }
-            foreach (StatModifierCreator creator in _data.Modifiers)
+            foreach (StatModifierCreator creator in _config.Modifiers)
             {
                 _pawn.PawnStats.RemoveStatModifier(creator);
             }
             DisableMeshes(_currentRenderer);
-            _data = armor;
-            foreach (StatModifierCreator creator in _data.Modifiers)
+            _config = armor;
+            foreach (StatModifierCreator creator in _config.Modifiers)
             {
                 _pawn.PawnStats.AddStatModifier(creator);
             }
             foreach (ArmorRenderer ar in _renderers)
             {
-                if (ar.Data == _data)
+                if (ar.Config == _config)
                 {
                     _currentRenderer = ar;
                     break;
@@ -60,7 +58,7 @@ namespace WinterUniverse
             }
             foreach (ArmorRenderer ar in _renderers)
             {
-                if (ar.Data == _data)
+                if (ar.Config == _config)
                 {
                     _currentRenderer = ar;
                     break;

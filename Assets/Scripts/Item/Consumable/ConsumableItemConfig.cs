@@ -13,12 +13,7 @@ namespace WinterUniverse
         public ConsumableTypeConfig ConsumableType => _consumableType;
         public List<EffectCreator> Effects => _effects;
 
-        private void OnValidate()
-        {
-            _itemType = ItemType.Consumable;
-        }
-
-        public override void Use(PawnController pawn, bool fromInventory = true)
+        public override bool Use(PawnController pawn, bool fromInventory = true)
         {
             foreach (EffectCreator creator in _effects)
             {
@@ -38,6 +33,7 @@ namespace WinterUniverse
             {
                 pawn.PawnInventory.RemoveItem(this);
             }
+            return true;
         }
     }
 }

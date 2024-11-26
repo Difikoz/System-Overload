@@ -5,9 +5,9 @@ namespace WinterUniverse
     [CreateAssetMenu(fileName = "Resource Item", menuName = "Winter Universe/Item/Resource/New Item")]
     public class ResourceItemConfig : ItemConfig
     {
-        private void OnValidate()
+        public override bool Use(PawnController character, bool fromInventory = true)
         {
-            _itemType = ItemType.Resource;
+            return false;
         }
     }
 }

@@ -8,8 +8,8 @@ namespace WinterUniverse
     {
         public string CharacterName = "Name";
         public FactionConfig Faction;
-        public WeaponItemConfig WeaponInRightHand;
-        public WeaponItemConfig WeaponInLeftHand;
+        public WeaponItemConfig Weapon;
+        public ArmorItemConfig Armor;
         public List<ItemStack> StartingItems = new();
 
         public PawnSaveData GetData()
@@ -18,8 +18,8 @@ namespace WinterUniverse
             {
                 CharacterName = CharacterName,
                 Faction = Faction.DisplayName,
-                WeaponInRightHand = WeaponInRightHand.DisplayName,
-                WeaponInLeftHand = WeaponInLeftHand.DisplayName,
+                Weapon = Weapon.DisplayName,
+                Armor = Armor.DisplayName,
             };
             foreach (ItemStack stack in StartingItems)
             {

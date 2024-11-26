@@ -2,39 +2,53 @@ using UnityEngine;
 
 namespace WinterUniverse
 {
-    public class RemoveActionFlag : StateMachineBehaviour
+    public class ToggleActionFlags : StateMachineBehaviour
     {
-        private PawnController _owner;
+        private PawnController _pawn;
+        [SerializeField] private bool _addIsPerfoming = false;
         [SerializeField] private bool _removeIsPerfoming = true;
-        [SerializeField] private bool _removeRootMotion = true;
-        [SerializeField] private bool _restoreUseGravity = true;
-        [SerializeField] private bool _restoreCanMove = true;
-        [SerializeField] private bool _restoreCanRotate = true;
+        [SerializeField] private bool _addUseGravity = true;
+        [SerializeField] private bool _removeUseGravity = false;
+        [SerializeField] private bool _addCanMove = true;
+        [SerializeField] private bool _removeCanMove = false;
+        [SerializeField] private bool _addCanRotate = true;
+        [SerializeField] private bool _removeCanRotate = false;
 
         // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
         override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            _owner = animator.transform.parent.GetComponent<PawnController>();
-            if (_removeIsPerfoming)
+            _pawn = animator.GetComponent<PawnController>();
+            if (_addIsPerfoming)
             {
-                _owner.IsPerfomingAction = false;
+                _pawn.IsPerfomingAction = true;
             }
-            if (_removeRootMotion)
+            else if (_removeIsPerfoming)
             {
-                animator.applyRootMotion = false;
-                _owner.UseRootMotion = false;
+                _pawn.IsPerfomingAction = false;
             }
-            if (_restoreUseGravity)
+            if (_addUseGravity)
             {
-                _owner.UseGravity = true;
+                _pawn.UseGravity = true;
             }
-            if (_restoreCanMove)
+            else if (_removeUseGravity)
             {
-                _owner.CanMove = true;
+                _pawn.UseGravity = false;
             }
-            if (_restoreCanRotate)
+            if (_addCanMove)
             {
-                _owner.CanRotate = true;
+                _pawn.CanMove = true;
+            }
+            else if (_removeCanMove)
+            {
+                _pawn.CanMove = false;
+            }
+            if (_addCanRotate)
+            {
+                _pawn.CanRotate = true;
+            }
+            else if (_removeCanRotate)
+            {
+                _pawn.CanRotate = false;
             }
         }
 

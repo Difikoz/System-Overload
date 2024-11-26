@@ -43,7 +43,6 @@ namespace WinterUniverse
         public float FallVelocity;
         public float TurnVelocity;
         public bool IsPerfomingAction;
-        public bool UseRootMotion;
         public bool UseGravity = true;
         public bool CanMove = true;
         public bool CanRotate = true;
@@ -99,14 +98,12 @@ namespace WinterUniverse
             _characterName = data.CharacterName;
             _pawnInventory.Initialize(data.InventoryStacks);
             IgnoreMyOwnColliders();// this order??? or on end???
-            _pawnEquipment.EquipWeapon(GameManager.StaticInstance.WorldData.GetWeapon(data.WeaponInRightHand), false, false);
-            _pawnEquipment.EquipWeapon(GameManager.StaticInstance.WorldData.GetWeapon(data.WeaponInLeftHand), false, false);
-            // equip starting armors
+            _pawnEquipment.EquipWeapon(GameManager.StaticInstance.WorldData.GetWeapon(data.Weapon), false, false);
+            _pawnEquipment.EquipArmor(GameManager.StaticInstance.WorldData.GetArmor(data.Armor), false, false);
             //_pawnEquipment.EquipBestItems();
             _pawnStats.RecalculateStats();
             _pawnStats.RestoreCurrentHealth(_pawnStats.HealthMax.CurrentValue);
             _pawnStats.RestoreCurrentEnergy(_pawnStats.EnergyMax.CurrentValue);
-            _pawnEquipment.ForceUpdateMeshes();
             ChangeFaction(GameManager.StaticInstance.WorldData.GetFaction(data.Faction));
             Created = true;
         }
