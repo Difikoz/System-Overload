@@ -9,18 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b185a8a499535234ea2784fc1c88ad33, type: 3}
-  m_Name: Juice
+  m_Script: {fileID: 11500000, guid: d55bb6c1f5aa5574da81d3cc93a441bf, type: 3}
+  m_Name: Assault Rifle
   m_EditorClassIdentifier: 
-  _displayName: Juice
+  _displayName: Assault Rifle
   _description: Description
   _textColor: {r: 1, g: 1, b: 1, a: 1}
   _iconSprite: {fileID: 0}
-  _itemType: {fileID: 11400000, guid: 02da5052756dc3443890bcea6146d72d, type: 2}
-  _model: {fileID: 0}
-  _weight: 1
-  _maxCountInStack: 1
-  _price: 100
-  _rating: 1
-  _consumableType: {fileID: 11400000, guid: d5943117e6633504e8800d335a542e2d, type: 2}
-  _effects: []

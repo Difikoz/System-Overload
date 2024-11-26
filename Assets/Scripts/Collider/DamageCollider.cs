@@ -11,7 +11,6 @@ namespace WinterUniverse
         [SerializeField] protected Collider _collider;
         [SerializeField] protected List<DamageType> _damageTypes = new();
         [SerializeField] protected List<EffectCreator> _targetEffects = new();
-        [SerializeField] protected bool _doSplashDamage;
         [SerializeField] protected float _splashRadius;
 
         protected PawnController _owner;
@@ -20,20 +19,19 @@ namespace WinterUniverse
         protected Vector3 _hitDirection;
         protected List<PawnController> _damagedCharacters = new();
 
-        public virtual void Initialize(PawnController owner, List<DamageType> damageTypes, List<EffectCreator> ownerEffects, List<EffectCreator> targetEffects, bool doSplashDamage, float splashRadius)
+        public virtual void Initialize(PawnController owner, List<DamageType> damageTypes, List<EffectCreator> ownerEffects, List<EffectCreator> targetEffects, float splashRadius)
         {
             _owner = owner;
             _damageTypes = damageTypes;
             _ownerEffects = ownerEffects;
             _targetEffects = targetEffects;
-            _doSplashDamage = doSplashDamage;
             _splashRadius = splashRadius;
         }
 
         protected virtual void OnTriggerEnter(Collider other)
         {
             PawnController target = other.GetComponentInParent<PawnController>();
-            if (_doSplashDamage)
+            if (_splashRadius > 0f)
             {
                 Collider[] colliders = Physics.OverlapSphere(transform.position, _splashRadius, GameManager.StaticInstance.LayerManager.PawnMask);
                 foreach (Collider collider in colliders)

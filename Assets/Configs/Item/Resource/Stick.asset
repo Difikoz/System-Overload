@@ -14,12 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _displayName: Stick
   _description: Description
-  _icon: {fileID: 0}
-  _itemType: 3
+  _textColor: {r: 1, g: 1, b: 1, a: 1}
+  _iconSprite: {fileID: 0}
+  _itemType: {fileID: 11400000, guid: fb84ef55c15c862499558739756f7fc7, type: 2}
   _model: {fileID: 0}
   _weight: 1
   _maxCountInStack: 1
   _price: 100
   _rating: 1
-  _requiredFaction: []
-  _requiredStats: []

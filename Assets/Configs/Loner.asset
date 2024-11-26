@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CharacterName: Loner
   Faction: {fileID: 11400000, guid: 4599ab3740c19ba4e9b9d537fba4dd39, type: 2}
-  WeaponInRightHand: {fileID: 0}
-  WeaponInLeftHand: {fileID: 0}
+  Weapon: {fileID: 11400000, guid: 07713a3acc18bb943b92170dee3428e0, type: 2}
+  Armor: {fileID: 11400000, guid: d2e2b237edbbe6340bda32f586e0bdf1, type: 2}
   StartingItems: []

@@ -12,39 +12,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd981da6a113acd4b9e24dfab3dc43ff, type: 3}
   m_Name: Combat Exoskelet
   m_EditorClassIdentifier: 
-  _displayName: Nude
+  _displayName: Exoskelet
   _description: Description
   _textColor: {r: 1, g: 1, b: 1, a: 1}
-  _iconSprite: {fileID: 0}
+  _iconSprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   _itemType: {fileID: 11400000, guid: a64e39ef594882140a5a71bd25d7f227, type: 2}
   _model: {fileID: 0}
-  _weight: 0
-  _maxCountInStack: 0
-  _price: 0
-  _rating: 0
-  _armorType: {fileID: 11400000, guid: da3cbcca341c5fb41ab62957a239a1db, type: 2}
+  _weight: 10
+  _maxCountInStack: 1
+  _price: 100000
+  _rating: 100
+  _armorType: {fileID: 11400000, guid: 7fa7beb3030a22c48bb95795247dd26f, type: 2}
   _modifiers:
   - _stat: {fileID: 11400000, guid: 6343b25afc23b784e85bc9bf0f31b586, type: 2}
     _modifier:
       _type: 0
-      _value: 100
+      _value: 50
   - _stat: {fileID: 11400000, guid: 6e1e8f87c2d5bef4e9f86f19afb14735, type: 2}
     _modifier:
       _type: 0
-      _value: 4
+      _value: 2
   - _stat: {fileID: 11400000, guid: 6952922381bc8434aaee5bfa03195b05, type: 2}
     _modifier:
       _type: 0
-      _value: 100
+      _value: 500
   - _stat: {fileID: 11400000, guid: 43c65deddb177ec409ff69bdf32b1583, type: 2}
     _modifier:
       _type: 0
-      _value: 100
+      _value: 500
   - _stat: {fileID: 11400000, guid: 8120a913e0e5db54cb7a3dfd7630718e, type: 2}
     _modifier:
       _type: 0
-      _value: 1
+      _value: 5
   - _stat: {fileID: 11400000, guid: 134b5f55d9181d74990157a9fb81dbe5, type: 2}
     _modifier:
       _type: 0
-      _value: 5
+      _value: 25

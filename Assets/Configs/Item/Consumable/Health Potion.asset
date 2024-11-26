@@ -14,14 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _displayName: Health Potion
   _description: Description
-  _icon: {fileID: 0}
-  _itemType: 2
+  _textColor: {r: 1, g: 1, b: 1, a: 1}
+  _iconSprite: {fileID: 0}
+  _itemType: {fileID: 11400000, guid: 02da5052756dc3443890bcea6146d72d, type: 2}
   _model: {fileID: 0}
   _weight: 1
   _maxCountInStack: 1
   _price: 100
   _rating: 1
-  _requiredFaction: []
-  _requiredStats: []
   _consumableType: {fileID: 11400000, guid: 8efc9695fd883774b8f8982eb51f7b1c, type: 2}
   _effects: []

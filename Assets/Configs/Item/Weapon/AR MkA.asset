@@ -10,20 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cb0c7ed9746c0f6479c6640a0b8c5a32, type: 3}
-  m_Name: Dagger Iron
+  m_Name: AR MkA
   m_EditorClassIdentifier: 
-  _displayName: Iron Dagger
+  _displayName: MkA
   _description: Description
   _textColor: {r: 1, g: 1, b: 1, a: 1}
   _iconSprite: {fileID: 0}
   _itemType: {fileID: 11400000, guid: 1ddecd33fa61ce8408277da515bc0217, type: 2}
-  _model: {fileID: 6718179591798571465, guid: c3c91ee1fe909d542aa6baee96711063, type: 3}
+  _model: {fileID: 5786097810451525583, guid: 260ff1508afea5241b6511d8fbe92201, type: 3}
   _weight: 1
   _maxCountInStack: 1
   _price: 100
   _rating: 1
   _controller: {fileID: 22100000, guid: 5a1faf2d6d259a4439a40aa53fb43ba2, type: 2}
-  _weaponType: {fileID: 11400000, guid: 101b1f12d6ca95e428b4285f6e98c707, type: 2}
+  _weaponType: {fileID: 11400000, guid: 63a9c08014a5ea54e85588e4c111ada1, type: 2}
   _modifiers: []
   _fireClips: []
   _ownerEffects: []

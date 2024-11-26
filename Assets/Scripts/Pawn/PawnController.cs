@@ -88,7 +88,7 @@ namespace WinterUniverse
             _pawnSound.Initialize();
         }
 
-        private void Update()
+        public void OnUpdate()
         {
             if (!Created)
             {
@@ -109,7 +109,7 @@ namespace WinterUniverse
                 }
                 else if (IsFiring)
                 {
-                    _pawnEquipment.WeaponSlot.Config.Action.AttempToPerformAction(this);
+                    _pawnEquipment.WeaponSlot.Fire();
                 }
             }
             _pawnAnimator.OnUpdate();

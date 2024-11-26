@@ -50,6 +50,7 @@ namespace WinterUniverse
                 //zoom out camera
             }
             transform.SetPositionAndRotation(_pawn.transform.position, _pawn.transform.rotation);
+            _pawn.OnUpdate();
         }
 
         private void OnDeath()
