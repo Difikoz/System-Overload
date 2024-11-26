@@ -16,12 +16,12 @@ namespace WinterUniverse
 
         public virtual bool InRangeToUse(AIController ai)
         {
-            return ai.PawnCombat.DistanceToTarget > MinDistance && ai.PawnCombat.DistanceToTarget < MaxDistance;
+            return ai.Pawn.PawnCombat.DistanceToTarget > MinDistance && ai.Pawn.PawnCombat.DistanceToTarget < MaxDistance;
         }
 
         public virtual bool InAngleToUse(AIController ai)
         {
-            return Mathf.Abs(ai.PawnCombat.AngleToTarget) < Angle / 2f;
+            return Mathf.Abs(ai.Pawn.PawnCombat.AngleToTarget) < Angle / 2f;
         }
     }
 }

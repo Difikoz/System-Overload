@@ -18,6 +18,7 @@ namespace WinterUniverse
         {
             _pawn.MoveDirection = GameManager.StaticInstance.PlayerCamera.transform.right * GameManager.StaticInstance.PlayerInput.MoveInput.x + GameManager.StaticInstance.PlayerCamera.transform.forward * GameManager.StaticInstance.PlayerInput.MoveInput.y;
             _pawn.LookDirection = GameManager.StaticInstance.PlayerCamera.transform.forward;
+            transform.SetPositionAndRotation(_pawn.transform.position, _pawn.transform.rotation);
         }
 
         private void OnDeath()

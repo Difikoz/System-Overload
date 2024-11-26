@@ -15,6 +15,7 @@ namespace WinterUniverse
         [SerializeField] private float _baseMoveSpeed = 4f;
         [SerializeField] private float _height = 2f;
         [SerializeField] private float _radius = 0.5f;
+        [SerializeField] private float _maxTurnAngle = 45f;
 
         public Transform HeadPoint => _headPoint;
         public Transform BodyPoint => _bodyPoint;
@@ -30,13 +31,15 @@ namespace WinterUniverse
             _animator = GetComponent<Animator>();
         }
 
-        public void UpdateAnimatorMovement(float horizontal, float vertical, float moveSpeed)
+        public void OnUpdate()
         {
-            _animator.SetFloat("RightVelocity", horizontal / moveSpeed);
-            _animator.SetFloat("ForwardVelocity", vertical / moveSpeed);
-            _animator.SetFloat("MoveSpeed", moveSpeed / _baseMoveSpeed);
-            _animator.SetBool("IsGrounded", _pawn.IsGrounded);
+            _animator.SetFloat("RightVelocity", _pawn.RightVelocity / _pawn.PawnStats.MoveSpeed.CurrentValue);
+            _animator.SetFloat("ForwardVelocity", _pawn.ForwardVelocity / _pawn.PawnStats.MoveSpeed.CurrentValue);
+            _animator.SetFloat("MoveSpeed", _pawn.PawnStats.MoveSpeed.CurrentValue);
+            _animator.SetFloat("FallVelocity", _pawn.FallVelocity);
+            _animator.SetFloat("TurnVelocity", _pawn.TurnVelocity / _maxTurnAngle);
             _animator.SetBool("IsMoving", _pawn.IsMoving);
+            _animator.SetBool("IsGrounded", _pawn.IsGrounded);
         }
 
         public void SetFloat(string name, float value)

@@ -9,7 +9,7 @@ namespace WinterUniverse
 
         public override void AttempToPerformAction(AIController ai)
         {
-            ai.PawnAnimator.PlayActionAnimation(AnimName, true);
+            ai.Pawn.PawnAnimator.PlayActionAnimation(AnimName, true);
         }
     }
 }

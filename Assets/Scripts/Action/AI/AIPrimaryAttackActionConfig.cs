@@ -12,11 +12,11 @@ namespace WinterUniverse
         {
             if (Slot == HandSlotType.Right)
             {
-                ai.PawnCombat.UseWeaponAction(ai.PawnEquipment.WeaponRightSlot.Config, Type, Slot);
+                ai.Pawn.PawnCombat.UseWeaponAction(ai.Pawn.PawnEquipment.WeaponRightSlot.Config, Type, Slot);
             }
             else
             {
-                ai.PawnCombat.UseWeaponAction(ai.PawnEquipment.WeaponLeftSlot.Config, Type, Slot);
+                ai.Pawn.PawnCombat.UseWeaponAction(ai.Pawn.PawnEquipment.WeaponLeftSlot.Config, Type, Slot);
             }
         }
 
@@ -24,13 +24,13 @@ namespace WinterUniverse
         {
             if (Slot == HandSlotType.Right)
             {
-                MinDistance = ai.PawnEquipment.WeaponRightSlot.Config.MinDistance;
-                MaxDistance = ai.PawnEquipment.WeaponRightSlot.Config.MaxDistance;
+                MinDistance = ai.Pawn.PawnEquipment.WeaponRightSlot.Config.MinDistance;
+                MaxDistance = ai.Pawn.PawnEquipment.WeaponRightSlot.Config.MaxDistance;
             }
             else
             {
-                MinDistance = ai.PawnEquipment.WeaponLeftSlot.Config.MinDistance;
-                MaxDistance = ai.PawnEquipment.WeaponLeftSlot.Config.MaxDistance;
+                MinDistance = ai.Pawn.PawnEquipment.WeaponLeftSlot.Config.MinDistance;
+                MaxDistance = ai.Pawn.PawnEquipment.WeaponLeftSlot.Config.MaxDistance;
             }
             return base.InRangeToUse(ai);
         }
@@ -39,11 +39,11 @@ namespace WinterUniverse
         {
             if (Slot == HandSlotType.Right)
             {
-                Angle = ai.PawnEquipment.WeaponRightSlot.Config.Angle;
+                Angle = ai.Pawn.PawnEquipment.WeaponRightSlot.Config.Angle;
             }
             else
             {
-                Angle = ai.PawnEquipment.WeaponLeftSlot.Config.Angle;
+                Angle = ai.Pawn.PawnEquipment.WeaponLeftSlot.Config.Angle;
             }
             return base.InAngleToUse(ai);
         }

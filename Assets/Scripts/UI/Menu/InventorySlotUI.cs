@@ -20,9 +20,9 @@ namespace WinterUniverse
 
         public void Use()
         {
-            if (_item.CanUse(GameManager.StaticInstance.Player, out string error))
+            if (_item.CanUse(GameManager.StaticInstance.Player.Pawn, out string error))
             {
-                _item.Use(GameManager.StaticInstance.Player);
+                _item.Use(GameManager.StaticInstance.Player.Pawn);
             }
             else
             {

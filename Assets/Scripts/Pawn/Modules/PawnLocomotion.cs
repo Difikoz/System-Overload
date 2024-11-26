@@ -7,18 +7,14 @@ namespace WinterUniverse
     {
         private CharacterController _cc;
         private PawnController _pawn;
-        private Vector2 _moveInput;
+        private Vector3 _moveDirection;
+        private Vector3 _lookDirection;
         private Vector3 _moveVelocity;
         private Vector3 _fallVelocity;
-        private Vector3 _lookDirection;
-        private float _forwardVelocity;
-        private float _rightVelocity;
-        private float _rotateDirection;
         private float _jumpTimer;
         private float _groundedTimer;
         private RaycastHit _groundHit;
 
-        [SerializeField] private float _maxTurnAngle = 15f;
         [SerializeField] private float _timeToJump = 0.25f;
         [SerializeField] private float _timeToFall = 0.25f;
 
@@ -35,30 +31,29 @@ namespace WinterUniverse
             _cc.center = _pawn.PawnAnimator.Height * Vector3.up / 2f;
         }
 
-        public void HandleLocomotion()
+        public void OnUpdate()
         {
             if (_pawn.IsDead && _pawn.IsGrounded)
             {
                 return;
             }
-            _moveInput = _pawn.GetMoveInput();
-            _lookDirection = _pawn.GetLookDirection();
+            _moveDirection = _pawn.MoveDirection;
+            _lookDirection = _pawn.LookDirection;
             HandleGravity();
             HandleMovement();
             HandleRotation();
             if (_moveVelocity != Vector3.zero)
             {
-                _forwardVelocity = Vector3.Dot(_moveVelocity, transform.forward);
-                _rightVelocity = Vector3.Dot(_moveVelocity, transform.right);
+                _pawn.ForwardVelocity = Vector3.Dot(_moveVelocity, transform.forward);
+                _pawn.RightVelocity = Vector3.Dot(_moveVelocity, transform.right);
                 _pawn.IsMoving = true;
             }
             else
             {
-                _forwardVelocity = 0f;
-                _rightVelocity = 0f;
+                _pawn.ForwardVelocity = 0f;
+                _pawn.RightVelocity = 0f;
                 _pawn.IsMoving = false;
             }
-            _pawn.PawnAnimator.UpdateAnimatorMovement(_rightVelocity, _forwardVelocity, _pawn.PawnStats.MoveSpeed.CurrentValue);
         }
 
         private void HandleGravity()
@@ -94,19 +89,18 @@ namespace WinterUniverse
                 _moveVelocity = Vector3.zero;
                 return;
             }
-            if (_moveInput != Vector2.zero)
+            if (_moveDirection != Vector3.zero)
             {
                 if (_pawn.IsRunning)
                 {
-                    _moveInput *= 2f;
+                    _moveDirection *= 2f;
                 }
-                _moveVelocity = Vector3.MoveTowards(_moveVelocity, (transform.right * _moveInput.x + transform.forward * _moveInput.y) * _pawn.PawnStats.MoveSpeed.CurrentValue, _pawn.PawnStats.Acceleration.CurrentValue * Time.deltaTime);
+                _moveVelocity = Vector3.MoveTowards(_moveVelocity, _moveDirection * _pawn.PawnStats.MoveSpeed.CurrentValue, _pawn.PawnStats.Acceleration.CurrentValue * Time.deltaTime);
             }
             else
             {
                 _moveVelocity = Vector3.MoveTowards(_moveVelocity, Vector3.zero, _pawn.PawnStats.Deceleration.CurrentValue * Time.deltaTime);
             }
-            //_cc.Move(_moveVelocity * Time.deltaTime);
         }
 
         private void HandleRotation()
@@ -117,8 +111,7 @@ namespace WinterUniverse
             }
             if (_lookDirection != Vector3.zero)
             {
-                _rotateDirection = ExtraTools.GetSignedAngleToDirection(transform.forward, _lookDirection);
-                _pawn.PawnAnimator.SetFloat("TurnDirection", _rotateDirection);
+                _pawn.TurnVelocity = ExtraTools.GetSignedAngleToDirection(transform.forward, _lookDirection);
                 if (_pawn.IsMoving)
                 {
                     transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(_lookDirection), _pawn.PawnStats.RotateSpeed.CurrentValue * Time.deltaTime);
@@ -128,7 +121,7 @@ namespace WinterUniverse
 
         public bool HandleRunning()
         {
-            if (_pawn.IsDead || _pawn.IsPerfomingAction || _pawn.PawnStats.EnergyCurrent <= _pawn.PawnStats.RunEnergyCost.CurrentValue || _moveInput.magnitude < 0.5f)
+            if (_pawn.IsDead || _pawn.IsPerfomingAction || _pawn.PawnStats.EnergyCurrent <= _pawn.PawnStats.RunEnergyCost.CurrentValue || !_pawn.IsMoving)
             {
                 return false;
             }

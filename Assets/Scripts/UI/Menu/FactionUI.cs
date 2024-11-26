@@ -10,7 +10,7 @@ namespace WinterUniverse
 
         public void Initialize()
         {
-            GameManager.StaticInstance.Player.OnFactionChanged += UpdateUI;
+            GameManager.StaticInstance.Player.Pawn.OnFactionChanged += UpdateUI;
         }
 
         private void UpdateUI(FactionConfig faction)

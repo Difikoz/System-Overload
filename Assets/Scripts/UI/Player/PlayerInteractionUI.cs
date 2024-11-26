@@ -11,7 +11,7 @@ namespace WinterUniverse
 
         public void Initialize()
         {
-            GameManager.StaticInstance.Player.PawnInteraction.OnRefreshInteractables += OnRefreshInteractables;
+            GameManager.StaticInstance.Player.Pawn.PawnInteraction.OnRefreshInteractables += OnRefreshInteractables;
         }
 
         private void OnRefreshInteractables(List<Interactable> interactables)
@@ -29,7 +29,7 @@ namespace WinterUniverse
 
         private void OnDestroy()
         {
-            GameManager.StaticInstance.Player.PawnInteraction.OnRefreshInteractables -= OnRefreshInteractables;
+            GameManager.StaticInstance.Player.Pawn.PawnInteraction.OnRefreshInteractables -= OnRefreshInteractables;
         }
     }
 }

@@ -13,11 +13,11 @@ namespace WinterUniverse
 
         public override NPCState Tick(AIController npc)
         {
-            if (npc.IsPerfomingAction)
+            if (npc.Pawn.IsPerfomingAction)
             {
                 return this;
             }
-            if (npc.PawnCombat.CurrentTarget == null || npc.PawnCombat.CurrentTarget.IsDead)
+            if (npc.Pawn.PawnCombat.CurrentTarget == null || npc.Pawn.PawnCombat.CurrentTarget.IsDead)
             {
                 return SwitchState(npc, npc.IdleState);
             }

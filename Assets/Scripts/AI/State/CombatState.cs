@@ -25,15 +25,15 @@ namespace WinterUniverse
 
         public override NPCState Tick(AIController npc)
         {
-            if (npc.IsPerfomingAction)
+            if (npc.Pawn.IsPerfomingAction)
             {
                 return this;
             }
-            if (npc.PawnCombat.CurrentTarget == null || npc.PawnCombat.CurrentTarget.IsDead)
+            if (npc.Pawn.PawnCombat.CurrentTarget == null || npc.Pawn.PawnCombat.CurrentTarget.IsDead)
             {
                 return SwitchState(npc, npc.IdleState);
             }
-            if (npc.PawnCombat.DistanceToTarget > MaxCombatRadius)
+            if (npc.Pawn.PawnCombat.DistanceToTarget > MaxCombatRadius)
             {
                 return SwitchState(npc, npc.ChaseState);
             }
@@ -46,7 +46,7 @@ namespace WinterUniverse
             {
                 GetNewAction(npc);
             }
-            npc.Agent.SetDestination(npc.PawnCombat.CurrentTarget.transform.position);
+            npc.Agent.SetDestination(npc.Pawn.PawnCombat.CurrentTarget.transform.position);
             return this;
         }
 

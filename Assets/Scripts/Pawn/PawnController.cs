@@ -38,6 +38,10 @@ namespace WinterUniverse
         public bool Created;
         public Vector3 MoveDirection;
         public Vector3 LookDirection;
+        public float ForwardVelocity;
+        public float RightVelocity;
+        public float FallVelocity;
+        public float TurnVelocity;
         public bool IsPerfomingAction;
         public bool UseRootMotion;
         public bool UseGravity = true;
@@ -85,7 +89,8 @@ namespace WinterUniverse
                 _pawnStats.HandleRegeneration();
                 _pawnCombat.HandleTargeting();
             }
-            _pawnLocomotion.HandleLocomotion();
+            _pawnAnimator.OnUpdate();
+            _pawnLocomotion.OnUpdate();
         }
 
         public void CreateCharacter(PawnSaveData data)
