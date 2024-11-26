@@ -22,8 +22,8 @@ namespace WinterUniverse
             _pawn = GetComponent<PawnController>();
             _weaponSlot = GetComponentInChildren<WeaponSlot>();
             _armorSlot.GetComponentInChildren<ArmorSlot>();
-            _weaponSlot.Initialize();
-            _armorSlot.Initialize();
+            _weaponSlot.Initialize(_defaultWeapon);
+            _armorSlot.Initialize(_defaultArmor);
         }
 
         public void EquipWeapon(WeaponItemConfig weapon, bool removeNewFromInventory = true, bool addOldToInventory = true)

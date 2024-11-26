@@ -34,9 +34,9 @@ namespace WinterUniverse
         public override void Interact(PawnController character)
         {
             character.PawnInventory.AddItem(Data, Amount);
-            if (character.GetComponent<PlayerController>())
+            if (character.GetComponent<WorldPlayerManager>())
             {
-                GameManager.StaticInstance.PlayerUI.NotificationUI.DisplayNotification($"Added {(Amount > 1 ? $"{Amount} " : "")}{Data.DisplayName}");
+                GameManager.StaticInstance.UIManager.NotificationUI.DisplayNotification($"Added {(Amount > 1 ? $"{Amount} " : "")}{Data.DisplayName}");
             }
             LeanPool.Despawn(gameObject);// TODO pool despawn
         }

@@ -18,7 +18,7 @@ namespace WinterUniverse
         {
             if (_spawnedNPC == null)
             {
-                _spawnedNPC = LeanPool.Spawn(GameManager.StaticInstance.WorldData.AIPrefab, transform.position, transform.rotation).GetComponent<AIController>();
+                _spawnedNPC = LeanPool.Spawn(GameManager.StaticInstance.ObjectManager.AIControllerPrefab, transform.position, transform.rotation).GetComponent<AIController>();
                 _spawnedNPC.Initialize();
                 _spawnedNPC.Pawn.CreateCharacter(Data.GetData());
             }

@@ -33,7 +33,7 @@ namespace WinterUniverse
 
         }
 
-        public void HandleUpdate()
+        public void OnUpdate()
         {
             if (_paused)
             {
@@ -53,7 +53,7 @@ namespace WinterUniverse
             // other logic
         }
 
-        public void UpauseGame()
+        public void UnpauseGame()
         {
             _paused = false;
             // other logic
@@ -67,7 +67,7 @@ namespace WinterUniverse
                 _minute -= 60;
                 AddHour();
             }
-            OnTimeChanged?.Invoke(_minute, _hour);
+            OnTimeChanged?.Invoke(_hour, _minute);
         }
 
         public void AddHour(int amount = 1)
@@ -78,7 +78,7 @@ namespace WinterUniverse
                 _hour -= 24;
                 AddDay();
             }
-            OnTimeChanged?.Invoke(_minute, _hour);
+            OnTimeChanged?.Invoke(_hour, _minute);
         }
 
         public void AddDay(int amount = 1)

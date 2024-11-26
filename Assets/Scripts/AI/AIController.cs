@@ -38,7 +38,7 @@ namespace WinterUniverse
 
         public void Initialize()
         {
-            _pawn = LeanPool.Spawn(GameManager.StaticInstance.WorldData.PawnPrefab).GetComponent<PawnController>();
+            _pawn = LeanPool.Spawn(GameManager.StaticInstance.ObjectManager.HumanPrefab).GetComponent<PawnController>();
             _agent = GetComponent<NavMeshAgent>();
             _aiDetectionModule = GetComponent<AIDetectionModule>();
             _idleState = Instantiate(_idleState);
@@ -77,7 +77,7 @@ namespace WinterUniverse
             if (_ALIFEMode == ALIFEMode.Simple)
             {
                 // other stuff
-                if (GameManager.StaticInstance.Player != null && Vector3.Distance(transform.position, GameManager.StaticInstance.Player.transform.position) < 250f)
+                if (GameManager.StaticInstance.PlayerManager != null && Vector3.Distance(transform.position, GameManager.StaticInstance.PlayerManager.transform.position) < 250f)
                 {
                     _ALIFEMode = ALIFEMode.Advanced;
                     // set values aka rendering/animation to advanced
@@ -86,7 +86,7 @@ namespace WinterUniverse
             else if (_ALIFEMode == ALIFEMode.Advanced)
             {
                 // other stuff
-                if (GameManager.StaticInstance.Player == null || Vector3.Distance(transform.position, GameManager.StaticInstance.Player.transform.position) > 250f)
+                if (GameManager.StaticInstance.PlayerManager == null || Vector3.Distance(transform.position, GameManager.StaticInstance.PlayerManager.transform.position) > 250f)
                 {
                     _ALIFEMode = ALIFEMode.Simple;
                     // set values aka rendering/animation to simple

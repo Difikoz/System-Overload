@@ -11,7 +11,7 @@ namespace WinterUniverse
 
         public void Initialize()
         {
-            GameManager.StaticInstance.Player.Pawn.PawnInventory.OnInventoryChanged += UpdateUI;
+            GameManager.StaticInstance.PlayerManager.Pawn.PawnInventory.OnInventoryChanged += UpdateUI;
         }
 
         private void UpdateUI(List<ItemStack> stacks)

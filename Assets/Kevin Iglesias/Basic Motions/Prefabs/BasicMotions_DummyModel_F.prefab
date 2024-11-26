@@ -1655,8 +1655,6 @@ GameObject:
   m_Component:
   - component: {fileID: 9030717234314516334}
   - component: {fileID: 3149038336768560404}
-  - component: {fileID: -8070346864510353685}
-  - component: {fileID: -5829232105325604238}
   m_Layer: 2
   m_Name: BasicMotions_DummyModel_F
   m_TagString: Untagged
@@ -1703,38 +1701,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &-8070346864510353685
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8509654672991112660}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e523e3de5e0eca54798100063cae0d1f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _baseMoveSpeed: 4
-  _height: 2
-  _radius: 0.5
---- !u!114 &-5829232105325604238
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8509654672991112660}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11a792c28cc73bb45a77a3cd112692d2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  UnarmedWeapon: {fileID: 0}
-  WeaponRightSlot: {fileID: 0}
-  WeaponLeftSlot: {fileID: 0}
-  SpellData: {fileID: 0}
-  ArmorSlots: []
 --- !u!1 &8571088267480178432
 GameObject:
   m_ObjectHideFlags: 0

@@ -15,7 +15,7 @@ namespace WinterUniverse
 
         public override bool CanInteract(PawnController character)
         {
-            return character.GetComponent<PlayerController>() != null;
+            return character.GetComponent<WorldPlayerManager>() != null;
         }
 
         public override void Interact(PawnController character)
@@ -23,9 +23,9 @@ namespace WinterUniverse
             character.PawnEffects.RemoveNegativeEffects();
             character.PawnStats.RestoreCurrentHealth(character.PawnStats.HealthMax.CurrentValue);
             character.PawnStats.RestoreCurrentEnergy(character.PawnStats.EnergyMax.CurrentValue);
-            GameManager.StaticInstance.WorldSaveLoad.CurrentSaveData.RespawnTransform.SetPositionAndRotation(_respawnPoint.position, _respawnPoint.eulerAngles);
-            GameManager.StaticInstance.WorldSaveLoad.SaveGame();
-            GameManager.StaticInstance.PlayerUI.NotificationUI.DisplayNotification(_notificationMessage);
+            GameManager.StaticInstance.SaveLoadManager.CurrentSaveData.RespawnTransform.SetPositionAndRotation(_respawnPoint.position, _respawnPoint.eulerAngles);
+            GameManager.StaticInstance.SaveLoadManager.SaveGame();
+            GameManager.StaticInstance.UIManager.NotificationUI.DisplayNotification(_notificationMessage);
         }
     }
 }

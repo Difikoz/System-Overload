@@ -6,14 +6,14 @@ namespace WinterUniverse
     {
         public RegionData Data;
 
-        private PlayerController _player;
+        private WorldPlayerManager _player;
 
         protected override void OnTriggerEnter(Collider other)
         {
             if (other.TryGetComponent(out _player))
             {
-                GameManager.StaticInstance.WorldSound.ChangeAmbient(Data.AmbientClips);
-                GameManager.StaticInstance.PlayerUI.NotificationUI.DisplayNotification($"Entered [{Data.DisplayName}]");
+                GameManager.StaticInstance.SoundManager.ChangeAmbient(Data.AmbientClips);
+                GameManager.StaticInstance.UIManager.NotificationUI.DisplayNotification($"Entered [{Data.DisplayName}]");
                 foreach (StatModifierCreator creator in Data.Modifiers)
                 {
                     _player.Pawn.PawnStats.AddStatModifier(creator);
@@ -25,8 +25,8 @@ namespace WinterUniverse
         {
             if (other.TryGetComponent(out _player))
             {
-                GameManager.StaticInstance.WorldSound.ChangeAmbient();
-                GameManager.StaticInstance.PlayerUI.NotificationUI.DisplayNotification($"Quited [{Data.DisplayName}]");
+                GameManager.StaticInstance.SoundManager.ChangeAmbient();
+                GameManager.StaticInstance.UIManager.NotificationUI.DisplayNotification($"Quited [{Data.DisplayName}]");
                 foreach (StatModifierCreator creator in Data.Modifiers)
                 {
                     _player.Pawn.PawnStats.RemoveStatModifier(creator);

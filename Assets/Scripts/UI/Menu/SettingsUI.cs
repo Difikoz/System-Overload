@@ -26,19 +26,19 @@ namespace WinterUniverse
         private void OnSettingsSliderMasterVolumeChanged(float value)
         {
             PlayerPrefs.SetFloat("MasterVolume", value);
-            GameManager.StaticInstance.WorldSound.SetMasterVolume(value);
+            GameManager.StaticInstance.SoundManager.SetMasterVolume(value);
         }
 
         private void OnSettingsSliderAmbientVolumeChanged(float value)
         {
             PlayerPrefs.SetFloat("AmbientVolume", value);
-            GameManager.StaticInstance.WorldSound.SetAmbientVolume(value);
+            GameManager.StaticInstance.SoundManager.SetAmbientVolume(value);
         }
 
         private void OnSettingsSliderSoundVolumeChanged(float value)
         {
             PlayerPrefs.SetFloat("SoundVolume", value);
-            GameManager.StaticInstance.WorldSound.SetSoundVolume(value);
+            GameManager.StaticInstance.SoundManager.SetSoundVolume(value);
         }
 
         private void OnSettingsButtonQuitGamePressed()

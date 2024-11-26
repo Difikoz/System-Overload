@@ -15,9 +15,8 @@ MonoBehaviour:
   _displayName: Move Speed
   _description: Description
   _icon: {fileID: 0}
-  _baseValue: 0
   _clampMinValue: 1
   _minValue: 0
   _clampMaxValue: 0
   _maxValue: 0
-  _isPercent: 0
+  _isPercent: 1

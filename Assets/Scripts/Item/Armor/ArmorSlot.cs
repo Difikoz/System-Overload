@@ -8,14 +8,15 @@ namespace WinterUniverse
         private PawnController _pawn;
         private ArmorRenderer _currentRenderer;
 
-        [SerializeField] private ArmorItemConfig _config;
+        private ArmorItemConfig _config;
         [SerializeField] private List<ArmorRenderer> _renderers = new();
 
         public ArmorItemConfig Config => _config;
 
-        public void Initialize()
+        public void Initialize(ArmorItemConfig defaultArmor)
         {
             _pawn = GetComponentInParent<PawnController>();
+            _config = defaultArmor;
             foreach (StatModifierCreator creator in _config.Modifiers)
             {
                 _pawn.PawnStats.AddStatModifier(creator);

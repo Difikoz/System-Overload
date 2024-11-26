@@ -1,4 +1,3 @@
-using Lean.Pool;
 using System.Collections;
 using UnityEngine;
 
@@ -6,29 +5,29 @@ namespace WinterUniverse
 {
     public class GameManager : Singleton<GameManager>
     {
-        private PlayerController _player;
-        private PlayerInputManager _playerInput;
-        private PlayerCameraManager _playerCamera;
-        private PlayerUIManager _playerUI;
-        private WorldLayerManager _worldLayer;
-        private WorldDataManager _worldData;
-        private WorldObjectManager _worldObject;
-        private WorldSaveLoadManager _worldSaveLoad;
-        private WorldSoundManager _worldSound;
-        private WorldTimeManager _worldTime;
+        private WorldPlayerManager _playerManager;
+        private WorldInputManager _inputManager;
+        private WorldCameraManager _cameraManager;
+        private WorldUIManager _uiManager;
+        private WorldLayerManager _layerManager;
+        private WorldConfigsManager _dataManager;
+        private WorldObjectManager _objectManager;
+        private WorldSaveLoadManager _saveLoadManager;
+        private WorldSoundManager _soundManager;
+        private WorldTimeManager _timeManager;
 
         private bool _completed;
 
-        public PlayerController Player => _player;
-        public PlayerInputManager PlayerInput => _playerInput;
-        public PlayerCameraManager PlayerCamera => _playerCamera;
-        public PlayerUIManager PlayerUI => _playerUI;
-        public WorldLayerManager WorldLayer => _worldLayer;
-        public WorldDataManager WorldData => _worldData;
-        public WorldObjectManager WorldObject => _worldObject;
-        public WorldSaveLoadManager WorldSaveLoad => _worldSaveLoad;
-        public WorldSoundManager WorldSound => _worldSound;
-        public WorldTimeManager WorldTime => _worldTime;
+        public WorldPlayerManager PlayerManager => _playerManager;
+        public WorldInputManager InputManager => _inputManager;
+        public WorldCameraManager CameraManager => _cameraManager;
+        public WorldUIManager UIManager => _uiManager;
+        public WorldLayerManager LayerManager => _layerManager;
+        public WorldConfigsManager DataManager => _dataManager;
+        public WorldObjectManager ObjectManager => _objectManager;
+        public WorldSaveLoadManager SaveLoadManager => _saveLoadManager;
+        public WorldSoundManager SoundManager => _soundManager;
+        public WorldTimeManager TimeManager => _timeManager;
 
         protected override void Awake()
         {
@@ -40,63 +39,64 @@ namespace WinterUniverse
         {
             WaitForSeconds delay = new(0.25f);
             yield return null;
-            _playerInput = GetComponentInChildren<PlayerInputManager>();
-            _playerCamera = GetComponentInChildren<PlayerCameraManager>();
-            _playerUI = GetComponentInChildren<PlayerUIManager>();
-            _worldLayer = GetComponentInChildren<WorldLayerManager>();
-            _worldData = GetComponentInChildren<WorldDataManager>();
-            _worldObject = GetComponentInChildren<WorldObjectManager>();
-            _worldSaveLoad = GetComponentInChildren<WorldSaveLoadManager>();
-            _worldSound = GetComponentInChildren<WorldSoundManager>();
-            _worldTime = GetComponentInChildren<WorldTimeManager>();
+            _playerManager = GetComponentInChildren<WorldPlayerManager>();
+            _inputManager = GetComponentInChildren<WorldInputManager>();
+            _cameraManager = GetComponentInChildren<WorldCameraManager>();
+            _uiManager = GetComponentInChildren<WorldUIManager>();
+            _layerManager = GetComponentInChildren<WorldLayerManager>();
+            _dataManager = GetComponentInChildren<WorldConfigsManager>();
+            _objectManager = GetComponentInChildren<WorldObjectManager>();
+            _saveLoadManager = GetComponentInChildren<WorldSaveLoadManager>();
+            _soundManager = GetComponentInChildren<WorldSoundManager>();
+            _timeManager = GetComponentInChildren<WorldTimeManager>();
             yield return null;
-            _playerUI.LoadingScreenUI.Show();
+            _uiManager.LoadingScreenUI.Show();
             yield return null;
-            _playerUI.LoadingScreenUI.UpdateLoadingScreen("Initialize Player", 0, 1);
-            _player = LeanPool.Spawn(_worldData.PlayerPrefab).GetComponent<PlayerController>();
+            _uiManager.LoadingScreenUI.UpdateLoadingScreen("Initialize Player", 0, 1);
+            _playerManager.Initialize();
             yield return delay;
-            _playerUI.LoadingScreenUI.UpdateLoadingScreen("Initialize Player", 1, 1);
+            _uiManager.LoadingScreenUI.UpdateLoadingScreen("Initialize Player", 1, 1);
             yield return delay;
-            _playerUI.LoadingScreenUI.UpdateLoadingScreen("Initialize Player Input", 0, 1);
-            _playerInput.Initialize();
+            _uiManager.LoadingScreenUI.UpdateLoadingScreen("Initialize Player Input", 0, 1);
+            _inputManager.Initialize();
             yield return delay;
-            _playerUI.LoadingScreenUI.UpdateLoadingScreen("Initialize Player Input", 1, 1);
+            _uiManager.LoadingScreenUI.UpdateLoadingScreen("Initialize Player Input", 1, 1);
             yield return delay;
-            _playerUI.LoadingScreenUI.UpdateLoadingScreen("Initialize Player Camera", 0, 1);
-            _playerCamera.Initialize();
+            _uiManager.LoadingScreenUI.UpdateLoadingScreen("Initialize Player Camera", 0, 1);
+            _cameraManager.Initialize();
             yield return delay;
-            _playerUI.LoadingScreenUI.UpdateLoadingScreen("Initialize Player Camera", 1, 1);
+            _uiManager.LoadingScreenUI.UpdateLoadingScreen("Initialize Player Camera", 1, 1);
             yield return delay;
-            _playerUI.LoadingScreenUI.UpdateLoadingScreen("Initialize Player UI", 0, 1);
-            _playerUI.Initialize();
+            _uiManager.LoadingScreenUI.UpdateLoadingScreen("Initialize Player UI", 0, 1);
+            _uiManager.Initialize();
             yield return delay;
-            _playerUI.MenuUI.CloseMenu();
-            _playerUI.LoadingScreenUI.UpdateLoadingScreen("Initialize Player UI", 1, 1);
+            _uiManager.MenuUI.CloseMenu();
+            _uiManager.LoadingScreenUI.UpdateLoadingScreen("Initialize Player UI", 1, 1);
             yield return delay;
-            _playerUI.LoadingScreenUI.UpdateLoadingScreen("Initialize World Data", 0, 1);
-            _worldData.Initialize();
+            _uiManager.LoadingScreenUI.UpdateLoadingScreen("Initialize World Data", 0, 1);
+            _dataManager.Initialize();
             yield return delay;
-            _playerUI.LoadingScreenUI.UpdateLoadingScreen("Initialize World Data", 1, 1);
+            _uiManager.LoadingScreenUI.UpdateLoadingScreen("Initialize World Data", 1, 1);
             yield return delay;
-            _playerUI.LoadingScreenUI.UpdateLoadingScreen("Initialize World Sound", 0, 1);
-            _worldSound.Initialize();
+            _uiManager.LoadingScreenUI.UpdateLoadingScreen("Initialize World Sound", 0, 1);
+            _soundManager.Initialize();
             yield return delay;
-            _playerUI.LoadingScreenUI.UpdateLoadingScreen("Initialize World Sound", 1, 1);
+            _uiManager.LoadingScreenUI.UpdateLoadingScreen("Initialize World Sound", 1, 1);
             yield return delay;
-            _playerUI.LoadingScreenUI.UpdateLoadingScreen("Initialize World Time", 0, 1);
-            _worldTime.Initialize();
+            _uiManager.LoadingScreenUI.UpdateLoadingScreen("Initialize World Time", 0, 1);
+            _timeManager.Initialize();
             yield return delay;
-            _playerUI.LoadingScreenUI.UpdateLoadingScreen("Initialize World Time", 1, 1);
+            _uiManager.LoadingScreenUI.UpdateLoadingScreen("Initialize World Time", 1, 1);
             yield return delay;
-            _playerUI.LoadingScreenUI.UpdateLoadingScreen("Load Saved Data", 0, 1);
-            _worldSaveLoad.LoadGame();
+            _uiManager.LoadingScreenUI.UpdateLoadingScreen("Load Saved Data", 0, 1);
+            _saveLoadManager.LoadGame();
             yield return delay;
-            _playerUI.LoadingScreenUI.UpdateLoadingScreen("Load Saved Data", 1, 1);
+            _uiManager.LoadingScreenUI.UpdateLoadingScreen("Load Saved Data", 1, 1);
             yield return delay;
-            _playerUI.LoadingScreenUI.Hide();
+            _uiManager.LoadingScreenUI.Hide();
             Debug.Log($"Loaded : {Time.timeSinceLevelLoad} seconds.");
             yield return null;
-            _playerInput.Enable();
+            _inputManager.Enable();
             yield return null;
             _completed = true;
         }
@@ -107,8 +107,8 @@ namespace WinterUniverse
             {
                 return;
             }
-            _playerInput.HandleUpdate();
-            _worldTime.HandleUpdate();
+            _timeManager.OnUpdate();
+            _playerManager.OnUpdate();
         }
 
         private void LateUpdate()
@@ -117,7 +117,7 @@ namespace WinterUniverse
             {
                 return;
             }
-            _playerCamera.HandleUpdate();
+            _cameraManager.OnUpdate();
         }
     }
 }

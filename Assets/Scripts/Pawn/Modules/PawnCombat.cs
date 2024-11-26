@@ -15,7 +15,7 @@ namespace WinterUniverse
             _pawn = GetComponent<PawnController>();
         }
 
-        public void HandleTargeting()
+        public void OnUpdate()
         {
             if (CurrentTarget != null && !_pawn.IsDead)
             {
@@ -62,7 +62,7 @@ namespace WinterUniverse
 
         public bool OtherTargetBlockedByObstacle(PawnController target)// if head or body not blocked - return false
         {
-            return Physics.Linecast(_pawn.PawnAnimator.HeadPoint.position, target.PawnAnimator.BodyPoint.position, GameManager.StaticInstance.WorldLayer.ObstacleMask) && Physics.Linecast(_pawn.PawnAnimator.HeadPoint.position, target.PawnAnimator.HeadPoint.position, GameManager.StaticInstance.WorldLayer.ObstacleMask);
+            return Physics.Linecast(_pawn.PawnAnimator.HeadPoint.position, target.PawnAnimator.BodyPoint.position, GameManager.StaticInstance.LayerManager.ObstacleMask) && Physics.Linecast(_pawn.PawnAnimator.HeadPoint.position, target.PawnAnimator.HeadPoint.position, GameManager.StaticInstance.LayerManager.ObstacleMask);
         }
 
         public bool CurrentTargetIsVisible()

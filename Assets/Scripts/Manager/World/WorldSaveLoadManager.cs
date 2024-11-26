@@ -9,7 +9,7 @@ namespace WinterUniverse
 
         public void SaveGame()
         {
-            GameManager.StaticInstance.Player.SaveData(ref CurrentSaveData);
+            GameManager.StaticInstance.PlayerManager.SaveData(ref CurrentSaveData);
             DataWriter.CreateSaveFile(CurrentSaveData, _fileName);
         }
 
@@ -22,10 +22,10 @@ namespace WinterUniverse
             else
             {
                 CurrentSaveData = new();
-                GameManager.StaticInstance.Player.Pawn.CreateCharacter(CurrentSaveData);
+                GameManager.StaticInstance.PlayerManager.Pawn.CreateCharacter(CurrentSaveData);
                 SaveGame();
             }
-            GameManager.StaticInstance.Player.LoadData(CurrentSaveData);
+            GameManager.StaticInstance.PlayerManager.LoadData(CurrentSaveData);
         }
 
         public void DeleteGame()

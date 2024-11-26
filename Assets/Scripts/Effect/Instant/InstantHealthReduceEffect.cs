@@ -46,7 +46,7 @@ namespace WinterUniverse
             {
                 if (_element.HitClips.Count > 0)
                 {
-                    _pawn.PawnSound.PlaySound(GameManager.StaticInstance.WorldSound.ChooseRandomClip(_element.HitClips));
+                    _pawn.PawnSound.PlaySound(GameManager.StaticInstance.SoundManager.ChooseRandomClip(_element.HitClips));
                 }
                 _pawn.PawnSound.PlayGetHitClip();
             }

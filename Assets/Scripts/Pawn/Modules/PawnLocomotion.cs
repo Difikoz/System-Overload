@@ -67,16 +67,16 @@ namespace WinterUniverse
                     _groundedTimer = 0f;
                     ApplyJumpForce();
                 }
-                _pawn.IsGrounded = _fallVelocity.y <= 0.1f && Physics.SphereCast(transform.position + _cc.center, _cc.radius, Vector3.down, out _groundHit, _cc.center.y - (_cc.radius / 2f), GameManager.StaticInstance.WorldLayer.ObstacleMask);
+                _pawn.IsGrounded = _fallVelocity.y <= 0.1f && Physics.SphereCast(transform.position + _cc.center, _cc.radius, Vector3.down, out _groundHit, _cc.center.y - (_cc.radius / 2f), GameManager.StaticInstance.LayerManager.ObstacleMask);
                 if (_pawn.IsGrounded)
                 {
                     _groundedTimer = _timeToFall;
-                    _fallVelocity.y = GameManager.StaticInstance.WorldData.Gravity / 5f;
+                    _fallVelocity.y = GameManager.StaticInstance.DataManager.Gravity / 5f;
                 }
                 else
                 {
                     _groundedTimer -= Time.deltaTime;
-                    _fallVelocity.y += GameManager.StaticInstance.WorldData.Gravity * Time.deltaTime;
+                    _fallVelocity.y += GameManager.StaticInstance.DataManager.Gravity * Time.deltaTime;
                 }
                 _jumpTimer -= Time.deltaTime;
                 _cc.Move(_fallVelocity * Time.deltaTime);
@@ -106,17 +106,14 @@ namespace WinterUniverse
 
         private void HandleRotation()
         {
-            if (!_pawn.CanRotate)
+            if (!_pawn.CanRotate || _lookDirection == Vector3.zero)
             {
                 return;
             }
-            if (_lookDirection != Vector3.zero)
+            _pawn.TurnVelocity = ExtraTools.GetSignedAngleToDirection(transform.forward, _lookDirection);
+            if (_pawn.IsMoving)
             {
-                _pawn.TurnVelocity = ExtraTools.GetSignedAngleToDirection(transform.forward, _lookDirection);
-                if (_pawn.IsMoving)
-                {
-                    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(_lookDirection), _pawn.PawnStats.RotateSpeed.CurrentValue * Time.deltaTime);
-                }
+                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(_lookDirection), _pawn.PawnStats.RotateSpeed.CurrentValue * Time.deltaTime);
             }
         }
 
@@ -130,14 +127,14 @@ namespace WinterUniverse
             return true;
         }
 
-        public void TryPerformJump()
+        public void AttempToJump()
         {
             _jumpTimer = _timeToJump;
         }
 
         private void ApplyJumpForce()
         {
-            _fallVelocity.y = Mathf.Sqrt(_pawn.PawnStats.JumpForce.CurrentValue * -2f * GameManager.StaticInstance.WorldData.Gravity);
+            _fallVelocity.y = Mathf.Sqrt(_pawn.PawnStats.JumpForce.CurrentValue * -2f * GameManager.StaticInstance.DataManager.Gravity);
             _pawn.PawnStats.ReduceCurrentEnergy(_pawn.PawnStats.JumpEnergyCost.CurrentValue);
         }
     }

@@ -8,6 +8,7 @@ namespace WinterUniverse
         private PawnController _pawn;
         private Animator _animator;
 
+        [SerializeField] private Transform _aimBone;
         [SerializeField] private Transform _headPoint;
         [SerializeField] private Transform _bodyPoint;
         [SerializeField] private Transform _footRightPoint;
@@ -38,6 +39,10 @@ namespace WinterUniverse
             _animator.SetFloat("TurnVelocity", _pawn.TurnVelocity / _maxTurnAngle);
             _animator.SetBool("IsMoving", _pawn.IsMoving);
             _animator.SetBool("IsGrounded", _pawn.IsGrounded);
+            if (_pawn.LookDirection != Vector3.zero)
+            {
+                _aimBone.rotation = Quaternion.Slerp(_aimBone.rotation, Quaternion.LookRotation(_pawn.LookDirection), _pawn.PawnStats.RotateSpeed.CurrentValue * Time.deltaTime);
+            }
         }
 
         public void SetFloat(string name, float value)
@@ -61,17 +66,17 @@ namespace WinterUniverse
 
         public void FootR()
         {
-            if (Physics.Raycast(_footRightPoint.position, -transform.up, out RaycastHit hit, 0.1f, GameManager.StaticInstance.WorldLayer.ObstacleMask))
+            if (Physics.Raycast(_footRightPoint.position, -transform.up, out RaycastHit hit, 0.1f, GameManager.StaticInstance.LayerManager.ObstacleMask))
             {
-                _pawn.PawnSound.PlaySound(GameManager.StaticInstance.WorldSound.GetFootstepClip(hit.transform));
+                _pawn.PawnSound.PlaySound(GameManager.StaticInstance.SoundManager.GetFootstepClip(hit.transform));
             }
         }
 
         public void FootL()
         {
-            if (Physics.Raycast(_footLeftPoint.position, -transform.up, out RaycastHit hit, 0.1f, GameManager.StaticInstance.WorldLayer.ObstacleMask))
+            if (Physics.Raycast(_footLeftPoint.position, -transform.up, out RaycastHit hit, 0.1f, GameManager.StaticInstance.LayerManager.ObstacleMask))
             {
-                _pawn.PawnSound.PlaySound(GameManager.StaticInstance.WorldSound.GetFootstepClip(hit.transform));
+                _pawn.PawnSound.PlaySound(GameManager.StaticInstance.SoundManager.GetFootstepClip(hit.transform));
             }
         }
 

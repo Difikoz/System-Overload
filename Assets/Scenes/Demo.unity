@@ -1185,6 +1185,9 @@ MonoBehaviour:
   _pawnMask:
     serializedVersion: 2
     m_Bits: 8
+  _detectableMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &248928073
 GameObject:
   m_ObjectHideFlags: 0
@@ -3787,8 +3790,8 @@ MonoBehaviour:
     InventoryStacks:
       _keys: []
       _values: 
-    WeaponInRightHand: 
-    WeaponInLeftHand: 
+    Weapon: 
+    Armor: 
 --- !u!1 &805151322
 GameObject:
   m_ObjectHideFlags: 0
@@ -4010,6 +4013,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79d20713f5b345c4baad42f907adce31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _humanPrefab: {fileID: 0}
   _playerPrefab: {fileID: 5838612897740544063, guid: eb6eef775d1a09d4aba461591c7ba187, type: 3}
   _aiPrefab: {fileID: 0}
   _lootItemPrefab: {fileID: 6898418262779158037, guid: 1162e82339e3d6f4797fdc5194a42aba, type: 3}
@@ -4980,6 +4984,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _loadingScreenUI: {fileID: 70907012}
+  _menuUI: {fileID: 0}
+  _settingsUI: {fileID: 0}
+  _statUI: {fileID: 0}
+  _equipmentUI: {fileID: 0}
+  _inventoryUI: {fileID: 0}
+  _factionUI: {fileID: 0}
+  _vitalityUI: {fileID: 0}
+  _notificationUI: {fileID: 0}
+  _interactionUI: {fileID: 0}
 --- !u!1 &1090001253
 GameObject:
   m_ObjectHideFlags: 0
@@ -5566,6 +5579,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b17180a7ac29284db5244e93b51188a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _moveInput: {x: 0, y: 0}
+  _lookInput: {x: 0, y: 0}
+  _runInput: 0
+  _jumpInput: 0
+  _interactInput: 0
+  _fireInput: 0
+  _aimInput: 0
 --- !u!1 &1408429798
 GameObject:
   m_ObjectHideFlags: 0

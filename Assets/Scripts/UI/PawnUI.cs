@@ -30,7 +30,7 @@ namespace WinterUniverse
         {
             while (true)
             {
-                _direction = transform.position - GameManager.StaticInstance.PlayerCamera.Camera.transform.position;
+                _direction = transform.position - GameManager.StaticInstance.CameraManager.MainCamera.transform.position;
                 _direction.y = 0f;
                 _direction.Normalize();
                 if (_direction != Vector3.zero)

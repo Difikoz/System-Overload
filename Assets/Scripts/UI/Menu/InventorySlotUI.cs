@@ -20,7 +20,7 @@ namespace WinterUniverse
 
         public void Use()
         {
-            _item.Use(GameManager.StaticInstance.Player.Pawn);
+            _item.Use(GameManager.StaticInstance.PlayerManager.Pawn);
         }
     }
 }

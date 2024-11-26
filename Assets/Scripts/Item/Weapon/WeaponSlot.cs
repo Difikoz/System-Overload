@@ -5,9 +5,8 @@ namespace WinterUniverse
 {
     public class WeaponSlot : MonoBehaviour
     {
-        [SerializeField] private WeaponItemConfig _config;
-
         private PawnController _pawn;
+        private WeaponItemConfig _config;
         private DamageCollider _damageCollider;
         private GameObject _model;
 
@@ -15,9 +14,10 @@ namespace WinterUniverse
         public WeaponItemConfig Config => _config;
         public DamageCollider DamageCollider => _damageCollider;
 
-        public void Initialize()
+        public void Initialize(WeaponItemConfig defaultWeapon)
         {
             _pawn = GetComponentInParent<PawnController>();
+            _config = defaultWeapon;
             foreach (StatModifierCreator creator in _config.Modifiers)
             {
                 _pawn.PawnStats.AddStatModifier(creator);

@@ -6,10 +6,20 @@ using UnityEngine;
 namespace WinterUniverse
 {
     [RequireComponent(typeof(Rigidbody))]
+    [RequireComponent(typeof(PawnAnimator))]
+    [RequireComponent(typeof(PawnCombat))]
+    [RequireComponent(typeof(PawnEffects))]
+    [RequireComponent(typeof(PawnEquipment))]
+    [RequireComponent(typeof(PawnInteraction))]
+    [RequireComponent(typeof(PawnInventory))]
+    [RequireComponent(typeof(PawnLocomotion))]
+    [RequireComponent(typeof(PawnSound))]
+    [RequireComponent(typeof(PawnStats))]
     public class PawnController : MonoBehaviour
     {
         public Action<FactionConfig> OnFactionChanged;
         public Action OnDied;
+        public Action OnRevived;
 
         protected string _characterName;
         protected FactionConfig _faction;
@@ -46,10 +56,13 @@ namespace WinterUniverse
         public bool UseGravity = true;
         public bool CanMove = true;
         public bool CanRotate = true;
-
         public bool IsGrounded = true;
         public bool IsMoving;
         public bool IsRunning;
+        public bool IsJumping;
+        public bool IsInteracting;
+        public bool IsFiring;
+        public bool IsAiming;
         public bool IsInvulnerable;
         public bool IsDead;
 
@@ -64,7 +77,6 @@ namespace WinterUniverse
             _pawnLocomotion = GetComponent<PawnLocomotion>();
             _pawnSound = GetComponent<PawnSound>();
             _pawnStats = GetComponent<PawnStats>();
-            //CharacterUI = GetComponentInChildren<CharacterUI>();
             _pawnAnimator.Initialize();
             _pawnCombat.Initialize();
             _pawnEffects.Initialize();
@@ -85,8 +97,20 @@ namespace WinterUniverse
             if (!IsDead)
             {
                 _pawnEffects.TickEffects(Time.deltaTime);
-                _pawnStats.HandleRegeneration();
-                _pawnCombat.HandleTargeting();
+                _pawnStats.OnUpdate();
+                _pawnCombat.OnUpdate();
+                if (IsJumping)
+                {
+                    _pawnLocomotion.AttempToJump();
+                }
+                else if (IsInteracting)
+                {
+                    _pawnInteraction.AttempToInteract();
+                }
+                else if (IsFiring)
+                {
+                    _pawnEquipment.WeaponSlot.Config.Action.AttempToPerformAction(this);
+                }
             }
             _pawnAnimator.OnUpdate();
             _pawnLocomotion.OnUpdate();
@@ -98,13 +122,13 @@ namespace WinterUniverse
             _characterName = data.CharacterName;
             _pawnInventory.Initialize(data.InventoryStacks);
             IgnoreMyOwnColliders();// this order??? or on end???
-            _pawnEquipment.EquipWeapon(GameManager.StaticInstance.WorldData.GetWeapon(data.Weapon), false, false);
-            _pawnEquipment.EquipArmor(GameManager.StaticInstance.WorldData.GetArmor(data.Armor), false, false);
+            _pawnEquipment.EquipWeapon(GameManager.StaticInstance.DataManager.GetWeapon(data.Weapon), false, false);
+            _pawnEquipment.EquipArmor(GameManager.StaticInstance.DataManager.GetArmor(data.Armor), false, false);
             //_pawnEquipment.EquipBestItems();
             _pawnStats.RecalculateStats();
             _pawnStats.RestoreCurrentHealth(_pawnStats.HealthMax.CurrentValue);
             _pawnStats.RestoreCurrentEnergy(_pawnStats.EnergyMax.CurrentValue);
-            ChangeFaction(GameManager.StaticInstance.WorldData.GetFaction(data.Faction));
+            ChangeFaction(GameManager.StaticInstance.DataManager.GetFaction(data.Faction));
             Created = true;
         }
 
@@ -148,6 +172,7 @@ namespace WinterUniverse
                 _pawnStats.RestoreCurrentHealth(_pawnStats.HealthMax.CurrentValue);
                 _pawnStats.RestoreCurrentEnergy(_pawnStats.EnergyMax.CurrentValue);
                 _pawnAnimator.PlayActionAnimation("Revive", true);
+                OnRevived?.Invoke();
             }
         }
 

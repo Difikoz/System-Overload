@@ -46,7 +46,7 @@ namespace WinterUniverse
             OnRefreshInteractables?.Invoke(_interactables);
         }
 
-        public void Interact()
+        public void AttempToInteract()
         {
             if (_pawn.IsPerfomingAction)
             {

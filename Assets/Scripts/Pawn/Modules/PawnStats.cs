@@ -143,7 +143,7 @@ namespace WinterUniverse
 
         public void CreateStats()
         {
-            Stats = new(GameManager.StaticInstance.WorldData.GetStats());
+            Stats = new(GameManager.StaticInstance.DataManager.GetStats());
             AssignStats();
         }
 
@@ -318,7 +318,7 @@ namespace WinterUniverse
             OnEnergyChanged?.Invoke(EnergyCurrent, EnergyMax.CurrentValue);
         }
 
-        public void HandleRegeneration()
+        public void OnUpdate()
         {
             RegenerateHealth();
             RegenerateEnergy();

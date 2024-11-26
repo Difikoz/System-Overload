@@ -37,6 +37,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""Look"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""ede80059-f978-4064-a37d-c2c61975e5d2"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Run"",
                     ""type"": ""Button"",
                     ""id"": ""d023b8dd-b61a-4511-9cba-1839ea296878"",
@@ -46,21 +55,12 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Dash"",
-                    ""type"": ""Button"",
-                    ""id"": ""1d3846f5-bf76-4a45-bcc1-e4d0a0a99887"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": ""MultiTap"",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""Interact"",
                     ""type"": ""Button"",
                     ""id"": ""1b81abcb-fd35-42f3-8cc4-553fcaa33617"",
                     ""expectedControlType"": """",
                     ""processors"": """",
-                    ""interactions"": ""Press"",
+                    ""interactions"": ""Press(behavior=2)"",
                     ""initialStateCheck"": false
                 },
                 {
@@ -69,61 +69,25 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""id"": ""a88d7197-34b7-451f-a0bd-dbcc37bb74df"",
                     ""expectedControlType"": """",
                     ""processors"": """",
-                    ""interactions"": ""Tap(duration=0.5)"",
+                    ""interactions"": ""Press(behavior=2)"",
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Vault"",
-                    ""type"": ""Button"",
-                    ""id"": ""19ed3da2-61c5-4e3a-92e2-1c223588c7c9"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": ""Hold(duration=1)"",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""ActionPrimaryRight"",
-                    ""type"": ""Button"",
-                    ""id"": ""d8ad9bf1-4128-499a-a393-eec5e0869353"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": ""Tap(duration=0.5)"",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""ActionPrimaryLeft"",
+                    ""name"": ""Fire"",
                     ""type"": ""Button"",
                     ""id"": ""27376388-46d3-408e-b509-a3a7e3196c55"",
                     ""expectedControlType"": """",
                     ""processors"": """",
-                    ""interactions"": ""Tap(duration=0.5)"",
+                    ""interactions"": ""Press(behavior=2)"",
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""ActionSecondaryRight"",
+                    ""name"": ""Aim"",
                     ""type"": ""Button"",
-                    ""id"": ""9290b8ce-f608-4e73-94c5-66f3586bd8a5"",
+                    ""id"": ""d8ad9bf1-4128-499a-a393-eec5e0869353"",
                     ""expectedControlType"": """",
                     ""processors"": """",
-                    ""interactions"": ""Hold(duration=1)"",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""ActionSecondaryLeft"",
-                    ""type"": ""Button"",
-                    ""id"": ""af38d828-a6e5-4158-83b0-fd41b1b50812"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": ""Hold(duration=1)"",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""CastSpell"",
-                    ""type"": ""Button"",
-                    ""id"": ""a558ec0e-075a-4512-b9b7-f7f3e48b744d"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": ""Press"",
+                    ""interactions"": ""Press(behavior=2)"",
                     ""initialStateCheck"": false
                 }
             ],
@@ -152,34 +116,12 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""1f0aff18-d4b0-4c23-9044-df0d24e6c5a9"",
-                    ""path"": ""<Gamepad>/buttonSouth"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Vault"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""53c225b2-a5d2-4e7a-ab71-ab41ca7f6839"",
-                    ""path"": ""<Keyboard>/space"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Vault"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""bc31e331-af38-40a1-af59-27a8e0c6552a"",
                     ""path"": ""<Gamepad>/rightShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""ActionPrimaryRight"",
+                    ""action"": ""Aim"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -190,7 +132,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""ActionPrimaryRight"",
+                    ""action"": ""Aim"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -201,7 +143,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""ActionPrimaryLeft"",
+                    ""action"": ""Fire"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -212,51 +154,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""ActionPrimaryLeft"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""3c675f94-0ea9-49f4-a3cc-9dcb140d5f80"",
-                    ""path"": ""<Gamepad>/leftShoulder"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""ActionSecondaryLeft"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""3800562a-15e9-4373-ac98-1480ec36387b"",
-                    ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""ActionSecondaryLeft"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""167a690a-4e47-4f49-8d4c-965d19b7dbb1"",
-                    ""path"": ""<Gamepad>/rightShoulder"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""ActionSecondaryRight"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""fc97690d-d1e0-46b7-9e80-dbf72eb839b4"",
-                    ""path"": ""<Mouse>/rightButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""ActionSecondaryRight"",
+                    ""action"": ""Fire"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -328,6 +226,28 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""428eb519-419c-4e75-a6ec-b27b080c7ab0"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": ""ScaleVector2(x=4,y=4)"",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a1cf3494-63b6-4b0a-b3ea-82b858830271"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""fd71781e-3d8b-4fb9-ab28-ce54a0552776"",
                     ""path"": ""<Gamepad>/buttonWest"",
                     ""interactions"": """",
@@ -367,182 +287,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Jump"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""e2cdea6c-aff1-40e3-ab8d-ee897afa9e4f"",
-                    ""path"": ""<Gamepad>/leftStickPress"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Dash"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""e01d9d0f-30fb-425f-a545-65d9b4d7c6de"",
-                    ""path"": ""<Keyboard>/shift"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Dash"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""9b691594-e963-469d-adff-88d7b73773ce"",
-                    ""path"": ""<Gamepad>/buttonNorth"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""CastSpell"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""f175e129-d6c2-4386-87cb-6d88ba8cf1f6"",
-                    ""path"": ""<Keyboard>/r"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""CastSpell"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                }
-            ]
-        },
-        {
-            ""name"": ""Camera"",
-            ""id"": ""d7ea8565-280b-4780-9b4d-1219d468ee88"",
-            ""actions"": [
-                {
-                    ""name"": ""Look"",
-                    ""type"": ""PassThrough"",
-                    ""id"": ""aff44cda-88ce-40bf-9b64-18ffc88a6aaa"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""LockTarget"",
-                    ""type"": ""Button"",
-                    ""id"": ""1ec012cc-da27-4032-b295-db15b981b915"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": ""Press"",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""SwitchTargetLeft"",
-                    ""type"": ""Button"",
-                    ""id"": ""3db513c0-71b5-4c54-8011-b9d0c195c57e"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": ""Press"",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""SwitchTargetRight"",
-                    ""type"": ""Button"",
-                    ""id"": ""65a63487-aea4-4278-a868-302f02c2ccb2"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": ""Press"",
-                    ""initialStateCheck"": false
-                }
-            ],
-            ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""74f0eef1-92d8-46ee-9415-c42a8f058d03"",
-                    ""path"": ""<Gamepad>/rightStick"",
-                    ""interactions"": """",
-                    ""processors"": ""ScaleVector2(x=4,y=4)"",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Look"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""88f6dabc-7666-4df5-8c30-0b0667204b02"",
-                    ""path"": ""<Mouse>/delta"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Look"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""571f301b-5855-4293-9e1a-8cea2c0080a1"",
-                    ""path"": ""<Gamepad>/rightStick/right"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""SwitchTargetRight"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""a2555239-b6b9-4b9b-83f1-d22371a2115f"",
-                    ""path"": ""<Keyboard>/e"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""SwitchTargetRight"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""2d1cb3be-2788-4980-a7ae-c07061367a3d"",
-                    ""path"": ""<Gamepad>/rightStick/left"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""SwitchTargetLeft"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""c84c68d7-06a2-4d3e-8134-15b95a84c2d9"",
-                    ""path"": ""<Keyboard>/q"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""SwitchTargetLeft"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""fcc876e6-f887-421b-877c-f61eccd34d00"",
-                    ""path"": ""<Gamepad>/rightStickPress"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""LockTarget"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""929df842-8bca-4fb5-98f3-fdd51baeefdd"",
-                    ""path"": ""<Keyboard>/tab"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""LockTarget"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -640,6 +384,33 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""expectedControlType"": ""Quaternion"",
                     ""processors"": """",
                     ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Status"",
+                    ""type"": ""Button"",
+                    ""id"": ""dd89e6ef-ac35-4fc8-92cc-0fe640ad7b5c"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": ""Press"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SwitchLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""9a88d0b8-105d-432f-a55f-654f0ceaebaa"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": ""Press"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SwitchRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""a95b813d-9b75-4512-82a0-c53b027999a1"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": ""Press"",
                     ""initialStateCheck"": false
                 }
             ],
@@ -995,6 +766,72 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""RightClick"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""747491c2-f90e-438f-a0f6-ef15f2196868"",
+                    ""path"": ""<Gamepad>/select"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Status"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b41667cd-ddb4-4040-9c64-9a9d6b9e5857"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Status"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""53c244ab-e728-45b7-97da-98f85a7b7638"",
+                    ""path"": ""<Gamepad>/rightStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""SwitchLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""912fc45d-bea4-4e1b-9411-489f7e70b496"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""SwitchLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f30a1599-cbf4-4bc3-9015-dfe02e106fb5"",
+                    ""path"": ""<Gamepad>/rightStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""SwitchRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""04a89f14-0f41-4e78-87ac-71f16acc3983"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""SwitchRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -1032,22 +869,12 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         // Character
         m_Character = asset.FindActionMap("Character", throwIfNotFound: true);
         m_Character_Move = m_Character.FindAction("Move", throwIfNotFound: true);
+        m_Character_Look = m_Character.FindAction("Look", throwIfNotFound: true);
         m_Character_Run = m_Character.FindAction("Run", throwIfNotFound: true);
-        m_Character_Dash = m_Character.FindAction("Dash", throwIfNotFound: true);
         m_Character_Interact = m_Character.FindAction("Interact", throwIfNotFound: true);
         m_Character_Jump = m_Character.FindAction("Jump", throwIfNotFound: true);
-        m_Character_Vault = m_Character.FindAction("Vault", throwIfNotFound: true);
-        m_Character_ActionPrimaryRight = m_Character.FindAction("ActionPrimaryRight", throwIfNotFound: true);
-        m_Character_ActionPrimaryLeft = m_Character.FindAction("ActionPrimaryLeft", throwIfNotFound: true);
-        m_Character_ActionSecondaryRight = m_Character.FindAction("ActionSecondaryRight", throwIfNotFound: true);
-        m_Character_ActionSecondaryLeft = m_Character.FindAction("ActionSecondaryLeft", throwIfNotFound: true);
-        m_Character_CastSpell = m_Character.FindAction("CastSpell", throwIfNotFound: true);
-        // Camera
-        m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
-        m_Camera_Look = m_Camera.FindAction("Look", throwIfNotFound: true);
-        m_Camera_LockTarget = m_Camera.FindAction("LockTarget", throwIfNotFound: true);
-        m_Camera_SwitchTargetLeft = m_Camera.FindAction("SwitchTargetLeft", throwIfNotFound: true);
-        m_Camera_SwitchTargetRight = m_Camera.FindAction("SwitchTargetRight", throwIfNotFound: true);
+        m_Character_Fire = m_Character.FindAction("Fire", throwIfNotFound: true);
+        m_Character_Aim = m_Character.FindAction("Aim", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1060,12 +887,14 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_UI_RightClick = m_UI.FindAction("RightClick", throwIfNotFound: true);
         m_UI_TrackedDevicePosition = m_UI.FindAction("TrackedDevicePosition", throwIfNotFound: true);
         m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
+        m_UI_Status = m_UI.FindAction("Status", throwIfNotFound: true);
+        m_UI_SwitchLeft = m_UI.FindAction("SwitchLeft", throwIfNotFound: true);
+        m_UI_SwitchRight = m_UI.FindAction("SwitchRight", throwIfNotFound: true);
     }
 
     ~@PlayerInputActions()
     {
         UnityEngine.Debug.Assert(!m_Character.enabled, "This will cause a leak and performance issues, PlayerInputActions.Character.Disable() has not been called.");
-        UnityEngine.Debug.Assert(!m_Camera.enabled, "This will cause a leak and performance issues, PlayerInputActions.Camera.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_UI.enabled, "This will cause a leak and performance issues, PlayerInputActions.UI.Disable() has not been called.");
     }
 
@@ -1129,31 +958,23 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Character;
     private List<ICharacterActions> m_CharacterActionsCallbackInterfaces = new List<ICharacterActions>();
     private readonly InputAction m_Character_Move;
+    private readonly InputAction m_Character_Look;
     private readonly InputAction m_Character_Run;
-    private readonly InputAction m_Character_Dash;
     private readonly InputAction m_Character_Interact;
     private readonly InputAction m_Character_Jump;
-    private readonly InputAction m_Character_Vault;
-    private readonly InputAction m_Character_ActionPrimaryRight;
-    private readonly InputAction m_Character_ActionPrimaryLeft;
-    private readonly InputAction m_Character_ActionSecondaryRight;
-    private readonly InputAction m_Character_ActionSecondaryLeft;
-    private readonly InputAction m_Character_CastSpell;
+    private readonly InputAction m_Character_Fire;
+    private readonly InputAction m_Character_Aim;
     public struct CharacterActions
     {
         private @PlayerInputActions m_Wrapper;
         public CharacterActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Character_Move;
+        public InputAction @Look => m_Wrapper.m_Character_Look;
         public InputAction @Run => m_Wrapper.m_Character_Run;
-        public InputAction @Dash => m_Wrapper.m_Character_Dash;
         public InputAction @Interact => m_Wrapper.m_Character_Interact;
         public InputAction @Jump => m_Wrapper.m_Character_Jump;
-        public InputAction @Vault => m_Wrapper.m_Character_Vault;
-        public InputAction @ActionPrimaryRight => m_Wrapper.m_Character_ActionPrimaryRight;
-        public InputAction @ActionPrimaryLeft => m_Wrapper.m_Character_ActionPrimaryLeft;
-        public InputAction @ActionSecondaryRight => m_Wrapper.m_Character_ActionSecondaryRight;
-        public InputAction @ActionSecondaryLeft => m_Wrapper.m_Character_ActionSecondaryLeft;
-        public InputAction @CastSpell => m_Wrapper.m_Character_CastSpell;
+        public InputAction @Fire => m_Wrapper.m_Character_Fire;
+        public InputAction @Aim => m_Wrapper.m_Character_Aim;
         public InputActionMap Get() { return m_Wrapper.m_Character; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1166,36 +987,24 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Move.started += instance.OnMove;
             @Move.performed += instance.OnMove;
             @Move.canceled += instance.OnMove;
+            @Look.started += instance.OnLook;
+            @Look.performed += instance.OnLook;
+            @Look.canceled += instance.OnLook;
             @Run.started += instance.OnRun;
             @Run.performed += instance.OnRun;
             @Run.canceled += instance.OnRun;
-            @Dash.started += instance.OnDash;
-            @Dash.performed += instance.OnDash;
-            @Dash.canceled += instance.OnDash;
             @Interact.started += instance.OnInteract;
             @Interact.performed += instance.OnInteract;
             @Interact.canceled += instance.OnInteract;
             @Jump.started += instance.OnJump;
             @Jump.performed += instance.OnJump;
             @Jump.canceled += instance.OnJump;
-            @Vault.started += instance.OnVault;
-            @Vault.performed += instance.OnVault;
-            @Vault.canceled += instance.OnVault;
-            @ActionPrimaryRight.started += instance.OnActionPrimaryRight;
-            @ActionPrimaryRight.performed += instance.OnActionPrimaryRight;
-            @ActionPrimaryRight.canceled += instance.OnActionPrimaryRight;
-            @ActionPrimaryLeft.started += instance.OnActionPrimaryLeft;
-            @ActionPrimaryLeft.performed += instance.OnActionPrimaryLeft;
-            @ActionPrimaryLeft.canceled += instance.OnActionPrimaryLeft;
-            @ActionSecondaryRight.started += instance.OnActionSecondaryRight;
-            @ActionSecondaryRight.performed += instance.OnActionSecondaryRight;
-            @ActionSecondaryRight.canceled += instance.OnActionSecondaryRight;
-            @ActionSecondaryLeft.started += instance.OnActionSecondaryLeft;
-            @ActionSecondaryLeft.performed += instance.OnActionSecondaryLeft;
-            @ActionSecondaryLeft.canceled += instance.OnActionSecondaryLeft;
-            @CastSpell.started += instance.OnCastSpell;
-            @CastSpell.performed += instance.OnCastSpell;
-            @CastSpell.canceled += instance.OnCastSpell;
+            @Fire.started += instance.OnFire;
+            @Fire.performed += instance.OnFire;
+            @Fire.canceled += instance.OnFire;
+            @Aim.started += instance.OnAim;
+            @Aim.performed += instance.OnAim;
+            @Aim.canceled += instance.OnAim;
         }
 
         private void UnregisterCallbacks(ICharacterActions instance)
@@ -1203,36 +1012,24 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Move.started -= instance.OnMove;
             @Move.performed -= instance.OnMove;
             @Move.canceled -= instance.OnMove;
+            @Look.started -= instance.OnLook;
+            @Look.performed -= instance.OnLook;
+            @Look.canceled -= instance.OnLook;
             @Run.started -= instance.OnRun;
             @Run.performed -= instance.OnRun;
             @Run.canceled -= instance.OnRun;
-            @Dash.started -= instance.OnDash;
-            @Dash.performed -= instance.OnDash;
-            @Dash.canceled -= instance.OnDash;
             @Interact.started -= instance.OnInteract;
             @Interact.performed -= instance.OnInteract;
             @Interact.canceled -= instance.OnInteract;
             @Jump.started -= instance.OnJump;
             @Jump.performed -= instance.OnJump;
             @Jump.canceled -= instance.OnJump;
-            @Vault.started -= instance.OnVault;
-            @Vault.performed -= instance.OnVault;
-            @Vault.canceled -= instance.OnVault;
-            @ActionPrimaryRight.started -= instance.OnActionPrimaryRight;
-            @ActionPrimaryRight.performed -= instance.OnActionPrimaryRight;
-            @ActionPrimaryRight.canceled -= instance.OnActionPrimaryRight;
-            @ActionPrimaryLeft.started -= instance.OnActionPrimaryLeft;
-            @ActionPrimaryLeft.performed -= instance.OnActionPrimaryLeft;
-            @ActionPrimaryLeft.canceled -= instance.OnActionPrimaryLeft;
-            @ActionSecondaryRight.started -= instance.OnActionSecondaryRight;
-            @ActionSecondaryRight.performed -= instance.OnActionSecondaryRight;
-            @ActionSecondaryRight.canceled -= instance.OnActionSecondaryRight;
-            @ActionSecondaryLeft.started -= instance.OnActionSecondaryLeft;
-            @ActionSecondaryLeft.performed -= instance.OnActionSecondaryLeft;
-            @ActionSecondaryLeft.canceled -= instance.OnActionSecondaryLeft;
-            @CastSpell.started -= instance.OnCastSpell;
-            @CastSpell.performed -= instance.OnCastSpell;
-            @CastSpell.canceled -= instance.OnCastSpell;
+            @Fire.started -= instance.OnFire;
+            @Fire.performed -= instance.OnFire;
+            @Fire.canceled -= instance.OnFire;
+            @Aim.started -= instance.OnAim;
+            @Aim.performed -= instance.OnAim;
+            @Aim.canceled -= instance.OnAim;
         }
 
         public void RemoveCallbacks(ICharacterActions instance)
@@ -1251,76 +1048,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     }
     public CharacterActions @Character => new CharacterActions(this);
 
-    // Camera
-    private readonly InputActionMap m_Camera;
-    private List<ICameraActions> m_CameraActionsCallbackInterfaces = new List<ICameraActions>();
-    private readonly InputAction m_Camera_Look;
-    private readonly InputAction m_Camera_LockTarget;
-    private readonly InputAction m_Camera_SwitchTargetLeft;
-    private readonly InputAction m_Camera_SwitchTargetRight;
-    public struct CameraActions
-    {
-        private @PlayerInputActions m_Wrapper;
-        public CameraActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Look => m_Wrapper.m_Camera_Look;
-        public InputAction @LockTarget => m_Wrapper.m_Camera_LockTarget;
-        public InputAction @SwitchTargetLeft => m_Wrapper.m_Camera_SwitchTargetLeft;
-        public InputAction @SwitchTargetRight => m_Wrapper.m_Camera_SwitchTargetRight;
-        public InputActionMap Get() { return m_Wrapper.m_Camera; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(CameraActions set) { return set.Get(); }
-        public void AddCallbacks(ICameraActions instance)
-        {
-            if (instance == null || m_Wrapper.m_CameraActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_CameraActionsCallbackInterfaces.Add(instance);
-            @Look.started += instance.OnLook;
-            @Look.performed += instance.OnLook;
-            @Look.canceled += instance.OnLook;
-            @LockTarget.started += instance.OnLockTarget;
-            @LockTarget.performed += instance.OnLockTarget;
-            @LockTarget.canceled += instance.OnLockTarget;
-            @SwitchTargetLeft.started += instance.OnSwitchTargetLeft;
-            @SwitchTargetLeft.performed += instance.OnSwitchTargetLeft;
-            @SwitchTargetLeft.canceled += instance.OnSwitchTargetLeft;
-            @SwitchTargetRight.started += instance.OnSwitchTargetRight;
-            @SwitchTargetRight.performed += instance.OnSwitchTargetRight;
-            @SwitchTargetRight.canceled += instance.OnSwitchTargetRight;
-        }
-
-        private void UnregisterCallbacks(ICameraActions instance)
-        {
-            @Look.started -= instance.OnLook;
-            @Look.performed -= instance.OnLook;
-            @Look.canceled -= instance.OnLook;
-            @LockTarget.started -= instance.OnLockTarget;
-            @LockTarget.performed -= instance.OnLockTarget;
-            @LockTarget.canceled -= instance.OnLockTarget;
-            @SwitchTargetLeft.started -= instance.OnSwitchTargetLeft;
-            @SwitchTargetLeft.performed -= instance.OnSwitchTargetLeft;
-            @SwitchTargetLeft.canceled -= instance.OnSwitchTargetLeft;
-            @SwitchTargetRight.started -= instance.OnSwitchTargetRight;
-            @SwitchTargetRight.performed -= instance.OnSwitchTargetRight;
-            @SwitchTargetRight.canceled -= instance.OnSwitchTargetRight;
-        }
-
-        public void RemoveCallbacks(ICameraActions instance)
-        {
-            if (m_Wrapper.m_CameraActionsCallbackInterfaces.Remove(instance))
-                UnregisterCallbacks(instance);
-        }
-
-        public void SetCallbacks(ICameraActions instance)
-        {
-            foreach (var item in m_Wrapper.m_CameraActionsCallbackInterfaces)
-                UnregisterCallbacks(item);
-            m_Wrapper.m_CameraActionsCallbackInterfaces.Clear();
-            AddCallbacks(instance);
-        }
-    }
-    public CameraActions @Camera => new CameraActions(this);
-
     // UI
     private readonly InputActionMap m_UI;
     private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
@@ -1334,6 +1061,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_RightClick;
     private readonly InputAction m_UI_TrackedDevicePosition;
     private readonly InputAction m_UI_TrackedDeviceOrientation;
+    private readonly InputAction m_UI_Status;
+    private readonly InputAction m_UI_SwitchLeft;
+    private readonly InputAction m_UI_SwitchRight;
     public struct UIActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -1348,6 +1078,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @RightClick => m_Wrapper.m_UI_RightClick;
         public InputAction @TrackedDevicePosition => m_Wrapper.m_UI_TrackedDevicePosition;
         public InputAction @TrackedDeviceOrientation => m_Wrapper.m_UI_TrackedDeviceOrientation;
+        public InputAction @Status => m_Wrapper.m_UI_Status;
+        public InputAction @SwitchLeft => m_Wrapper.m_UI_SwitchLeft;
+        public InputAction @SwitchRight => m_Wrapper.m_UI_SwitchRight;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1387,6 +1120,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @TrackedDeviceOrientation.started += instance.OnTrackedDeviceOrientation;
             @TrackedDeviceOrientation.performed += instance.OnTrackedDeviceOrientation;
             @TrackedDeviceOrientation.canceled += instance.OnTrackedDeviceOrientation;
+            @Status.started += instance.OnStatus;
+            @Status.performed += instance.OnStatus;
+            @Status.canceled += instance.OnStatus;
+            @SwitchLeft.started += instance.OnSwitchLeft;
+            @SwitchLeft.performed += instance.OnSwitchLeft;
+            @SwitchLeft.canceled += instance.OnSwitchLeft;
+            @SwitchRight.started += instance.OnSwitchRight;
+            @SwitchRight.performed += instance.OnSwitchRight;
+            @SwitchRight.canceled += instance.OnSwitchRight;
         }
 
         private void UnregisterCallbacks(IUIActions instance)
@@ -1421,6 +1163,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @TrackedDeviceOrientation.started -= instance.OnTrackedDeviceOrientation;
             @TrackedDeviceOrientation.performed -= instance.OnTrackedDeviceOrientation;
             @TrackedDeviceOrientation.canceled -= instance.OnTrackedDeviceOrientation;
+            @Status.started -= instance.OnStatus;
+            @Status.performed -= instance.OnStatus;
+            @Status.canceled -= instance.OnStatus;
+            @SwitchLeft.started -= instance.OnSwitchLeft;
+            @SwitchLeft.performed -= instance.OnSwitchLeft;
+            @SwitchLeft.canceled -= instance.OnSwitchLeft;
+            @SwitchRight.started -= instance.OnSwitchRight;
+            @SwitchRight.performed -= instance.OnSwitchRight;
+            @SwitchRight.canceled -= instance.OnSwitchRight;
         }
 
         public void RemoveCallbacks(IUIActions instance)
@@ -1459,23 +1210,12 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     public interface ICharacterActions
     {
         void OnMove(InputAction.CallbackContext context);
+        void OnLook(InputAction.CallbackContext context);
         void OnRun(InputAction.CallbackContext context);
-        void OnDash(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
-        void OnVault(InputAction.CallbackContext context);
-        void OnActionPrimaryRight(InputAction.CallbackContext context);
-        void OnActionPrimaryLeft(InputAction.CallbackContext context);
-        void OnActionSecondaryRight(InputAction.CallbackContext context);
-        void OnActionSecondaryLeft(InputAction.CallbackContext context);
-        void OnCastSpell(InputAction.CallbackContext context);
-    }
-    public interface ICameraActions
-    {
-        void OnLook(InputAction.CallbackContext context);
-        void OnLockTarget(InputAction.CallbackContext context);
-        void OnSwitchTargetLeft(InputAction.CallbackContext context);
-        void OnSwitchTargetRight(InputAction.CallbackContext context);
+        void OnFire(InputAction.CallbackContext context);
+        void OnAim(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
@@ -1489,5 +1229,8 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnRightClick(InputAction.CallbackContext context);
         void OnTrackedDevicePosition(InputAction.CallbackContext context);
         void OnTrackedDeviceOrientation(InputAction.CallbackContext context);
+        void OnStatus(InputAction.CallbackContext context);
+        void OnSwitchLeft(InputAction.CallbackContext context);
+        void OnSwitchRight(InputAction.CallbackContext context);
     }
 }
