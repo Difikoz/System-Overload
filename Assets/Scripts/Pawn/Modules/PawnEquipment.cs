@@ -21,7 +21,7 @@ namespace WinterUniverse
         {
             _pawn = GetComponent<PawnController>();
             _weaponSlot = GetComponentInChildren<WeaponSlot>();
-            _armorSlot.GetComponentInChildren<ArmorSlot>();
+            _armorSlot = GetComponentInChildren<ArmorSlot>();
             _weaponSlot.Initialize(_defaultWeapon);
             _armorSlot.Initialize(_defaultArmor);
         }

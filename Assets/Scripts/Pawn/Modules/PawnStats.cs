@@ -143,7 +143,7 @@ namespace WinterUniverse
 
         public void CreateStats()
         {
-            Stats = new(GameManager.StaticInstance.DataManager.GetStats());
+            Stats = new(GameManager.StaticInstance.ConfigsManager.GetStats());
             AssignStats();
         }
 

@@ -5642,8 +5642,8 @@ MonoBehaviour:
   _followSpeed: 10
   _horizontalRotationSpeed: 50
   _verticalRotationSpeed: 25
-  _minLookAngle: -30
-  _maxLookAngle: 60
+  _minLookAngle: 75
+  _maxLookAngle: 75
   _collisionRadius: 0.25
   _collisionAvoidanceSpeed: 8
 --- !u!1 &1431225795

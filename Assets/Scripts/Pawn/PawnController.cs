@@ -122,13 +122,13 @@ namespace WinterUniverse
             _characterName = data.CharacterName;
             _pawnInventory.Initialize(data.InventoryStacks);
             IgnoreMyOwnColliders();// this order??? or on end???
-            _pawnEquipment.EquipWeapon(GameManager.StaticInstance.DataManager.GetWeapon(data.Weapon), false, false);
-            _pawnEquipment.EquipArmor(GameManager.StaticInstance.DataManager.GetArmor(data.Armor), false, false);
+            _pawnEquipment.EquipWeapon(GameManager.StaticInstance.ConfigsManager.GetWeapon(data.Weapon), false, false);
+            _pawnEquipment.EquipArmor(GameManager.StaticInstance.ConfigsManager.GetArmor(data.Armor), false, false);
             //_pawnEquipment.EquipBestItems();
             _pawnStats.RecalculateStats();
             _pawnStats.RestoreCurrentHealth(_pawnStats.HealthMax.CurrentValue);
             _pawnStats.RestoreCurrentEnergy(_pawnStats.EnergyMax.CurrentValue);
-            ChangeFaction(GameManager.StaticInstance.DataManager.GetFaction(data.Faction));
+            ChangeFaction(GameManager.StaticInstance.ConfigsManager.GetFaction(data.Faction));
             Created = true;
         }
 

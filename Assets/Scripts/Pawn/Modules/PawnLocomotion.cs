@@ -71,12 +71,12 @@ namespace WinterUniverse
                 if (_pawn.IsGrounded)
                 {
                     _groundedTimer = _timeToFall;
-                    _fallVelocity.y = GameManager.StaticInstance.DataManager.Gravity / 5f;
+                    _fallVelocity.y = GameManager.StaticInstance.ConfigsManager.Gravity / 5f;
                 }
                 else
                 {
                     _groundedTimer -= Time.deltaTime;
-                    _fallVelocity.y += GameManager.StaticInstance.DataManager.Gravity * Time.deltaTime;
+                    _fallVelocity.y += GameManager.StaticInstance.ConfigsManager.Gravity * Time.deltaTime;
                 }
                 _jumpTimer -= Time.deltaTime;
                 _cc.Move(_fallVelocity * Time.deltaTime);
@@ -134,7 +134,7 @@ namespace WinterUniverse
 
         private void ApplyJumpForce()
         {
-            _fallVelocity.y = Mathf.Sqrt(_pawn.PawnStats.JumpForce.CurrentValue * -2f * GameManager.StaticInstance.DataManager.Gravity);
+            _fallVelocity.y = Mathf.Sqrt(_pawn.PawnStats.JumpForce.CurrentValue * -2f * GameManager.StaticInstance.ConfigsManager.Gravity);
             _pawn.PawnStats.ReduceCurrentEnergy(_pawn.PawnStats.JumpEnergyCost.CurrentValue);
         }
     }

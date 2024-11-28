@@ -17,7 +17,7 @@ namespace WinterUniverse
             _stacks.Clear();
             foreach (KeyValuePair<string, int> stack in stacks)
             {
-                AddItem(GameManager.StaticInstance.DataManager.GetItem(stack.Key), stack.Value);
+                AddItem(GameManager.StaticInstance.ConfigsManager.GetItem(stack.Key), stack.Value);
             }
         }
 
